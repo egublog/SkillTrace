@@ -1,0 +1,531 @@
+@charset "UTF-8";
+/*=====================================================
+# setting
+=====================================================*/
+/*=====================================================
+# plugins
+=====================================================*/
+/*=====================================================
+# base
+=====================================================*/
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "游ゴシック体", "Yu Gothic", yugothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", meiryo, "MS Pゴシック", "MS PGothic", sans-serif;
+  font-size: 1.6rem;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #e8d3ca;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  color: #333;
+}
+
+a:hover {
+  opacity: .7;
+  transition: .3s;
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
+.inner {
+  width: 1100px;
+  max-width: 100%;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1100px) {
+  .hidden-pc {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+  .hidden-tab {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .hidden-sp {
+    display: none;
+  }
+}
+
+.section-ttl-wrapper {
+  text-align: center;
+}
+
+.section-ttl {
+  display: inline-block;
+  margin: 20px auto;
+  position: relative;
+  height: 45px;
+  text-align: center;
+}
+
+.section-ttl:before {
+  /*左側のリボン端*/
+  content: '';
+  position: absolute;
+  width: 10px;
+  bottom: -10px;
+  left: -35px;
+  z-index: -2;
+  border: 20px solid #56adf3;
+  border-left-color: transparent;
+  /*山形に切り抜き*/
+}
+
+.section-ttl:after {
+  /*右側のリボン端*/
+  content: '';
+  position: absolute;
+  width: 10px;
+  bottom: -10px;
+  right: -35px;
+  z-index: -2;
+  border: 20px solid #56adf3;
+  border-right-color: transparent;
+  /*山形に切り抜き*/
+}
+
+.section-ttl h2 {
+  font-weight: bold;
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: 0 20px;
+  line-height: 45px;
+  font-size: 18px;
+  color: #FFF;
+  background: #2196F3;
+  /*真ん中の背景色*/
+}
+
+.section-ttl h2:before {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 0;
+  border: none;
+  border-bottom: solid 10px transparent;
+  border-right: solid 15px #397eb5;
+  /*左の折り返し部分*/
+}
+
+.section-ttl h2:after {
+  position: absolute;
+  content: '';
+  top: 100%;
+  right: 0;
+  border: none;
+  border-bottom: solid 10px transparent;
+  border-left: solid 15px #397eb5;
+  /*右の折り返し部分*/
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #b2cbe4;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px;
+  font-size: 1.5rem;
+}
+
+input, textarea {
+  resize: none;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  width: 100%;
+}
+
+hr {
+  margin: 0 calc(50% - 50vw);
+  height: 8px;
+  background-image: repeating-linear-gradient(45deg, #777 0, #777 1px, transparent 0, transparent 50%), repeating-linear-gradient(135deg, #777 0, #777 1px, transparent 0, transparent 50%);
+  background-size: 8px 8px;
+}
+
+.friend-img {
+  width: 130px;
+  height: 130px;
+}
+
+@media (max-width: 1099px) {
+  .friend-img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 767px) {
+  .friend-img {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+.friend-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 50%;
+}
+
+.back {
+  padding: 15px;
+  background-color: #f3f3f3;
+  border-radius: 50%;
+  transform: translateY(80px);
+}
+
+.back span {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+/*=====================================================
+# mixin
+=====================================================*/
+/*=====================================================
+# module
+=====================================================*/
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: #fff;
+  z-index: 100;
+}
+
+@media (min-width: 1100px) {
+  .header {
+    top: 0;
+    box-sizing: content-box;
+    border-bottom: 1px solid #333;
+  }
+}
+
+@media (max-width: 1099px) {
+  .header {
+    bottom: 0;
+    box-sizing: content-box;
+    border-top: 1px solid #333;
+  }
+}
+
+.header .inner {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.header-logo a {
+  display: block;
+  width: 230px;
+  line-height: 50px;
+}
+
+.header-wrap {
+  display: flex;
+}
+
+@media (min-width: 1100px) {
+  .header-wrap {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 1099px) {
+  .header-wrap {
+    margin: 0 auto;
+  }
+}
+
+.header-nav {
+  font-size: 2.3rem;
+  height: 50px;
+}
+
+.header-nav-list {
+  display: flex;
+  align-items: center;
+}
+
+.header-nav-item a {
+  height: 50px;
+  line-height: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: all .3s;
+}
+
+.header-nav-item a:hover {
+  background-color: #e8d3ca;
+  opacity: .9;
+}
+
+.header-nav-item a .icon {
+  color: #e29676;
+  margin-right: 5px;
+}
+
+@media (max-width: 767px) {
+  .header-nav-item a .icon {
+    margin-right: 0;
+  }
+}
+
+.header-nav-item a span {
+  font-weight: bold;
+}
+
+.header .toggle {
+  margin-left: 30px;
+}
+
+.header .toggle-button {
+  color: gray;
+  height: 30px;
+  padding: 5px 0;
+}
+
+.header .toggle-show {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  transition: all .3s;
+}
+
+.header .toggle-show.is-active {
+  display: block;
+}
+
+.header .toggle-show .logout-button {
+  padding: 10px;
+  font-size: 15px;
+  text-align: center;
+}
+
+@media (min-width: 1100px) {
+  main {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 1099px) {
+  main {
+    margin-bottom: 50px;
+  }
+}
+
+/*=====================================================
+# home
+=====================================================*/
+.home-top-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 50;
+}
+
+.home-top-wrap-center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.home-top-wrap-center .profile-img {
+  width: 200px;
+  height: 200px;
+}
+
+.home-top-wrap-center .profile-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.home-top-wrap-center p {
+  margin-top: 20px;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.home-top-wrap-center-follow {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-top-wrap-center-follow a {
+  background-color: #b2cbe4;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px;
+}
+
+.home-top-wrap-center-follow .following {
+  margin-left: 30px;
+}
+
+.home-top-wrap-right {
+  position: absolute;
+  right: 0;
+}
+
+.home-top-wrap-right a {
+  background-color: #f3f3f3;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px;
+}
+
+.home-top-detail {
+  margin-top: 20px;
+}
+
+.home-top-detail dl {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 7px dotted #fff;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 0 40px 0;
+}
+
+.home-top-detail dl .home-top-detail-wrapper {
+  text-align: center;
+  flex: 1 0 40%;
+}
+
+.home-top-detail dl .home-top-detail-wrapper dt {
+  margin-top: 10px;
+}
+
+.home-top-detail dl .home-top-detail-wrapper dd {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.home-top-button a {
+  display: block;
+  padding: 10px 20px;
+  background-color: #b2cbe4;
+  border: 1px solid #fff;
+  text-align: center;
+  width: 250px;
+  border-radius: 10px;
+  margin: 20px auto;
+  box-shadow: 1px 1px;
+}
+
+.home-bottom {
+  padding-top: 30px;
+}
+
+.home-bottom .home-skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.home-bottom .home-skill-item {
+  width: calc((100% - 20px * 2) / 3);
+  margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+  .home-bottom .home-skill-item {
+    width: calc((100% - 20px) / 2);
+  }
+}
+
+.home-bottom .home-skill-item a {
+  background-color: #f3f3f3;
+  text-align: center;
+  display: block;
+  padding: 30px 10px;
+  border: 3px dotted #fff;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.home-bottom .home-skill-item a p {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.home-bottom .home-skill-item a .devicon {
+  padding-top: 20px;
+}
+
+.home-bottom .home-skill-item a .devicon-style {
+  font-size: 7rem;
+}
+
+.home-bottom .home-skill-item a .star-count {
+  margin-top: 20px;
+}
+
+.home-bottom .home-skill-item a .star-count span {
+  font-size: 2.5rem;
+}
+
+.home-bottom .home-skill-item:last-child {
+  height: 0;
+  padding: 0;
+  visibility: hidden;
+}
+
+.home-bottom .skill-add {
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.home-bottom .skill-add a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

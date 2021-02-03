@@ -1,0 +1,134 @@
+@import "setting";
+
+
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: #fff;
+  z-index: map-get($layer, 'header');
+
+  @include mq(pc) {
+    top: 0;
+    box-sizing: content-box;
+    border-bottom: 1px solid #333;
+  }
+  
+  @include mq(tab) {
+    bottom: 0;
+    box-sizing: content-box;
+    border-top: 1px solid #333;
+  }
+
+
+  .inner {
+    display: flex;
+    align-items: center;
+    // background-color: #b1c7a7;
+    height: 50px;
+  }
+
+  &-logo {
+
+    a {
+      display: block;
+      width: 230px;
+      line-height: 50px;
+    }
+  }
+
+  &-wrap {
+    display: flex;
+    // background-color: pink;
+
+    @include mq(pc) {
+      margin-left: auto;
+    }
+
+    @include mq(tab) {
+      margin: 0 auto;
+    }
+  }
+
+  &-nav {
+    font-size: 2.3rem;
+    // background-color: pink;
+    height: 50px;
+    
+    &-list {
+      display: flex;
+      align-items: center;
+    }
+
+    &-item {
+       
+      & + & {
+        
+      }
+      
+      a {
+        height: 50px;
+        line-height: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
+        transition: all .3s;
+
+        &:hover {
+          background-color: $color-bg-base;
+          opacity: .9;
+        }
+        
+        .icon {
+          color: $color-icon;
+          margin-right: 5px;
+
+          @include mq(sp) {
+            margin-right: 0;
+          }
+        }
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .toggle {
+    margin-left: 30px;
+
+    &-button {
+      color: gray;
+      height: 30px;
+      padding: 5px 0;
+    }
+
+    &-show {
+      display: none;
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      transition: all .3s;
+
+      &.is-active {
+        display: block;
+      }
+      
+      .logout-button {
+        padding: 10px;
+        font-size: 15px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+main {
+  @include mq(pc) {
+    margin-top: 50px;
+  }
+
+  @include mq(tab) {
+    margin-bottom: 50px;
+  }
+}

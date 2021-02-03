@@ -1,0 +1,282 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: $font-family-base;
+    font-size: 1.6rem;
+    color: $color-text-base;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: $color-bg-base;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    color: #333;
+
+    &:hover {
+        opacity: 0.7;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+}
+
+.inner {
+    width: $layout-width-inner;
+    max-width: 100%;
+    padding: 0 30px;
+    margin: 0 auto;
+}
+
+// PCだけ非表示
+.hidden-pc {
+    @include mq("pc") {
+        display: none;
+    }
+}
+
+// タブレットだけ非表示
+.hidden-tab {
+    @include mq("tab-only") {
+        display: none;
+    }
+}
+
+// スマホだけ非表示
+.hidden-sp {
+    @include mq("sp") {
+        display: none;
+    }
+}
+
+// リボンのタイトル
+.section-ttl-wrapper {
+    text-align: center;
+}
+
+.section-ttl {
+    display: inline-block;
+    margin: 20px auto;
+    position: relative;
+    height: 45px;
+    text-align: center;
+}
+
+.section-ttl:before {
+    /*左側のリボン端*/
+    content: "";
+    position: absolute;
+    width: 10px;
+    bottom: -10px;
+    left: -35px;
+    z-index: -2;
+    border: 20px solid #56adf3;
+    border-left-color: transparent; /*山形に切り抜き*/
+}
+
+.section-ttl:after {
+    /*右側のリボン端*/
+    content: "";
+    position: absolute;
+    width: 10px;
+    bottom: -10px;
+    right: -35px;
+    z-index: -2;
+    border: 20px solid #56adf3;
+    border-right-color: transparent; /*山形に切り抜き*/
+}
+
+.section-ttl h2 {
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 0 20px;
+    line-height: 45px;
+    font-size: 18px;
+    color: #fff;
+    background: #2196f3; /*真ん中の背景色*/
+}
+
+.section-ttl h2:before {
+    position: absolute;
+    content: "";
+    top: 100%;
+    left: 0;
+    border: none;
+    border-bottom: solid 10px transparent;
+    border-right: solid 15px #397eb5; /*左の折り返し部分*/
+}
+
+.section-ttl h2:after {
+    position: absolute;
+    content: "";
+    top: 100%;
+    right: 0;
+    border: none;
+    border-bottom: solid 10px transparent;
+    border-left: solid 15px #397eb5; /*右の折り返し部分*/
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: $color-btn;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    box-shadow: 1px 1px;
+    font-size: 1.5rem;
+}
+
+input,
+textarea {
+    resize: none;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+    width: 100%;
+}
+
+// my_homeの境界線
+hr {
+    margin: 0 calc(50% - 50vw);
+    height: 8px;
+    background-image: repeating-linear-gradient(
+            45deg,
+            #777 0,
+            #777 1px,
+            rgba(0, 0, 0, 0) 0,
+            rgba(0, 0, 0, 0) 50%
+        ),
+        repeating-linear-gradient(
+            135deg,
+            #777 0,
+            #777 1px,
+            rgba(0, 0, 0, 0) 0,
+            rgba(0, 0, 0, 0) 50%
+        );
+    background-size: 8px 8px;
+}
+
+// my_homeに戻るボタン
+.back {
+    padding: 15px;
+    background-color: #f3f3f3;
+    border-radius: 50%;
+    transform: translateY(80px);
+
+    span {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+}
+
+// 友達一覧のUI
+.friends-list {
+  padding-bottom: 60px;
+
+    .friends-item {
+      margin-top: 10px;
+      
+      a {
+        display: flex;
+        align-items: center;
+        border: 1px solid;
+        border-radius: 10px;
+        width: 70%;
+        margin: 0 auto;
+        padding: 10px;
+        
+            @include mq(sp) {
+              width: 85%;
+            }
+
+            .friend-img {
+                width: 130px;
+                height: 130px;
+
+                @include mq(tab) {
+                    width: 100px;
+                    height: 100px;
+                }
+
+                @include mq(sp) {
+                    width: 70px;
+                    height: 70px;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+
+            .friends-body {
+              margin: 0 auto;
+
+
+                &-top {
+                  display: flex;
+                  align-items: center;
+
+                    &-name {
+                      font-size: 2rem;
+                      font-weight: bold;
+                    }
+
+                    &-age {
+                      padding-left: 10px;
+                    }
+                }
+
+                &-bottom {
+                  display: flex;
+                  align-items: center;
+
+
+                    &-area {
+
+                    }
+
+                    &-history {
+                      padding-left: 10px;
+                    }
+
+                    &-favorite {
+                      padding-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 見つかりませんでしたのUI
+.no-hit {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 30px;
+}

@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+/*=====================================================
+# setting
+=====================================================*/
+
+@import "includes/setting";
+
+/*=====================================================
+# plugins
+=====================================================*/
+////////_swiper.css//////////
+
+/*=====================================================
+# base
+=====================================================*/
+/////// base.scss////////
+
+@import "includes/base";
+
+/*=====================================================
+# mixin
+=====================================================*/
+/////////_btn.scss///////////
+
+/*=====================================================
+# module
+=====================================================*/
+//////////_header.scss///////////
+
+@import "includes/header";
+
+/*=====================================================
+# home
+=====================================================*/
+
+.home-top {
+    &-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: map-get($layer, "home-top");
+
+        &-center {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 30px;
+
+            .profile-img {
+                width: 200px;
+                height: 200px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+
+            p {
+                margin-top: 20px;
+                font-size: 3rem;
+                font-weight: bold;
+            }
+
+            &-follow {
+                margin-top: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                a {
+                    background-color: $color-btn;
+                    border: 1px solid #fff;
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    box-shadow: 1px 1px;
+                }
+
+                .following {
+                    margin-left: 30px;
+                }
+            }
+        }
+
+        &-right {
+            position: absolute;
+            right: 0;
+
+            a {
+                background-color: #f3f3f3;
+                border: 1px solid #fff;
+                padding: 10px 20px;
+                border-radius: 10px;
+                box-shadow: 1px 1px;
+            }
+        }
+    }
+
+    &-detail {
+        margin-top: 20px;
+
+        dl {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            border: 7px dotted #fff;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px 0 40px 0;
+
+            .home-top-detail-wrapper {
+                text-align: center;
+                flex: 1 0 40%;
+
+                dt {
+                    margin-top: 10px;
+                }
+
+                dd {
+                    margin-top: 10px;
+                    font-weight: bold;
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+
+    &-button {
+        a {
+            display: block;
+            padding: 10px 20px;
+            background-color: $color-btn;
+            border: 1px solid #fff;
+            text-align: center;
+            width: 250px;
+            border-radius: 10px;
+            margin: 20px auto;
+            box-shadow: 1px 1px;
+        }
+    }
+}
+
+.home-bottom {
+    padding-top: 30px;
+
+    .home-skill-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .home-skill-item {
+        width: calc((100% - 20px * 2) / 3);
+        margin-top: 20px;
+
+        @include mq(sp) {
+          width: calc((100% - 20px) / 2);
+        }
+
+        a {
+            background-color: #f3f3f3;
+            text-align: center;
+            display: block;
+            padding: 30px 10px;
+            border: 3px dotted #fff;
+            border-radius: 10px;
+            width: 100%;
+
+            p {
+                font-size: 2rem;
+                font-weight: bold;
+            }
+
+            .devicon {
+                padding-top: 20px;
+
+                &-style {
+                    font-size: 7rem;
+                }
+            }
+
+            .star-count {
+                margin-top: 20px;
+
+                span {
+                    font-size: 2.5rem;
+                }
+            }
+        }
+
+        &:last-child {
+            height: 0;
+            padding: 0;
+            visibility: hidden;
+        }
+    }
+
+    .skill-add {
+      font-size: 60px;
+      font-weight: bold;
+      a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+}

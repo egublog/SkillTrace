@@ -1,0 +1,452 @@
+@charset "UTF-8";
+/*=====================================================
+# setting
+=====================================================*/
+/*=====================================================
+# plugins
+=====================================================*/
+/*=====================================================
+# base
+=====================================================*/
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "游ゴシック体", "Yu Gothic", yugothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", meiryo, "MS Pゴシック", "MS PGothic", sans-serif;
+  font-size: 1.6rem;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #e8d3ca;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  color: #333;
+}
+
+a:hover {
+  opacity: 0.7;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
+.inner {
+  width: 1100px;
+  max-width: 100%;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1100px) {
+  .hidden-pc {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+  .hidden-tab {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .hidden-sp {
+    display: none;
+  }
+}
+
+.section-ttl-wrapper {
+  text-align: center;
+}
+
+.section-ttl {
+  display: inline-block;
+  margin: 20px auto;
+  position: relative;
+  height: 45px;
+  text-align: center;
+}
+
+.section-ttl:before {
+  /*左側のリボン端*/
+  content: "";
+  position: absolute;
+  width: 10px;
+  bottom: -10px;
+  left: -35px;
+  z-index: -2;
+  border: 20px solid #56adf3;
+  border-left-color: transparent;
+  /*山形に切り抜き*/
+}
+
+.section-ttl:after {
+  /*右側のリボン端*/
+  content: "";
+  position: absolute;
+  width: 10px;
+  bottom: -10px;
+  right: -35px;
+  z-index: -2;
+  border: 20px solid #56adf3;
+  border-right-color: transparent;
+  /*山形に切り抜き*/
+}
+
+.section-ttl h2 {
+  font-weight: bold;
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: 0 20px;
+  line-height: 45px;
+  font-size: 18px;
+  color: #fff;
+  background: #2196f3;
+  /*真ん中の背景色*/
+}
+
+.section-ttl h2:before {
+  position: absolute;
+  content: "";
+  top: 100%;
+  left: 0;
+  border: none;
+  border-bottom: solid 10px transparent;
+  border-right: solid 15px #397eb5;
+  /*左の折り返し部分*/
+}
+
+.section-ttl h2:after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  right: 0;
+  border: none;
+  border-bottom: solid 10px transparent;
+  border-left: solid 15px #397eb5;
+  /*右の折り返し部分*/
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #b2cbe4;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px;
+  font-size: 1.5rem;
+}
+
+input,
+textarea {
+  resize: none;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  width: 100%;
+}
+
+hr {
+  margin: 0 calc(50% - 50vw);
+  height: 8px;
+  background-image: repeating-linear-gradient(45deg, #777 0, #777 1px, transparent 0, transparent 50%), repeating-linear-gradient(135deg, #777 0, #777 1px, transparent 0, transparent 50%);
+  background-size: 8px 8px;
+}
+
+.back {
+  padding: 15px;
+  background-color: #f3f3f3;
+  border-radius: 50%;
+  transform: translateY(80px);
+}
+
+.back span {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.friends-list {
+  padding-bottom: 60px;
+}
+
+.friends-list .friends-item {
+  margin-top: 10px;
+}
+
+.friends-list .friends-item a {
+  display: flex;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 10px;
+  width: 70%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+@media (max-width: 767px) {
+  .friends-list .friends-item a {
+    width: 85%;
+  }
+}
+
+.friends-list .friends-item a .friend-img {
+  width: 130px;
+  height: 130px;
+}
+
+@media (max-width: 1099px) {
+  .friends-list .friends-item a .friend-img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 767px) {
+  .friends-list .friends-item a .friend-img {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+.friends-list .friends-item a .friend-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.friends-list .friends-item a .friends-body {
+  margin: 0 auto;
+}
+
+.friends-list .friends-item a .friends-body-top {
+  display: flex;
+  align-items: center;
+}
+
+.friends-list .friends-item a .friends-body-top-name {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.friends-list .friends-item a .friends-body-top-age {
+  padding-left: 10px;
+}
+
+.friends-list .friends-item a .friends-body-bottom {
+  display: flex;
+  align-items: center;
+}
+
+.friends-list .friends-item a .friends-body-bottom-history {
+  padding-left: 10px;
+}
+
+.friends-list .friends-item a .friends-body-bottom-favorite {
+  padding-left: 10px;
+}
+
+.no-hit {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 30px;
+}
+
+/*=====================================================
+# mixin
+=====================================================*/
+/*=====================================================
+# module
+=====================================================*/
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: #fff;
+  z-index: 100;
+}
+
+@media (min-width: 1100px) {
+  .header {
+    top: 0;
+    box-sizing: content-box;
+    border-bottom: 1px solid #333;
+  }
+}
+
+@media (max-width: 1099px) {
+  .header {
+    bottom: 0;
+    box-sizing: content-box;
+    border-top: 1px solid #333;
+  }
+}
+
+.header .inner {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.header-logo a {
+  display: block;
+  width: 230px;
+  line-height: 50px;
+}
+
+.header-wrap {
+  display: flex;
+}
+
+@media (min-width: 1100px) {
+  .header-wrap {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 1099px) {
+  .header-wrap {
+    margin: 0 auto;
+  }
+}
+
+.header-nav {
+  font-size: 2.3rem;
+  height: 50px;
+}
+
+.header-nav-list {
+  display: flex;
+  align-items: center;
+}
+
+.header-nav-item a {
+  height: 50px;
+  line-height: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: all .3s;
+}
+
+.header-nav-item a:hover {
+  background-color: #e8d3ca;
+  opacity: .9;
+}
+
+.header-nav-item a .icon {
+  color: #e29676;
+  margin-right: 5px;
+}
+
+@media (max-width: 767px) {
+  .header-nav-item a .icon {
+    margin-right: 0;
+  }
+}
+
+.header-nav-item a span {
+  font-weight: bold;
+}
+
+.header .toggle {
+  margin-left: 30px;
+}
+
+.header .toggle-button {
+  color: gray;
+  height: 30px;
+  padding: 5px 0;
+}
+
+.header .toggle-show {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  transition: all .3s;
+}
+
+.header .toggle-show.is-active {
+  display: block;
+}
+
+.header .toggle-show .logout-button {
+  padding: 10px;
+  font-size: 15px;
+  text-align: center;
+}
+
+@media (min-width: 1100px) {
+  main {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 1099px) {
+  main {
+    margin-bottom: 50px;
+  }
+}
+
+/*=====================================================
+# search
+=====================================================*/
+.search-wrapper-def {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 10px auto;
+  border: 7px dotted #fff;
+  padding: 0 30px 30px 30px;
+}
+
+.search-wrapper-def .search-box {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.search-wrapper-def .search-box label {
+  display: flex;
+  align-items: center;
+}
+
+.search-wrapper-def .search-box dt {
+  font-size: 1.7rem;
+  width: 250px;
+}
+
+.search-wrapper-def .search-box dd {
+  width: 100%;
+  margin-left: 40px;
+}
+
+.search-wrapper-button {
+  max-width: 100px;
+  margin: 20px auto;
+}
