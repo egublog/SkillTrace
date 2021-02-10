@@ -17,9 +17,7 @@
   <form action="{{ action('SkillController@skill_add_save') }}" method="POST">
     {{ csrf_field() }}
 
-    <select class="col-8" id="" name="language_id">
-
-    
+    <select class="col-8 form-select" id="" name="language_id">
       
       @foreach($languages as $language)
       <option value="{{ $language->id }}">{{ $language->name }}</option>
@@ -31,7 +29,7 @@
     </select>
 
 
-    <input type="submit" value="追加する">
+    <input class="my-5" type="submit" value="追加する">
   </form>
 
 </section><!-- /.skill_add -->

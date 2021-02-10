@@ -15,7 +15,7 @@
     <a class="back" href="{{ action('HomeController@my_home') }}"><span>&lt;</span></a>
     <div class="section-ttl-wrapper">
       <div class="section-ttl">
-        <h2>プロフィール編集</h2>
+        <h2>プロフィールの編集</h2>
       </div><!-- /.section-ttl -->
     </div><!-- /.section-ttl-wrapper -->
 
@@ -45,14 +45,14 @@
           @if($myAccount->img == null)
           <img src="/storage/no_img.png" alt="seikin">
           @else
-          <img src="/storage/profile_images/{{ $myAccount->img }}" alt="自分のトプ画" width="100px" height="100px">
+          <img src="{{ $myAccount->img }}" alt="自分のトプ画" width="100px" height="100px">
           @endif
         </div>
 
         <form action="{{ action('HomeController@profile_img_save') }}" method="post" enctype="multipart/form-data">
           @csrf
           <input type="file" name="profile_img">
-          <input type="submit" value="登録する">
+          <input class="btn" type="submit" value="登録する">
         </form>
 
       </div><!-- /.profile-body-img -->
@@ -139,7 +139,7 @@
           </dl><!-- /.profile-body-detail-def -->
 
           <div class="profile-body-detail-button">
-            <input class="btn btn-primary d-block mx-auto" type="submit" value="設定完了">
+            <input class="btn" type="submit" value="設定完了">
           </div>
 
         </form>

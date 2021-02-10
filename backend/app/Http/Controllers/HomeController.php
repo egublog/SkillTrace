@@ -124,9 +124,12 @@ class HomeController extends Controller
         $languages = Language::all();
 
         $file_name = $myId . '.jpeg';
-        $user_img->storeAs('public/profile_images', $file_name);
+        // $user_img->storeAs('public/profile_images', $file_name);
 
-        $myAccount->img = $file_name;
+        $path = Storage::disk('s3')->putFile('/test', $user_img, 'public');
+        $myAccount->img = Storage::disk('s3')->url($path);
+
+        // $myAccount->img = $file_name;
         $myAccount->save();
 
         return redirect('/profile')->with([

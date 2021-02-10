@@ -17,7 +17,7 @@
         @if($account->img == null)
         <img src="/storage/no_img.png" alt="各々のトプ画">
         @else
-        <img src="/storage/profile_images/{{ $account->img }}" alt="自分のトプ画">
+        <img src="{{ $account->img }}" alt="自分のトプ画">
         @endif
       </div>
 
