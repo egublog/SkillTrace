@@ -27,3 +27,70 @@
 
 @import "includes/header";
 
+.skill {
+
+  &-ttl-wrapper {
+
+  }
+
+  &-wrap {
+
+  }
+
+  &-top {
+
+    &-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        font-size: 2rem;
+        margin-right: 30px;
+      }
+    }
+  }
+
+  &-middle {
+
+  }
+
+  &-bottom {
+
+    .skill-trace-img {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    input {
+      margin-top: 30px;
+    }
+
+    select {
+      margin-top: 30px;
+    }
+  }
+
+  &-edit-ttl {
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  &-edit-btn {
+    max-width: 100px;
+    margin: 20px auto;
+
+    input {
+
+    }
+  }
+}

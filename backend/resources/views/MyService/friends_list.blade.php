@@ -59,9 +59,9 @@
             <div class="friend-img">
               <!-- もしも画像が設定されていたら表示する -->
               @if($follower->user_follower->img == null)
-              <img src="/storage/no_img.png" alt="各々のトプ画">
+              <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
               @else
-              <img src="/storage/profile_images/{{ $follower->user_follower->img }}" alt="自分のトプ画">
+              <img src="{{ $follower->user_follower->img }}" alt="自分のトプ画">
               @endif
             </div><!-- /.friends-img -->
 
@@ -118,9 +118,9 @@
 
             <div class="friend-img">
               @if($following->user_following->img == null)
-              <img src="/storage/no_img.png" alt="各々のトプ画">
+              <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
               @else
-              <img src="/storage/profile_images/{{ $following->user_following->img }}" alt="自分のトプ画">
+              <img src="{{ $following->user_following->img }}" alt="自分のトプ画">
               @endif
             </div><!-- /.friends-img -->
 

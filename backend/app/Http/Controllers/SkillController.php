@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Language;
 use App\User;
 use App\User_language;
@@ -234,15 +235,21 @@ class SkillController extends Controller
         $file = $request->input('file');
 
         // traceテーブルのuser_language_idの数だけskill_1-2などと表示したい
-        $theSkillId_count =  Trace::where('user_language_id', $theSkillId)->count();
+        // $theSkillId_count =  Trace::where('user_language_id', $theSkillId)->count();
 
-        $file_name = 'skill_img_' . $theSkillId . '-' . ($theSkillId_count + 1) . '.jpeg';
+        // $file_name = 'skill_img_' . $theSkillId . '-' . ($theSkillId_count + 1) . '.jpeg';
 
-        $trace_img->storeAs('public/trace_images', $file_name);
+        // $trace_img->storeAs('public/trace_images', $file_name);
 
+        
         $trace = new Trace;
+        if ($trace_img === null) {
+            $trace->img = null;
+        } else {
+            $path = Storage::disk('s3')->putFile('trace_img', $trace_img, 'public');
+            $trace->img = Storage::disk('s3')->url($path);
+        }
         $trace->user_language_id = $theSkillId;
-        $trace->img = $file_name;
         $trace->category_id = $category;
         $trace->content = $traceText;
         $trace->save();
@@ -374,6 +381,20 @@ class SkillController extends Controller
         $trace_content = $request->input('trace_content');
         $category_id = $request->input('category_id');
 
+                
+        $traceEdits = Trace::find($trace_id);
+        
+        if ($trace_img === null) {
+            $traceEdits->img = null;
+        } else {
+            $path = Storage::disk('s3')->putFile('trace_img', $trace_img, 'public');
+            $traceEdits->img = Storage::disk('s3')->url($path);
+        }
+
+        $traceEdits->category_id = $category_id;
+        $traceEdits->content = $trace_content;
+        $traceEdits->save();
+
         $theSkill = User_language::find($theSkillId);
         $myId = Auth::id();
         $account = User::find($theSkill->user_id);
@@ -382,21 +403,11 @@ class SkillController extends Controller
         $skills = Skill::where('user_language_id', $theSkillId)->get();
 
         // traceテーブルのuser_language_idの数だけskill_1-2などと表示したい
-        $theSkillId_count =  Trace::where('user_language_id', $theSkillId)->count();
+        // $theSkillId_count =  Trace::where('user_language_id', $theSkillId)->count();
 
-        $file_name = 'skill_img_' . $theSkillId . '-' . $theSkillId_count . '.jpeg';
+        // $file_name = 'skill_img_' . $theSkillId . '-' . $theSkillId_count . '.jpeg';
 
-        $trace_img->storeAs('public/trace_images', $file_name);
-
-
-        $traceEdits = Trace::find($trace_id);
-
-        $traceEdits->img = $file_name;
-        $traceEdits->category_id = $category_id;
-        $traceEdits->content = $trace_content;
-        $traceEdits->save();
-
-
+        // $trace_img->storeAs('public/trace_images', $file_name);
 
         return view('MyService.skill_item')->with([
             'theSkill' => $theSkill,

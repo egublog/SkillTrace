@@ -27,3 +27,31 @@
 
 @import "includes/header";
 
+.talk {
+
+  .friends {
+
+    &-list {
+
+    }
+
+    &-item {
+
+    }
+
+    &-img {
+      width: 60px;
+      height: 60px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    &-name {
+      margin-left: 20px;
+    }
+  }
+}

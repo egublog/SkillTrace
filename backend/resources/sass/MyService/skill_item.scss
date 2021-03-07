@@ -27,3 +27,145 @@
 
 @import "includes/header";
 
+.skill {
+
+  //小見出し
+  &-ttl {
+    text-align: center;
+    margin: 20px auto 10px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border: 3px solid #fff;
+  }
+
+  .edit {
+    font-size: 2.5rem;
+  }
+
+  .delete {
+    font-size: 2.5rem;
+  }
+
+  .edit-delete {
+    display: flex;
+    align-items: center;
+    
+  }
+
+  &-add {
+    text-align: center;
+
+    a {
+      font-size: 5rem;
+      font-weight: bold;
+      padding: 5px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      margin-top: 30px;
+    }
+  }
+
+  .nothing {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  &-wrap {
+    margin-bottom: 30px;
+  }
+
+  &-top {
+    margin-top: 10px;
+
+    &-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      .skill-top-star {
+        font-size: 3rem;
+      }
+
+      .edit {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
+  &-middle {
+   
+
+    &-list {
+
+    }
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    &-txt {
+      display: flex;
+      align-items: center;
+    }
+
+  }
+
+  &-bottom {
+    margin-bottom: 30px;
+    
+    &-list {
+      
+    }
+    
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+
+        &-wrap {
+          display: flex;
+          align-items: center;
+
+
+          .skill-bottom-img {
+            width: 100px;
+            height: 100px;
+            
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              border-radius: 50%;
+            }
+          }
+          
+          .skill-bottom-category {
+            margin-left: 20px;
+            max-width: 20%;
+
+          }
+
+          .skill-bottom-txt {
+            margin-left: 50px;
+            max-width: 40%;
+          }
+        }
+      }
+    }
+
+  &-delete {
+    
+
+    input {
+      font-size: 2rem;
+      color: #fff;
+    }
+  }
+}

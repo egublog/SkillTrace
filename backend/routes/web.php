@@ -28,7 +28,9 @@ Route::get('/search', 'SearchController@search');
 Route::post('/search', 'SearchController@search_result');
 
 
-Route::get('/my_home', 'HomeController@my_home');
+// Route::get('/my_home', 'HomeController@my_home');
+Route::get('/my_home', 'HomeController@my_home')->name('home.my_home');
+
 Route::post('/friend_home', 'HomeController@friend_home');
 
 Route::get('/profile', 'HomeController@profile');

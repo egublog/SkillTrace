@@ -124,9 +124,9 @@ csrf_field()
 
               <div class="friend-img">
                 @if($search_result_user->img == null)
-                <img src="/storage/no_img.png" alt="各々のトプ画">
+                <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
                 @else
-                <img src="/storage/profile_images/{{ $search_result_user->img }}" alt="自分のトプ画">
+                <img src="{{ $search_result_user->img }}" alt="自分のトプ画">
                 @endif
               </div><!-- /.friends-img -->
 

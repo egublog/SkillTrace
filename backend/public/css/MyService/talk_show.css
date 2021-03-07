@@ -411,3 +411,18 @@ hr {
     margin-bottom: 50px;
   }
 }
+
+.talk .friends-img {
+  width: 60px;
+  height: 60px;
+}
+
+.talk .friends-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.talk .friends-name {
+  margin-left: 20px;
+}

@@ -6,32 +6,34 @@
 
 @section('content')
 
-<section class="skill_add">
-
-  <div class="section-ttl-wrapper">
-    <div class="section-ttl">
-      <h2>スキルの追加</h2>
-    </div><!-- /.section-ttl -->
-  </div><!-- /.section-ttl-wrapper -->
-
-  <form action="{{ action('SkillController@skill_add_save') }}" method="POST">
-    {{ csrf_field() }}
-
-    <select class="col-8 form-select" id="" name="language_id">
-      
-      @foreach($languages as $language)
-      <option value="{{ $language->id }}">{{ $language->name }}</option>
-     
-      @endforeach
-
-      <!-- pluckメソッドでやる方法もある -->
-
-    </select>
-
-
-    <input class="my-5" type="submit" value="追加する">
-  </form>
-
-</section><!-- /.skill_add -->
+<div class="inner">
+  <section class="skill_add">
+  
+    <div class="section-ttl-wrapper">
+      <div class="section-ttl">
+        <h2>スキルの追加</h2>
+      </div><!-- /.section-ttl -->
+    </div><!-- /.section-ttl-wrapper -->
+  
+    <form action="{{ action('SkillController@skill_add_save') }}" method="POST">
+      {{ csrf_field() }}
+  
+      <select class="col-8 form-select" id="" name="language_id">
+        
+        @foreach($languages as $language)
+        <option value="{{ $language->id }}">{{ $language->name }}</option>
+       
+        @endforeach
+  
+        <!-- pluckメソッドでやる方法もある -->
+  
+      </select>
+  
+  
+      <input class="my-5" type="submit" value="追加する">
+    </form>
+  
+  </section><!-- /.skill_add -->
+</div><!-- /.inner -->
 
 @endsection

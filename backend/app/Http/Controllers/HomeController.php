@@ -33,7 +33,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $myId = Auth::id();
+        $account = User::find($myId);
+
+        return view('home')->with([
+            'myId' => $myId,
+            'account' => $account
+        ]);
     }
 
     public function my_home()
@@ -42,6 +48,7 @@ class HomeController extends Controller
         $account = User::find($myId);
         $languages = User_language::where('user_id', $myId)->get();
 
+        
 
         return view('MyService.home')->with([
             'account' => $account,
@@ -123,10 +130,10 @@ class HomeController extends Controller
         $histories = History::all();
         $languages = Language::all();
 
-        $file_name = $myId . '.jpeg';
+        // $file_name = $myId . '.jpeg';
         // $user_img->storeAs('public/profile_images', $file_name);
 
-        $path = Storage::disk('s3')->putFile('/test', $user_img, 'public');
+        $path = Storage::disk('s3')->putFile('profile_img', $user_img, 'public');
         $myAccount->img = Storage::disk('s3')->url($path);
 
         // $myAccount->img = $file_name;
