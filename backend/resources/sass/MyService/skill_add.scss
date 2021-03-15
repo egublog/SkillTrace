@@ -27,3 +27,21 @@
 @import "includes/header";
 
 
+.skill-add {
+
+  &-select {
+    display: block;
+    width: 60vw;
+    margin: 30px auto 0;
+    
+  }
+
+  &-btn {
+    max-width: 100px;
+    margin: 0 auto;
+
+    input {
+
+    }
+  }
+}

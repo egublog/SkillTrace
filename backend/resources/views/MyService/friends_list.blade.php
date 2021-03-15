@@ -65,21 +65,24 @@
               @endif
             </div><!-- /.friends-img -->
 
-            <div class="friends-body">
+            <div class="friend-body">
               <!-- 名前や年齢などの説明 -->
 
-              <div class="friends-body-top">
-                <p class="friends-body-top-name">{{ $follower->user_follower->name }}</p>
-                <p class="friends-body-top-age">年齢：{{ $follower->user_follower->age }}</p>
-              </div><!-- /.friends-body-top -->
+              <div class="friend-body-top">
+                <p>{{ $follower->user_follower->name }}</p>
+              </div><!-- /.friend-body-top -->
+              
+              <div class="friend-body-middle">
+                <p>年齢：{{ $follower->user_follower->age }}</p>
+                <p>住所：{{ $follower->user_follower->area->area }}</p>
+              </div><!-- /.friend-body-middle -->
 
-              <div class="friends-body-bottom">
-                <p class="friends-body-bottom-area">住所：{{ $follower->user_follower->area->area }}</p>
-                <p class="friends-body-bottom-history">エンジニア歴：{{ $follower->user_follower->history->history }}</p>
-                <p class="friends-body-bottom-favorite">得意言語：{{ $follower->user_follower->language->name }}</p>
+              <div class="friend-body-bottom">
+                <p>エンジニア歴：{{ $follower->user_follower->history->history }}</p>
+                <p>得意言語：{{ $follower->user_follower->language->name }}</p>
               </div><!-- /.friends-body-bottom -->
 
-            </div><!-- /.friends-body -->
+            </div><!-- /.friend-body -->
 
           </a>
 

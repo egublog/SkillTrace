@@ -23,11 +23,11 @@
 
 
     <div class="talk-box">
-      <ul class="talk-box-list">
+      <ul class="friends-list">
 
         @forelse($following_accounts as $following_account)
 
-        <li class="talk-box-item">
+        <li class="friends-item">
           <form name="friend" action="{{ action('TalkController@talk_show') }}" method="GET">
             @csrf
 
@@ -47,26 +47,29 @@
                   @endif
                 </div><!-- /.friends-img -->
 
-                <div class="talk-box-body">
+                <div class="friend-body">
                   <!-- 名前や年齢などの説明 -->
-                  <div class="talk-box-top">
-                    <p class="talk-box-name">{{{ $following_account->user_following->name }}}</p>
-                    <p class="talk-box-age">年齢：{{{ $following_account->user_following->age }}}</p>
-                  </div><!-- /.talk-box-top -->
+                  <div class="friend-body-top">
+                    <p>{{{ $following_account->user_following->name }}}</p>
+                  </div><!-- /.friend-body-top -->
+                  
+                  <div class="friend-body-middle">
+                    <p>年齢：{{{ $following_account->user_following->age }}}</p>
+                    <p>住所：{{{ $following_account->user_following->area->area }}}</p=>
+                  </div><!-- /.friend-body-middle -->
 
-                  <div class="talk-box-bottom">
-                    <p class="talk-box-area">住所：{{{ $following_account->user_following->area->area }}}</p>
-                    <p class="talk-box-history">エンジニア歴：{{{ $following_account->user_following->history->history }}}</p>
-                    <p class="talk-box-favorite">得意言語：{{{ $following_account->user_following->language->name }}}</p>
-                  </div><!-- /.talk-box-bottom -->
+                  <div class="friend-body-bottom">
+                    <p>エンジニア歴：{{{ $following_account->user_following->history->history }}}</p>
+                    <p>得意言語：{{{ $following_account->user_following->language->name }}}</p=>
+                  </div><!-- /.friend-body-bottom -->
 
-                </div><!-- /.talk-box-body -->
+                </div><!-- /.friend-body -->
               </a>
 
               <input type="hidden" name="id" value="{{ optional($following_account->user_following)->id }}">
 
           </form>
-        </li><!-- /.talk-box-item -->
+        </li><!-- /.friends-item -->
 
         @empty
 
@@ -75,7 +78,7 @@
         @endforelse
 
 
-      </ul><!-- /.talk-box-list -->
+      </ul><!-- /.friends-list -->
     </div><!-- /.talk-box -->
 
 

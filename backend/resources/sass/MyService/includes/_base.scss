@@ -233,40 +233,24 @@ hr {
                 }
             }
 
-            .friends-body {
+            .friend-body {
               margin: 0 auto;
 
 
                 &-top {
-                  display: flex;
-                  align-items: center;
-
-                    &-name {
-                      font-size: 2rem;
-                      font-weight: bold;
+                    p {
+                        font-size: 3rem;
                     }
+                }
 
-                    &-age {
-                      padding-left: 10px;
-                    }
+                &-middle {
+                    display: flex;
+                    align-items: center;
                 }
 
                 &-bottom {
                   display: flex;
                   align-items: center;
-
-
-                    &-area {
-
-                    }
-
-                    &-history {
-                      padding-left: 10px;
-                    }
-
-                    &-favorite {
-                      padding-left: 10px;
-                    }
                 }
             }
         }

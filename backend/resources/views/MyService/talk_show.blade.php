@@ -12,11 +12,12 @@
 <!-- friend -->
 <!-- profile -->
 
-<section class="talk container">
+<section class="talk">
 
   <div class="row">
     <div class="friends col-md-4 hidden-sp">
 
+      <p class="friends-ttl">友達一覧</p>
       <!-- 友達一覧 -->
       <ul class="friends-list">
 

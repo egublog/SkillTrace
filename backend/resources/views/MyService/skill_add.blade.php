@@ -7,33 +7,37 @@
 @section('content')
 
 <div class="inner">
-  <section class="skill_add">
-  
+  <section class="skill-add">
+
     <div class="section-ttl-wrapper">
       <div class="section-ttl">
         <h2>スキルの追加</h2>
       </div><!-- /.section-ttl -->
     </div><!-- /.section-ttl-wrapper -->
-  
+
     <form action="{{ action('SkillController@skill_add_save') }}" method="POST">
       {{ csrf_field() }}
-  
-      <select class="col-8 form-select" id="" name="language_id">
-        
+
+      <select class="skill-add-select" id="" name="language_id">
+
         @foreach($languages as $language)
         <option value="{{ $language->id }}">{{ $language->name }}</option>
-       
+
         @endforeach
-  
+
         <!-- pluckメソッドでやる方法もある -->
-  
+
       </select>
-  
-  
-      <input class="my-5" type="submit" value="追加する">
+
+
+
+      <div class="skill-add-btn">
+        <input class="my-5 btn" type="submit" value="追加する">
+      </div><!-- /.skill-add-btn -->
+
     </form>
-  
-  </section><!-- /.skill_add -->
+
+  </section><!-- /.skill-add -->
 </div><!-- /.inner -->
 
 @endsection

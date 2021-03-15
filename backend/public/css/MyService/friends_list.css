@@ -237,35 +237,22 @@ hr {
   border-radius: 50%;
 }
 
-.friends-list .friends-item a .friends-body {
+.friends-list .friends-item a .friend-body {
   margin: 0 auto;
 }
 
-.friends-list .friends-item a .friends-body-top {
+.friends-list .friends-item a .friend-body-top {
+  font-size: 3rem;
+}
+
+.friends-list .friends-item a .friend-body-middle {
   display: flex;
   align-items: center;
 }
 
-.friends-list .friends-item a .friends-body-top-name {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.friends-list .friends-item a .friends-body-top-age {
-  padding-left: 10px;
-}
-
-.friends-list .friends-item a .friends-body-bottom {
+.friends-list .friends-item a .friend-body-bottom {
   display: flex;
   align-items: center;
-}
-
-.friends-list .friends-item a .friends-body-bottom-history {
-  padding-left: 10px;
-}
-
-.friends-list .friends-item a .friends-body-bottom-favorite {
-  padding-left: 10px;
 }
 
 .no-hit {

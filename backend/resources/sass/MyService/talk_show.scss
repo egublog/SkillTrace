@@ -30,6 +30,18 @@
 .talk {
 
   .friends {
+    border-right: 2px solid #333;
+    height: 100vh;
+    padding: 0;
+
+    &-ttl {
+      // background-color: orange;
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 30px;
+
+    }
 
     &-list {
 
@@ -52,6 +64,42 @@
 
     &-name {
       margin-left: 20px;
+    }
+  }
+
+  // 右側
+  &-friend {
+    padding-right: 2vw;
+    position: relative;
+
+    &-top {
+
+      &-ttl {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        position: relative;
+
+        .back {
+          transform: translateY(0);
+          position: absolute;
+          left: 0;
+        }
+
+        p {
+          font-size: 3rem;
+          font-weight: bold;
+        }
+      }
+    }
+
+    &-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
   }
 }

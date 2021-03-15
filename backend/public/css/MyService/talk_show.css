@@ -237,35 +237,22 @@ hr {
   border-radius: 50%;
 }
 
-.friends-list .friends-item a .friends-body {
+.friends-list .friends-item a .friend-body {
   margin: 0 auto;
 }
 
-.friends-list .friends-item a .friends-body-top {
+.friends-list .friends-item a .friend-body-top p {
+  font-size: 3rem;
+}
+
+.friends-list .friends-item a .friend-body-middle {
   display: flex;
   align-items: center;
 }
 
-.friends-list .friends-item a .friends-body-top-name {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.friends-list .friends-item a .friends-body-top-age {
-  padding-left: 10px;
-}
-
-.friends-list .friends-item a .friends-body-bottom {
+.friends-list .friends-item a .friend-body-bottom {
   display: flex;
   align-items: center;
-}
-
-.friends-list .friends-item a .friends-body-bottom-history {
-  padding-left: 10px;
-}
-
-.friends-list .friends-item a .friends-body-bottom-favorite {
-  padding-left: 10px;
 }
 
 .no-hit {
@@ -412,6 +399,19 @@ hr {
   }
 }
 
+.talk .friends {
+  border-right: 2px solid #333;
+  height: 100vh;
+  padding: 0;
+}
+
+.talk .friends-ttl {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+}
+
 .talk .friends-img {
   width: 60px;
   height: 60px;
@@ -425,4 +425,36 @@ hr {
 
 .talk .friends-name {
   margin-left: 20px;
+}
+
+.talk-friend {
+  padding-right: 2vw;
+  position: relative;
+}
+
+.talk-friend-top-ttl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  position: relative;
+}
+
+.talk-friend-top-ttl .back {
+  transform: translateY(0);
+  position: absolute;
+  left: 0;
+}
+
+.talk-friend-top-ttl p {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.talk-friend-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
