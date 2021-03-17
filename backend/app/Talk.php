@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Talk extends Model
 {
-    //
+    
     public function user_follower() {
         return $this->belongsTo('App\User', 'user_id');
     }
