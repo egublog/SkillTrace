@@ -22,56 +22,57 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/activity', 'ActivityController@activity');
+//home
+Route::get('/user/{userId}', 'HomeController@my_home')->name('home.my_home');
+Route::get('/friend/{friendId}', 'HomeController@friend_home')->name('home.friend_home');
 
-Route::get('/search', 'SearchController@search');
-Route::post('/search', 'SearchController@search_result');
+//profile
+Route::get('/profile', 'ProfileController@index')->name('profile.index');
+Route::post('/profile/store', 'ProfileController@store')->name('profile.store');
+Route::post('/profile/img_store', 'ProfileController@img_store')->name('profile.img_store');
 
+//activity
+Route::get('/activity', 'ActivityController')->name('activity');
 
-// Route::get('/my_home', 'HomeController@my_home');
-Route::get('/my_home', 'HomeController@my_home')->name('home.my_home');
+//search
+Route::get('/search', 'SearchController@index')->name('search.index');
+Route::get('/search/result', 'SearchController@search')->name('search.search');
 
-Route::post('/friend_home', 'HomeController@friend_home');
+//followers
+Route::get('/user/{userId}/followers', 'FollowerController@index')->name('follower.index');
 
-Route::get('/profile', 'HomeController@profile');
-Route::post('/profile', 'HomeController@profile_save');
-Route::post('/profile_img', 'HomeController@profile_img_save');
-
-Route::get('/follower_list', 'HomeController@follower_list');
-Route::get('/following_list', 'HomeController@following_list');
-Route::post('/friend_home/following', 'HomeController@following');
-
-
-
-Route::get('/talk', 'TalkController@talk');
-Route::post('/talk_search', 'TalkController@talk_search');
-Route::get('/talk_show', 'TalkController@talk_show');
-Route::post('/talk_show', 'TalkController@talk_content');
+//following
+Route::get('/user/{userId}/following', 'FollowingController@index')->name('following.index');
+Route::post('/user/{userId}/follow', 'FollowingController@follow')->name('following.follow');
 
 
-Route::post('/skill_item', 'SkillController@skill_item');
-Route::get('/skill_add', 'SkillController@skill_add');
+//talk
+Route::get('/talk', 'TalkController@index')->name('talk.index');
+Route::get('/talk/search', 'TalkController@search')->name('talk.search');
+Route::get('/talk/{theFriendId}', 'TalkController@show')->name('talk.show');
+Route::post('/talk/{theFriendId}/store', 'TalkController@store')->name('talk.store');
 
-Route::post('/skill_edit_add_star', 'SkillController@skill_edit_add_star');
-Route::post('/skill_edit_add_able', 'SkillController@skill_edit_add_able');
-Route::post('/skill_edit_add_trace', 'SkillController@skill_edit_add_trace');
+//skill
+Route::get('/user/{userId}/skill/{skillId}', 'SkillController@show')->name('skill.show');
+Route::get('/user/skill/add', 'SkillController@add')->name('skill.add');
+Route::post('/user/skill/add', 'SkillController@store')->name('skill.store');
+Route::delete('/user/skill/{userLanguageId}', 'SkillController@destroy')->name('skill.destroy');
 
-Route::post('/skillable_edit', 'SkillController@skillable_edit');
-Route::post('/skillable_edit_redirect', 'SkillController@skillable_edit_redirect');
-Route::post('/skillable_delete', 'SkillController@skillable_delete');
+//star
+Route::get('/user/{userLanguageId}/star', 'SkillStarController@add')->name('skillStar.add');
+Route::put('/user/{userLanguageId}/star', 'SkillStarController@update')->name('skillStar.update');
 
+//ability
+Route::get('/user/{userLanguageId}/ability', 'SkillAbilityController@add')->name('skillAbility.add');
+Route::post('/user/{userLanguageId}/ability', 'SkillAbilityController@store')->name('skillAbility.store');
+Route::get('/user/{userLanguageId}/ability/{abilityId}', 'SkillAbilityController@show')->name('skillAbility.show');
+Route::put('/user/{userLanguageId}/ability/{abilityId}', 'SkillAbilityController@update')->name('skillAbility.update');
+Route::delete('/user/{userLanguageId}/ability/{abilityId}', 'SkillAbilityController@destroy')->name('skillAbility.destroy');
 
-Route::post('/skill_trace_edit', 'SkillController@skill_trace_edit');
-Route::post('/skill_trace_edit_redirect', 'SkillController@skill_trace_edit_redirect');
-Route::post('/skill_trace_delete', 'SkillController@skill_trace_delete');
-
-Route::post('/skill_edit_star', 'SkillController@skill_edit_star');
-Route::post('/skill_edit_able', 'SkillController@skill_edit_able');
-Route::post('/skill_edit_trace', 'SkillController@skill_edit_trace');
-
-Route::post('/skill_add_save', 'SkillController@skill_add_save');
-Route::post('/home/skill_delete', 'SkillController@skill_delete');
-
-// Route::post('/skill_list_add', 'SkillController@skill_list_add');
-
+//trace
+Route::get('/user/{userLanguageId}/trace', 'SkillTraceController@add')->name('skillTrace.add');
+Route::post('/user/{userLanguageId}/trace', 'SkillTraceController@store')->name('skillTrace.store');
+Route::get('/user/{userLanguageId}/trace/{traceId}', 'SkillTraceController@show')->name('skillTrace.show');
+Route::put('/user/{userLanguageId}/trace/{traceId}', 'SkillTraceController@update')->name('skillTrace.update');
+Route::delete('/user/{userLanguageId}/trace/{traceId}', 'SkillTraceController@destroy')->name('skillTrace.destroy');
 

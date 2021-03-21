@@ -13,7 +13,7 @@
   <section class="profile">
   
     <div class="profile-top">
-      <a class="back" href="{{ action('HomeController@my_home') }}"><span>&lt;</span></a>
+      <a class="back" href="{{ route('home.my_home', ['userId' => $myId]) }}"><span>&lt;</span></a>
       <div class="section-ttl-wrapper">
         <div class="section-ttl">
           <h2>プロフィールの編集</h2>
@@ -50,7 +50,7 @@
             @endif
           </div>
   
-          <form action="{{ action('HomeController@profile_img_save') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('profile.img_store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="file" name="profile_img">
             <input class="btn" type="submit" value="登録する">
@@ -60,7 +60,7 @@
   
   
         <div class="profile-body-detail">
-          <form action="{{ action('HomeController@profile_save') }}" method="post">
+          <form action="{{ route('profile.store') }}" method="post">
             {{ csrf_field() }}
   
             <p class="profile-body-detail-ttl">プロフィール設定</p>

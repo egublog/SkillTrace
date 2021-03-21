@@ -15,7 +15,7 @@
                     @endif
 
                     You are logged in!
-                    <a href="{{ route('home.my_home') }}">my_homeへ</a>
+                    <a href="{{ route('home.my_home', ['userId' => $myId]) }}">my_homeへ</a>
                 </div>
             </div>
         </div>

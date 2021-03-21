@@ -11,7 +11,7 @@
 <section class="friends">
 
   <div class="friends-wrap">
-    <a class="back" href="{{ action('HomeController@my_home') }}"><span>&lt;</span></a>
+    <a class="back" href="{{ route('home.my_home', ['userId' => $myId]) }}"><span>&lt;</span></a>
 
     <div class="section-ttl-wrapper">
       <div class="section-ttl">
@@ -23,16 +23,14 @@
 
   <div class="friends-follow">
 
-    <form name="follower" class="follower" action="{{ action('HomeController@follower_list') }}" method="get">
+    <form name="follower" class="follower" action="{{ route('follower.index', ['userId' => $userId]) }}" method="get">
       @csrf
       <a href="javascript: follower.submit()">フォロワー</a>
-      <input type="hidden" name="follower" value="{{ $userId }}">
     </form>
 
-    <form name="following" class="following" action="{{ action('HomeController@following_list') }}" method="get">
+    <form name="following" class="following" action="{{ route('following.index', ['userId' => $userId]) }}" method="get">
       @csrf
       <a href="javascript: following.submit()">フォロー中</a>
-      <input type="hidden" name="following" value="{{ $userId }}">
     </form>
 
 
@@ -44,8 +42,10 @@
 
     @forelse($followers as $follower)
 
+    <?php $friendId = $follower->user_follower->id ?>
+
     <li class="friends-item">
-      <form name="friend" action="{{ action('HomeController@friend_home') }}" method="POST">
+      <form name="friend" action="{{ route('home.friend_home', ['friendId' => $friendId]) }}" method="get">
         @csrf
         <!-- followersの個数が一個だったらと2個以上だったらで場合わけ -->
         @if(count($followers) == 1)
@@ -73,13 +73,13 @@
               </div><!-- /.friend-body-top -->
               
               <div class="friend-body-middle">
-                <p>年齢：{{ $follower->user_follower->age }}</p>
-                <p>住所：{{ $follower->user_follower->area->area }}</p>
+                <p>年齢：{{ optional($follower->user_follower)->age }}</p>
+                <p>住所：{{ optional($follower->user_follower->area)->area }}</p>
               </div><!-- /.friend-body-middle -->
 
               <div class="friend-body-bottom">
-                <p>エンジニア歴：{{ $follower->user_follower->history->history }}</p>
-                <p>得意言語：{{ $follower->user_follower->language->name }}</p>
+                <p>エンジニア歴：{{ optional($follower->user_follower->history)->history }}</p>
+                <p>得意言語：{{ optional($follower->user_follower->language)->name }}</p>
               </div><!-- /.friends-body-bottom -->
 
             </div><!-- /.friend-body -->
@@ -87,7 +87,7 @@
           </a>
 
 
-          <input type="hidden" name="id" value="{{ $follower->user_follower->id }}">
+          <!-- <input type="hidden" name="id" value="{{ $follower->user_follower->id }}"> -->
 
       </form>
     </li>
@@ -106,8 +106,12 @@
   <ul class="friends-list following-list">
 
     @forelse($followings as $following)
+
+    <?php $friendId = $following->user_following->id; ?>
+
+
     <li class="friends-item">
-      <form name="friend" action="{{ action('HomeController@friend_home') }}" method="POST">
+      <form name="friend" action="{{ route('home.friend_home', ['friendId' => $friendId]) }}" method="get">
         @csrf
         <!-- followingsの個数が一個だったらと2個以上だったらで場合わけ -->
         @if(count($followings) == 1)
@@ -131,21 +135,21 @@
               <!-- 名前や年齢などの説明 -->
 
               <div class="friends-body-top">
-                <p class="friends-body-top-name">{{ $following->user_following->name }}</p>
-                <p class="friends-body-top-age">年齢：{{ $following->user_following->age }}</p>
+                <p class="friends-body-top-name">{{ optional($following->user_following)->name }}</p>
+                <p class="friends-body-top-age">年齢：{{ optional($following->user_following)->age }}</p>
               </div><!-- /.friends-body-top -->
 
               <div class="friends-body-bottom">
-                <p class="friends-body-bottom-area">住所：{{ $following->user_following->area->area }}</p>
-                <p class="friends-body-bottom-history">エンジニア歴：{{ $following->user_following->history->history }}</p>
-                <p class="friends-body-bottom-favorite">得意言語：{{ $following->user_following->language->name }}</p>
+                <p class="friends-body-bottom-area">住所：{{ optional($following->user_following->area)->area }}</p>
+                <p class="friends-body-bottom-history">エンジニア歴：{{ optional($following->user_following->history)->history }}</p>
+                <p class="friends-body-bottom-favorite">得意言語：{{ optional($following->user_following->language)->name }}</p>
               </div><!-- /.friends-body-bottom -->
 
             </div><!-- /.friends-body -->
           </a>
 
 
-          <input type="hidden" name="id" value="{{ $following->user_following->id }}">
+          <!-- <input type="hidden" name="id" value="{{ $following->user_following->id }}"> -->
 
       </form>
     </li><!-- /.friends-item -->

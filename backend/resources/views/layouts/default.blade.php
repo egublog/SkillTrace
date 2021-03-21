@@ -49,7 +49,7 @@
     <div class="inner">
 
       <div class="header-logo hidden-sp hidden-tab">
-        <a href="{{ action('HomeController@my_home') }}"><img src="/img/header-logo.png" alt=""></a>
+        <a href="{{ route('home.my_home', ['userId' => $myId]) }}"><img src="/img/header-logo.png" alt=""></a>
       </div><!-- /.header-logo -->
 
       <div class="header-wrap">
@@ -58,25 +58,25 @@
           <ul class="header-nav-list">
 
             <li class="header-nav-item">
-              <a href="{{ action('HomeController@my_home') }}">
+              <a href="{{ route('home.my_home', ['userId' => $myId]) }}">
                 <i class="fas fa-home icon"></i><span class="hidden-sp">ホーム</span>
               </a>
             </li><!-- /.header-nav-item -->
 
             <li class="header-nav-item">
-              <a href="{{ action('SearchController@search') }}">
+              <a href="{{ route('search.index') }}">
                 <i class="fas fa-search icon"></i><span class="hidden-sp">見つける</span>
               </a>
             </li><!-- /.header-nav-item -->
 
             <li class="header-nav-item">
-              <a href="{{ action('ActivityController@activity') }}">
+              <a href="{{ route('activity') }}">
                 <i class="fas fa-bell icon"></i><span class="hidden-sp">通知</span>
               </a>
             </li><!-- /.header-nav-item -->
 
             <li class="header-nav-item">
-              <a href="{{ action('TalkController@talk') }}">
+              <a href="{{ route('talk.index') }}">
                 <i class="fas fa-comments icon"></i><span class="hidden-sp">トーク</span>
               </a>
             </li><!-- /.header-nav-item -->

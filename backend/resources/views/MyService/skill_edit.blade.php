@@ -20,7 +20,9 @@
       <div class="inner">
 
         @if(isset($stars))
-        <form action="{{ action('SkillController@skill_edit_star') }}" method="POST">
+        <form action="{{ route('skillStar.update', ['userLanguageId' => $userLanguageId]) }}" method="POST">
+
+          @method("put")
           <div class="skill-top">
             <h3 class="skill-edit-ttl">スキルレベル</h3>
 
@@ -38,7 +40,7 @@
           @endif
 
           @if(isset($skillables))
-          <form action="{{ action('SkillController@skill_edit_able') }}" method="POST">
+          <form action="{{ route('skillAbility.store', ['userLanguageId' => $userLanguageId]) }}" method="POST">
             <div class="skill-middle">
               <h3 class="skill-edit-ttl">できること</h3>
               <!-- もしもプラスボタンが押されたら -->
@@ -51,14 +53,15 @@
             @endif
 
             @if(isset($skillableEdits))
-            <form action="{{ action('SkillController@skillable_edit_redirect') }}" method="POST">
+            <form action="{{ route('skillAbility.update', ['userLanguageId' => $userLanguageId, 'abilityId' => $abilityId]) }}" method="POST">
+
+              @method("PUT")
+
               <div class="skill-middle">
                 <h3 class="skill-edit-ttl">できること</h3>
                 <!-- もしもプラスボタンが押されたら -->
                 <div class="skill-middle-able">
                   <input type="text" name="skill_content" value="{{ $skillableEdits->content }}">
-
-                  <input type="hidden" name="skill_id" value="{{ $skillableEdits->id }}">
 
                 </div><!-- /.skill-middle-list -->
 
@@ -66,7 +69,8 @@
               @endif
 
               @if(isset($skill_traces))
-              <form action="{{ action('SkillController@skill_edit_trace') }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('skillTrace.store', ['userLanguageId' => $userLanguageId]) }}" method="POST" enctype="multipart/form-data">
+
                 <div class="skill-bottom">
                   <h3 class="skill-edit-ttl">軌跡</h3>
 
@@ -90,7 +94,9 @@
                 @endif
 
                 @if(isset($traceEdit))
-                <form action="{{ action('SkillController@skill_trace_edit_redirect') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('skillTrace.update', ['userLanguageId' => $userLanguageId, 'traceId' => $traceId]) }}" method="POST" enctype="multipart/form-data">
+
+                @method("put")
 
                   <div class="skill-bottom">
                     <h3 class="skill-edit-ttl">軌跡</h3>
@@ -116,7 +122,6 @@
                         </select>
 
                         <input type="text" name="trace_content" value="{{ $traceEdit->content }}">
-                        <input type="hidden" name="trace_id" value="{{ $traceEdit->id }}">
 
                       </li>
                     </ul><!-- /.skill-trace-list -->
@@ -128,7 +133,6 @@
                     <input class="btn" type="submit" value="編集完了">
                   </div><!-- /.skill-edit-btn -->
 
-                  <input type="hidden" name="id" value="{{ $theSkill->id }}">
                   @csrf
                 </form>
       </div><!-- /.inner -->

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use App\Language;
-use App\User;
-use App\User_language;
-use App\Category;
-use App\Trace;
-use App\Skill;
+use App\Models\Language;
+use App\Models\User;
+use App\Models\User_language;
+use App\Models\Category;
+use App\Models\Trace;
+use App\Models\Skill;
 
 
 
@@ -18,9 +18,8 @@ use App\Skill;
 class SkillController extends Controller
 {
     //
-    public function skill_item(Request $request)
+    public function show($userId, $skillId)
     {
-        $theSkillId = $request->input('id');
 
         $myId = Auth::id();
 
@@ -31,24 +30,35 @@ class SkillController extends Controller
         // skillのcontent
         // traceのimg,category,content
 
-        $theSkill = User_language::find($theSkillId);
+        // $skill = Skill::find($skillId);
 
-        $account = User::find($theSkill->user_id);
+        $theSkill = User_language::where('language_id', $skillId)->where('user_id', $userId)->first();
 
-        $traces = Trace::where('user_language_id', $theSkillId)->get();
-        $skills = Skill::where('user_language_id', $theSkillId)->get();
+        $userLanguageId = $theSkill->id;
+
+        // $theSkill = User_language::find($skillId);
+
+        $account = User::find($userId);
+
+        $traces = Trace::where('user_language_id', $userLanguageId)->get();
+        $skills = Skill::where('user_language_id', $userLanguageId)->get();
 
 
-        return view('MyService.skill_item')->with([
-            'theSkill' => $theSkill,
-            'traces' => $traces,
-            'skills' => $skills,
-            'myId' => $myId,
-            'account' => $account
-        ]);
+        return view('MyService.skill_item', compact('theSkill', 'traces', 'skills', 'myId', 'account', 'skillId', 'userLanguageId'));
+        
+        
+        // ->with([
+        //     'theSkill' => $theSkill,
+        //     'traces' => $traces,
+        //     'skills' => $skills,
+        //     'myId' => $myId,
+        //     'account' => $account,
+        //     'skillId' => $skillId,
+        //     'userLanguageId' => $userLanguageId
+        // ]);
     }
 
-    public function skill_add()
+    public function add()
     {
         $myId = Auth::id();
 
@@ -57,14 +67,10 @@ class SkillController extends Controller
         $languages = Language::whereNotIn('id', $user_languages)->get();
 
 
-
-
-        return view('MyService.skill_add')->with([
-            'languages' => $languages
-        ]);
+        return view('MyService.skill_add', compact('myId', 'languages'));
     }
 
-    public function skill_add_save(Request $request)
+    public function store(Request $request)
     {
         // 保存する
         $myId = Auth::id();
@@ -93,355 +99,39 @@ class SkillController extends Controller
         $languages = User_language::where('user_id', $myId)->get();
 
 
-        return view('MyService.home')->with([
-            'myId' => $myId,
-            'account' => $account,
-            'languages' => $languages
-        ]);
+        return redirect()->route('home.my_home', ['userId' => $myId]);
+        
+        // ->with([
+        //     'myId' => $myId,
+        //     'account' => $account,
+        //     'languages' => $languages
+        // ]);;
+
+        // return view('MyService.home')->with([
+        //     'myId' => $myId,
+        //     'account' => $account,
+        //     'languages' => $languages
+        // ]);
     }
 
-    public function skill_delete(Request $request)
+    public function destroy($userLanguageId)
     {
-        $theSkillId = $request->input('id');
-        User_language::find($theSkillId)->delete();
+
+        User_language::find($userLanguageId)->delete();
 
         $myId = Auth::id();
         $account = User::find($myId);
         $languages = User_language::where('user_id', $myId)->get();
 
 
-        return redirect('/my_home')->with([
-            'account' => $account,
-            'myId' => $myId,
-            'languages' => $languages,
-        ]);
-    }
-
-
-
-    public function skill_edit_add_star(Request $request)
-    {
-        $theSkillId = $request->input('id');
-
-        // 欲しいやつ
-        // 選択した言語
-        // skill_itemにすでにある情報たち
-        $theSkill = User_language::find($theSkillId);
-
-        $stars = User_language::find($theSkillId);
-
-        return view('MyService.skill_edit')->with([
-            'theSkill' => $theSkill,
-            'stars' => $stars
-        ]);
-    }
-
-    public function skill_edit_star(Request $request)
-    {
-        $theSkillId = $request->input('id');
-        $stars = $request->input('star_count');
-        // 書き換えをしたい
-        // user_languageテーブルのstar_countの
-
-        $myId = Auth::id();
-
-        $theSkill = User_language::find($theSkillId);
-        $theSkill->star_count = $stars;
-        $theSkill->save();
-
-        $account = User::find($theSkill->user_id);
-
-        // 欲しいやつ
-        // 選択した言語
-        // skill_itemにすでにある情報たち
-        $traces = Trace::where('user_language_id', $theSkillId)->get();
-        $skills = Skill::where('user_language_id', $theSkillId)->get();
-
-
-        return view('MyService.skill_item')->with([
-            'theSkill' => $theSkill,
-            'traces' => $traces,
-            'skills' => $skills,
-            'myId' => $myId,
-            'account' => $account
-        ]);
-    }
-
-    public function skill_edit_add_able(Request $request)
-    {
-        $theSkillId = $request->input('id');
-        $theSkill = User_language::find($theSkillId);
-
-        $skillables = Skill::where('user_language_id', $theSkillId)->get();
-
-        return view('MyService.skill_edit')->with([
-            'theSkill' => $theSkill,
-            'skillables' => $skillables
-        ]);
-    }
-
-    public function skill_edit_able(Request $request)
-    {
-        $theSkillId = $request->input('id');
-        $ableText = $request->input('able');
-
-        $myId = Auth::id();
-
-
-        $skill = new Skill;
-        $skill->user_language_id = $theSkillId;
-        $skill->content = $ableText;
-        $skill->save();
-
-        $theSkill = User_language::find($theSkillId);
-        $account = User::find($theSkill->user_id);
-
-        $skillables = Skill::where('user_language_id', $theSkillId)->get();
-        $traces = Trace::where('user_language_id', $theSkillId)->get();
-        $skills = Skill::where('user_language_id', $theSkillId)->get();
-
-        return view('MyService.skill_item')->with([
-            'theSkill' => $theSkill,
-            'traces' => $traces,
-            'skills' => $skills,
-            'myId' => $myId,
-            'account' => $account
-        ]);
-    }
-
-    public function skill_edit_add_trace(Request $request)
-    {
-        $theSkillId = $request->input('id');
-
-        $theSkill = User_language::find($theSkillId);
-
-        $skill_traces = Trace::all();
-        $categories = Category::all();
-
-        return view('MyService.skill_edit')->with([
-            'theSkill' => $theSkill,
-            'categories' => $categories,
-            'skill_traces' => $skill_traces
-        ]);
-    }
-
-    public function skill_edit_trace(Request $request)
-    {
-        // 奇跡の新規作成
-        $trace_img = $request->file('trace_img');
-        $theSkillId = $request->input('id');
-        $traceText = $request->input('skill-trace');
-        $category = $request->input('category');
-        $file = $request->input('file');
-
-        // traceテーブルのuser_language_idの数だけskill_1-2などと表示したい
-        // $theSkillId_count =  Trace::where('user_language_id', $theSkillId)->count();
-
-        // $file_name = 'skill_img_' . $theSkillId . '-' . ($theSkillId_count + 1) . '.jpeg';
-
-        // $trace_img->storeAs('public/trace_images', $file_name);
-
+        return redirect()->route('home.my_home', ['userId' => $myId]);
         
-        $trace = new Trace;
-        if ($trace_img === null) {
-            $trace->img = null;
-        } else {
-            $path = Storage::disk('s3')->putFile('trace_img', $trace_img, 'public');
-            $trace->img = Storage::disk('s3')->url($path);
-        }
-        $trace->user_language_id = $theSkillId;
-        $trace->category_id = $category;
-        $trace->content = $traceText;
-        $trace->save();
-
-        $traces = Trace::where('user_language_id', $theSkillId)->get();
-
-
-        $theSkill = User_language::find($theSkillId);
-        $myId = Auth::id();
-        $account = User::find($theSkill->user_id);
-
-        $traces = Trace::where('user_language_id', $theSkillId)->get();
-        $skills = Skill::where('user_language_id', $theSkillId)->get();
-
-
-        return view('MyService.skill_item')->with([
-            'theSkill' => $theSkill,
-            'traces' => $traces,
-            'skills' => $skills,
-            'myId' => $myId,
-            'account' => $account
-        ]);
+        // ->with([
+        //     'myId' => $myId,
+        //     'account' => $account,
+        //     'languages' => $languages
+        // ]);
     }
 
-    public function skillable_edit(Request $request)
-    {
-        // user_languageのid
-        $theSkillId = $request->input('id');
-        // skillのid
-        $skill_id = $request->input('skill_id');
 
-
-        $theSkill = User_language::find($theSkillId);
-
-        $skillableEdits = Skill::find($skill_id);
-
-        return view('MyService.skill_edit')->with([
-            'theSkill' => $theSkill,
-            'skillableEdits' => $skillableEdits
-        ]);
-    }
-
-    public function skillable_edit_redirect(Request $request)
-    {
-        // user_languageのid
-        $theSkillId = $request->input('id');
-        // skillのid
-        $skill_id = $request->input('skill_id');
-        // skillのcontent
-        $skill_content = $request->input('skill_content');
-
-        $skillableEdits = Skill::find($skill_id);
-
-        $skillableEdits->content = $skill_content;
-        $skillableEdits->save();
-
-
-
-        $theSkill = User_language::find($theSkillId);
-        $myId = Auth::id();
-        $account = User::find($theSkill->user_id);
-
-        $traces = Trace::where('user_language_id', $theSkillId)->get();
-        $skills = Skill::where('user_language_id', $theSkillId)->get();
-
-
-        return view('MyService.skill_item')->with([
-            'theSkill' => $theSkill,
-            'traces' => $traces,
-            'skills' => $skills,
-            'myId' => $myId,
-            'account' => $account
-        ]);
-    }
-
-    public function skillable_delete(Request $request)
-    {
-        // user_languageのid
-        $theSkillId = $request->input('id');
-        // skillのid
-        $skill_id = $request->input('skill_id');
-
-
-
-        $theSkill = User_language::find($theSkillId);
-        $myId = Auth::id();
-        $account = User::find($theSkill->user_id);
-
-        $skillableDelete = Skill::find($skill_id)->delete();
-
-        $traces = Trace::where('user_language_id', $theSkillId)->get();
-        $skills = Skill::where('user_language_id', $theSkillId)->get();
-
-
-        return view('MyService.skill_item')->with([
-            'theSkill' => $theSkill,
-            'traces' => $traces,
-            'skills' => $skills,
-            'myId' => $myId,
-            'account' => $account
-        ]);
-    }
-
-    public function skill_trace_edit(Request $request)
-    {
-        $theSkillId = $request->input('id');
-        $trace_id = $request->input('trace_id');
-
-
-        $theSkill = User_language::find($theSkillId);
-
-        $traceEdit = Trace::find($trace_id);
-
-        $categories = Category::all();
-
-        return view('MyService.skill_edit')->with([
-            'theSkill' => $theSkill,
-            'categories' => $categories,
-            'traceEdit' => $traceEdit
-        ]);
-    }
-
-    public function skill_trace_edit_redirect(Request $request)
-    {
-        // 軌跡の編集
-        $trace_img = $request->file('trace_img');
-        $theSkillId = $request->input('id');
-        $trace_id = $request->input('trace_id');
-        $trace_content = $request->input('trace_content');
-        $category_id = $request->input('category_id');
-
-                
-        $traceEdits = Trace::find($trace_id);
-        
-        if ($trace_img === null) {
-            $traceEdits->img = null;
-        } else {
-            $path = Storage::disk('s3')->putFile('trace_img', $trace_img, 'public');
-            $traceEdits->img = Storage::disk('s3')->url($path);
-        }
-
-        $traceEdits->category_id = $category_id;
-        $traceEdits->content = $trace_content;
-        $traceEdits->save();
-
-        $theSkill = User_language::find($theSkillId);
-        $myId = Auth::id();
-        $account = User::find($theSkill->user_id);
-
-        $traces = Trace::where('user_language_id', $theSkillId)->get();
-        $skills = Skill::where('user_language_id', $theSkillId)->get();
-
-        // traceテーブルのuser_language_idの数だけskill_1-2などと表示したい
-        // $theSkillId_count =  Trace::where('user_language_id', $theSkillId)->count();
-
-        // $file_name = 'skill_img_' . $theSkillId . '-' . $theSkillId_count . '.jpeg';
-
-        // $trace_img->storeAs('public/trace_images', $file_name);
-
-        return view('MyService.skill_item')->with([
-            'theSkill' => $theSkill,
-            'traces' => $traces,
-            'skills' => $skills,
-            'myId' => $myId,
-            'account' => $account
-        ]);
-    }
-
-    public function skill_trace_delete(Request $request)
-    {
-        // user_languageのid
-        $theSkillId = $request->input('id');
-        // skillのid
-        $trace_id = $request->input('trace_id');
-
-
-        $theSkill = User_language::find($theSkillId);
-        $myId = Auth::id();
-        $account = User::find($theSkill->user_id);
-
-        $traceDelete = Trace::find($trace_id)->delete();
-
-        $traces = Trace::where('user_language_id', $theSkillId)->get();
-        $skills = Skill::where('user_language_id', $theSkillId)->get();
-
-
-        return view('MyService.skill_item')->with([
-            'theSkill' => $theSkill,
-            'traces' => $traces,
-            'skills' => $skills,
-            'myId' => $myId,
-            'account' => $account
-        ]);
-    }
 }

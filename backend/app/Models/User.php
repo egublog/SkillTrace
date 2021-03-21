@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,49 +40,49 @@ class User extends Authenticatable
 
 
     public function area() {
-        return $this->belongsTo('App\Area');
+        return $this->belongsTo('App\Models\Area');
     }
 
     public function history() {
-        return $this->belongsTo('App\History');
+        return $this->belongsTo('App\Models\History');
     }
 
     public function language() {
-        return $this->belongsTo('App\Language');
+        return $this->belongsTo('App\Models\Language');
     }
 
     public function languages() {
-        return $this->belongsToMany('App\Language', 'user_languages', 'user_id', 'language_id');
+        return $this->belongsToMany('App\Models\Language', 'user_languages', 'user_id', 'language_id');
     }
 
     public function user_languages() {
-        return $this->hasMany('App\User_language');
+        return $this->hasMany('App\Models\User_language');
     }
     
     public function follow() {
-        return $this->belongsToMany('App\User', 'follows', 'user_id', 'user_to_id');
+        return $this->belongsToMany('App\Models\User', 'follows', 'user_id', 'user_to_id');
     }
 
     public function follow_to() {
-        return $this->belongsToMany('App\User', 'follows', 'user_to_id', 'user_id');
+        return $this->belongsToMany('App\Models\User', 'follows', 'user_to_id', 'user_id');
     }
 
     public function talk() {
-        return $this->belongsToMany('App\User', 'talks', 'user_id', 'user_to_id');
+        return $this->belongsToMany('App\Models\User', 'talks', 'user_id', 'user_to_id');
     }
 
     public function talk_to() {
-        return $this->belongsToMany('App\User', 'talks', 'user_to_id', 'user_id');
+        return $this->belongsToMany('App\Models\User', 'talks', 'user_to_id', 'user_id');
     }
 
     public function follows()
     {
-        return $this->hasMany('App\Follow', 'user_id');
+        return $this->hasMany('App\Models\Follow', 'user_id');
     }
 
     public function follows_to()
     {
-        return $this->hasMany('App\Follow', 'user_to_id');
+        return $this->hasMany('App\Models\Follow', 'user_to_id');
     }
 
 }

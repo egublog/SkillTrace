@@ -28,9 +28,11 @@
 
                 @forelse($follower_accounts as $follower_account)
 
+                <?php $friendId = $follower_account->user_follower->id ?>
+
                 <li class="friends-item">
 
-                    <form name="friend" action="{{ action('HomeController@friend_home') }}" method="POST">
+                    <form name="friend" action="{{ route('home.friend_home', ['friendId' => $friendId]) }}" method="get">
                         @csrf
 
                         @if(count($follower_accounts) == 1)
@@ -72,7 +74,7 @@
 
                             </a>
 
-                            <input type="hidden" name="id" value="{{ optional($follower_account->user_follower)->id }}">
+                            <!-- <input type="hidden" name="id" value="{{ optional($follower_account->user_follower)->id }}"> -->
 
                     </form>
                 </li><!-- /.friend-item -->

@@ -29,17 +29,19 @@
   
         <div class="home-top-wrap-center-follow">
   
-          <form class="follower" name="follower" action="{{ action('HomeController@follower_list') }}" method="get">
+
+          <form class="follower" name="follower" action="{{ route('follower.index', ['userId' => $userId]) }}" method="get">
             @csrf
             <a href="javascript: follower.submit()">フォロワー</a>
-            <input type="hidden" name="follower" value="{{ $account->id }}">
           </form>
   
-          <form class="following" name="following" action="{{ action('HomeController@following_list') }}" method="get">
+          <form class="following" name="following" action="{{ route('following.index', ['userId' => $userId]) }}" method="get">
             @csrf
             <a href="javascript: following.submit()">フォロー中</a>
-            <input type="hidden" name="following" value="{{ $account->id }}">
           </form>
+
+
+       
   
         </div><!-- /.home-top-wrap-center-follow -->
   
@@ -50,31 +52,31 @@
       <!-- すでにフォローしていない場合
       →followテーブルのuser_id=myIdかつuser_to_idがfriendIdがない場合 -->
   
-      @if($account->id !== $myId)
+      @if($userId != $myId)
       @empty($follow_check)
       <div class="home-top-wrap-right">
-        <form action="{{ action('HomeController@following') }}" method="POST" name="follow">
+        <form action="{{ route('following.follow', ['userId' => $userId]) }}" method="POST" name="follow">
           @csrf
   
           <a href="javascript: follow.submit()">
             フォローする
           </a>
-          <input type="hidden" name="id" value="{{ $account->id }}">
+
         </form>
       </div><!-- /.home-top-wrap-right -->
       @endempty
       @endif
-  
-      @if($account->id !== $myId)
+
+      @if($userId != $myId)
       @if(isset($follow_check))
       <div class="home-top-wrap-right">
-        <form action="{{ action('HomeController@following') }}" method="POST" name="follow">
+        <form action="{{ route('following.follow', ['userId' => $userId]) }}" method="POST" name="follow">
           @csrf
   
           <a href="javascript: follow.submit()">
             フォローしました
           </a>
-          <input type="hidden" name="id" value="{{ $account->id }}">
+
         </form>
       </div><!-- /.home-top-wrap-right -->
       @endif
@@ -120,16 +122,16 @@
     <div class="home-top-button">
   
       <!-- もしも自分のアカウントである場合 -->
-      @if($account->id === $myId)
-      <a href="{{ action('HomeController@profile') }}">プロフィールの編集</a>
+      @if($userId == $myId)
+      <a href="{{ route('profile.index') }}">プロフィールの編集</a>
       @endif
   
       <!-- もしも自分以外のアカウントである場合 -->
-      @if($account->id !== $myId)
-      <form name="friend" action="{{ action('TalkController@talk_show') }}" method="get">
+      @if($userId != $myId)
+      <form name="friend" action="{{ route('talk.show', ['theFriendId' => $userId]) }}" method="get">
         @csrf
         <a href="javascript: friend.submit()">トークする</a>
-        <input type="hidden" name="id" value="{{ $account->id }}">
+        <input type="hidden" name="id" value="{{ $userId }}">
       </form>
       @endif
   
@@ -156,10 +158,12 @@
   
       @if(isset($languages))
       @foreach($languages as $language)
+
+      <?php $skillId = $language->language->id ?>
   
       <li class="home-skill-item">
   
-        <form name="skill" action="{{ action('SkillController@skill_item') }}" method="POST">
+        <form name="skill" action="{{ route('skill.show', ['userId' => $userId, 'skillId' => $skillId]) }}" method="get">
           @csrf
           <!-- languagesの個数が一個だったらと2個以上だったらで場合わけ -->
           @if(count($languages) == 1)
@@ -201,30 +205,27 @@
   
             </a>
   
-  
-            <input type="hidden" name="id" value="{{ $language->id }}">
-  
         </form>
       </li>
       @endforeach
       @endif
   
-      @if($account->id === $myId)
+      @if($userId == $myId)
       <li class="home-skill-item skill-add">
-        <a href="{{ action('SkillController@skill_add') }}">
+        <a href="{{ route('skill.add') }}">
           +
         </a>
       </li>
   
       <li class="home-skill-item">
-        <a href="{{ action('SkillController@skill_add') }}">
+        <a href="{{ route('skill.add') }}">
   
         </a>
       </li>
   
       @else
       <li class="home-skill-item">
-        <a href="{{ action('SkillController@skill_add') }}">
+        <a href="{{ route('skill.add') }}">
   
         </a>
       </li>

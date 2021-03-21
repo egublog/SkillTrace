@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\User;
-use App\Area;
-use App\History;
-use App\Language;
-use App\User_language;
-use App\Follow;
-use App\Talk;
+use App\Models\User;
+use App\Models\Area;
+use App\Models\History;
+use App\Models\Language;
+use App\Models\User_language;
+use App\Models\Follow;
+use App\Models\Talk;
 
 class TalkController extends Controller
 {
     //
-    public function talk()
+    public function index()
     {
         $myId = Auth::id();
         $myAccount = User::find($myId);
@@ -30,12 +30,10 @@ class TalkController extends Controller
 
 
 
-        return view('MyService.talk')->with([
-            'following_accounts' => $following_accounts,
-        ]);
+        return view('MyService.talk', compact('myId', 'following_accounts'));
     }
 
-    public function talk_search(Request $request)
+    public function search(Request $request)
     {
 
         $myId = Auth::id();
@@ -51,8 +49,7 @@ class TalkController extends Controller
             $query->where('name', 'like', "%$search_result_name%");
         })->get();
 
-    
-
+        // dd($search_result_name);
 
         // 空の配列作って条件に当てはまるやつだけ配列に代入する
 
@@ -61,12 +58,10 @@ class TalkController extends Controller
         // $search_result_user = User::whereNotIn('id', [$myId])->where('name', $search_result_name)->get();
 
 
-        return view('MyService.talk')->with([
-            'following_accounts' => $following_accounts
-        ]);
+        return view('MyService.talk', compact('myId', 'following_accounts'));
     }
 
-    public function talk_show(Request $request)
+    public function show($theFriendId, Request $request)
     {
         // その友達のID
         $theFriendId = $request->input('id');
@@ -97,15 +92,10 @@ class TalkController extends Controller
         $talkDates = Talk::where('user_id', $myId)->where('user_to_id', $theFriendId)->orWhere('user_id', $theFriendId)->where('user_to_id', $myId)->get();
 
 
-        return view('MyService.talk_show')->with([
-            'following_accounts' => $following_accounts,
-            'theFriendAccount' => $theFriendAccount,
-            'talkDates' => $talkDates,
-            'myId' => $myId
-        ]);;
+        return view('MyService.talk_show', compact('myId', 'theFriendId', 'following_accounts', 'theFriendAccount', 'talkDates'));
     }
 
-    public function talk_content(Request $request)
+    public function store($theFriendId, Request $request)
     {
         $myId = Auth::id();
         // その友達の情報
@@ -119,27 +109,16 @@ class TalkController extends Controller
         $talks->yet = false;
         $talks->save();
 
-
-
         $talkDates = Talk::where('user_id', $myId)->where('user_to_id', $theFriendId)->orWhere('user_id', $theFriendId)->where('user_to_id', $myId)->get();
-
-
-
 
         $theFriendAccount = User::find($theFriendId);
 
         $myAccount = User::find($myId);
 
-
-
         $following_accounts = Follow::where('user_id', $myId)->get();
 
+        // return redirect()->route('talk.show', ['theFriendId' => $theFriendId]);
 
-        return view('MyService.talk_show')->with([
-            'following_accounts' => $following_accounts,
-            'theFriendAccount' => $theFriendAccount,
-            'talkDates' => $talkDates,
-            'myId' => $myId
-        ]);;
+        return view('MyService.talk_show', compact('myId', 'theFriendId', 'following_accounts', 'theFriendAccount', 'talkDates'));
     }
 }

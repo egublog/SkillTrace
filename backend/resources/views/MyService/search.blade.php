@@ -19,7 +19,7 @@ csrf_field()
 
   <div class="search-wrapper">
 
-    <form action="{{ action('SearchController@search_result') }}" method="post">
+    <form action="{{ route('search.search') }}" method="get">
       @csrf
 
       <dl class="search-wrapper-def">
@@ -109,9 +109,11 @@ csrf_field()
 
       @forelse($search_result_users as $search_result_user)
 
+      <?php $friendId = $search_result_user->id ?>
+
       <li class="friends-item">
 
-        <form name="friend" action="{{ action('HomeController@friend_home') }}" method="POST">
+        <form name="friend" action="{{ route('home.friend_home', ['friendId' => $friendId]) }}" method="get">
           @csrf
           <!-- search_result_usersの個数が一個だったらと2個以上だったらで場合わけ -->
           @if(count($search_result_users) == 1)
@@ -147,7 +149,7 @@ csrf_field()
             </a>
 
 
-            <input type="hidden" name="id" value="{{ $search_result_user->id }}">
+            <!-- <input type="hidden" name="id" value="{{ $search_result_user->id }}"> -->
 
         </form>
 

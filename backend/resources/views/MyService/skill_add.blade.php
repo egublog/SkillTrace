@@ -15,7 +15,7 @@
       </div><!-- /.section-ttl -->
     </div><!-- /.section-ttl-wrapper -->
 
-    <form action="{{ action('SkillController@skill_add_save') }}" method="POST">
+    <form action="{{ route('skill.store') }}" method="POST">
       {{ csrf_field() }}
 
       <select class="skill-add-select" id="" name="language_id">

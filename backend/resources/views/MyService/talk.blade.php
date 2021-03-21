@@ -14,7 +14,7 @@
         <h2>トーク</h2>
       </div><!-- /.section-ttl -->
       <!-- 検索 -->
-      <form action="{{ action('TalkController@talk_search') }}" method="post">
+      <form action="{{ route('talk.search') }}" method="get">
         @csrf
         <input type="text" name="name">
         <input class="btn" type="submit" value="検索">
@@ -28,7 +28,7 @@
         @forelse($following_accounts as $following_account)
 
         <li class="friends-item">
-          <form name="friend" action="{{ action('TalkController@talk_show') }}" method="GET">
+          <form name="friend" action="{{ route('talk.show', ['theFriendId' => $following_account->id]) }}" method="GET">
             @csrf
 
             @if(count($following_accounts) == 1)

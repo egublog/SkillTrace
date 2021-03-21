@@ -12,7 +12,7 @@
     <div class="skill-box">
   
   
-      <a class="back" href="{{ action('HomeController@my_home') }}"><span>&lt;</span></a>
+      <a class="back" href="{{ route('home.my_home', ['userId' => $myId]) }}"><span>&lt;</span></a>
   
       <div class="section-ttl-wrapper">
         <div class="section-ttl">
@@ -44,12 +44,11 @@
             @if(isset($account))
             @if($account->id == $myId)
             <div class="edit">
-              <form name="skill" action="{{ action('SkillController@skill_edit_add_star') }}" method="post">
+              <form name="skill" action="{{ route('skillStar.add', ['userLanguageId' => $userLanguageId]) }}" method="get">
                 @csrf
                 <a href="javascript: skill.submit()">
                   <i class="fas fa-edit"></i>
                 </a>
-                <input type="hidden" name="id" value="{{ $theSkill->id }}">
               </form>
             </div><!-- /.edit -->
             @endif
@@ -65,6 +64,9 @@
           <!-- DBとの連携でskill_editで書いたことをここに表示させたい -->
           <ul class="skill-middle-list">
             @forelse($skills as $skill)
+
+            <?php $abilityId = $skill->id ?>
+
             <li class="skill-middle-item">
   
               <p class="skill-middle-txt">{{ $skill->content }}</p>
@@ -74,8 +76,10 @@
                 @if(isset($account))
                 @if($account->id == $myId)
   
+
+
                 <div class="edit">
-                  <form name="ableEdit" action="{{ action('SkillController@skillable_edit') }}" method="post">
+                  <form name="ableEdit" action="{{ route('skillAbility.show', ['userLanguageId' => $userLanguageId, 'abilityId' => $abilityId]) }}" method="get">
                     @csrf
                     @if(count($skills) == 1)
                     <a href="javascript: ableEdit.submit()">
@@ -86,14 +90,15 @@
                         @endif
                         <i class="fas fa-edit"></i>
                       </a>
-                      <input type="hidden" name="id" value="{{ $theSkill->id }}">
-                      <input type="hidden" name="skill_id" value="{{ $skill->id }}">
                   </form>
                 </div><!-- /.edit -->
   
                 <div class="delete">
-                  <form name="ableDelete" action="{{ action('SkillController@skillable_delete') }}" method="post">
+                  <form name="ableDelete" action="{{ route('skillAbility.destroy', ['userLanguageId' => $userLanguageId, 'abilityId' => $abilityId]) }}" method="post">
+
                     @csrf
+                    @method("delete")
+
                     @if(count($skills) == 1)
                     <a href="javascript: ableDelete.submit()">
                       @endif
@@ -103,8 +108,7 @@
                         @endif
                         <i class="fas fa-trash-alt"></i>
                       </a>
-                      <input type="hidden" name="id" value="{{ $theSkill->id }}">
-                      <input type="hidden" name="skill_id" value="{{ $skill->id }}">
+
                   </form>
                 </div><!-- /.delete -->
   
@@ -124,13 +128,14 @@
   
           @if(isset($account))
           @if($account->id == $myId)
+          
           <div class="skill-add">
-            <form name="skillable" action="{{ action('SkillController@skill_edit_add_able') }}" method="post">
+            <form name="skillable" action="{{ route('skillAbility.add', ['userLanguageId' => $userLanguageId]) }}" method="get">
               @csrf
               <a href="javascript: skillable.submit()">
                 ＋
               </a>
-              <input type="hidden" name="id" value="{{ $theSkill->id }}">
+              <!-- <input type="hidden" name="id" value="{{ $theSkill->id }}"> -->
             </form>
           </div><!-- /.skill-add -->
           @endif
@@ -144,6 +149,8 @@
           <ul class="skill-bottom-list">
   
             @forelse($traces as $trace)
+
+            <?php $traceId = $trace->id ?>
   
             <li class="skill-bottom-item">
   
@@ -169,7 +176,7 @@
                 @if(isset($account))
                 @if($account->id == $myId)
                 <div class="edit">
-                  <form name="traceEdit" action="{{ action('SkillController@skill_trace_edit') }}" method="post">
+                  <form name="traceEdit" action="{{ route('skillTrace.show', ['userLanguageId' => $userLanguageId, 'traceId' => $traceId]) }}" method="get">
                     @csrf
                     @if(count($traces) == 1)
                     <a href="javascript: traceEdit.submit()">
@@ -180,14 +187,16 @@
                         @endif
                         <i class="fas fa-edit"></i>
                       </a>
-                      <input type="hidden" name="id" value="{{ $theSkill->id }}">
-                      <input type="hidden" name="trace_id" value="{{ $trace->id }}">
+
                   </form>
                 </div><!-- /.edit -->
   
                 <div class="delete">
-                  <form name="traceDelete" action="{{ action('SkillController@skill_trace_delete') }}" method="post">
+                  <form name="traceDelete" action="{{ route('skillTrace.destroy', ['userLanguageId' => $userLanguageId, 'traceId' => $traceId]) }}" method="post">
+
                     @csrf
+                    @method("delete")
+
                     @if(count($traces) == 1)
                     <a href="javascript: traceDelete.submit()">
                       @endif
@@ -197,8 +206,7 @@
                         @endif
                         <i class="fas fa-trash-alt"></i>
                       </a>
-                      <input type="hidden" name="id" value="{{ $theSkill->id }}">
-                      <input type="hidden" name="trace_id" value="{{ $trace->id }}">
+
                   </form>
                 </div><!-- /.delete -->
                 @endif
@@ -218,12 +226,11 @@
           @if(isset($account))
           @if($account->id == $myId)
           <div class="skill-add">
-            <form name="trace" action="{{ action('SkillController@skill_edit_add_trace') }}" method="post">
+            <form name="trace" action="{{ route('skillTrace.add', ['userLanguageId' => $userLanguageId]) }}" method="get">
               @csrf
               <a href="javascript: trace.submit()">
                 ＋
               </a>
-              <input type="hidden" name="id" value="{{ $theSkill->id }}">
             </form>
           </div><!-- /.skill-add -->
           @endif
@@ -234,9 +241,9 @@
   
         @if(isset($account))
         @if($account->id == $myId)
-        <form class="skill-delete" action="{{ action('SkillController@skill_delete') }}" method="post">
+        <form class="skill-delete" action="{{ route('skill.destroy', ['userLanguageId' => $userLanguageId]) }}" method="post">
           @csrf
-          <input type="hidden" name="id" value="{{ $theSkill->id }}">
+          @method("delete")
           <input class="btn bg-danger" type="submit" value="このスキルを削除する">
         </form>
         @endif

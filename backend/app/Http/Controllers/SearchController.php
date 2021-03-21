@@ -6,32 +6,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-use App\User;
-use App\Area;
-use App\History;
-use App\Language;
+use App\Models\User;
+use App\Models\Area;
+use App\Models\History;
+use App\Models\Language;
 
 
 class SearchController extends Controller
 {
     //
-    public function search()
+    public function index()
     {
+        $myId = Auth::id();
         $areas = Area::all();
         $histories = History::all();
         $languages = Language::all();
 
 
-        return view('MyService.search')->with([
-            'areas' => $areas,
-            'histories' => $histories,
-            'languages' => $languages,
-
-
-        ]);
+        return view('MyService.search', compact('myId', 'areas', 'histories', 'languages'));
     }
 
-    public function search_result(Request $request) {
+    public function search(Request $request) {
 
         $myId = Auth::id();
 
@@ -71,8 +66,6 @@ class SearchController extends Controller
             })
             ->get();
 
-           
-
 
         // $user__name__ = User::where('name', $request->name);
 
@@ -80,11 +73,6 @@ class SearchController extends Controller
         
             //    $requestはプロパティの名前がname属性, ユーザーが入力した物はプロパティの中身のオブジェクト
 
-        return view('MyService.search')->with([
-            'areas' => $areas,
-            'histories' => $histories,
-            'languages' => $languages,
-            'search_result_users' => $search_result_users
-        ]);
+        return view('MyService.search', compact('myId', 'areas', 'histories', 'languages', 'search_result_users'));
     }
 }
