@@ -15,7 +15,7 @@ use App\Models\Skill;
 class SkillAbilityController extends Controller
 {
     //
-    public function add($userLanguageId)
+    public function create($userLanguageId)
     {
         $myId = Auth::id();
         $theSkill = User_language::find($userLanguageId);

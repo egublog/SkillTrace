@@ -58,7 +58,7 @@ class SkillController extends Controller
         // ]);
     }
 
-    public function add()
+    public function create()
     {
         $myId = Auth::id();
 

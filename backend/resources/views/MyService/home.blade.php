@@ -189,20 +189,20 @@
   
       @if($userId == $myId)
       <li class="home-skill-item skill-add">
-        <a href="{{ route('skill.add') }}">
+        <a href="{{ route('skill.create') }}">
           +
         </a>
       </li>
   
       <li class="home-skill-item">
-        <a href="{{ route('skill.add') }}">
+        <a href="{{ route('skill.create') }}">
   
         </a>
       </li>
   
       @else
       <li class="home-skill-item">
-        <a href="{{ route('skill.add') }}">
+        <a href="{{ route('skill.create') }}">
   
         </a>
       </li>

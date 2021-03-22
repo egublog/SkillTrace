@@ -44,7 +44,7 @@
             @if(isset($account))
             @if($account->id == $myId)
             <div class="edit">
-              <form name="skill" action="{{ route('skillStar.add', ['userLanguageId' => $userLanguageId]) }}" method="get">
+              <form name="skill" action="{{ route('skillStar.create', ['userLanguageId' => $userLanguageId]) }}" method="get">
                 @csrf
                 <a href="javascript: skill.submit()">
                   <i class="fas fa-edit"></i>
@@ -130,7 +130,7 @@
           @if($account->id == $myId)
           
           <div class="skill-add">
-            <form name="skillable" action="{{ route('skillAbility.add', ['userLanguageId' => $userLanguageId]) }}" method="get">
+            <form name="skillable" action="{{ route('skillAbility.create', ['userLanguageId' => $userLanguageId]) }}" method="get">
               @csrf
               <a href="javascript: skillable.submit()">
                 ＋
@@ -226,7 +226,7 @@
           @if(isset($account))
           @if($account->id == $myId)
           <div class="skill-add">
-            <form name="trace" action="{{ route('skillTrace.add', ['userLanguageId' => $userLanguageId]) }}" method="get">
+            <form name="trace" action="{{ route('skillTrace.create', ['userLanguageId' => $userLanguageId]) }}" method="get">
               @csrf
               <a href="javascript: trace.submit()">
                 ＋

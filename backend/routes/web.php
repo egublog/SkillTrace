@@ -58,23 +58,23 @@ Route::post('/talk/{theFriendId}/store', 'TalkController@store')->name('talk.sto
 
 //skill
 Route::get('/user/{userId}/skill/{skillId}', 'SkillController@show')->name('skill.show');
-Route::get('/user/skill/add', 'SkillController@add')->name('skill.add');
-Route::post('/user/skill/add', 'SkillController@store')->name('skill.store');
+Route::get('/user/skill/create', 'SkillController@create')->name('skill.create');
+Route::post('/user/skill/create', 'SkillController@store')->name('skill.store');
 Route::delete('/user/skill/{userLanguageId}', 'SkillController@destroy')->name('skill.destroy');
 
 //star
-Route::get('/user/{userLanguageId}/star', 'SkillStarController@add')->name('skillStar.add');
+Route::get('/user/{userLanguageId}/star', 'SkillStarController@create')->name('skillStar.create');
 Route::put('/user/{userLanguageId}/star', 'SkillStarController@update')->name('skillStar.update');
 
 //ability
-Route::get('/user/{userLanguageId}/ability', 'SkillAbilityController@add')->name('skillAbility.add');
+Route::get('/user/{userLanguageId}/ability', 'SkillAbilityController@create')->name('skillAbility.create');
 Route::post('/user/{userLanguageId}/ability', 'SkillAbilityController@store')->name('skillAbility.store');
 Route::get('/user/{userLanguageId}/ability/{abilityId}', 'SkillAbilityController@show')->name('skillAbility.show');
 Route::put('/user/{userLanguageId}/ability/{abilityId}', 'SkillAbilityController@update')->name('skillAbility.update');
 Route::delete('/user/{userLanguageId}/ability/{abilityId}', 'SkillAbilityController@destroy')->name('skillAbility.destroy');
 
 //trace
-Route::get('/user/{userLanguageId}/trace', 'SkillTraceController@add')->name('skillTrace.add');
+Route::get('/user/{userLanguageId}/trace', 'SkillTraceController@create')->name('skillTrace.create');
 Route::post('/user/{userLanguageId}/trace', 'SkillTraceController@store')->name('skillTrace.store');
 Route::get('/user/{userLanguageId}/trace/{traceId}', 'SkillTraceController@show')->name('skillTrace.show');
 Route::put('/user/{userLanguageId}/trace/{traceId}', 'SkillTraceController@update')->name('skillTrace.update');

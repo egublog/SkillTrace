@@ -15,7 +15,7 @@ use App\Models\Skill;
 class SkillStarController extends Controller
 {
 
-    public function add($userLanguageId)
+    public function create($userLanguageId)
     {
         $myId = Auth::id();
 
