@@ -12,7 +12,7 @@
     <div class="skill-box">
   
   
-      <a class="back" href="{{ route('home.my_home', ['userId' => $myId]) }}"><span>&lt;</span></a>
+      <a class="back" href="{{ route('home.home', ['userId' => $userId]) }}"><span>&lt;</span></a>
   
       <div class="section-ttl-wrapper">
         <div class="section-ttl">

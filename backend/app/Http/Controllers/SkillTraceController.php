@@ -34,7 +34,7 @@ class SkillTraceController extends Controller
         // $theSkillId = $request->input('id');
         $traceText = $request->input('skill-trace');
         $category = $request->input('category');
-        $file = $request->input('file');
+        // $file = $request->input('file');
 
         // traceテーブルのuser_language_idの数だけskill_1-2などと表示したい
         // $theSkillId_count =  Trace::where('user_language_id', $theSkillId)->count();
@@ -56,17 +56,17 @@ class SkillTraceController extends Controller
         $trace->content = $traceText;
         $trace->save();
 
-        $traces = Trace::where('user_language_id', $userLanguageId)->get();
+        // $traces = Trace::where('user_language_id', $userLanguageId)->get();
 
 
         $theSkill = User_language::find($userLanguageId);
-        $myId = Auth::id();
+        // $myId = Auth::id();
         $account = User::find($theSkill->user_id);
         $userId = $account->id;
         $skillId = $theSkill->language_id;
 
-        $traces = Trace::where('user_language_id', $userLanguageId)->get();
-        $skills = Skill::where('user_language_id', $userLanguageId)->get();
+        // $traces = Trace::where('user_language_id', $userLanguageId)->get();
+        // $skills = Skill::where('user_language_id', $userLanguageId)->get();
 
 
         return redirect()->route('skill.show', ['userId' => $userId, 'skillId' =>$skillId ]);
@@ -141,13 +141,13 @@ class SkillTraceController extends Controller
         $traceEdits->save();
 
         $theSkill = User_language::find($userLanguageId);
-        $myId = Auth::id();
+        // $myId = Auth::id();
         $account = User::find($theSkill->user_id);
         $userId = $account->id;
         $skillId = $theSkill->language_id;
 
-        $traces = Trace::where('user_language_id', $userLanguageId)->get();
-        $skills = Skill::where('user_language_id', $userLanguageId)->get();
+        // $traces = Trace::where('user_language_id', $userLanguageId)->get();
+        // $skills = Skill::where('user_language_id', $userLanguageId)->get();
 
         // traceテーブルのuser_language_idの数だけskill_1-2などと表示したい
         // $theSkillId_count =  Trace::where('user_language_id', $theSkillId)->count();
@@ -186,15 +186,15 @@ class SkillTraceController extends Controller
 
 
         $theSkill = User_language::find($userLanguageId);
-        $myId = Auth::id();
+        // $myId = Auth::id();
         $account = User::find($theSkill->user_id);
         $userId = $account->id;
         $skillId = $theSkill->language_id;
 
-        $traceDelete = Trace::find($traceId)->delete();
+        Trace::find($traceId)->delete();
 
-        $traces = Trace::where('user_language_id', $userLanguageId)->get();
-        $skills = Skill::where('user_language_id', $userLanguageId)->get();
+        // $traces = Trace::where('user_language_id', $userLanguageId)->get();
+        // $skills = Skill::where('user_language_id', $userLanguageId)->get();
 
 
         return redirect()->route('skill.show', ['userId' => $userId, 'skillId' => $skillId ]);

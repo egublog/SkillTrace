@@ -27,8 +27,10 @@
 
         @forelse($following_accounts as $following_account)
 
+        <?php $theFriendId = $following_account->id; ?>
+
         <li class="friends-item">
-          <form name="friend" action="{{ route('talk.show', ['theFriendId' => $following_account->id]) }}" method="GET">
+          <form name="friend" action="{{ route('talk.show', ['theFriendId' => $theFriendId]) }}" method="GET">
             @csrf
 
             @if(count($following_accounts) == 1)
@@ -50,23 +52,21 @@
                 <div class="friend-body">
                   <!-- 名前や年齢などの説明 -->
                   <div class="friend-body-top">
-                    <p>{{{ $following_account->user_following->name }}}</p>
+                    <p>{{ optional($following_account->user_following)->name }}</p>
                   </div><!-- /.friend-body-top -->
                   
                   <div class="friend-body-middle">
-                    <p>年齢：{{{ $following_account->user_following->age }}}</p>
-                    <p>住所：{{{ $following_account->user_following->area->area }}}</p=>
+                    <p>年齢：{{ optional($following_account->user_following)->age }}</p>
+                    <p>住所：{{ optional($following_account->user_following->area)->area }}</p>
                   </div><!-- /.friend-body-middle -->
 
                   <div class="friend-body-bottom">
-                    <p>エンジニア歴：{{{ $following_account->user_following->history->history }}}</p>
-                    <p>得意言語：{{{ $following_account->user_following->language->name }}}</p=>
+                    <p>エンジニア歴：{{ optional($following_account->user_following->history)->history }}</p>
+                    <p>得意言語：{{ optional($following_account->user_following->language)->name }}</p>
                   </div><!-- /.friend-body-bottom -->
 
                 </div><!-- /.friend-body -->
               </a>
-
-              <input type="hidden" name="id" value="{{ optional($following_account->user_following)->id }}">
 
           </form>
         </li><!-- /.friends-item -->

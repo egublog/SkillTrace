@@ -29,7 +29,7 @@ class SkillAbilityController extends Controller
     {
         $ableText = $request->input('able');
 
-        $myId = Auth::id();
+        // $myId = Auth::id();
 
         $skill = new Skill;
         $skill->user_language_id = $userLanguageId;
@@ -42,9 +42,9 @@ class SkillAbilityController extends Controller
         $userId = $account->id;
         $skillId = $theSkill->language_id;
 
-        $skillables = Skill::where('user_language_id', $userLanguageId)->get();
-        $traces = Trace::where('user_language_id', $userLanguageId)->get();
-        $skills = Skill::where('user_language_id', $userLanguageId)->get();
+        // $skillables = Skill::where('user_language_id', $userLanguageId)->get();
+        // $traces = Trace::where('user_language_id', $userLanguageId)->get();
+        // $skills = Skill::where('user_language_id', $userLanguageId)->get();
 
         return redirect()->route('skill.show', ['userId' => $userId, 'skillId' =>$skillId ]);
         
@@ -65,10 +65,6 @@ class SkillAbilityController extends Controller
         //     'account' => $account
         // ]);
     }
-
-
-
-
 
     public function show($userLanguageId, $abilityId)
     {
@@ -93,14 +89,14 @@ class SkillAbilityController extends Controller
 
         
         $theSkill = User_language::find($userLanguageId);
-        $myId = Auth::id();
+        // $myId = Auth::id();
         $account = User::find($theSkill->user_id);
 
         $userId = $account->id;
         $skillId = $theSkill->language_id;
 
-        $traces = Trace::where('user_language_id', $userLanguageId)->get();
-        $skills = Skill::where('user_language_id', $userLanguageId)->get();
+        // $traces = Trace::where('user_language_id', $userLanguageId)->get();
+        // $skills = Skill::where('user_language_id', $userLanguageId)->get();
 
         return redirect()->route('skill.show', ['userId' => $userId, 'skillId' =>$skillId ]);
         
@@ -125,16 +121,16 @@ class SkillAbilityController extends Controller
     {
 
         $theSkill = User_language::find($userLanguageId);
-        $myId = Auth::id();
+        // $myId = Auth::id();
         $account = User::find($theSkill->user_id);
 
         $userId = $account->id;
         $skillId = $theSkill->language_id;
 
-        $skillableDelete = Skill::find($abilityId)->delete();
+        Skill::find($abilityId)->delete();
 
-        $traces = Trace::where('user_language_id', $userLanguageId)->get();
-        $skills = Skill::where('user_language_id', $userLanguageId)->get();
+        // $traces = Trace::where('user_language_id', $userLanguageId)->get();
+        // $skills = Skill::where('user_language_id', $userLanguageId)->get();
 
         return redirect()->route('skill.show', ['userId' => $userId, 'skillId' => $skillId ]);
         

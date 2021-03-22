@@ -32,7 +32,7 @@
 
                 <li class="friends-item">
 
-                    <form name="friend" action="{{ route('home.friend_home', ['friendId' => $friendId]) }}" method="get">
+                    <form name="friend" action="{{ route('home.home', ['userId' => $friendId]) }}" method="get">
                         @csrf
 
                         @if(count($follower_accounts) == 1)

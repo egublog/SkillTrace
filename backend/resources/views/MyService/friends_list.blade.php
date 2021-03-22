@@ -11,7 +11,7 @@
 <section class="friends">
 
   <div class="friends-wrap">
-    <a class="back" href="{{ route('home.my_home', ['userId' => $myId]) }}"><span>&lt;</span></a>
+    <a class="back" href="{{ route('home.home', ['userId' => $userId]) }}"><span>&lt;</span></a>
 
     <div class="section-ttl-wrapper">
       <div class="section-ttl">
@@ -45,7 +45,7 @@
     <?php $friendId = $follower->user_follower->id ?>
 
     <li class="friends-item">
-      <form name="friend" action="{{ route('home.friend_home', ['friendId' => $friendId]) }}" method="get">
+      <form name="friend" action="{{ route('home.home', ['userId' => $friendId]) }}" method="get">
         @csrf
         <!-- followersの個数が一個だったらと2個以上だったらで場合わけ -->
         @if(count($followers) == 1)
@@ -111,7 +111,7 @@
 
 
     <li class="friends-item">
-      <form name="friend" action="{{ route('home.friend_home', ['friendId' => $friendId]) }}" method="get">
+      <form name="friend" action="{{ route('home.home', ['userId' => $friendId]) }}" method="get">
         @csrf
         <!-- followingsの個数が一個だったらと2個以上だったらで場合わけ -->
         @if(count($followings) == 1)

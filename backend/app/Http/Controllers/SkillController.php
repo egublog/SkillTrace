@@ -44,7 +44,7 @@ class SkillController extends Controller
         $skills = Skill::where('user_language_id', $userLanguageId)->get();
 
 
-        return view('MyService.skill_item', compact('theSkill', 'traces', 'skills', 'myId', 'account', 'skillId', 'userLanguageId'));
+        return view('MyService.skill_item', compact('theSkill', 'traces', 'skills', 'myId', 'account', 'skillId', 'userLanguageId', 'userId'));
         
         
         // ->with([
@@ -74,7 +74,7 @@ class SkillController extends Controller
     {
         // 保存する
         $myId = Auth::id();
-        $account = User::find($myId);
+        // $account = User::find($myId);
         $the_skill = $request->language_id;
 
         // $myAccountの中間テーブルのuser_languagesテーブルにその番号を追加してsaveする
@@ -96,10 +96,10 @@ class SkillController extends Controller
         $user_language->save();
 
 
-        $languages = User_language::where('user_id', $myId)->get();
+        // $languages = User_language::where('user_id', $myId)->get();
 
 
-        return redirect()->route('home.my_home', ['userId' => $myId]);
+        return redirect()->route('home.home', ['userId' => $myId]);
         
         // ->with([
         //     'myId' => $myId,
@@ -120,11 +120,11 @@ class SkillController extends Controller
         User_language::find($userLanguageId)->delete();
 
         $myId = Auth::id();
-        $account = User::find($myId);
-        $languages = User_language::where('user_id', $myId)->get();
+        // $account = User::find($myId);
+        // $languages = User_language::where('user_id', $myId)->get();
 
 
-        return redirect()->route('home.my_home', ['userId' => $myId]);
+        return redirect()->route('home.home', ['userId' => $myId]);
         
         // ->with([
         //     'myId' => $myId,

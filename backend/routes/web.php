@@ -23,8 +23,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 //home
-Route::get('/user/{userId}', 'HomeController@my_home')->name('home.my_home');
-Route::get('/friend/{friendId}', 'HomeController@friend_home')->name('home.friend_home');
+
+Route::get('/user/{userId}', 'HomeController@home')->name('home.home');
+// Route::get('/user/{userId}', 'HomeController@my_home')->name('home.my_home');
+// Route::get('/friend/{friendId}', 'HomeController@friend_home')->name('home.friend_home');
 
 //profile
 Route::get('/profile', 'ProfileController@index')->name('profile.index');
@@ -43,7 +45,9 @@ Route::get('/user/{userId}/followers', 'FollowerController@index')->name('follow
 
 //following
 Route::get('/user/{userId}/following', 'FollowingController@index')->name('following.index');
-Route::post('/user/{userId}/follow', 'FollowingController@follow')->name('following.follow');
+// Route::post('/user/{userId}/aa', 'FollowingController@follow')->name('following.follow');
+Route::post('/user/{userId}/follow', 'FollowingController@follow');
+Route::post('/user/{userId}/unfollow', 'FollowingController@unfollow');
 
 
 //talk

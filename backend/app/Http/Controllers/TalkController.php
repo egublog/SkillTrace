@@ -19,8 +19,8 @@ class TalkController extends Controller
     public function index()
     {
         $myId = Auth::id();
-        $myAccount = User::find($myId);
-        $friendsId = Follow::where('user_to_id', $myId)->get(['user_id']);
+        // $myAccount = User::find($myId);
+        // $friendsId = Follow::where('user_to_id', $myId)->get(['user_id']);
 
 
         $following_accounts = Follow::where('user_id', $myId)->get();
@@ -61,10 +61,8 @@ class TalkController extends Controller
         return view('MyService.talk', compact('myId', 'following_accounts'));
     }
 
-    public function show($theFriendId, Request $request)
+    public function show($theFriendId)
     {
-        // その友達のID
-        $theFriendId = $request->input('id');
 
         $theFriendAccount = User::find($theFriendId);
 

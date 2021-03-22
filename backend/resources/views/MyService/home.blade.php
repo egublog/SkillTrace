@@ -40,9 +40,6 @@
             <a href="javascript: following.submit()">フォロー中</a>
           </form>
 
-
-       
-  
         </div><!-- /.home-top-wrap-center-follow -->
   
   
@@ -51,35 +48,15 @@
   
       <!-- すでにフォローしていない場合
       →followテーブルのuser_id=myIdかつuser_to_idがfriendIdがない場合 -->
-  
-      @if($userId != $myId)
-      @empty($follow_check)
-      <div class="home-top-wrap-right">
-        <form action="{{ route('following.follow', ['userId' => $userId]) }}" method="POST" name="follow">
-          @csrf
-  
-          <a href="javascript: follow.submit()">
-            フォローする
-          </a>
-
-        </form>
-      </div><!-- /.home-top-wrap-right -->
-      @endempty
-      @endif
 
       @if($userId != $myId)
-      @if(isset($follow_check))
-      <div class="home-top-wrap-right">
-        <form action="{{ route('following.follow', ['userId' => $userId]) }}" method="POST" name="follow">
-          @csrf
-  
-          <a href="javascript: follow.submit()">
-            フォローしました
-          </a>
 
-        </form>
+      <div class="home-top-wrap-right">
+
+        <follow-button :follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($userId) }}"></follow-button>
+
       </div><!-- /.home-top-wrap-right -->
-      @endif
+
       @endif
   
     </div><!-- /.home-top-wrap -->

@@ -55,42 +55,68 @@ class HomeController extends Controller
     //     ]);
     // }
 
-    public function my_home($userId)
+
+    public function home($userId)
     {
         $myId = Auth::id();
         $myAccount = User::find($myId);
+
+        $languages = User_language::where('user_id', $userId)->get();
         $account = User::findOrFail($userId);
-        $languages = User_language::where('user_id', $myId)->get();
+
+        $follow_check = Follow::where('user_id', $myId)->where('user_to_id', $userId)->first();
+
+        if($follow_check == null) {
+            $follow_check = false;
+        }else {
+            $follow_check = true;
+        }
+
+        return view('MyService.home', compact('myId', 'myAccount', 'userId', 'account', 'languages', 'follow_check'));
+    }
+
+    // public function my_home($userId)
+    // {
+    //     $myId = Auth::id();
+    //     $myAccount = User::find($myId);
+    //     $account = User::findOrFail($userId);
+    //     $languages = User_language::where('user_id', $myId)->get();
 
         
 
-        return view('MyService.home', compact('myId', 'myAccount', 'account', 'languages', 'userId'));
-    }
+    //     return view('MyService.home', compact('myId', 'myAccount', 'account', 'languages', 'userId'));
+    // }
 
-    public function friend_home($friendId)
-    {
-        $myId = Auth::id();
-        $myAccount = User::find($myId);
-        $friend_account = User::find($friendId);
-        $languages = User_language::where('user_id', $friendId)->get();
+    // public function friend_home($friendId)
+    // {
+    //     $myId = Auth::id();
+    //     $myAccount = User::find($myId);
+    //     $friend_account = User::findOrFail($friendId);
+    //     $languages = User_language::where('user_id', $friendId)->get();
 
-        $follow_check = Follow::where('user_id', $myId)->where('user_to_id', $friendId)->first();
+    //     $follow_check = Follow::where('user_id', $myId)->where('user_to_id', $friendId)->first();
 
-        // return redirect()->route('home.my_home', ['userId' => $friendId])->with([
-        //     'myId' => $myId,
-        //     'account' => $friend_account,
-        //     'languages' => $languages,
-        //     'follow_check' => $follow_check,
-        //     'userId' => $friendId
-        // ]);
+    //     if($follow_check == null) {
+    //         $follow_check = false;
+    //     }else {
+    //         $follow_check = true;
+    //     }
 
-        return view('MyService.home')->with([
-            'myId' => $myId,
-            'myAccount' => $myAccount,
-            'account' => $friend_account,
-            'languages' => $languages,
-            'follow_check' => $follow_check,
-            'userId' => $friendId
-        ]);
-    }
+    //     // return redirect()->route('home.my_home', ['userId' => $friendId])->with([
+    //     //     'myId' => $myId,
+    //     //     'account' => $friend_account,
+    //     //     'languages' => $languages,
+    //     //     'follow_check' => $follow_check,
+    //     //     'userId' => $friendId
+    //     // ]);
+
+    //     return view('MyService.home')->with([
+    //         'myId' => $myId,
+    //         'myAccount' => $myAccount,
+    //         'account' => $friend_account,
+    //         'languages' => $languages,
+    //         'follow_check' => $follow_check,
+    //         'userId' => $friendId
+    //     ]);
+    // }
 }

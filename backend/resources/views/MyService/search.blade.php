@@ -113,7 +113,7 @@ csrf_field()
 
       <li class="friends-item">
 
-        <form name="friend" action="{{ route('home.friend_home', ['friendId' => $friendId]) }}" method="get">
+        <form name="friend" action="{{ route('home.home', ['userId' => $friendId]) }}" method="get">
           @csrf
           <!-- search_result_usersの個数が一個だったらと2個以上だったらで場合わけ -->
           @if(count($search_result_users) == 1)

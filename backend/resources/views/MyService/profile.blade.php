@@ -13,7 +13,7 @@
   <section class="profile">
   
     <div class="profile-top">
-      <a class="back" href="{{ route('home.my_home', ['userId' => $myId]) }}"><span>&lt;</span></a>
+      <a class="back" href="{{ route('home.home', ['userId' => $myId]) }}"><span>&lt;</span></a>
       <div class="section-ttl-wrapper">
         <div class="section-ttl">
           <h2>プロフィールの編集</h2>

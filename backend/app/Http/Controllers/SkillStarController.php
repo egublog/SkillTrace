@@ -38,7 +38,7 @@ class SkillStarController extends Controller
         // 書き換えをしたい
         // user_languageテーブルのstar_countの
 
-        $myId = Auth::id();
+        // $myId = Auth::id();
 
         $theSkill = User_language::find($userLanguageId);
         $theSkill->star_count = $stars;
@@ -52,8 +52,8 @@ class SkillStarController extends Controller
         // 欲しいやつ
         // 選択した言語
         // skill_itemにすでにある情報たち
-        $traces = Trace::where('user_language_id', $userLanguageId)->get();
-        $skills = Skill::where('user_language_id', $userLanguageId)->get();
+        // $traces = Trace::where('user_language_id', $userLanguageId)->get();
+        // $skills = Skill::where('user_language_id', $userLanguageId)->get();
 
 
         // return redirect()->route('skill.show', ['userId' => $userId, 'skillId' =>$skillId ])->with([

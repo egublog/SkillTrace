@@ -44,10 +44,9 @@ class ProfileController extends Controller
             // もっと効率の良いやり方アリそう
             $account->save();
     
-            $languages = User_language::where('user_id', $myId)->get();
+            // $languages = User_language::where('user_id', $myId)->get();
     
-    
-            return redirect()->route('home.my_home', ['userId' => $myId]);
+            return redirect()->route('home.home', ['userId' => $myId]);
             
             
             // ->with([
@@ -78,8 +77,6 @@ class ProfileController extends Controller
             $myAccount->save();
     
             return redirect()->route('profile.index');
-            
-            
             
             // ->with([
             //     'myId' => $myId,
