@@ -10,7 +10,7 @@ export default {
   props: ["userId", "followCheck"],
   data() {
     return {
-      follow: false,
+      follow: false
     };
   },
   created() {

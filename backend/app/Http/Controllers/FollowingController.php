@@ -71,8 +71,8 @@ class FollowingController extends Controller
     {
         $myId = Auth::id();
         $myAccount = User::find($myId);
-        $the_following = Follow::where('user_id', $myId)->where('user_to_id', $userId)->first();
-
+        
+        // $the_following = Follow::where('user_id', $myId)->where('user_to_id', $userId)->first();
 
         // if (isset($the_following)) {
         //     $myAccount->follow()->detach($userId);
@@ -86,13 +86,14 @@ class FollowingController extends Controller
 
         $myAccount->follow()->attach($userId);
 
-        return response()->json([]);
     }
     public function unfollow($userId)
     {
         $myId = Auth::id();
         $myAccount = User::find($myId);
-        $the_following = Follow::where('user_id', $myId)->where('user_to_id', $userId)->first();
+
+        // $the_following = Follow::where('user_id', $myId)->where('user_to_id', $userId)->first();
+        
         // if (isset($the_following)) {
         //     $myAccount->follow()->detach($userId);
         // } else {
@@ -105,6 +106,6 @@ class FollowingController extends Controller
 
         $myAccount->follow()->detach($userId);
 
-        return response()->json([]);
+        // return response()->json([]);
     }
 }

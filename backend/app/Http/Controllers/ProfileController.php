@@ -28,7 +28,7 @@ class ProfileController extends Controller
             return view('MyService.profile', compact('myId', 'areas', 'histories', 'languages', 'myAccount'));
         }
     
-        public function store(Request $request)
+        public function store(ProfileRequest $request)
         {
             $myId = Auth::id();
             $account = User::find($myId);
@@ -56,7 +56,7 @@ class ProfileController extends Controller
             // ]);
         }
     
-        public function img_store(Request $request) {
+        public function img_store(ProfileImageRequest $request) {
 
             $user_img = $request->file('profile_img');
     

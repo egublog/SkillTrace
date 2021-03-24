@@ -24,7 +24,7 @@
         @forelse($following_accounts as $following_account)
 
         <li class="friends-item">
-          <form name="friend" action="{{ route('talk.show', ['theFriendId' => $following_account->id]) }}" method="GET">
+          <form name="friend" action="{{ route('talk.show', ['theFriendId' => $following_account->user_following->id]) }}" method="GET">
             @csrf
 
             @if(count($following_accounts) == 1)
@@ -48,13 +48,11 @@
 
                 <!-- 名前や年齢などの説明 -->
 
-                <p class="friends-name">{{{ $following_account->user_following->name }}}</p>
+                <p class="friends-name">{{{ optional($following_account->user_following)->name }}}</p>
 
 
 
               </a>
-
-              <input type="hidden" name="id" value="{{ optional($following_account->user_following)->id }}">
 
           </form>
 
@@ -79,7 +77,7 @@
         <div class="talk-friend-top-ttl">
           <a class="back" href="{{ route('talk.index') }}"><span>&lt;</span></a>
 
-          <p>{{ $theFriendAccount->name }}とのトーク</p>
+          <p>{{ optional($theFriendAccount)->name }}とのトーク</p>
 
         </div><!-- /.talk-friend-top-ttl -->
 
@@ -141,8 +139,6 @@
         <form action="{{ route('talk.store', ['theFriendId' => $theFriendId]) }}" method="post">
           @csrf
           <div class="talk-send">
-
-            <input type="hidden" name="id" value="{{ $theFriendAccount->id }}">
 
             <textarea name="message" id="message" resize="vertical" placeholder="メッセージを入力"></textarea>
 

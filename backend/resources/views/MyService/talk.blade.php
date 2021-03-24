@@ -27,7 +27,7 @@
 
         @forelse($following_accounts as $following_account)
 
-        <?php $theFriendId = $following_account->id; ?>
+        <?php $theFriendId = $following_account->user_following->id ; ?>
 
         <li class="friends-item">
           <form name="friend" action="{{ route('talk.show', ['theFriendId' => $theFriendId]) }}" method="GET">

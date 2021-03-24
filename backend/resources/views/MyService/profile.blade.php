@@ -11,7 +11,7 @@
 
 <div class="inner">
   <section class="profile">
-  
+
     <div class="profile-top">
       <a class="back" href="{{ route('home.home', ['userId' => $myId]) }}"><span>&lt;</span></a>
       <div class="section-ttl-wrapper">
@@ -19,29 +19,29 @@
           <h2>プロフィールの編集</h2>
         </div><!-- /.section-ttl -->
       </div><!-- /.section-ttl-wrapper -->
-  
+
     </div><!-- /.profile-top -->
-  
+
     <div class="profile-body">
       <div class="inner">
-  
+
         <div class="profile-body-img">
           <p class="profile-body-img-tit">プロフィール写真</p>
-  
+
           <!-- もしも何も写真の設定をしていなかったらデフォルトの画像 -->
           <!-- もしもすでに写真の設定をしていたらその画像が出るように -->
-  
-          @if ($errors->any())
-          <div class="alert alert-danger">
+          @if ($errors->has('profile_img'))
+          <div class="alert alert-danger mt-3">
             <ul>
-              @foreach ($errors->all() as $error)
+
+              @foreach($errors->get('profile_img') as $error)
               <li>{{ $error }}</li>
               @endforeach
+
             </ul>
           </div>
           @endif
-  
-  
+
           <div class="profile-body-img-content">
             @if($myAccount->img == null)
             <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="no_img">
@@ -49,43 +49,64 @@
             <img src="{{ $myAccount->img }}" alt="自分のトプ画" width="100px" height="100px">
             @endif
           </div>
-  
+
           <form action="{{ route('profile.img_store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="file" name="profile_img">
             <input class="btn" type="submit" value="登録する">
           </form>
-  
+
         </div><!-- /.profile-body-img -->
-  
-  
+
+
         <div class="profile-body-detail">
           <form action="{{ route('profile.store') }}" method="post">
             {{ csrf_field() }}
-  
+
             <p class="profile-body-detail-ttl">プロフィール設定</p>
-  
-  
+
             <dl class="profile-body-detail-def">
-  
+
+              @if ($errors->has('name'))
+              <div class="alert alert-danger mt-3">
+                <ul>
+
+                  <li>{{ $errors->first('name') }}</li>
+
+                </ul>
+              </div>
+              @endif
+
               <div class="profile-box">
                 <label>
                   <dt class="profile-box-ttl">名前：</dt>
                   <dd class="profile-box-data">
-                    <input class="" id="name" name="name">
+                    <input class="" id="name" name="name" value="{{ old('name') }}">
                   </dd>
                 </label>
               </div>
-  
+
+              @if ($errors->has('age'))
+              <div class="alert alert-danger mt-3">
+                <ul>
+
+                  @foreach($errors->get('age') as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+
+                </ul>
+              </div>
+              @endif
+
               <div class="profile-box">
                 <label>
                   <dt class="profile-box-ttl">年齢：</dt>
                   <dd class="profile-box-data">
-                    <input class="" id="age" name="age" type='number'>
+                    <input class="" id="age" name="age" type='number' value="{{ old('age') }}">
                   </dd>
                 </label>
               </div>
-  
+
               <div class="profile-box">
                 <label>
                   <dt class="profile-box-ttl">住んでいる地域：</dt>
@@ -94,14 +115,14 @@
                       <!-- DBとの接続で北海道から沖縄まで選択できるようにする -->
                       <?php $i = 1; ?>
                       @foreach($areas as $area)
-                      <option value="<?php echo $i ?>">{{ $area->area }}</option>
+                      <option value="<?php echo $i ?>" @if($myAccount->area_id==$i ) selected @endif>{{ $area->area }}</option>
                       <?php $i++ ?>
                       @endforeach
                     </select>
                   </dd>
                 </label>
               </div>
-  
+
               <div class="profile-box">
                 <label>
                   <dt class="profile-box-ttl">エンジニア歴：</dt>
@@ -110,15 +131,15 @@
                       <!-- DBとの接続でエンジニア歴がどれくらいか選択できるようにする -->
                       <?php $i = 1; ?>
                       @foreach($histories as $history)
-                      <option value="<?php echo $i ?>">{{ $history->history }}</option>
+                      <option value="<?php echo $i ?>" @if($myAccount->history_id==$i ) selected @endif>{{ $history->history }}</option>
                       <?php $i++ ?>
                       @endforeach
-  
+
                     </select>
                   </dd>
                 </label>
               </div>
-  
+
               <div class="profile-box">
                 <label>
                   <dt class="profile-box-ttl">得意な言語：
@@ -128,27 +149,27 @@
                       <!-- DBとの接続で得意な言語を選択できるようにする -->
                       <?php $i = 1; ?>
                       @foreach($languages as $language)
-                      <option value="<?php echo $i ?>">{{ $language->name }}</option>
+                      <option value="<?php echo $i ?>" @if($myAccount->language_id==$i ) selected @endif>{{ $language->name }}</option>
                       <?php $i++ ?>
                       @endforeach
-  
+
                     </select>
                   </dd>
                 </label>
               </div>
-  
+
             </dl><!-- /.profile-body-detail-def -->
-  
+
             <div class="profile-body-detail-button">
               <input class="btn" type="submit" value="設定完了">
             </div>
-  
+
           </form>
         </div><!-- /.profile-body-detail -->
-  
+
       </div><!-- /.inner -->
     </div><!-- /.profile-body -->
-  
+
   </section><!-- /.profile -->
 </div><!-- /.inner -->
 
