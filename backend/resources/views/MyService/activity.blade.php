@@ -6,8 +6,6 @@
 
 @section('content')
 
-<!-- usr, follow, user->area, user->history, user->language,  -->
-
 <div class="inner">
     <section class="activity">
 
@@ -20,11 +18,6 @@
 
         <div class="activity-result">
             <ul class="friends-list">
-
-                <!-- followテーブル、userテーブル、 -->
-
-                <!-- user_to_id === $myId がある場合 -->
-
 
                 @forelse($follower_accounts as $follower_account)
 
@@ -43,8 +36,6 @@
                             <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
                                 @endif
 
-
-
                                 <div class="friend-img">
                                     @if($follower_account->user_follower->img == null)
                                     <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
@@ -54,7 +45,7 @@
                                 </div><!-- /.friends-result-img -->
 
                                 <div class="friend-body">
-                                    <!-- 名前や年齢などの説明 -->
+
                                     <div class="friend-body-top">
                                         <p>{{ optional($follower_account->user_follower)->name }}</p>
                                         <span>さんにフォローされました</span>
@@ -74,8 +65,6 @@
 
                             </a>
 
-                            <!-- <input type="hidden" name="id" value="{{ optional($follower_account->user_follower)->id }}"> -->
-
                     </form>
                 </li><!-- /.friend-item -->
 
@@ -85,10 +74,8 @@
 
                 @endforelse
 
-
             </ul><!-- /.activity-result-list -->
         </div><!-- /.activity-result -->
-
     </section><!-- /.activity -->
 </div><!-- /.inner -->
 

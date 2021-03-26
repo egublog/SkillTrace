@@ -14,7 +14,7 @@
         <h2>トーク</h2>
       </div><!-- /.section-ttl -->
       <!-- 検索 -->
-      <form action="{{ route('talk.search') }}" method="get">
+      <form action="{{ route('talks.search') }}" method="get">
         @csrf
         <input type="text" name="name">
         <input class="btn" type="submit" value="検索">
@@ -30,7 +30,7 @@
         <?php $theFriendId = $following_account->user_following->id ; ?>
 
         <li class="friends-item">
-          <form name="friend" action="{{ route('talk.show', ['theFriendId' => $theFriendId]) }}" method="GET">
+          <form name="friend" action="{{ route('talks.show', ['theFriendId' => $theFriendId]) }}" method="GET">
             @csrf
 
             @if(count($following_accounts) == 1)

@@ -19,7 +19,7 @@ csrf_field()
 
   <div class="search-wrapper">
 
-    <form action="{{ route('search.search') }}" method="get">
+    <form action="{{ route('searches.search') }}" method="get">
       @csrf
 
       <dl class="search-wrapper-def">
@@ -28,7 +28,7 @@ csrf_field()
           <label>
             <dt class="search-box-ttl">名前：</dt>
             <dd class="search-box-data">
-              <input class="" id="name" name="name">
+              <input class="" id="name" name="name" value="{{ old('name') }}">
             </dd>
           </label>
         </div>
@@ -37,7 +37,7 @@ csrf_field()
           <label>
             <dt class="search-box-ttl">年齢：</dt>
             <dd class="search-box-data">
-              <input class="" id="age" name="age" type='number'>
+              <input class="" id="age" name="age" type='number' value="{{ old('age') }}">
             </dd>
           </label>
         </div>
@@ -49,7 +49,7 @@ csrf_field()
               <select class="col-8" id="area" name="area_id">
                 <?php $i = 1; ?>
                 @foreach($areas as $area)
-                <option value="<?php echo $i ?>">{{ $area->area }}</option>
+                <option value="<?php echo $i ?>" @if(old('area_id') == $i) selected @endif>{{ $area->area }}</option>
                 <?php $i++ ?>
                 @endforeach
               </select>
@@ -64,7 +64,7 @@ csrf_field()
               <select class="col-8" id="history" name="history_id">
                 <?php $i = 1; ?>
                 @foreach($histories as $history)
-                <option value="<?php echo $i ?>">{{ $history->history }}</option>
+                <option value="<?php echo $i ?>" @if(old('history_id') == $i) selected @endif>{{ $history->history }}</option>
                 <?php $i++ ?>
                 @endforeach
 
@@ -81,7 +81,7 @@ csrf_field()
               <select class="col-8" id="favorite" name="language_id">
                 <?php $i = 1; ?>
                 @foreach($languages as $language)
-                <option value="<?php echo $i ?>">{{ $language->name }}</option>
+                <option value="<?php echo $i ?>" @if(old('language_id') == $i) selected @endif>{{ $language->name }}</option>
                 <?php $i++ ?>
                 @endforeach
 

@@ -50,7 +50,7 @@
             @endif
           </div>
 
-          <form action="{{ route('profile.img_store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('profiles.img_store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="file" name="profile_img">
             <input class="btn" type="submit" value="登録する">
@@ -60,7 +60,7 @@
 
 
         <div class="profile-body-detail">
-          <form action="{{ route('profile.store') }}" method="post">
+          <form action="{{ route('profiles.store') }}" method="post">
             {{ csrf_field() }}
 
             <p class="profile-body-detail-ttl">プロフィール設定</p>
@@ -115,7 +115,7 @@
                       <!-- DBとの接続で北海道から沖縄まで選択できるようにする -->
                       <?php $i = 1; ?>
                       @foreach($areas as $area)
-                      <option value="<?php echo $i ?>" @if($myAccount->area_id==$i ) selected @endif>{{ $area->area }}</option>
+                      <option value="<?php echo $i ?>" @if( $myAccount->area_id == $i ) selected @endif>{{ $area->area }}</option>
                       <?php $i++ ?>
                       @endforeach
                     </select>

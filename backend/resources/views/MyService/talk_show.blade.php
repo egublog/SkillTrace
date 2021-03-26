@@ -24,7 +24,7 @@
         @forelse($following_accounts as $following_account)
 
         <li class="friends-item">
-          <form name="friend" action="{{ route('talk.show', ['theFriendId' => $following_account->user_following->id]) }}" method="GET">
+          <form name="friend" action="{{ route('talks.show', ['theFriendId' => $following_account->user_following->id]) }}" method="GET">
             @csrf
 
             @if(count($following_accounts) == 1)
@@ -75,7 +75,7 @@
       <div class="talk-friend-top">
 
         <div class="talk-friend-top-ttl">
-          <a class="back" href="{{ route('talk.index') }}"><span>&lt;</span></a>
+          <a class="back" href="{{ route('talks.index') }}"><span>&lt;</span></a>
 
           <p>{{ optional($theFriendAccount)->name }}とのトーク</p>
 
@@ -136,7 +136,7 @@
       </div><!-- /.talk-friend-middle -->
 
       <div class="talk-friend-bottom">
-        <form action="{{ route('talk.store', ['theFriendId' => $theFriendId]) }}" method="post">
+        <form action="{{ route('talks.store', ['theFriendId' => $theFriendId]) }}" method="post">
           @csrf
           <div class="talk-send">
 

@@ -44,7 +44,7 @@
             @if(isset($account))
             @if($account->id == $myId)
             <div class="edit">
-              <form name="skill" action="{{ route('skillStar.create', ['userLanguageId' => $userLanguageId]) }}" method="get">
+              <form name="skill" action="{{ route('skill_stars.create', ['userLanguageId' => $userLanguageId]) }}" method="get">
                 @csrf
                 <a href="javascript: skill.submit()">
                   <i class="fas fa-edit"></i>
@@ -79,7 +79,7 @@
 
 
                 <div class="edit">
-                  <form name="ableEdit" action="{{ route('skillAbility.show', ['userLanguageId' => $userLanguageId, 'abilityId' => $abilityId]) }}" method="get">
+                  <form name="ableEdit" action="{{ route('skill_abilities.show', ['userLanguageId' => $userLanguageId, 'abilityId' => $abilityId]) }}" method="get">
                     @csrf
                     @if(count($skills) == 1)
                     <a href="javascript: ableEdit.submit()">
@@ -94,7 +94,7 @@
                 </div><!-- /.edit -->
   
                 <div class="delete">
-                  <form name="ableDelete" action="{{ route('skillAbility.destroy', ['userLanguageId' => $userLanguageId, 'abilityId' => $abilityId]) }}" method="post">
+                  <form name="ableDelete" action="{{ route('skill_abilities.destroy', ['userLanguageId' => $userLanguageId, 'abilityId' => $abilityId]) }}" method="post">
 
                     @csrf
                     @method("delete")
@@ -130,7 +130,7 @@
           @if($account->id == $myId)
           
           <div class="skill-add">
-            <form name="skillable" action="{{ route('skillAbility.create', ['userLanguageId' => $userLanguageId]) }}" method="get">
+            <form name="skillable" action="{{ route('skill_abilities.create', ['userLanguageId' => $userLanguageId]) }}" method="get">
               @csrf
               <a href="javascript: skillable.submit()">
                 ＋
@@ -176,7 +176,7 @@
                 @if(isset($account))
                 @if($account->id == $myId)
                 <div class="edit">
-                  <form name="traceEdit" action="{{ route('skillTrace.show', ['userLanguageId' => $userLanguageId, 'traceId' => $traceId]) }}" method="get">
+                  <form name="traceEdit" action="{{ route('skill_traces.show', ['userLanguageId' => $userLanguageId, 'traceId' => $traceId]) }}" method="get">
                     @csrf
                     @if(count($traces) == 1)
                     <a href="javascript: traceEdit.submit()">
@@ -192,7 +192,7 @@
                 </div><!-- /.edit -->
   
                 <div class="delete">
-                  <form name="traceDelete" action="{{ route('skillTrace.destroy', ['userLanguageId' => $userLanguageId, 'traceId' => $traceId]) }}" method="post">
+                  <form name="traceDelete" action="{{ route('skill_traces.destroy', ['userLanguageId' => $userLanguageId, 'traceId' => $traceId]) }}" method="post">
 
                     @csrf
                     @method("delete")
@@ -226,7 +226,7 @@
           @if(isset($account))
           @if($account->id == $myId)
           <div class="skill-add">
-            <form name="trace" action="{{ route('skillTrace.create', ['userLanguageId' => $userLanguageId]) }}" method="get">
+            <form name="trace" action="{{ route('skill_traces.create', ['userLanguageId' => $userLanguageId]) }}" method="get">
               @csrf
               <a href="javascript: trace.submit()">
                 ＋
@@ -241,7 +241,7 @@
   
         @if(isset($account))
         @if($account->id == $myId)
-        <form class="skill-delete" action="{{ route('skill.destroy', ['userLanguageId' => $userLanguageId]) }}" method="post">
+        <form class="skill-delete" action="{{ route('skills.destroy', ['userLanguageId' => $userLanguageId]) }}" method="post">
           @csrf
           @method("delete")
           <input class="btn bg-danger" type="submit" value="このスキルを削除する">

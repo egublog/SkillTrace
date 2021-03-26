@@ -6,11 +6,10 @@
 
 @section('content')
 
-<!-- userセット, follow -->
-
 <section class="friends">
 
   <div class="friends-wrap">
+
     <a class="back" href="{{ route('home.home', ['userId' => $userId]) }}"><span>&lt;</span></a>
 
     <div class="section-ttl-wrapper">
@@ -23,7 +22,7 @@
 
   <div class="friends-follow">
 
-    <form name="follower" class="follower" action="{{ route('follower.index', ['userId' => $userId]) }}" method="get">
+    <form name="follower" class="follower" action="{{ route('followers.index', ['userId' => $userId]) }}" method="get">
       @csrf
       <a href="javascript: follower.submit()">フォロワー</a>
     </form>
@@ -33,11 +32,11 @@
       <a href="javascript: following.submit()">フォロー中</a>
     </form>
 
-
   </div><!-- /.friends-wrap -->
 
-  @if(isset($followers))
   <!-- フォロワー -->
+  @if(isset($followers))
+
   <ul class="friends-list follower-list">
 
     @forelse($followers as $follower)
@@ -57,16 +56,16 @@
             @endif
 
             <div class="friend-img">
-              <!-- もしも画像が設定されていたら表示する -->
+
               @if($follower->user_follower->img == null)
               <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
               @else
               <img src="{{ $follower->user_follower->img }}" alt="自分のトプ画">
               @endif
+
             </div><!-- /.friends-img -->
 
             <div class="friend-body">
-              <!-- 名前や年齢などの説明 -->
 
               <div class="friend-body-top">
                 <p>{{ $follower->user_follower->name }}</p>
@@ -85,14 +84,11 @@
             </div><!-- /.friend-body -->
 
           </a>
-
-
-          <!-- <input type="hidden" name="id" value="{{ $follower->user_follower->id }}"> -->
-
       </form>
     </li>
 
     @empty
+
     <p class="empty">見つかりませんでした</p>
 
     @endforelse
@@ -101,8 +97,9 @@
   @endif
 
 
-  @if(isset($followings))
   <!-- フォロー中 -->
+  @if(isset($followings))
+
   <ul class="friends-list following-list">
 
     @forelse($followings as $following)
@@ -122,17 +119,17 @@
           <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
             @endif
 
-
             <div class="friend-img">
+
               @if($following->user_following->img == null)
               <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
               @else
               <img src="{{ $following->user_following->img }}" alt="自分のトプ画">
               @endif
+
             </div><!-- /.friends-img -->
 
             <div class="friends-body">
-              <!-- 名前や年齢などの説明 -->
 
               <div class="friends-body-top">
                 <p class="friends-body-top-name">{{ optional($following->user_following)->name }}</p>
@@ -146,11 +143,8 @@
               </div><!-- /.friends-body-bottom -->
 
             </div><!-- /.friends-body -->
+
           </a>
-
-
-          <!-- <input type="hidden" name="id" value="{{ $following->user_following->id }}"> -->
-
       </form>
     </li><!-- /.friends-item -->
 
@@ -164,10 +158,5 @@
   @endif
 
 </section><!-- /.friends -->
-
-
-
-
-
 
 @endsection

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Models\Area;
@@ -40,6 +39,7 @@ class SearchController extends Controller
         $history_id = $request->input('history_id');
         $language_id = $request->input('language_id');
 
+        $request->flash();
 
         $search_result_users = User::
             //自分のレコードは含めない
@@ -65,13 +65,6 @@ class SearchController extends Controller
             return $query->where('language_id', $language_id); 
             })
             ->get();
-
-
-        // $user__name__ = User::where('name', $request->name);
-
-        // $search_result_name =  $user->where('name', $request->name);
-        
-            //    $requestはプロパティの名前がname属性, ユーザーが入力した物はプロパティの中身のオブジェクト
 
         return view('MyService.search', compact('myId', 'areas', 'histories', 'languages', 'search_result_users'));
     }

@@ -15,21 +15,16 @@
       </div><!-- /.section-ttl -->
     </div><!-- /.section-ttl-wrapper -->
 
-    <form action="{{ route('skill.store') }}" method="POST">
-      {{ csrf_field() }}
+    <form action="{{ route('skills.store') }}" method="POST">
+      @csrf
 
       <select class="skill-add-select" id="" name="language_id">
 
         @foreach($languages as $language)
         <option value="{{ $language->id }}">{{ $language->name }}</option>
-
         @endforeach
 
-        <!-- pluckメソッドでやる方法もある -->
-
       </select>
-
-
 
       <div class="skill-add-btn">
         <input class="my-5 btn" type="submit" value="追加する">

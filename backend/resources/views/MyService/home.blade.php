@@ -6,12 +6,10 @@
 
 @section('content')
 
-<!-- 自分のスキル確認 -->
-
 <div class="inner">
   <section class="home-top">
     <div class="home-top-wrap">
-      <!-- トプ画と名前とフォロワーフォローボタン -->
+
       <div class="home-top-wrap-center">
   
         <div class="profile-img">
@@ -25,12 +23,10 @@
         @if(isset($account->name))
         <p>{{ $account->name }}</p>
         @endif
-  
-  
-        <div class="home-top-wrap-center-follow">
-  
 
-          <form class="follower" name="follower" action="{{ route('follower.index', ['userId' => $userId]) }}" method="get">
+        <div class="home-top-wrap-center-follow">
+
+          <form class="follower" name="follower" action="{{ route('followers.index', ['userId' => $userId]) }}" method="get">
             @csrf
             <a href="javascript: follower.submit()">フォロワー</a>
           </form>
@@ -41,22 +37,15 @@
           </form>
 
         </div><!-- /.home-top-wrap-center-follow -->
-  
-  
-  
+
       </div>
-  
-      <!-- すでにフォローしていない場合
-      →followテーブルのuser_id=myIdかつuser_to_idがfriendIdがない場合 -->
 
       @if($userId != $myId)
-
       <div class="home-top-wrap-right">
 
         <follow-button :follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($userId) }}"></follow-button>
 
       </div><!-- /.home-top-wrap-right -->
-
       @endif
   
     </div><!-- /.home-top-wrap -->
@@ -97,18 +86,17 @@
     </div><!-- /.home-top-detail -->
   
     <div class="home-top-button">
-  
-      <!-- もしも自分のアカウントである場合 -->
+
+    <!-- 自分の画面 -->
       @if($userId == $myId)
-      <a href="{{ route('profile.index') }}">プロフィールの編集</a>
+      <a href="{{ route('profiles.index') }}">プロフィールの編集</a>
       @endif
   
-      <!-- もしも自分以外のアカウントである場合 -->
+      <!-- 他人の画面 -->
       @if($userId != $myId)
-      <form name="friend" action="{{ route('talk.show', ['theFriendId' => $userId]) }}" method="get">
+      <form name="friend" action="{{ route('talks.show', ['theFriendId' => $userId]) }}" method="get">
         @csrf
         <a href="javascript: friend.submit()">トークする</a>
-        <input type="hidden" name="id" value="{{ $userId }}">
       </form>
       @endif
   
@@ -126,12 +114,7 @@
       </div><!-- /.section-ttl -->
     </div><!-- /.section-ttl-wrapper -->
   
-  
-    <!-- もしskill_addでskillを選択して追加するボタンが押されたら、選択した物がここに追加される仕組みを作りたい -->
-    <!-- ↓↓↓↓↓↓↓↓↓↓↓↓ -->
-  
     <ul class="home-skill-list">
-      <!-- もしもlanguagesテーブルの自分のIDのぶんだけのlanguage_idがあった場合に何かあればある分だけ表示 -->
   
       @if(isset($languages))
       @foreach($languages as $language)
@@ -140,7 +123,7 @@
   
       <li class="home-skill-item">
   
-        <form name="skill" action="{{ route('skill.show', ['userId' => $userId, 'skillId' => $skillId]) }}" method="get">
+        <form name="skill" action="{{ route('skills.show', ['userId' => $userId, 'skillId' => $skillId]) }}" method="get">
           @csrf
           <!-- languagesの個数が一個だったらと2個以上だったらで場合わけ -->
           @if(count($languages) == 1)
@@ -151,8 +134,6 @@
             <a href="javascript: skill[{{ $loop->iteration - 1 }}].submit()">
               @endif
   
-  
-  
               @if(isset($language->language->name))
               <p>{{ $language->language->name }}</p>
               @endif
@@ -162,22 +143,19 @@
                 <i class="devicon-{{ $language->language->favicon }} colored devicon-style"></i>
                 @endif
               </div><!-- /.devicon -->
-  
-              <!-- もしもlanguagesテーブルのstar_countに何か入っていたらそのぶんだけ繰り返す -->
+
               <div class="star-count">
-  
-                <!-- もしも星の設定をしており、0以外の値が入っていたら -->
+
                 @if($language->star_count != 0)
                 @for($i = 0; $i < $language->star_count; $i++)
                   <span>⭐️</span>
-                  @endfor
-                  @endif
-  
-                  <!-- もしも星の設定をしておらず、0であれば -->
-                  @if($language->star_count == 0)
-                  <span>未入力</span>
-                  @endif
-  
+                @endfor
+                @endif
+
+                @if($language->star_count == 0)
+                <span>未入力</span>
+                @endif
+
               </div><!-- /.star-count -->
   
             </a>
@@ -189,27 +167,26 @@
   
       @if($userId == $myId)
       <li class="home-skill-item skill-add">
-        <a href="{{ route('skill.create') }}">
+        <a href="{{ route('skills.create') }}">
           +
         </a>
       </li>
   
       <li class="home-skill-item">
-        <a href="{{ route('skill.create') }}">
+        <a href="{{ route('skills.create') }}">
   
         </a>
       </li>
   
       @else
       <li class="home-skill-item">
-        <a href="{{ route('skill.create') }}">
+        <a href="{{ route('skills.create') }}">
   
         </a>
       </li>
       @endif
   
     </ul><!-- /.home-skill-list -->
-  
   
   </section><!-- /.home-bottom -->
 </div><!-- /.inner -->

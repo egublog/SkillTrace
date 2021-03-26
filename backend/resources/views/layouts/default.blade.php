@@ -63,19 +63,19 @@
               </li><!-- /.header-nav-item -->
 
               <li class="header-nav-item">
-                <a href="{{ route('search.index') }}">
+                <a href="{{ route('searches.index') }}">
                   <i class="fas fa-search icon"></i><span class="hidden-sp">見つける</span>
                 </a>
               </li><!-- /.header-nav-item -->
 
               <li class="header-nav-item">
-                <a href="{{ route('activity') }}">
+                <a href="{{ route('activities') }}">
                   <i class="fas fa-bell icon"></i><span class="hidden-sp">通知</span>
                 </a>
               </li><!-- /.header-nav-item -->
 
               <li class="header-nav-item">
-                <a href="{{ route('talk.index') }}">
+                <a href="{{ route('talks.index') }}">
                   <i class="fas fa-comments icon"></i><span class="hidden-sp">トーク</span>
                 </a>
               </li><!-- /.header-nav-item -->
@@ -93,7 +93,7 @@
                     @csrf
                   </form>
                 </div>
-                
+
               </li>
 
             </ul><!-- /.header-nav-list -->
