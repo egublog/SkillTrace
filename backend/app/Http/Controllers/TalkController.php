@@ -54,7 +54,7 @@ class TalkController extends Controller
 
         $talkDates = Talk::where('user_id', $myId)->where('user_to_id', $theFriendId)->orWhere('user_id', $theFriendId)->where('user_to_id', $myId)->get();
 
-        return view('MyService.talk_show', compact('myId', 'theFriendId', 'following_accounts', 'theFriendAccount', 'talkDates'));
+        return view('MyService.talk-show', compact('myId', 'theFriendId', 'following_accounts', 'theFriendAccount', 'talkDates'));
     }
 
     public function store($theFriendId, Request $request)
@@ -78,6 +78,6 @@ class TalkController extends Controller
 
         $following_accounts = Follow::where('user_id', $myId)->get();
 
-        return view('MyService.talk_show', compact('myId', 'theFriendId', 'following_accounts', 'theFriendAccount', 'talkDates'));
+        return view('MyService.talk-show', compact('myId', 'theFriendId', 'following_accounts', 'theFriendAccount', 'talkDates'));
     }
 }

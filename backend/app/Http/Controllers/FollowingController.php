@@ -13,7 +13,7 @@ class FollowingController extends Controller
         $myId = Auth::id();
         $followings = Follow::where('user_id', $userId)->get();
 
-        return view('MyService.friends_list', compact('myId', 'followings', 'userId'));
+        return view('MyService.friends-list', compact('myId', 'followings', 'userId'));
     }
 
     public function follow($userId)

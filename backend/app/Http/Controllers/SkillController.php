@@ -30,7 +30,7 @@ class SkillController extends Controller
         $traces = Trace::where('user_language_id', $userLanguageId)->get();
         $skills = Skill::where('user_language_id', $userLanguageId)->get();
 
-        return view('MyService.skill_item', compact('theSkill', 'traces', 'skills', 'myId', 'account', 'skillId', 'userLanguageId', 'userId'));
+        return view('MyService.skill-item', compact('theSkill', 'traces', 'skills', 'myId', 'account', 'skillId', 'userLanguageId', 'userId'));
     }
 
     public function create()
@@ -42,7 +42,7 @@ class SkillController extends Controller
         $languages = Language::whereNotIn('id', $user_languages)->get();
 
 
-        return view('MyService.skill_add', compact('myId', 'languages'));
+        return view('MyService.skill-add', compact('myId', 'languages'));
     }
 
     public function store(Request $request)

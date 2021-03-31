@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('css', '/css/MyService/friends_list.css')
+@section('css', '/css/MyService/friends-list.css')
 
 @section('title', '友達一覧')
 

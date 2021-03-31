@@ -12,6 +12,6 @@ class FollowerController extends Controller
         $myId = Auth::id();
         $followers = Follow::where('user_to_id', $userId)->get();
 
-        return view('MyService.friends_list', compact('myId', 'followers', 'userId'));
+        return view('MyService.friends-list', compact('myId', 'followers', 'userId'));
     }
 }

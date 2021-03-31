@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('css', '/css/MyService/skill_edit.css')
+@section('css', '/css/MyService/skill-edit.css')
 
 @section('title', 'スキルの編集')
 
@@ -148,7 +148,7 @@
                   @csrf
                 </form>
       </div><!-- /.inner -->
-    </div><!-- /.skill_item-wrap -->
+    </div><!-- /.skill-wrap -->
 
   </div><!-- /.skill -->
 

@@ -37,4 +37,10 @@ class ProfileRequest extends FormRequest
             'age.between' => '年齢は0~150の間で入力してください。'
         ];
     }
+
+    public function userAttributes() {
+        return $this->only([
+            'name', 'age', 'area_id', 'history_id', 'language_id'
+        ]);
+    }
 }

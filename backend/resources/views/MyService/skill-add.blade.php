@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('css', '/css/MyService/skill_add.css')
+@section('css', '/css/MyService/skill-add.css')
 
 @section('title', 'スキルの追加')
 

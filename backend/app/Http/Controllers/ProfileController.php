@@ -29,16 +29,7 @@ class ProfileController extends Controller
         $myId = Auth::id();
         $account = User::find($myId);
 
-
-        $columns = ['name', 'age', 'area_id', 'history_id', 'language_id'];
-
-        foreach ($columns as $column) {
-            if (isset($request->$column)) {
-                $account->$column = $request->$column;
-            }
-        }
-
-        $account->save();
+        $account->update($request->userAttributes());
 
         return redirect()->route('home.home', ['userId' => $myId]);
     }

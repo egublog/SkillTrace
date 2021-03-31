@@ -18,7 +18,7 @@ class SkillStarController extends Controller
         //区別するためにstarsを用意
         $stars = User_language::find($userLanguageId);
 
-        return view('MyService.skill_edit', compact('myId', 'theSkill', 'userLanguageId', 'stars'));
+        return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'stars'));
     }
 
     public function update($userLanguageId, Request $request)

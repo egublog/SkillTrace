@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('css', '/css/MyService/talk_show.css')
+@section('css', '/css/MyService/talk-show.css')
 
 @section('title', 'トークの中身')
 
@@ -92,7 +92,7 @@
           <div class="talk-own-head">
 
             <!-- もしもyetがtrueだったら -->
-            <!-- もし、相手がTalkController@talk_showを実行したら -->
+            <!-- もし、相手がTalkController@talk-showを実行したら -->
 
             @if($talkDate->yet)
             <p class="talk-own-head-yet">既読</p>

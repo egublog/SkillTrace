@@ -18,7 +18,7 @@ class SkillAbilityController extends Controller
 
         $skillables = Skill::where('user_language_id', $userLanguageId)->get();
 
-        return view('MyService.skill_edit', compact('myId', 'theSkill', 'userLanguageId', 'skillables'));
+        return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'skillables'));
     }
 
     public function store($userLanguageId, Request $request)
@@ -45,7 +45,7 @@ class SkillAbilityController extends Controller
         $theSkill = User_language::find($userLanguageId);
         $skillableEdits = Skill::find($abilityId);
 
-        return view('MyService.skill_edit', compact('myId', 'theSkill', 'skillableEdits', 'abilityId', 'userLanguageId'));
+        return view('MyService.skill-edit', compact('myId', 'theSkill', 'skillableEdits', 'abilityId', 'userLanguageId'));
     }
 
     public function update($userLanguageId, $abilityId, Request $request)

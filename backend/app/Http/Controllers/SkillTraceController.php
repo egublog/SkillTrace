@@ -21,7 +21,7 @@ class SkillTraceController extends Controller
         $skill_traces = Trace::all();
         $categories = Category::all();
 
-        return view('MyService.skill_edit', compact('myId', 'theSkill', 'userLanguageId', 'categories', 'skill_traces'));
+        return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'categories', 'skill_traces'));
     }
 
     public function store($userLanguageId, SkillTraceImageRequest $request)
@@ -61,7 +61,7 @@ class SkillTraceController extends Controller
 
         $categories = Category::all();
 
-        return view('MyService.skill_edit', compact('myId', 'theSkill', 'categories', 'traceEdit', 'traceId', 'userLanguageId'));
+        return view('MyService.skill-edit', compact('myId', 'theSkill', 'categories', 'traceEdit', 'traceId', 'userLanguageId'));
     }
 
     public function update($userLanguageId, $traceId, SkillTraceImageRequest $request)

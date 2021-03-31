@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('css', '/css/MyService/skill_item.css')
+@section('css', '/css/MyService/skill-item.css')
 
 @section('title', 'スキルの中身')
 
@@ -60,8 +60,7 @@
   
         <div class="skill-middle">
           <h3 class="skill-ttl">できること</h3>
-  
-          <!-- DBとの連携でskill_editで書いたことをここに表示させたい -->
+
           <ul class="skill-middle-list">
             @forelse($skills as $skill)
 
