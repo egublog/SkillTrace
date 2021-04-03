@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     //
-    public function user_languages() {
+    public function userLanguages()
+    {
         return $this->hasMany('App\Models\Trace');
     }
 }

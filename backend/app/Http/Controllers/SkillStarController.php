@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\User_language;
+use App\Models\UserLanguage;
 
 class SkillStarController extends Controller
 {
@@ -13,10 +13,10 @@ class SkillStarController extends Controller
     public function create($userLanguageId)
     {
         $myId = Auth::id();
-        $theSkill = User_language::find($userLanguageId);
+        $theSkill = UserLanguage::find($userLanguageId);
 
         //区別するためにstarsを用意
-        $stars = User_language::find($userLanguageId);
+        $stars = UserLanguage::find($userLanguageId);
 
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'stars'));
     }
@@ -25,7 +25,7 @@ class SkillStarController extends Controller
     {
         $stars = $request->input('star_count');
 
-        $theSkill = User_language::find($userLanguageId);
+        $theSkill = UserLanguage::find($userLanguageId);
         $theSkill->star_count = $stars;
         $theSkill->save();
 
@@ -34,6 +34,6 @@ class SkillStarController extends Controller
         $userId = $account->id;
         $skillId = $theSkill->language_id;
 
-        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' =>$skillId ]);
+        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
     }
 }

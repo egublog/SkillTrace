@@ -16,7 +16,7 @@ class TalkController extends Controller
     {
         $myId = Auth::id();
 
-        $followingAccounts = Follow::getFollowing($myId);
+        $followingAccounts = Follow::following($myId)->get();
 
         return view('MyService.talk', compact('myId', 'followingAccounts'));
     }
@@ -42,7 +42,7 @@ class TalkController extends Controller
         $myAccount = User::find($myId);
         // $friendsId = Follow::follower($myId)->get(['user_id']);
 
-        $followingAccounts = Follow::getFollowing($myId);
+        $followingAccounts = Follow::following($myId)->get();
 
         $yetColumns = Talk::where('user_id', $theFriendId)->where('user_to_id', $myId)->get();
 
@@ -60,7 +60,6 @@ class TalkController extends Controller
     public function store($theFriendId, Request $request)
     {
         $myId = Auth::id();
-        $theFriendId = $request->input('id');
         $my_msg = $request->input('message');
 
         $talks = new Talk;
@@ -76,7 +75,7 @@ class TalkController extends Controller
 
         $myAccount = User::find($myId);
 
-        $followingAccounts = Follow::getFollowing($myId);
+        $followingAccounts = Follow::following($myId)->get();
 
         return view('MyService.talk-show', compact('myId', 'theFriendId', 'followingAccounts', 'theFriendAccount', 'talks'));
     }

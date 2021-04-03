@@ -39,39 +39,48 @@ class User extends Authenticatable
 
 
 
-    public function area() {
+    public function area()
+    {
         return $this->belongsTo('App\Models\Area');
     }
 
-    public function history() {
+    public function history()
+    {
         return $this->belongsTo('App\Models\History');
     }
 
-    public function language() {
+    public function language()
+    {
         return $this->belongsTo('App\Models\Language');
     }
 
-    public function languages() {
+    public function languages()
+    {
         return $this->belongsToMany('App\Models\Language', 'user_languages', 'user_id', 'language_id');
     }
 
-    public function user_languages() {
-        return $this->hasMany('App\Models\User_language');
+    public function userLanguages()
+    {
+        return $this->hasMany('App\Models\UserLanguage');
     }
-    
-    public function follow() {
+
+    public function follow()
+    {
         return $this->belongsToMany('App\Models\User', 'follows', 'user_id', 'user_to_id');
     }
 
-    public function follow_to() {
+    public function follow_to()
+    {
         return $this->belongsToMany('App\Models\User', 'follows', 'user_to_id', 'user_id');
     }
 
-    public function talk() {
+    public function talk()
+    {
         return $this->belongsToMany('App\Models\User', 'talks', 'user_id', 'user_to_id');
     }
 
-    public function talk_to() {
+    public function talk_to()
+    {
         return $this->belongsToMany('App\Models\User', 'talks', 'user_to_id', 'user_id');
     }
 
@@ -84,5 +93,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Follow', 'user_to_id');
     }
-
 }

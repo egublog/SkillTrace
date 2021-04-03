@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\User_language;
+use App\Models\UserLanguage;
 use App\Models\Follow;
 
 class HomeController extends Controller
@@ -38,7 +38,7 @@ class HomeController extends Controller
         $myId = Auth::id();
         $myAccount = User::find($myId);
 
-        $languages = User_language::where('user_id', $userId)->get();
+        $languages = UserLanguage::where('user_id', $userId)->get();
         $account = User::findOrFail($userId);
 
         $follow_check = Follow::mutualFollow($myId, $userId)->first();

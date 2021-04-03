@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
-use App\Models\User_language;
+use App\Models\UserLanguage;
 use App\Models\Category;
 use App\Models\Trace;
 use App\Http\Requests\SkillTraceImageRequest;
@@ -16,7 +16,7 @@ class SkillTraceController extends Controller
     {
         $myId = Auth::id();
 
-        $theSkill = User_language::find($userLanguageId);
+        $theSkill = UserLanguage::find($userLanguageId);
 
         $skill_traces = Trace::all();
         $categories = Category::all();
@@ -43,19 +43,19 @@ class SkillTraceController extends Controller
         $trace->content = $traceText;
         $trace->save();
 
-        $theSkill = User_language::find($userLanguageId);
+        $theSkill = UserLanguage::find($userLanguageId);
         $account = User::find($theSkill->user_id);
         $userId = $account->id;
         $skillId = $theSkill->language_id;
 
-        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' =>$skillId ]);
+        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
     }
 
     public function show($userLanguageId, $traceId)
     {
         $myId = Auth::id();
 
-        $theSkill = User_language::find($userLanguageId);
+        $theSkill = UserLanguage::find($userLanguageId);
 
         $traceEdit = Trace::find($traceId);
 
@@ -71,7 +71,7 @@ class SkillTraceController extends Controller
         $category_id = $request->input('category_id');
 
         $traceEdits = Trace::find($traceId);
-        
+
         if ($trace_img === null) {
             $traceEdits->img = null;
         } else {
@@ -83,19 +83,19 @@ class SkillTraceController extends Controller
         $traceEdits->content = $trace_content;
         $traceEdits->save();
 
-        $theSkill = User_language::find($userLanguageId);
+        $theSkill = UserLanguage::find($userLanguageId);
 
         $account = User::find($theSkill->user_id);
         $userId = $account->id;
         $skillId = $theSkill->language_id;
 
-        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId ]);
+        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
     }
 
     public function destroy($userLanguageId, $traceId)
     {
 
-        $theSkill = User_language::find($userLanguageId);
+        $theSkill = UserLanguage::find($userLanguageId);
 
         $account = User::find($theSkill->user_id);
         $userId = $account->id;
@@ -103,6 +103,6 @@ class SkillTraceController extends Controller
 
         Trace::find($traceId)->delete();
 
-        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId ]);
+        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
     }
 }
