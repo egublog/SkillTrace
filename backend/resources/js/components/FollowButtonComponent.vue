@@ -18,8 +18,8 @@ export default {
   },
   methods: {
     following(userId) {
-      let url = `/user/${userId}/follow`;
-
+      let url = `/users/${userId}/follow`;
+      
       axios
         .post(url)
         .then(response => {
@@ -30,7 +30,7 @@ export default {
         });
     },
     unfollowing(userId) {
-      let url = `/user/${userId}/unfollow`;
+      let url = `/users/${userId}/unfollow`;
 
       axios
         .post(url)

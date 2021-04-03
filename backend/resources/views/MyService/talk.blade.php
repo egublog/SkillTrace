@@ -25,44 +25,44 @@
     <div class="talk-box">
       <ul class="friends-list">
 
-        @forelse($following_accounts as $following_account)
+        @forelse($followingAccounts as $followingAccount)
 
-        <?php $theFriendId = $following_account->user_following->id ; ?>
+        <?php $theFriendId = $followingAccount->user_following->id; ?>
 
         <li class="friends-item">
           <form name="friend" action="{{ route('talks.show', ['theFriendId' => $theFriendId]) }}" method="GET">
             @csrf
 
-            @if(count($following_accounts) == 1)
+            @if(count($followingAccounts) == 1)
             <a href="javascript: friend.submit()">
               @endif
 
-              @if(count($following_accounts) >= 2)
+              @if(count($followingAccounts) >= 2)
               <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
                 @endif
 
                 <div class="friend-img">
-                  @if($following_account->user_following->img == null)
+                  @if($followingAccount->user_following->img == null)
                   <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
                   @else
-                  <img src="{{ $following_account->user_following->img }}" alt="自分のトプ画">
+                  <img src="{{ $followingAccount->user_following->img }}" alt="自分のトプ画">
                   @endif
                 </div><!-- /.friends-img -->
 
                 <div class="friend-body">
                   <!-- 名前や年齢などの説明 -->
                   <div class="friend-body-top">
-                    <p>{{ optional($following_account->user_following)->name }}</p>
+                    <p>{{ optional($followingAccount->user_following)->name }}</p>
                   </div><!-- /.friend-body-top -->
-                  
+
                   <div class="friend-body-middle">
-                    <p>年齢：{{ optional($following_account->user_following)->age }}</p>
-                    <p>住所：{{ optional($following_account->user_following->area)->area }}</p>
+                    <p>年齢：{{ optional($followingAccount->user_following)->age }}</p>
+                    <p>住所：{{ optional($followingAccount->user_following->area)->area }}</p>
                   </div><!-- /.friend-body-middle -->
 
                   <div class="friend-body-bottom">
-                    <p>エンジニア歴：{{ optional($following_account->user_following->history)->history }}</p>
-                    <p>得意言語：{{ optional($following_account->user_following->language)->name }}</p>
+                    <p>エンジニア歴：{{ optional($followingAccount->user_following->history)->history }}</p>
+                    <p>得意言語：{{ optional($followingAccount->user_following->language)->name }}</p>
                   </div><!-- /.friend-body-bottom -->
 
                 </div><!-- /.friend-body -->

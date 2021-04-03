@@ -21,17 +21,17 @@
       <!-- 友達一覧 -->
       <ul class="friends-list">
 
-        @forelse($following_accounts as $following_account)
+        @forelse($followingAccounts as $followingAccount)
 
         <li class="friends-item">
-          <form name="friend" action="{{ route('talks.show', ['theFriendId' => $following_account->user_following->id]) }}" method="GET">
+          <form name="friend" action="{{ route('talks.show', ['theFriendId' => $followingAccount->user_following->id]) }}" method="GET">
             @csrf
 
-            @if(count($following_accounts) == 1)
+            @if(count($followingAccounts) == 1)
             <a href="javascript: friend.submit()">
               @endif
 
-              @if(count($following_accounts) >= 2)
+              @if(count($followingAccounts) >= 2)
               <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
                 @endif
 
@@ -39,16 +39,16 @@
 
 
                 <div class="friends-img">
-                  @if($following_account->user_following->img == null)
+                  @if($followingAccount->user_following->img == null)
                   <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
                   @else
-                  <img src="{{ $following_account->user_following->img }}" alt="自分のトプ画">
+                  <img src="{{ $followingAccount->user_following->img }}" alt="自分のトプ画">
                   @endif
                 </div><!-- /.friends-img -->
 
                 <!-- 名前や年齢などの説明 -->
 
-                <p class="friends-name">{{{ optional($following_account->user_following)->name }}}</p>
+                <p class="friends-name">{{{ optional($followingAccount->user_following)->name }}}</p>
 
 
 
@@ -85,25 +85,25 @@
 
       <div class="talk-friend-middle">
         <!-- もしも自分の発言だったら -->
-        @if(isset($talkDates))
-        @foreach($talkDates as $talkDate)
-        @if($talkDate->user_id == $myId)
+        @if(isset($talks))
+        @foreach($talks as $talk)
+        @if($talk->user_id == $myId)
         <div class="talk-own">
           <div class="talk-own-head">
 
             <!-- もしもyetがtrueだったら -->
             <!-- もし、相手がTalkController@talk-showを実行したら -->
 
-            @if($talkDate->yet)
+            @if($talk->yet)
             <p class="talk-own-head-yet">既読</p>
             @endif
 
-            <p class="talk-own-head-time">{{ $talkDate->created_at->format('H:i') }}</p>
+            <p class="talk-own-head-time">{{ $talk->created_at->format('H:i') }}</p>
 
           </div>
 
           <div class="talk-own-content">
-            <p class="talk-own-content-txt">{{ $talkDate->talk_body }}</p>
+            <p class="talk-own-content-txt">{{ $talk->talk_body }}</p>
           </div>
 
         </div>
@@ -121,11 +121,11 @@
           </div>
 
           <div class="talk-opponent-body">
-            <p class="talk-opponent-body-txt">{{ $talkDate->talk_body }}</p>
+            <p class="talk-opponent-body-txt">{{ $talk->talk_body }}</p>
           </div>
 
           <div class="talk-opponent-footer">
-            <p class="talk-opponent-footer-time">{{ $talkDate->created_at->format('H:i') }}</p>
+            <p class="talk-opponent-footer-time">{{ $talk->created_at->format('H:i') }}</p>
           </div>
 
         </div>

@@ -11,8 +11,8 @@ class ActivityController extends Controller
     public function __invoke()
     {
         $myId = Auth::id();
-        $follower_accounts = Follow::where('user_to_id', $myId)->get();
-    
-        return view('MyService.activity', compact('myId', 'follower_accounts'));
+        $followerAccounts = Follow::follower($myId)->get();
+
+        return view('MyService.activity', compact('myId', 'followerAccounts'));
     }
 }

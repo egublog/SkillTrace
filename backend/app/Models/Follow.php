@@ -15,5 +15,26 @@ class Follow extends Model
         return $this->belongsTo('App\Models\User', 'user_to_id');
     }
 
+    // scope
+    public function scopeFollowing($query, $userId) {
+        return $query->where('user_id', $userId);
+    }
 
+    public function scopeFollower($query, $userId) {
+        return $query->where('user_to_id', $userId);
+    }
+    
+    public function scopeMutualFollow($query, $myId, $userId) {
+        return $query->where('user_id', $myId)->where('user_to_id', $userId);
+    }
+
+    public static function followCheck($follow_check) {
+
+        if($follow_check == null) {
+            $follow_check = false;
+        }else {
+            $follow_check = true;
+        }
+
+    }
 }

@@ -19,46 +19,46 @@
         <div class="activity-result">
             <ul class="friends-list">
 
-                @forelse($follower_accounts as $follower_account)
+                @forelse($followerAccounts as $followerAccount)
 
-                <?php $friendId = $follower_account->user_follower->id ?>
+                <?php $friendId = $followerAccount->user_follower->id ?>
 
                 <li class="friends-item">
 
                     <form name="friend" action="{{ route('home.home', ['userId' => $friendId]) }}" method="get">
                         @csrf
 
-                        @if(count($follower_accounts) == 1)
+                        @if(count($followerAccounts) == 1)
                         <a href="javascript: friend.submit()">
                             @endif
 
-                            @if(count($follower_accounts) >= 2)
+                            @if(count($followerAccounts) >= 2)
                             <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
                                 @endif
 
                                 <div class="friend-img">
-                                    @if($follower_account->user_follower->img == null)
+                                    @if($followerAccount->user_follower->img == null)
                                     <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
                                     @else
-                                    <img src="{{ $follower_account->user_follower->img }}" alt="自分のトプ画">
+                                    <img src="{{ $followerAccount->user_follower->img }}" alt="自分のトプ画">
                                     @endif
                                 </div><!-- /.friends-result-img -->
 
                                 <div class="friend-body">
 
                                     <div class="friend-body-top">
-                                        <p>{{ optional($follower_account->user_follower)->name }}</p>
+                                        <p>{{ optional($followerAccount->user_follower)->name }}</p>
                                         <span>さんにフォローされました</span>
                                     </div><!-- /.friend-body-top -->
 
                                     <div class="friend-body-middle">
-                                        <p>年齢：{{ optional($follower_account->user_follower)->age }}</p>
-                                        <p>住所：{{ optional($follower_account->user_follower)->area->area }}</p>
+                                        <p>年齢：{{ optional($followerAccount->user_follower)->age }}</p>
+                                        <p>住所：{{ optional($followerAccount->user_follower)->area->area }}</p>
                                     </div><!-- /.friend-body-middle -->
 
                                     <div class="friend-body-bottom">
-                                        <p>エンジニア歴：{{ optional($follower_account->user_follower)->history->history }}</p>
-                                        <p>得意言語：{{ optional($follower_account->user_follower)->language->name }}</p>
+                                        <p>エンジニア歴：{{ optional($followerAccount->user_follower)->history->history }}</p>
+                                        <p>得意言語：{{ optional($followerAccount->user_follower)->language->name }}</p>
                                     </div><!-- /.friend-body-bottom -->
 
                                 </div><!-- /.friends-body -->

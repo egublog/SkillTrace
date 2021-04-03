@@ -41,13 +41,10 @@ class HomeController extends Controller
         $languages = User_language::where('user_id', $userId)->get();
         $account = User::findOrFail($userId);
 
-        $follow_check = Follow::where('user_id', $myId)->where('user_to_id', $userId)->first();
+        $follow_check = Follow::mutualFollow($myId, $userId)->first();
 
-        if($follow_check == null) {
-            $follow_check = false;
-        }else {
-            $follow_check = true;
-        }
+        //すでにフォローしているかどうかの判定
+        Follow::followCheck($follow_check);
 
         return view('MyService.home', compact('myId', 'myAccount', 'userId', 'account', 'languages', 'follow_check'));
     }

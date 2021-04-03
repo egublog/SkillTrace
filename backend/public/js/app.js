@@ -2009,7 +2009,7 @@ __webpack_require__.r(__webpack_exports__);
     following: function following(userId) {
       var _this = this;
 
-      var url = "/user/".concat(userId, "/follow");
+      var url = "/users/".concat(userId, "/follow");
       axios.post(url).then(function (response) {
         _this.follow = true;
       })["catch"](function (error) {
@@ -2019,7 +2019,7 @@ __webpack_require__.r(__webpack_exports__);
     unfollowing: function unfollowing(userId) {
       var _this2 = this;
 
-      var url = "/user/".concat(userId, "/unfollow");
+      var url = "/users/".concat(userId, "/unfollow");
       axios.post(url).then(function (response) {
         _this2.follow = false;
       })["catch"](function (error) {
