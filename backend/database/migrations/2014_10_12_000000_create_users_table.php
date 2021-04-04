@@ -28,16 +28,8 @@ class CreateUsersTable extends Migration
 
             $table->string('img')->nullable();
             $table->unsignedBigInteger('age')->nullable();
-            $table->unsignedBigInteger('area_id')->nullable();
-            $table->unsignedBigInteger('history_id')->nullable();
-            $table->unsignedBigInteger('language_id')->nullable();
 
             $table->timestamps();
-
-             // 外部キー制約
-             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
-             $table->foreign('history_id')->references('id')->on('histories')->onDelete('cascade');
-             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
         });
     }
 

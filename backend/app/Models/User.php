@@ -93,4 +93,37 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Follow', 'user_to_id');
     }
+
+    //scope
+
+    // public function scopeSearchName($query, $name)
+    // {
+    //     return $query->when($name, function ($query) use ($name) {
+    //         return $query->where('name', 'like', "%$name%");
+    //     });
+    // }
+    // public function scopeSearchAge($query, $age)
+    // {
+    //     return $query->when($age, function ($query) use ($age) {
+    //         return $query->where('age', 'like', "%$age%");
+    //     });
+    // }
+    // public function scopeSearchArea($query, $area_id)
+    // {
+    //     return $query->when($area_id, function ($query) use ($area_id) {
+    //         return $query->where('area_id', 'like', "%$area_id%");
+    //     });
+    // }
+    // public function scopeSearchHistory($query, $history_id)
+    // {
+    //     return $query->when($history_id, function ($query) use ($history_id) {
+    //         return $query->where('history_id', 'like', "%$history_id%");
+    //     });
+    // }
+    // public function scopeSearchLanguage($query, $language_id)
+    // {
+    //     return $query->when($language_id, function ($query) use ($language_id) {
+    //         return $query->where('language_id', 'like', "%$language_id%");
+    //     });
+    // }
 }

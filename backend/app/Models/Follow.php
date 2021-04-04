@@ -37,4 +37,11 @@ class Follow extends Model
         }
 
     }
+
+    // public function scopeSearchName($query, $name) {
+
+    //     return $query->whereHas('user_following', function ($query) use ($name) {
+    //         $query->where('name', 'like', "%$name%");
+    //     });
+    // }
 }

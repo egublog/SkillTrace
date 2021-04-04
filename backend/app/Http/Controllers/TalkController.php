@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Follow;
 use App\Models\Talk;
+use App\Queries\SearchFollowing;
 
 class TalkController extends Controller
 {
@@ -27,9 +28,9 @@ class TalkController extends Controller
         $myId = Auth::id();
         $search_result_name = $request->input('name');
 
-        $followingAccounts = Follow::where('user_id', $myId)->whereHas('user_following', function ($query) use ($search_result_name) {
-            $query->where('name', 'like', "%$search_result_name%");
-        })->get();
+        // $followingAccounts = Follow::following($myId)->searchName($search_result_name)->get();
+
+        $followingAccounts = SearchFollowing::get($myId, $search_result_name);
 
         return view('MyService.talk', compact('myId', 'followingAccounts'));
     }
@@ -39,12 +40,12 @@ class TalkController extends Controller
         $theFriendAccount = User::find($theFriendId);
 
         $myId = Auth::id();
-        $myAccount = User::find($myId);
-        // $friendsId = Follow::follower($myId)->get(['user_id']);
 
         $followingAccounts = Follow::following($myId)->get();
 
-        $yetColumns = Talk::where('user_id', $theFriendId)->where('user_to_id', $myId)->get();
+        $yetColumns = Talk::where('user_id', $theFriendId)
+            ->where('user_to_id', $myId)
+            ->get();
 
         if (isset($yetColumns->first()->user_id))
             foreach ($yetColumns as $yetColumn) {
@@ -52,7 +53,11 @@ class TalkController extends Controller
                 $yetColumn->save();
             }
 
-        $talks = Talk::where('user_id', $myId)->where('user_to_id', $theFriendId)->orWhere('user_id', $theFriendId)->where('user_to_id', $myId)->get();
+        $talks = Talk::where('user_id', $myId)
+            ->where('user_to_id', $theFriendId)
+            ->orWhere('user_id', $theFriendId)
+            ->where('user_to_id', $myId)
+            ->get();
 
         return view('MyService.talk-show', compact('myId', 'theFriendId', 'followingAccounts', 'theFriendAccount', 'talks'));
     }
