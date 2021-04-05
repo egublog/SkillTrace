@@ -14,16 +14,16 @@ export default {
     };
   },
   created() {
-    this.follow = this.followCheck
+    this.follow = this.followCheck;
   },
   methods: {
     following(userId) {
       let url = `/users/${userId}/follow`;
-      
+
       axios
         .post(url)
         .then(response => {
-          this.follow = true
+          this.follow = true;
         })
         .catch(error => {
           alert(error);
@@ -35,7 +35,7 @@ export default {
       axios
         .post(url)
         .then(response => {
-          this.follow = false
+          this.follow = false;
         })
         .catch(error => {
           alert(error);
@@ -49,5 +49,4 @@ export default {
 .btn-white {
   background-color: #fff;
 }
-
 </style>
