@@ -40,10 +40,11 @@
 
       </div>
 
+      <!-- 他人の画面 -->
       @if($userId != $myId)
       <div class="home-top-wrap-right">
 
-        <follow-button :follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($userId) }}"></follow-button>
+        <follow-button :follow-check="{{ $followCheck }}" :user-id="{{ $userId }}"></follow-button>
 
       </div><!-- /.home-top-wrap-right -->
       @endif
@@ -165,6 +166,7 @@
       @endforeach
       @endif
   
+      <!-- 自分の画面 -->
       @if($userId == $myId)
       <li class="home-skill-item skill-add">
         <a href="{{ route('skills.create') }}">

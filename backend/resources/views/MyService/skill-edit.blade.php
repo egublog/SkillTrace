@@ -41,12 +41,26 @@
 
           @if(isset($skillables))
           <form action="{{ route('skill_abilities.store', ['userLanguageId' => $userLanguageId]) }}" method="POST">
-            <div class="skill-middle">
-              <h3 class="skill-edit-ttl">できること</h3>
-              <!-- もしもプラスボタンが押されたら -->
-              <div class="skill-middle-able">
-                <input type="text" name="able">
 
+            <div class="skill-middle">
+
+              <h3 class="skill-edit-ttl">できること</h3>
+
+              <!-- エラー処理 -->
+              @if ($errors->has('ability'))
+              <div class="alert alert-danger mt-3">
+                <ul>
+
+                  @foreach($errors->get('ability') as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+
+                </ul>
+              </div>
+              @endif
+
+              <div class="skill-middle-able">
+                <input type="text" name="ability">
               </div><!-- /.skill-middle-list -->
 
             </div><!-- /.skill-middle -->
@@ -58,22 +72,36 @@
               @method("PUT")
 
               <div class="skill-middle">
-                <h3 class="skill-edit-ttl">できること</h3>
-                <!-- もしもプラスボタンが押されたら -->
-                <div class="skill-middle-able">
-                  <input type="text" name="skill_content" value="{{ $skillableEdits->content }}">
 
+                <h3 class="skill-edit-ttl">できること</h3>
+
+                <!-- エラー処理 -->
+                @if ($errors->has('ability'))
+                <div class="alert alert-danger mt-3">
+                  <ul>
+
+                    @foreach($errors->get('ability') as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+
+                  </ul>
+                </div>
+                @endif
+
+                <div class="skill-middle-able">
+                  <input type="text" name="ability" value="{{ $skillableEdits->content }}">
                 </div><!-- /.skill-middle-list -->
 
               </div><!-- /.skill-middle -->
               @endif
 
-              @if(isset($skill_traces))
+              @if(isset($skillTraces))
               <form action="{{ route('skill_traces.store', ['userLanguageId' => $userLanguageId]) }}" method="POST" enctype="multipart/form-data">
 
                 <div class="skill-bottom">
                   <h3 class="skill-edit-ttl">軌跡</h3>
 
+                  <!-- エラー処理 -->
                   @if ($errors->has('trace_img'))
                   <div class="alert alert-danger mt-3">
                     <ul>
@@ -97,7 +125,20 @@
                         @endforeach
                       </select>
 
-                      <input type="text" name="skill-trace">
+                      <!-- エラー処理 -->
+                      @if ($errors->has('trace'))
+                      <div class="alert alert-danger mt-3">
+                        <ul>
+
+                          @foreach($errors->get('trace') as $error)
+                          <li>{{ $error }}</li>
+                          @endforeach
+
+                        </ul>
+                      </div>
+                      @endif
+
+                      <input type="text" name="trace">
 
                     </li>
                   </ul><!-- /.skill-trace-list -->
@@ -116,7 +157,6 @@
                     <ul class="skill-trace-list">
                       <li class="skill-trace-item">
 
-                        <!-- 一旦画像は保留 -->
                         <div class="skill-trace-img">
                           @if($traceEdit->img == null)
                           <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/trace_img/no_img.png" alt="各々のトプ画">
@@ -133,7 +173,20 @@
                           @endforeach
                         </select>
 
-                        <input type="text" name="trace_content" value="{{ $traceEdit->content }}">
+                        <!-- エラー処理 -->
+                        @if ($errors->has('trace'))
+                        <div class="alert alert-danger mt-3">
+                          <ul>
+
+                            @foreach($errors->get('trace') as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+
+                          </ul>
+                        </div>
+                        @endif
+
+                        <input type="text" name="trace" value="{{ $traceEdit->content }}">
 
                       </li>
                     </ul><!-- /.skill-trace-list -->

@@ -36,12 +36,12 @@ class ProfileController extends Controller
 
     public function img_store(ProfileImageRequest $request) {
 
-        $user_img = $request->file('profile_img');
+        $userImg = $request->file('profile_img');
 
         $myId = Auth::id();
         $myAccount = User::find($myId);
 
-        $path = Storage::disk('s3')->putFile('profile_img', $user_img, 'public');
+        $path = Storage::disk('s3')->putFile('profile_img', $userImg, 'public');
         $myAccount->img = Storage::disk('s3')->url($path);
 
         $myAccount->save();

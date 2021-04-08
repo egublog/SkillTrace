@@ -7,14 +7,13 @@ use App\Models\Follow;
 final class SearchFollowing
 {
   /**
-   * @return \App\Models\Follow[]
+   * @return \Illuminate\Database\Query\Builder
    */
-  public static function get($myId, $name)
+  public static function search($myId, $name)
   {
     return Follow::following($myId)
       ->whereHas('user_following', function ($query) use ($name) {
         $query->where('name', 'like', "%$name%");
-      })
-      ->get();
+      });
   }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Skill;
+use App\Http\Requests\SkillAbilityRequest;
 
 class SkillAbilityController extends Controller
 {
@@ -21,9 +22,9 @@ class SkillAbilityController extends Controller
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'skillables'));
     }
 
-    public function store($userLanguageId, Request $request)
+    public function store($userLanguageId, SkillAbilityRequest $request)
     {
-        $ableText = $request->input('able');
+        $ableText = $request->input('ability');
 
         $skill = new Skill;
         $skill->user_language_id = $userLanguageId;
@@ -31,9 +32,8 @@ class SkillAbilityController extends Controller
         $skill->save();
 
         $theSkill = UserLanguage::find($userLanguageId);
-        $account = User::find($theSkill->user_id);
 
-        $userId = $account->id;
+        $userId = $theSkill->user_id;
         $skillId = $theSkill->language_id;
 
         return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
@@ -48,13 +48,13 @@ class SkillAbilityController extends Controller
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'skillableEdits', 'abilityId', 'userLanguageId'));
     }
 
-    public function update($userLanguageId, $abilityId, Request $request)
+    public function update($userLanguageId, $abilityId, SkillAbilityRequest $request)
     {
-        $skill_content = $request->input('skill_content');
+        $skillContent = $request->input('ability');
 
         $skillableEdits = Skill::find($abilityId);
 
-        $skillableEdits->content = $skill_content;
+        $skillableEdits->content = $skillContent;
         $skillableEdits->save();
 
         $theSkill = UserLanguage::find($userLanguageId);

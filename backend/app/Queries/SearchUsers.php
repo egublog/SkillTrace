@@ -7,9 +7,9 @@ use App\Models\User;
 final class SearchUsers
 {
   /**
-   * @return \App\Models\User[]
+   * @return \Illuminate\Database\Query\Builder
    */
-  public static function get($myId, $name, $age, $area_id, $history_id, $language_id)
+  public static function search($myId, $name, $age, $areId, $historyId, $languageId)
   {
     return User::whereNotIn('id', [$myId])
       ->when($name, function ($query) use ($name) {
@@ -18,15 +18,14 @@ final class SearchUsers
       ->when($age, function ($query) use ($age) {
         return $query->where('age', 'like', "%$age%");
       })
-      ->when($area_id, function ($query) use ($area_id) {
-        return $query->where('area_id', 'like', "%$area_id%");
+      ->when($areId, function ($query) use ($areId) {
+        return $query->where('area_id', 'like', "%$areId%");
       })
-      ->when($history_id, function ($query) use ($history_id) {
-        return $query->where('history_id', 'like', "%$history_id%");
+      ->when($historyId, function ($query) use ($historyId) {
+        return $query->where('history_id', 'like', "%$historyId%");
       })
-      ->when($language_id, function ($query) use ($language_id) {
-        return $query->where('language_id', 'like', "%$language_id%");
-      })
-      ->get();
+      ->when($languageId, function ($query) use ($languageId) {
+        return $query->where('language_id', 'like', "%$languageId%");
+      });
   }
 }

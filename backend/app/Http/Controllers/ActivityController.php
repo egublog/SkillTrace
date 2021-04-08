@@ -7,7 +7,6 @@ use App\Models\Follow;
 
 class ActivityController extends Controller
 {
-    //シングルコントローラー
     public function __invoke()
     {
         $myId = Auth::id();

@@ -10,15 +10,30 @@
   <section class="talk">
 
     <div class="section-ttl-wrapper">
+
       <div class="section-ttl">
         <h2>トーク</h2>
       </div><!-- /.section-ttl -->
+
+      @if ($errors->has('name'))
+      <div class="alert alert-danger mt-3">
+        <ul>
+
+          @foreach($errors->get('name') as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+
+        </ul>
+      </div>
+      @endif
+
       <!-- 検索 -->
       <form action="{{ route('talks.search') }}" method="get">
         @csrf
         <input type="text" name="name">
         <input class="btn" type="submit" value="検索">
       </form>
+
     </div><!-- /.section-ttl-wrapper -->
 
 

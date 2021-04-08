@@ -99,57 +99,54 @@ csrf_field()
     </form>
   </div><!-- /.search-wrapper -->
 
+
+
   <!-- 検索結果 -->
 
-
     <ul class="friends-list">
-      <!-- もしも結果がヒットすれば -->
 
-      @if(isset($search_result_users))
+      @if(isset($searchResultUsers))
 
-      @forelse($search_result_users as $search_result_user)
+      @forelse($searchResultUsers as $searchResultUser)
 
-      <?php $friendId = $search_result_user->id ?>
+      <?php $friendId = $searchResultUser->id ?>
 
       <li class="friends-item">
 
         <form name="friend" action="{{ route('home.home', ['userId' => $friendId]) }}" method="get">
           @csrf
           <!-- search_result_usersの個数が一個だったらと2個以上だったらで場合わけ -->
-          @if(count($search_result_users) == 1)
+          @if(count($searchResultUsers) == 1)
           <a href="javascript: friend.submit()">
             @endif
 
-            @if(count($search_result_users) >= 2)
+            @if(count($searchResultUsers) >= 2)
             <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
               @endif
 
               <div class="friend-img">
-                @if($search_result_user->img == null)
+                @if($searchResultUser->img == null)
                 <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
                 @else
-                <img src="{{ $search_result_user->img }}" alt="自分のトプ画">
+                <img src="{{ $searchResultUser->img }}" alt="自分のトプ画">
                 @endif
               </div><!-- /.friends-img -->
 
               <div class="friends-body">
 
                 <div class="friends-body-top">
-                  <p class="friends-body-top-name">{{ $search_result_user->name }}</p>
-                  <p class="friends-body-top-age">年齢：{{ $search_result_user->age }}</p>
+                  <p class="friends-body-top-name">{{ $searchResultUser->name }}</p>
+                  <p class="friends-body-top-age">年齢：{{ $searchResultUser->age }}</p>
                 </div><!-- /.friends-body-top -->
 
                 <div class="friends-body-bottom">
-                  <p class="friends-body-bottom-area">住所：{{ $search_result_user->area->area }}</p>
-                  <p class="friends-body-bottom-history">エンジニア歴：{{ $search_result_user->history->history }}</p>
-                  <p class="friends-body-bottom-favorite">得意言語：{{ $search_result_user->language->name }}</p>
+                  <p class="friends-body-bottom-area">住所：{{ $searchResultUser->area->area }}</p>
+                  <p class="friends-body-bottom-history">エンジニア歴：{{ $searchResultUser->history->history }}</p>
+                  <p class="friends-body-bottom-favorite">得意言語：{{ $searchResultUser->language->name }}</p>
                 </div><!-- /.friends-body-bottom -->
 
               </div><!-- /.friends-body -->
             </a>
-
-
-            <!-- <input type="hidden" name="id" value="{{ $search_result_user->id }}"> -->
 
         </form>
 

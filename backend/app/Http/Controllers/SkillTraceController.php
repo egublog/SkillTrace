@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Category;
 use App\Models\Trace;
-use App\Http\Requests\SkillTraceImageRequest;
+use App\Http\Requests\SkillTraceRequest;
 
 class SkillTraceController extends Controller
 {
@@ -18,23 +18,23 @@ class SkillTraceController extends Controller
 
         $theSkill = UserLanguage::find($userLanguageId);
 
-        $skill_traces = Trace::all();
+        $skillTraces = Trace::all();
         $categories = Category::all();
 
-        return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'categories', 'skill_traces'));
+        return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'categories', 'skillTraces'));
     }
 
-    public function store($userLanguageId, SkillTraceImageRequest $request)
+    public function store($userLanguageId, SkillTraceRequest $request)
     {
-        $trace_img = $request->file('trace_img');
-        $traceText = $request->input('skill-trace');
+        $traceImg = $request->file('trace_img');
+        $traceText = $request->input('trace');
         $category = $request->input('category');
 
         $trace = new Trace;
-        if ($trace_img === null) {
+        if ($traceImg === null) {
             $trace->img = null;
         } else {
-            $path = Storage::disk('s3')->putFile('trace_img', $trace_img, 'public');
+            $path = Storage::disk('s3')->putFile('trace_img', $traceImg, 'public');
             $trace->img = Storage::disk('s3')->url($path);
         }
 
@@ -44,8 +44,8 @@ class SkillTraceController extends Controller
         $trace->save();
 
         $theSkill = UserLanguage::find($userLanguageId);
-        $account = User::find($theSkill->user_id);
-        $userId = $account->id;
+
+        $userId = $theSkill->user_id;
         $skillId = $theSkill->language_id;
 
         return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
@@ -64,29 +64,28 @@ class SkillTraceController extends Controller
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'categories', 'traceEdit', 'traceId', 'userLanguageId'));
     }
 
-    public function update($userLanguageId, $traceId, SkillTraceImageRequest $request)
+    public function update($userLanguageId, $traceId, SkillTraceRequest $request)
     {
-        $trace_img = $request->file('trace_img');
-        $trace_content = $request->input('trace_content');
-        $category_id = $request->input('category_id');
+        $traceImg = $request->file('trace_img');
+        $traceContent = $request->input('trace');
+        $categoryId = $request->input('category_id');
 
         $traceEdits = Trace::find($traceId);
 
-        if ($trace_img === null) {
+        if ($traceImg === null) {
             $traceEdits->img = null;
         } else {
-            $path = Storage::disk('s3')->putFile('trace_img', $trace_img, 'public');
+            $path = Storage::disk('s3')->putFile('trace_img', $traceImg, 'public');
             $traceEdits->img = Storage::disk('s3')->url($path);
         }
 
-        $traceEdits->category_id = $category_id;
-        $traceEdits->content = $trace_content;
+        $traceEdits->category_id = $categoryId;
+        $traceEdits->content = $traceContent;
         $traceEdits->save();
 
         $theSkill = UserLanguage::find($userLanguageId);
 
-        $account = User::find($theSkill->user_id);
-        $userId = $account->id;
+        $userId = $theSkill->user_id;
         $skillId = $theSkill->language_id;
 
         return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
@@ -97,8 +96,7 @@ class SkillTraceController extends Controller
 
         $theSkill = UserLanguage::find($userLanguageId);
 
-        $account = User::find($theSkill->user_id);
-        $userId = $account->id;
+        $userId = $theSkill->user_id;
         $skillId = $theSkill->language_id;
 
         Trace::find($traceId)->delete();

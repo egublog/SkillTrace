@@ -140,6 +140,18 @@
           @csrf
           <div class="talk-send">
 
+            @if ($errors->has('message'))
+            <div class="alert alert-danger mt-3">
+              <ul>
+
+                @foreach($errors->get('message') as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+
+              </ul>
+            </div>
+            @endif
+
             <textarea name="message" id="message" resize="vertical" placeholder="メッセージを入力"></textarea>
 
             <div class="talk-send-button">

@@ -48,11 +48,11 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $myId = Auth::id();
-        $the_skill = $request->language_id;
+        $theSkill = $request->language_id;
 
         $userLanguage = new UserLanguage;
         $userLanguage->user_id = $myId;
-        $userLanguage->language_id = $the_skill;
+        $userLanguage->language_id = $theSkill;
         $userLanguage->star_count = 1;
         $userLanguage->save();
 

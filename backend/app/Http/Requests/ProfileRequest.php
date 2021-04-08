@@ -29,6 +29,12 @@ class ProfileRequest extends FormRequest
         ];
     }
 
+    /**
+     * エラー文
+     *
+     * @return array
+     */
+
     public function messages() {
         return [
             'name.required' => '名前は必ず入力してください。',
@@ -37,6 +43,12 @@ class ProfileRequest extends FormRequest
             'age.between' => '年齢は0~150の間で入力してください。'
         ];
     }
+
+    /**
+     * 5つに限定
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
 
     public function userAttributes() {
         return $this->only([
