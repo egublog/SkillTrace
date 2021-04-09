@@ -24,7 +24,7 @@ class SearchRequest extends FormRequest
     public function rules()
     {
         return [
-            'age' => 'numeric|between:0,150'
+            'age' => 'numeric|between:0,150|nullable'
         ];
     }
 

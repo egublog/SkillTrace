@@ -33,6 +33,18 @@ csrf_field()
           </label>
         </div>
 
+        @if ($errors->has('age'))
+        <div class="alert alert-danger mt-3">
+          <ul>
+
+            @foreach($errors->get('age') as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+
+          </ul>
+        </div>
+        @endif
+
         <div class="search-box">
           <label>
             <dt class="search-box-ttl">年齢：</dt>
@@ -49,7 +61,7 @@ csrf_field()
               <select class="col-8" id="area" name="area_id">
                 <?php $i = 1; ?>
                 @foreach($areas as $area)
-                <option value="<?php echo $i ?>" @if(old('area_id') == $i) selected @endif>{{ $area->area }}</option>
+                <option value="<?php echo $i ?>" @if(old('area_id')==$i) selected @endif>{{ $area->area }}</option>
                 <?php $i++ ?>
                 @endforeach
               </select>
@@ -64,7 +76,7 @@ csrf_field()
               <select class="col-8" id="history" name="history_id">
                 <?php $i = 1; ?>
                 @foreach($histories as $history)
-                <option value="<?php echo $i ?>" @if(old('history_id') == $i) selected @endif>{{ $history->history }}</option>
+                <option value="<?php echo $i ?>" @if(old('history_id')==$i) selected @endif>{{ $history->history }}</option>
                 <?php $i++ ?>
                 @endforeach
 
@@ -81,7 +93,7 @@ csrf_field()
               <select class="col-8" id="favorite" name="language_id">
                 <?php $i = 1; ?>
                 @foreach($languages as $language)
-                <option value="<?php echo $i ?>" @if(old('language_id') == $i) selected @endif>{{ $language->name }}</option>
+                <option value="<?php echo $i ?>" @if(old('language_id')==$i) selected @endif>{{ $language->name }}</option>
                 <?php $i++ ?>
                 @endforeach
 
@@ -103,65 +115,65 @@ csrf_field()
 
   <!-- 検索結果 -->
 
-    <ul class="friends-list">
+  <ul class="friends-list">
 
-      @if(isset($searchResultUsers))
+    @if(isset($searchResultUsers))
 
-      @forelse($searchResultUsers as $searchResultUser)
+    @forelse($searchResultUsers as $searchResultUser)
 
-      <?php $friendId = $searchResultUser->id ?>
+    <?php $friendId = $searchResultUser->id ?>
 
-      <li class="friends-item">
+    <li class="friends-item">
 
-        <form name="friend" action="{{ route('home.home', ['userId' => $friendId]) }}" method="get">
-          @csrf
-          <!-- search_result_usersの個数が一個だったらと2個以上だったらで場合わけ -->
-          @if(count($searchResultUsers) == 1)
-          <a href="javascript: friend.submit()">
+      <form name="friend" action="{{ route('home.home', ['userId' => $friendId]) }}" method="get">
+        @csrf
+        <!-- search_result_usersの個数が一個だったらと2個以上だったらで場合わけ -->
+        @if(count($searchResultUsers) == 1)
+        <a href="javascript: friend.submit()">
+          @endif
+
+          @if(count($searchResultUsers) >= 2)
+          <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
             @endif
 
-            @if(count($searchResultUsers) >= 2)
-            <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
+            <div class="friend-img">
+              @if($searchResultUser->img == null)
+              <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
+              @else
+              <img src="{{ $searchResultUser->img }}" alt="自分のトプ画">
               @endif
+            </div><!-- /.friends-img -->
 
-              <div class="friend-img">
-                @if($searchResultUser->img == null)
-                <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
-                @else
-                <img src="{{ $searchResultUser->img }}" alt="自分のトプ画">
-                @endif
-              </div><!-- /.friends-img -->
+            <div class="friends-body">
 
-              <div class="friends-body">
+              <div class="friends-body-top">
+                <p class="friends-body-top-name">{{ $searchResultUser->name }}</p>
+                <p class="friends-body-top-age">年齢：{{ $searchResultUser->age }}</p>
+              </div><!-- /.friends-body-top -->
 
-                <div class="friends-body-top">
-                  <p class="friends-body-top-name">{{ $searchResultUser->name }}</p>
-                  <p class="friends-body-top-age">年齢：{{ $searchResultUser->age }}</p>
-                </div><!-- /.friends-body-top -->
+              <div class="friends-body-bottom">
+                <p class="friends-body-bottom-area">住所：{{ $searchResultUser->area->area }}</p>
+                <p class="friends-body-bottom-history">エンジニア歴：{{ $searchResultUser->history->history }}</p>
+                <p class="friends-body-bottom-favorite">得意言語：{{ $searchResultUser->language->name }}</p>
+              </div><!-- /.friends-body-bottom -->
 
-                <div class="friends-body-bottom">
-                  <p class="friends-body-bottom-area">住所：{{ $searchResultUser->area->area }}</p>
-                  <p class="friends-body-bottom-history">エンジニア歴：{{ $searchResultUser->history->history }}</p>
-                  <p class="friends-body-bottom-favorite">得意言語：{{ $searchResultUser->language->name }}</p>
-                </div><!-- /.friends-body-bottom -->
+            </div><!-- /.friends-body -->
+          </a>
 
-              </div><!-- /.friends-body -->
-            </a>
+      </form>
 
-        </form>
-
-      </li>
+    </li>
 
 
-      @empty
+    @empty
 
-      <p class="no-hit">見つかりませんでした</p>
+    <p class="no-hit">見つかりませんでした</p>
 
 
-      @endforelse
-      @endif
+    @endforelse
+    @endif
 
-    </ul><!-- /.friends-list -->
+  </ul><!-- /.friends-list -->
 
 
 </section><!-- /.search -->

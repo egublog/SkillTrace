@@ -25,7 +25,7 @@ class ProfileImageRequest extends FormRequest
     {
         return [
             //プロフィール画像
-            'profile_img' => 'image|mimes:jpeg,png,jpg,gif|max:1024|dimensions:max_width=300',
+            'profile_img' => 'image|mimes:jpeg,png,jpg,gif|max:1024|dimensions:max_width=300|required',
         ];
     }
 
@@ -42,6 +42,7 @@ class ProfileImageRequest extends FormRequest
             "profile_img.mimes" => "指定された拡張子（PNG/JPG/GIF）ではありません。",
             "profile_img.max" => "１Ｍを超えています。",
             "profile_img.dimensions" => "横幅は最大300pxです。",
+            "profile_img.required" => "画像を指定してください。"
         ];
     }
 }
