@@ -91,9 +91,7 @@
         <div class="talk-own">
           <div class="talk-own-head">
 
-            <!-- もしもyetがtrueだったら -->
             <!-- もし、相手がTalkController@talk-showを実行したら -->
-
             @if($talk->yet)
             <p class="talk-own-head-yet">既読</p>
             @endif

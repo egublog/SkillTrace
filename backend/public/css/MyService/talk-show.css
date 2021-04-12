@@ -360,19 +360,13 @@ hr {
 }
 
 .header .toggle {
-  margin-left: 30px;
-}
-
-.header .toggle-button {
-  color: gray;
-  height: 30px;
-  padding: 5px 0;
+  position: relative;
 }
 
 .header .toggle-show {
   display: none;
   position: absolute;
-  top: 30px;
+  top: 50px;
   right: 40px;
   transition: all .3s;
 }
@@ -401,7 +395,8 @@ hr {
 
 .talk .friends {
   border-right: 2px solid #333;
-  height: 100vh;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
   padding: 0;
 }
 
@@ -439,6 +434,7 @@ hr {
   padding-top: 30px;
   padding-bottom: 30px;
   position: relative;
+  background-color: rgba(232, 211, 202, 0.7);
 }
 
 .talk-friend-top-ttl .back {
@@ -452,9 +448,116 @@ hr {
   font-weight: bold;
 }
 
+.talk-friend-middle {
+  margin-left: -15px;
+  margin-right: -5px;
+  padding: 30px;
+  height: calc(100vh - 50px - 90px);
+  overflow-y: scroll;
+}
+
+.talk-friend-middle .talk-own {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.talk-friend-middle .talk-own-head {
+  align-self: flex-end;
+}
+
+.talk-friend-middle .talk-own-head-yet {
+  font-size: 1.4rem;
+}
+
+.talk-friend-middle .talk-own-head-time {
+  font-size: 1.2rem;
+}
+
+.talk-friend-middle .talk-own-content {
+  margin-left: 5px;
+  background-color: #BAD3FF;
+  padding: .4em .8em;
+  border-radius: 20px;
+  position: relative;
+}
+
+.talk-friend-middle .talk-own-content::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 20px 0 0 15px;
+  border-color: transparent transparent transparent #BAD3FF;
+  position: absolute;
+  top: 0px;
+  right: -8px;
+  transform: rotate(80deg);
+}
+
+.talk-friend-middle .talk-own-content-txt {
+  white-space: wrap;
+  overflow-wrap: anywhere;
+  font-size: 1.8rem;
+}
+
+.talk-friend-middle .talk-opponent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.talk-friend-middle .talk-opponent-img {
+  margin-right: 10px;
+}
+
+.talk-friend-middle .talk-opponent-img img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.talk-friend-middle .talk-opponent-body {
+  margin-left: 13px;
+  background-color: #fff;
+  padding: .4em .8em;
+  border-radius: 20px;
+  position: relative;
+}
+
+.talk-friend-middle .talk-opponent-body::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 20px 0 0 15px;
+  border-color: transparent transparent transparent  #fff;
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  transform: rotate(-50deg);
+}
+
+.talk-friend-middle .talk-opponent-body-txt {
+  white-space: wrap;
+  overflow-wrap: anywhere;
+  font-size: 1.8rem;
+}
+
+.talk-friend-middle .talk-opponent-footer {
+  margin-left: 5px;
+}
+
+.talk-friend-middle .talk-opponent-footer-time {
+  font-size: 1.2rem;
+}
+
 .talk-friend-bottom {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   right: 0;
 }

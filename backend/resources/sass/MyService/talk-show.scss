@@ -31,7 +31,8 @@
 
   .friends {
     border-right: 2px solid #333;
-    height: 100vh;
+    height: calc(100vh - 50px);
+    overflow-y: scroll;
     padding: 0;
 
     &-ttl {
@@ -81,6 +82,7 @@
         padding-top: 30px;
         padding-bottom: 30px;
         position: relative;
+        background-color:  rgba($color: #e8d3ca, $alpha: .7);
 
         .back {
           transform: translateY(0);
@@ -95,9 +97,128 @@
       }
     }
 
+    &-middle {
+      // background-color: #fff;
+      margin-left: -15px;
+      margin-right: -5px;
+      padding: 30px;
+      height: calc(100vh - 50px - 90px);
+      overflow-y: scroll;
+      
+      // @include mq(sp) {
+      //   margin-left: 0;
+      //   margin-right: 0;
+      // }
+      
+      .talk-own {
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 20px;
+        
+        &-head {
+          // background-color: red;
+          align-self: flex-end;
+
+          &-yet {
+            font-size: 1.4rem;
+          }
+
+          &-time {
+            // background-color: seagreen;
+            font-size: 1.2rem;
+          }
+        }
+
+        &-content {
+          margin-left: 5px;
+          background-color: #BAD3FF;
+          padding: .4em .8em;
+          border-radius: 20px;
+          position: relative;
+
+
+          &::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 20px 0 0 15px;
+            border-color: transparent transparent transparent #BAD3FF;
+            position: absolute;
+            top: 0px;
+            right: -8px;
+            transform: rotate(80deg);
+          }
+        
+          &-txt {
+            white-space: wrap;
+            overflow-wrap: anywhere;
+            font-size: 1.8rem;
+          }
+        }
+      }
+
+      .talk-opponent {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 20px;
+
+        &-img {
+          margin-right: 10px;
+
+          img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+
+        &-body {
+          margin-left: 13px;
+          background-color: #fff;
+          padding: .4em .8em;
+          border-radius: 20px;
+          position: relative;
+
+          &::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 20px 0 0 15px;
+            border-color: transparent transparent transparent  #fff;
+            position: absolute;
+            top: -7px;
+            left: -7px;
+            transform: rotate(-50deg);
+          }
+
+          &-txt {
+            white-space: wrap;
+            overflow-wrap: anywhere;
+            font-size: 1.8rem;
+          }
+        }
+
+        &-footer {
+          margin-left: 5px;
+
+          &-time {
+            font-size: 1.2rem;
+          }
+        }
+      }
+
+
+    }
+
     &-bottom {
       position: absolute;
-      bottom: 0;
+      bottom: 10px;
       left: 0;
       right: 0;
     }
