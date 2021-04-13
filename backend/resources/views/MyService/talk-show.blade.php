@@ -83,7 +83,7 @@
 
       </div><!-- /.talk-friend-top -->
 
-      <div class="talk-friend-middle">
+      <div class="talk-friend-middle" id="talk-middle-scroll">
         <!-- もしも自分の発言だったら -->
         @if(isset($talks))
         @foreach($talks as $talk)
@@ -134,7 +134,8 @@
       </div><!-- /.talk-friend-middle -->
 
       <div class="talk-friend-bottom">
-        <form action="{{ route('talks.store', ['theFriendId' => $theFriendId]) }}" method="post">
+
+        <form id="talk-txt" action="{{ route('talks.store', ['theFriendId' => $theFriendId]) }}" method="post">
           @csrf
           <div class="talk-send">
 
@@ -151,10 +152,6 @@
             @endif
 
             <textarea name="message" id="message" resize="vertical" placeholder="メッセージを入力"></textarea>
-
-            <div class="talk-send-button">
-              <input class="" type="submit" value="送信">
-            </div>
 
           </div>
         </form>

@@ -102,7 +102,7 @@
       margin-left: -15px;
       margin-right: -5px;
       padding: 30px;
-      height: calc(100vh - 50px - 90px);
+      height: calc(100vh - 50px - 90px - 10vh);
       overflow-y: scroll;
       
       // @include mq(sp) {
@@ -218,9 +218,13 @@
 
     &-bottom {
       position: absolute;
-      bottom: 10px;
-      left: 0;
-      right: 0;
+      bottom: 0;
+      left: 5vw;
+      right: 6vw;
+
+      textarea {
+        height: 10vh;
+      }
     }
   }
 }

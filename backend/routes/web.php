@@ -23,10 +23,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 //home
-Route::get('/users/{userId}', 'HomeController@home')->name('home.home');
+Route::get('/users/{userId}', 'HomeController@home')->middleware('auth')->name('home.home');
 
 //profile
-Route::group(['prefix' => 'profiles', 'as' => 'profiles.'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'profiles', 'as' => 'profiles.'], function() {
 
     Route::get('/', 'ProfileController@index')->name('index');
     Route::post('/store', 'ProfileController@store')->name('store');
@@ -35,10 +35,10 @@ Route::group(['prefix' => 'profiles', 'as' => 'profiles.'], function() {
 });
 
 //activity
-Route::get('/activities', 'ActivityController')->name('activities');
+Route::get('/activities', 'ActivityController')->middleware('auth')->name('activities');
 
 //search
-Route::group(['prefix' => 'searches', 'as' => 'searches.'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'searches', 'as' => 'searches.'], function() {
 
     Route::get('/', 'SearchController@index')->name('index');
     Route::get('/result', 'SearchController@search')->name('search');
@@ -46,10 +46,10 @@ Route::group(['prefix' => 'searches', 'as' => 'searches.'], function() {
 });
 
 //followers
-Route::get('/users/{userId}/followers', 'FollowerController@index')->name('followers.index');
+Route::get('/users/{userId}/followers', 'FollowerController@index')->middleware('auth')->name('followers.index');
 
 //following
-Route::group(['prefix' => 'users/{userId}', 'as' => 'following.'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'users/{userId}', 'as' => 'following.'], function() {
 
     Route::get('/following', 'FollowingController@index')->name('index');
     Route::post('/follow', 'FollowingController@follow');
@@ -57,9 +57,8 @@ Route::group(['prefix' => 'users/{userId}', 'as' => 'following.'], function() {
 
 });
 
-
 //talk
-Route::group(['prefix' => 'talks', 'as' => 'talks.'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'talks', 'as' => 'talks.'], function() {
 
     Route::get('/', 'TalkController@index')->name('index');
     Route::get('/search', 'TalkController@search')->name('search');
@@ -69,7 +68,7 @@ Route::group(['prefix' => 'talks', 'as' => 'talks.'], function() {
 });
 
 //skill
-Route::group(['prefix' => 'users', 'as' => 'skills.'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'users', 'as' => 'skills.'], function() {
 
     Route::get('/{userId}/skills/{skillId}', 'SkillController@show')->name('show');
     Route::get('/skills/create', 'SkillController@create')->name('create');
@@ -79,7 +78,7 @@ Route::group(['prefix' => 'users', 'as' => 'skills.'], function() {
 });
 
 //star
-Route::group(['prefix' => 'users/{userLanguageId}/stars', 'as' => 'skill_stars.'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'users/{userLanguageId}/stars', 'as' => 'skill_stars.'], function() {
 
     Route::get('/', 'SkillStarController@create')->name('create');
     Route::put('/', 'SkillStarController@update')->name('update');
@@ -87,7 +86,7 @@ Route::group(['prefix' => 'users/{userLanguageId}/stars', 'as' => 'skill_stars.'
 });
 
 //ability
-Route::group(['prefix' => 'users/{userLanguageId}/abilities', 'as' => 'skill_abilities.'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'users/{userLanguageId}/abilities', 'as' => 'skill_abilities.'], function() {
 
     Route::get('/', 'SkillAbilityController@create')->name('create');
     Route::post('/', 'SkillAbilityController@store')->name('store');
@@ -98,7 +97,7 @@ Route::group(['prefix' => 'users/{userLanguageId}/abilities', 'as' => 'skill_abi
 });
 
 //trace
-Route::group(['prefix' => 'users/{userLanguageId}/traces', 'as' => 'skill_traces.'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'users/{userLanguageId}/traces', 'as' => 'skill_traces.'], function() {
 
     Route::get('/', 'SkillTraceController@create')->name('create');
     Route::post('/', 'SkillTraceController@store')->name('store');

@@ -44,7 +44,7 @@
       @if($userId != $myId)
       <div class="home-top-wrap-right">
 
-        <follow-button :follow-check="{{ $followCheck }}" :user-id="{{ $userId }}"></follow-button>
+        <follow-button :follow-check="{{ json_encode($followCheck) }}" :user-id="{{ json_encode($userId) }}"></follow-button>
 
       </div><!-- /.home-top-wrap-right -->
       @endif
