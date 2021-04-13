@@ -28,10 +28,14 @@
       @endif
 
       <!-- 検索 -->
-      <form action="{{ route('talks.search') }}" method="get">
+      <form class="mt-3" action="{{ route('talks.search') }}" method="get">
         @csrf
         <input type="text" name="name">
-        <input class="btn" type="submit" value="検索">
+
+        <div class="talk-wrapper-button">
+          <input class="btn" type="submit" value="検索">
+        </div><!-- /.talk-wrapper-button -->
+
       </form>
 
     </div><!-- /.section-ttl-wrapper -->
@@ -88,7 +92,7 @@
 
         @empty
 
-        <p>見つかりませんでした</p>
+        <p class="no-hit">見つかりませんでした</p>
 
         @endforelse
 

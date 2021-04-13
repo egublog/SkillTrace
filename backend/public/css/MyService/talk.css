@@ -360,19 +360,13 @@ hr {
 }
 
 .header .toggle {
-  margin-left: 30px;
-}
-
-.header .toggle-button {
-  color: gray;
-  height: 30px;
-  padding: 5px 0;
+  position: relative;
 }
 
 .header .toggle-show {
   display: none;
   position: absolute;
-  top: 30px;
+  top: 50px;
   right: 40px;
   transition: all .3s;
 }
@@ -397,4 +391,9 @@ hr {
   main {
     margin-bottom: 50px;
   }
+}
+
+.talk-wrapper-button {
+  max-width: 100px;
+  margin: 20px auto;
 }

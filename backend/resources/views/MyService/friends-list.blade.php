@@ -89,7 +89,7 @@
 
     @empty
 
-    <p class="empty">見つかりませんでした</p>
+    <p class="no-hit">見つかりませんでした</p>
 
     @endforelse
 
@@ -127,22 +127,25 @@
               <img src="{{ $following->user_following->img }}" alt="自分のトプ画">
               @endif
 
-            </div><!-- /.friends-img -->
+            </div><!-- /.friend-img -->
 
-            <div class="friends-body">
+            <div class="friend-body">
 
-              <div class="friends-body-top">
-                <p class="friends-body-top-name">{{ optional($following->user_following)->name }}</p>
-                <p class="friends-body-top-age">年齢：{{ optional($following->user_following)->age }}</p>
-              </div><!-- /.friends-body-top -->
+              <div class="friend-body-top">
+                <p>{{ optional($following->user_following)->name }}</p>
+              </div><!-- /.friend-body-top -->
+              
+              <div class="friend-body-middle">
+                <p>年齢：{{ optional($following->user_following)->age }}</p>
+                <p>住所：{{ optional($following->user_following->area)->area }}</p=>
+              </div><!-- /.friend-body-middle -->
 
-              <div class="friends-body-bottom">
-                <p class="friends-body-bottom-area">住所：{{ optional($following->user_following->area)->area }}</p>
-                <p class="friends-body-bottom-history">エンジニア歴：{{ optional($following->user_following->history)->history }}</p>
-                <p class="friends-body-bottom-favorite">得意言語：{{ optional($following->user_following->language)->name }}</p>
-              </div><!-- /.friends-body-bottom -->
+              <div class="friend-body-bottom">
+                <p>エンジニア歴：{{ optional($following->user_following->history)->history }}</pass=>
+                <p>得意言語：{{ optional($following->user_following->language)->name }}</p=>
+              </div><!-- /.friend-body-bottom -->
 
-            </div><!-- /.friends-body -->
+            </div><!-- /.friend-body -->
 
           </a>
       </form>

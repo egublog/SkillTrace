@@ -144,37 +144,35 @@ csrf_field()
               @endif
             </div><!-- /.friends-img -->
 
-            <div class="friends-body">
+            <div class="friend-body">
 
-              <div class="friends-body-top">
-                <p class="friends-body-top-name">{{ $searchResultUser->name }}</p>
-                <p class="friends-body-top-age">年齢：{{ $searchResultUser->age }}</p>
-              </div><!-- /.friends-body-top -->
+              <div class="friend-body-top">
+                <p>{{ $searchResultUser->name }}</p>
+              </div><!-- /.friend-body-top -->
+              
+              <div class="friend-body-middle">
+                <p>年齢：{{ $searchResultUser->age }}</p>
+                <p>住所：{{ $searchResultUser->area->area }}</p>
+              </div><!-- /.friend-body-middle -->
 
-              <div class="friends-body-bottom">
-                <p class="friends-body-bottom-area">住所：{{ $searchResultUser->area->area }}</p>
-                <p class="friends-body-bottom-history">エンジニア歴：{{ $searchResultUser->history->history }}</p>
-                <p class="friends-body-bottom-favorite">得意言語：{{ $searchResultUser->language->name }}</p>
-              </div><!-- /.friends-body-bottom -->
+              <div class="friend-body-bottom">
+                <p>エンジニア歴：{{ $searchResultUser->history->history }}</p>
+                <p>得意言語：{{ $searchResultUser->language->name }}</p>
+              </div><!-- /.friend-body-bottom -->
 
             </div><!-- /.friends-body -->
           </a>
-
       </form>
-
     </li>
-
 
     @empty
 
     <p class="no-hit">見つかりませんでした</p>
 
-
     @endforelse
     @endif
 
   </ul><!-- /.friends-list -->
-
 
 </section><!-- /.search -->
 
