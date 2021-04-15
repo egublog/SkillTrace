@@ -160,7 +160,6 @@
               </div><!-- /.star-count -->
   
             </a>
-  
         </form>
       </li>
       @endforeach

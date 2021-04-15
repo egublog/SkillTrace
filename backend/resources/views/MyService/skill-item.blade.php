@@ -134,9 +134,9 @@
               <a href="javascript: skillable.submit()">
                 ＋
               </a>
-              <!-- <input type="hidden" name="id" value="{{ $theSkill->id }}"> -->
             </form>
           </div><!-- /.skill-add -->
+          
           @endif
           @endif
   

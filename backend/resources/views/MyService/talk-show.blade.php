@@ -18,7 +18,7 @@
     <div class="friends col-md-4 hidden-sp">
 
       <p class="friends-ttl">友達一覧</p>
-      <!-- 友達一覧 -->
+
       <ul class="friends-list">
 
         @forelse($followingAccounts as $followingAccount)
@@ -35,9 +35,6 @@
               <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
                 @endif
 
-
-
-
                 <div class="friends-img">
                   @if($followingAccount->user_following->img == null)
                   <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
@@ -46,11 +43,7 @@
                   @endif
                 </div><!-- /.friends-img -->
 
-                <!-- 名前や年齢などの説明 -->
-
                 <p class="friends-name">{{{ optional($followingAccount->user_following)->name }}}</p>
-
-
 
               </a>
 
@@ -84,11 +77,14 @@
       </div><!-- /.talk-friend-top -->
 
       <div class="talk-friend-middle" id="talk-middle-scroll">
+
         <!-- もしも自分の発言だったら -->
         @if(isset($talks))
         @foreach($talks as $talk)
         @if($talk->user_id == $myId)
+
         <div class="talk-own">
+          
           <div class="talk-own-head">
 
             <!-- もし、相手がTalkController@talk-showを実行したら -->

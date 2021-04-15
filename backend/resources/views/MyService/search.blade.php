@@ -79,7 +79,6 @@ csrf_field()
                 <option value="<?php echo $i ?>" @if(old('history_id')==$i) selected @endif>{{ $history->history }}</option>
                 <?php $i++ ?>
                 @endforeach
-
               </select>
             </dd>
           </label>
@@ -87,8 +86,7 @@ csrf_field()
 
         <div class="search-box">
           <label>
-            <dt class="search-box-ttl">得意な言語：
-            </dt>
+            <dt class="search-box-ttl">得意な言語：</dt>
             <dd class="search-box-data">
               <select class="col-8" id="favorite" name="language_id">
                 <?php $i = 1; ?>
@@ -96,7 +94,6 @@ csrf_field()
                 <option value="<?php echo $i ?>" @if(old('language_id')==$i) selected @endif>{{ $language->name }}</option>
                 <?php $i++ ?>
                 @endforeach
-
               </select>
             </dd>
           </label>

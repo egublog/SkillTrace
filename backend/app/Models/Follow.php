@@ -24,12 +24,12 @@ class Follow extends Model
      */
     public function scopeFollowing($query, $userId)
     {
-        return $query->where('user_id', $userId);
+        return $query->where('user_id', $userId)->with('user_following');
     }
 
     public function scopeFollower($query, $userId)
     {
-        return $query->where('user_to_id', $userId);
+        return $query->where('user_to_id', $userId)->with('user_follower');
     }
 
     public function scopeMutualFollow($query, $myId, $userId)

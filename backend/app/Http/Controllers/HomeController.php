@@ -38,7 +38,7 @@ class HomeController extends Controller
         $myId = Auth::id();
         $myAccount = User::find($myId);
 
-        $languages = UserLanguage::where('user_id', $userId)->get();
+        $languages = UserLanguage::where('user_id', $userId)->with('language')->get();
         $account = User::findOrFail($userId);
 
         $followCheck = Follow::mutualFollow($myId, $userId)->first();

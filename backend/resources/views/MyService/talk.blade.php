@@ -69,7 +69,7 @@
                 </div><!-- /.friends-img -->
 
                 <div class="friend-body">
-                  <!-- 名前や年齢などの説明 -->
+                  
                   <div class="friend-body-top">
                     <p>{{ optional($followingAccount->user_following)->name }}</p>
                   </div><!-- /.friend-body-top -->
