@@ -60,7 +60,7 @@
 
         @empty
 
-        <p>見つかりませんでした</p>
+        <p class="no-hit">見つかりませんでした</p>
 
         @endforelse
 

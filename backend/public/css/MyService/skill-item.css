@@ -336,12 +336,12 @@ hr {
   line-height: 50px;
   padding-left: 20px;
   padding-right: 20px;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .header-nav-item a:hover {
   background-color: #e8d3ca;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 .header-nav-item a .icon {
@@ -368,7 +368,7 @@ hr {
   position: absolute;
   top: 50px;
   right: 40px;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .header .toggle-show.is-active {
@@ -483,27 +483,24 @@ hr {
 .skill-bottom-item-wrap {
   display: flex;
   align-items: center;
+  flex: 1 0 80%;
 }
 
 .skill-bottom-item-wrap .skill-bottom-img {
-  width: 100px;
-  height: 100px;
+  flex: 0 0 15%;
 }
 
 .skill-bottom-item-wrap .skill-bottom-img img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-  border-radius: 50%;
 }
 
 .skill-bottom-item-wrap .skill-bottom-category {
-  margin-left: 20px;
+  margin-left: 5vw;
   max-width: 20%;
+  flex: 1 0 30%;
 }
 
 .skill-bottom-item-wrap .skill-bottom-txt {
-  margin-left: 50px;
   max-width: 40%;
 }
 

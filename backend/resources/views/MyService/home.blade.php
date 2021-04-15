@@ -165,30 +165,17 @@
       </li>
       @endforeach
       @endif
+    </ul><!-- /.home-skill-list -->
   
       <!-- 自分の画面 -->
       @if($userId == $myId)
-      <li class="home-skill-item skill-add">
+      <div class="skill-add">
         <a href="{{ route('skills.create') }}">
           +
         </a>
-      </li>
-  
-      <li class="home-skill-item">
-        <a href="{{ route('skills.create') }}">
-  
-        </a>
-      </li>
-  
-      @else
-      <li class="home-skill-item">
-        <a href="{{ route('skills.create') }}">
-  
-        </a>
-      </li>
+      </div>
       @endif
   
-    </ul><!-- /.home-skill-list -->
   
   </section><!-- /.home-bottom -->
 </div><!-- /.inner -->

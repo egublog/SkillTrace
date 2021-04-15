@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Category;
 use App\Models\Trace;
@@ -18,17 +17,17 @@ class SkillTraceController extends Controller
 
         $theSkill = UserLanguage::find($userLanguageId);
 
-        $skillTraces = Trace::all();
+        $traces = Trace::all();
         $categories = Category::all();
 
-        return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'categories', 'skillTraces'));
+        return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'categories', 'traces'));
     }
 
     public function store($userLanguageId, SkillTraceRequest $request)
     {
         $traceImg = $request->file('trace_img');
         $traceText = $request->input('trace');
-        $category = $request->input('category');
+        $traceCategory = $request->input('category');
 
         $trace = new Trace;
         if ($traceImg === null) {
@@ -39,7 +38,7 @@ class SkillTraceController extends Controller
         }
 
         $trace->user_language_id = $userLanguageId;
-        $trace->category_id = $category;
+        $trace->category_id = $traceCategory;
         $trace->content = $traceText;
         $trace->save();
 
@@ -68,20 +67,20 @@ class SkillTraceController extends Controller
     {
         $traceImg = $request->file('trace_img');
         $traceContent = $request->input('trace');
-        $categoryId = $request->input('category_id');
+        $traceCategoryId = $request->input('category_id');
 
-        $traceEdits = Trace::find($traceId);
+        $traceEdit = Trace::find($traceId);
 
         if ($traceImg === null) {
-            $traceEdits->img = null;
+            $traceEdit->img = null;
         } else {
             $path = Storage::disk('s3')->putFile('trace_img', $traceImg, 'public');
-            $traceEdits->img = Storage::disk('s3')->url($path);
+            $traceEdit->img = Storage::disk('s3')->url($path);
         }
 
-        $traceEdits->category_id = $categoryId;
-        $traceEdits->content = $traceContent;
-        $traceEdits->save();
+        $traceEdit->category_id = $traceCategoryId;
+        $traceEdit->content = $traceContent;
+        $traceEdit->save();
 
         $theSkill = UserLanguage::find($userLanguageId);
 

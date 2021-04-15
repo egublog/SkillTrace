@@ -336,12 +336,12 @@ hr {
   line-height: 50px;
   padding-left: 20px;
   padding-right: 20px;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .header-nav-item a:hover {
   background-color: #e8d3ca;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 .header-nav-item a .icon {
@@ -368,7 +368,7 @@ hr {
   position: absolute;
   top: 50px;
   right: 40px;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .header .toggle-show.is-active {

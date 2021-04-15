@@ -39,7 +39,7 @@
           </div><!-- /.skill-top -->
           @endif
 
-          @if(isset($skillables))
+          @if(isset($abilities))
           <form action="{{ route('skill_abilities.store', ['userLanguageId' => $userLanguageId]) }}" method="POST">
 
             <div class="skill-middle">
@@ -66,7 +66,7 @@
             </div><!-- /.skill-middle -->
             @endif
 
-            @if(isset($skillableEdits))
+            @if(isset($abilityEdit))
             <form action="{{ route('skill_abilities.update', ['userLanguageId' => $userLanguageId, 'abilityId' => $abilityId]) }}" method="POST">
 
               @method("PUT")
@@ -89,13 +89,13 @@
                 @endif
 
                 <div class="skill-middle-able">
-                  <input type="text" name="ability" value="{{ $skillableEdits->content }}">
+                  <input type="text" name="ability" value="{{ $abilityEdit->content }}">
                 </div><!-- /.skill-middle-list -->
 
               </div><!-- /.skill-middle -->
               @endif
 
-              @if(isset($skillTraces))
+              @if(isset($traces))
               <form action="{{ route('skill_traces.store', ['userLanguageId' => $userLanguageId]) }}" method="POST" enctype="multipart/form-data">
 
                 <div class="skill-bottom">

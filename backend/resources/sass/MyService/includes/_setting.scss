@@ -1,5 +1,3 @@
-
-
 /////////_config.scss////////////
 
 // 色
@@ -9,38 +7,39 @@ $color-bg-base: #e8d3ca;
 $color-btn: #b2cbe4;
 $color-icon: #e29676;
 
-
 // レイアウト幅
 $layout-width-canvas: 1440px;
 $layout-width-inner: 1100px;
 
 // ブレークポイント
 $breakpoints: (
-	"sp": "(max-width: 767px)",
-	"tab-only": "(min-width: 768px) and (max-width: #{$layout-width-inner - 1px})",
-	"tab": "(max-width: #{$layout-width-inner - 1px})",
-	"pc": "(min-width: #{$layout-width-inner})",
+    "sp": "(max-width: 767px)",
+    "tab-only":
+        "(min-width: 768px) and (max-width: #{$layout-width-inner - 1px})",
+    "tab": "(max-width: #{$layout-width-inner - 1px})",
+    "pc": "(min-width: #{$layout-width-inner})"
 );
 
 // 階層
 $layer: (
-	header: 100, // ヘッダー
-	home-top: 50, //homeのimgなど
-	default: 1,
+    header: 100,
+    // ヘッダー
+        home-top: 50,
+    //homeのimgなど
+        default: 1
 );
 
-
 // フォント
-$font-family-default: "游ゴシック体", "Yu Gothic", yugothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", meiryo, "MS Pゴシック", "MS PGothic", sans-serif; // 標準フォント
+$font-family-default: "游ゴシック体", "Yu Gothic", yugothic, "ヒラギノ角ゴ Pro",
+    "Hiragino Kaku Gothic Pro", "メイリオ", meiryo, "MS Pゴシック", "MS PGothic",
+    sans-serif; // 標準フォント
 $font-family-base: $font-family-default;
 
 // メディアクエリー
 @mixin mq($breakpoint: sp) {
-	@media #{map-get($breakpoints, $breakpoint)} {
-		@content;
-	}
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
 }
 
-
 /////////_function.scss////////////
-

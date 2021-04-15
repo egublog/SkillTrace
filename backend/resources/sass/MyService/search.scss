@@ -19,8 +19,6 @@
 =====================================================*/
 /////////_btn.scss///////////
 
-
-
 /*=====================================================
 # module
 =====================================================*/
@@ -28,51 +26,46 @@
 
 @import "includes/header";
 
-
 /*=====================================================
 # search
 =====================================================*/
 
 .search {
+    &-wrapper {
+        &-def {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            width: 100%;
+            max-width: 600px;
+            margin: 10px auto;
+            border: 7px dotted #fff;
+            padding: 0 30px 30px 30px;
 
-  &-wrapper {
+            .search-box {
+                width: 100%;
+                margin-top: 30px;
 
+                label {
+                    display: flex;
+                    align-items: center;
+                }
 
-    &-def {
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      width: 100%;
-      max-width: 600px;
-      margin: 10px auto;
-      border: 7px dotted #fff;
-      padding: 0 30px 30px 30px;
+                dt {
+                    font-size: 1.7rem;
+                    width: 250px;
+                }
 
-      .search-box {
-        width: 100%;
-        margin-top: 30px;
-
-        label {
-          display: flex;
-          align-items: center;
-          
+                dd {
+                    width: 100%;
+                    margin-left: 40px;
+                }
+            }
         }
 
-        dt {
-          font-size: 1.7rem;
-          width: 250px;
+        &-button {
+            max-width: 100px;
+            margin: 20px auto;
         }
-
-        dd {
-          width: 100%;
-          margin-left: 40px;
-        }
-      }
     }
-
-    &-button {
-      max-width: 100px;
-      margin: 20px auto;
-    }
-  }
 }

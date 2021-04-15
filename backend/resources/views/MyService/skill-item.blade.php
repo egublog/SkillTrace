@@ -62,13 +62,13 @@
           <h3 class="skill-ttl">できること</h3>
 
           <ul class="skill-middle-list">
-            @forelse($skills as $skill)
+            @forelse($abilities as $ability)
 
-            <?php $abilityId = $skill->id ?>
+            <?php $abilityId = $ability->id ?>
 
             <li class="skill-middle-item">
   
-              <p class="skill-middle-txt">{{ $skill->content }}</p>
+              <p class="skill-middle-txt">{{ $ability->content }}</p>
   
               <div class="edit-delete">
   
@@ -80,11 +80,11 @@
                 <div class="edit">
                   <form name="ableEdit" action="{{ route('skill_abilities.show', ['userLanguageId' => $userLanguageId, 'abilityId' => $abilityId]) }}" method="get">
                     @csrf
-                    @if(count($skills) == 1)
+                    @if(count($abilities) == 1)
                     <a href="javascript: ableEdit.submit()">
                       @endif
   
-                      @if(count($skills) >= 2)
+                      @if(count($abilities) >= 2)
                       <a href="javascript: ableEdit[{{ $loop->iteration - 1 }}].submit()">
                         @endif
                         <i class="fas fa-edit"></i>
@@ -98,11 +98,11 @@
                     @csrf
                     @method("delete")
 
-                    @if(count($skills) == 1)
+                    @if(count($abilities) == 1)
                     <a href="javascript: ableDelete.submit()">
                       @endif
   
-                      @if(count($skills) >= 2)
+                      @if(count($abilities) >= 2)
                       <a href="javascript: ableDelete[{{ $loop->iteration - 1 }}].submit()">
                         @endif
                         <i class="fas fa-trash-alt"></i>

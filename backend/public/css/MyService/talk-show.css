@@ -477,19 +477,19 @@ hr {
 
 .talk-friend-middle .talk-own-content {
   margin-left: 5px;
-  background-color: #BAD3FF;
-  padding: .4em .8em;
+  background-color: #bad3ff;
+  padding: 0.4em 0.8em;
   border-radius: 20px;
   position: relative;
 }
 
 .talk-friend-middle .talk-own-content::after {
-  content: '';
+  content: "";
   width: 0;
   height: 0;
   border-style: solid;
   border-width: 20px 0 0 15px;
-  border-color: transparent transparent transparent #BAD3FF;
+  border-color: transparent transparent transparent #bad3ff;
   position: absolute;
   top: 0px;
   right: -8px;
@@ -523,18 +523,18 @@ hr {
 .talk-friend-middle .talk-opponent-body {
   margin-left: 13px;
   background-color: #fff;
-  padding: .4em .8em;
+  padding: 0.4em 0.8em;
   border-radius: 20px;
   position: relative;
 }
 
 .talk-friend-middle .talk-opponent-body::after {
-  content: '';
+  content: "";
   width: 0;
   height: 0;
   border-style: solid;
   border-width: 20px 0 0 15px;
-  border-color: transparent transparent transparent  #fff;
+  border-color: transparent transparent transparent #fff;
   position: absolute;
   top: -7px;
   left: -7px;

@@ -8,7 +8,7 @@ use App\Models\Language;
 use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Trace;
-use App\Models\Skill;
+use App\Models\Ability;
 
 
 
@@ -28,9 +28,9 @@ class SkillController extends Controller
         $account = User::find($userId);
 
         $traces = Trace::where('user_language_id', $userLanguageId)->get();
-        $skills = Skill::where('user_language_id', $userLanguageId)->get();
+        $abilities = Ability::where('user_language_id', $userLanguageId)->get();
 
-        return view('MyService.skill-item', compact('theSkill', 'traces', 'skills', 'myId', 'account', 'skillId', 'userLanguageId', 'userId'));
+        return view('MyService.skill-item', compact('theSkill', 'traces', 'abilities', 'myId', 'account', 'skillId', 'userLanguageId', 'userId'));
     }
 
     public function create()

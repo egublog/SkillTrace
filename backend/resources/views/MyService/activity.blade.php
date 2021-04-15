@@ -53,12 +53,12 @@
 
                                     <div class="friend-body-middle">
                                         <p>年齢：{{ optional($followerAccount->user_follower)->age }}</p>
-                                        <p>住所：{{ optional($followerAccount->user_follower)->area->area }}</p>
+                                        <p>住所：{{ optional($followerAccount->user_follower->area)->area }}</p>
                                     </div><!-- /.friend-body-middle -->
 
                                     <div class="friend-body-bottom">
-                                        <p>エンジニア歴：{{ optional($followerAccount->user_follower)->history->history }}</p>
-                                        <p>得意言語：{{ optional($followerAccount->user_follower)->language->name }}</p>
+                                        <p>エンジニア歴：{{ optional($followerAccount->user_follower->history)->history }}</p>
+                                        <p>得意言語：{{ optional($followerAccount->user_follower->language)->name }}</p>
                                     </div><!-- /.friend-body-bottom -->
 
                                 </div><!-- /.friends-body -->
