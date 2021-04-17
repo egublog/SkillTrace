@@ -58,6 +58,8 @@
           <dt>年齢</dt>
           @if(isset($account->age))
           <dd>{{ $account->age }}</dd>
+          @else
+          <dd>未登録</dd>
           @endif
         </div><!-- /.home-top-detail-wrapper -->
   
@@ -65,6 +67,8 @@
           <dt>住所</dt>
           @if(isset($account->area->area))
           <dd>{{ $account->area->area }}</dd>
+          @else
+          <dd>未登録</dd>
           @endif
         </div><!-- /.home-top-detail-wrapper -->
   
@@ -72,6 +76,8 @@
           <dt>エンジニア歴</dt>
           @if(isset($account->history->history))
           <dd>{{ $account->history->history }}</dd>
+          @else
+          <dd>未登録</dd>
           @endif
         </div><!-- /.home-top-detail-wrapper -->
   
@@ -79,6 +85,8 @@
           <dt>得意な言語</dt>
           @if(isset($account->language->name))
           <dd>{{ $account->language->name }}</dd>
+          @else
+          <dd>未登録</dd>
           @endif
         </div><!-- /.home-top-detail-wrapper -->
   
@@ -165,6 +173,10 @@
       @endforeach
       @endif
     </ul><!-- /.home-skill-list -->
+
+      @if($languages->isEmpty())
+        <p class="no-hit mt-5">スキルを追加してください</p>
+      @endif
   
       <!-- 自分の画面 -->
       @if($userId == $myId)

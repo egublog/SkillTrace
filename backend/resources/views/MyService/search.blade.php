@@ -146,15 +146,33 @@ csrf_field()
               <div class="friend-body-top">
                 <p>{{ $searchResultUser->name }}</p>
               </div><!-- /.friend-body-top -->
-              
+
               <div class="friend-body-middle">
-                <p>年齢：{{ $searchResultUser->age }}</p>
-                <p>住所：{{ $searchResultUser->area->area }}</p>
+                @if(isset($searchResultUser->age))
+                <p>年齢： {{ $searchResultUser->age }}</p>
+                @else
+                <p>年齢： 未登録</p>
+                @endif
+
+                @if(isset($searchResultUser->area->area))
+                <p>住所： {{ $searchResultUser->area->area }}</p>
+                @else
+                <p>住所： 未登録</p>
+                @endif
               </div><!-- /.friend-body-middle -->
 
               <div class="friend-body-bottom">
-                <p>エンジニア歴：{{ $searchResultUser->history->history }}</p>
-                <p>得意言語：{{ $searchResultUser->language->name }}</p>
+                @if(isset($searchResultUser->history->history))
+                <p>エンジニア歴： {{ $searchResultUser->history->history }}</p>
+                @else
+                <p>エンジニア歴： 未登録</p>
+                @endif
+
+                @if(isset($searchResultUser->language->name))
+                <p>得意言語： {{ $searchResultUser->language->name }}</p>
+                @else
+                <p>得意言語： 未登録</p>
+                @endif
               </div><!-- /.friend-body-bottom -->
 
             </div><!-- /.friends-body -->

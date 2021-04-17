@@ -69,19 +69,38 @@
                 </div><!-- /.friends-img -->
 
                 <div class="friend-body">
-                  
+
                   <div class="friend-body-top">
                     <p>{{ optional($followingAccount->user_following)->name }}</p>
                   </div><!-- /.friend-body-top -->
 
                   <div class="friend-body-middle">
-                    <p>年齢：{{ optional($followingAccount->user_following)->age }}</p>
-                    <p>住所：{{ optional($followingAccount->user_following->area)->area }}</p>
+                    @if(isset($followingAccount->user_following->age))
+                    <p>年齢： {{ $followingAccount->user_following->age }}</p>
+                    @else
+                    <p>年齢： 未登録</p>
+                    @endif
+
+                    @if(isset($followingAccount->user_following->area->area))
+                    <p>住所： {{ $followingAccount->user_following->area->area }}</p>
+                    @else
+                    <p>住所： 未登録</p>
+                    @endif
+
                   </div><!-- /.friend-body-middle -->
 
                   <div class="friend-body-bottom">
-                    <p>エンジニア歴：{{ optional($followingAccount->user_following->history)->history }}</p>
-                    <p>得意言語：{{ optional($followingAccount->user_following->language)->name }}</p>
+                    @if(isset($followingAccount->user_following->history->history))
+                    <p>エンジニア歴： {{ $followingAccount->user_following->history->history }}</p>
+                    @else
+                    <p>エンジニア歴： 未登録</p>
+                    @endif
+
+                    @if(isset($followingAccount->user_following->language->name))
+                    <p>得意言語： {{ $followingAccount->user_following->language->name }}</p>
+                    @else
+                    <p>得意言語： 未登録</p>
+                    @endif
                   </div><!-- /.friend-body-bottom -->
 
                 </div><!-- /.friend-body -->

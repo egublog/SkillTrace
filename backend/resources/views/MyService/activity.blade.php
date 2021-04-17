@@ -52,13 +52,31 @@
                                     </div><!-- /.friend-body-top -->
 
                                     <div class="friend-body-middle">
-                                        <p>年齢：{{ optional($followerAccount->user_follower)->age }}</p>
-                                        <p>住所：{{ optional($followerAccount->user_follower->area)->area }}</p>
+                                        @if(isset($followerAccount->user_follower->age))
+                                        <p>年齢： {{ $followerAccount->user_follower->age }}</p>
+                                        @else
+                                        <p>年齢： 未登録</p>
+                                        @endif
+
+                                        @if(isset($followerAccount->user_follower->area->area))
+                                        <p>住所： {{ $followerAccount->user_follower->area->area }}</p>
+                                        @else
+                                        <p>住所： 未登録</p>
+                                        @endif
                                     </div><!-- /.friend-body-middle -->
 
                                     <div class="friend-body-bottom">
-                                        <p>エンジニア歴：{{ optional($followerAccount->user_follower->history)->history }}</p>
-                                        <p>得意言語：{{ optional($followerAccount->user_follower->language)->name }}</p>
+                                        @if(isset($followerAccount->user_follower->history->history))
+                                        <p>エンジニア歴： {{ $followerAccount->user_follower->history->history }}</p>
+                                        @else
+                                        <p>エンジニア歴： 未登録</p>
+                                        @endif
+
+                                        @if(isset($followerAccount->user_follower->language->name))
+                                        <p>得意言語： {{ $followerAccount->user_follower->language->name }}</p>
+                                        @else
+                                        <p>得意言語： 未登録</p>
+                                        @endif
                                     </div><!-- /.friend-body-bottom -->
 
                                 </div><!-- /.friends-body -->

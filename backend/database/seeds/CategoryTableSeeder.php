@@ -20,7 +20,9 @@ class CategoryTableSeeder extends Seeder
             'YouTube',
             'Udemy',
             'スクール',
-            'オンラインサロン'
+            'オンラインサロン',
+            '独自教材',
+            'その他'
         ];
 
         for ($i = 0; $i < count($categories); $i++) {
