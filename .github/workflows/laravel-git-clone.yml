@@ -12,9 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Git Clone Project
-        run: git clone https://github.com/laravel/laravel.git backend
-
       - name: Docker Compose Version
         run: docker-compose --version
 
