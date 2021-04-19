@@ -44,45 +44,45 @@
     <div class="talk-box">
       <ul class="friends-list">
 
-        @forelse($followingAccounts as $followingAccount)
+        @forelse($talkingUsers as $talkingUser)
 
-        <?php $theFriendId = $followingAccount->user_following->id; ?>
+        <?php $talkingUserId = $talkingUser->id; ?>
 
         <li class="friends-item">
-          <form name="friend" action="{{ route('talks.show', ['theFriendId' => $theFriendId]) }}" method="GET">
+          <form name="friend" action="{{ route('talks.show', ['theFriendId' => $talkingUserId]) }}" method="GET">
             @csrf
 
-            @if(count($followingAccounts) == 1)
+            @if(count($talkingUsers) == 1)
             <a href="javascript: friend.submit()">
               @endif
 
-              @if(count($followingAccounts) >= 2)
+              @if(count($talkingUsers) >= 2)
               <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
                 @endif
 
                 <div class="friend-img">
-                  @if($followingAccount->user_following->img == null)
+                  @if($talkingUser->img == null)
                   <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
                   @else
-                  <img src="{{ $followingAccount->user_following->img }}" alt="自分のトプ画">
+                  <img src="{{ $talkingUser->img }}" alt="自分のトプ画">
                   @endif
                 </div><!-- /.friends-img -->
 
                 <div class="friend-body">
 
                   <div class="friend-body-top">
-                    <p>{{ optional($followingAccount->user_following)->name }}</p>
+                    <p>{{ $talkingUser->name }}</p>
                   </div><!-- /.friend-body-top -->
 
                   <div class="friend-body-middle">
-                    @if(isset($followingAccount->user_following->age))
-                    <p>年齢： {{ $followingAccount->user_following->age }}</p>
+                    @if(isset($talkingUser->age))
+                    <p>年齢： {{ $talkingUser->age }}</p>
                     @else
                     <p>年齢： 未登録</p>
                     @endif
 
-                    @if(isset($followingAccount->user_following->area->area))
-                    <p>住所： {{ $followingAccount->user_following->area->area }}</p>
+                    @if(isset($talkingUser->area->area))
+                    <p>住所： {{ $talkingUser->area->area }}</p>
                     @else
                     <p>住所： 未登録</p>
                     @endif
@@ -90,14 +90,14 @@
                   </div><!-- /.friend-body-middle -->
 
                   <div class="friend-body-bottom">
-                    @if(isset($followingAccount->user_following->history->history))
-                    <p>エンジニア歴： {{ $followingAccount->user_following->history->history }}</p>
+                    @if(isset($talkingUser->history->history))
+                    <p>エンジニア歴： {{ $talkingUser->history->history }}</p>
                     @else
                     <p>エンジニア歴： 未登録</p>
                     @endif
 
-                    @if(isset($followingAccount->user_following->language->name))
-                    <p>得意言語： {{ $followingAccount->user_following->language->name }}</p>
+                    @if(isset($talkingUser->language->name))
+                    <p>得意言語： {{ $talkingUser->language->name }}</p>
                     @else
                     <p>得意言語： 未登録</p>
                     @endif

@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>ProMeet - @yield('title')</title>
+  <title>SkillTrace - @yield('title')</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -80,12 +80,14 @@
                 </a>
               </li><!-- /.header-nav-item -->
 
-              <!-- ログインのtoggle -->
-              <li class="header-nav-item">
+              <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
 
-                <div>
-                  <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}
                   </a>
 
@@ -93,7 +95,6 @@
                     @csrf
                   </form>
                 </div>
-
               </li>
 
             </ul><!-- /.header-nav-list -->
@@ -119,7 +120,7 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script> -->
   <script src="{{ asset('js/script.js') }}"></script>
 
 </body>

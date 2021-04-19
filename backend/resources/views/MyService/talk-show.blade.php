@@ -21,29 +21,29 @@
 
       <ul class="friends-list">
 
-        @forelse($followingAccounts as $followingAccount)
+        @forelse($talkingUsers as $talkingUser)
 
         <li class="friends-item">
-          <form name="friend" action="{{ route('talks.show', ['theFriendId' => $followingAccount->user_following->id]) }}" method="GET">
+          <form name="friend" action="{{ route('talks.show', ['theFriendId' => $talkingUser->id]) }}" method="GET">
             @csrf
 
-            @if(count($followingAccounts) == 1)
+            @if(count($talkingUsers) == 1)
             <a href="javascript: friend.submit()">
               @endif
 
-              @if(count($followingAccounts) >= 2)
+              @if(count($talkingUsers) >= 2)
               <a href="javascript: friend[{{ $loop->iteration - 1 }}].submit()">
                 @endif
 
                 <div class="friends-img">
-                  @if($followingAccount->user_following->img == null)
+                  @if($talkingUser->img == null)
                   <img src="https://skilltrace-bucket.s3.ap-northeast-1.amazonaws.com/profile_img/no_img.png" alt="各々のトプ画">
                   @else
-                  <img src="{{ $followingAccount->user_following->img }}" alt="自分のトプ画">
+                  <img src="{{ $talkingUser->img }}" alt="自分のトプ画">
                   @endif
                 </div><!-- /.friends-img -->
 
-                <p class="friends-name">{{{ optional($followingAccount->user_following)->name }}}</p>
+                <p class="friends-name">{{{ $talkingUser->name }}}</p>
 
               </a>
 

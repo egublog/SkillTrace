@@ -18,9 +18,24 @@ class TalkController extends Controller
     {
         $myId = Auth::id();
 
-        $followingAccounts = Follow::following($myId)->get();
+        $talkLists = Talk::where('user_id', $myId)->orWhere('user_to_id', $myId)->orderBy('created_at', 'desc')->get();
 
-        return view('MyService.talk', compact('myId', 'followingAccounts'));
+        foreach ($talkLists as $talkList) {
+            if ($talkList->user_id != $myId) {
+                $talkingUsersId[] = $talkList->user_id;
+            }
+            if ($talkList->user_to_id != $myId) {
+                $talkingUsersId[] = $talkList->user_to_id;
+            }
+        }
+
+        $talkingUsersId = array_unique($talkingUsersId);
+
+        foreach ($talkingUsersId as $talkingUserId) {
+            $talkingUsers[] = User::find($talkingUserId);
+        }
+
+        return view('MyService.talk', compact('myId', 'talkingUsers'));
     }
 
     public function search(SearchTalkUserRequest $request)
@@ -31,7 +46,32 @@ class TalkController extends Controller
 
         $followingAccounts = SearchFollowing::search($myId, $searchResultName)->get();
 
-        return view('MyService.talk', compact('myId', 'followingAccounts'));
+
+
+        $talkLists = Talk::where('user_id', $myId)->orWhere('user_to_id', $myId)->orderBy('created_at', 'desc')->get();
+
+        foreach ($talkLists as $talkList) {
+            if ($talkList->user_id != $myId) {
+                $talkingUsersId[] = $talkList->user_id;
+            }
+            if ($talkList->user_to_id != $myId) {
+                $talkingUsersId[] = $talkList->user_to_id;
+            }
+        }
+
+        $talkingUsersId = array_unique($talkingUsersId);
+
+        $talkingUsers = [];
+
+        foreach ($talkingUsersId as $talkingUserId) {
+            $talkingUser = User::find($talkingUserId);
+
+            if (str_contains($talkingUser->name, $searchResultName)) {
+                $talkingUsers[] = $talkingUser;
+            }
+        }
+
+        return view('MyService.talk', compact('myId', 'talkingUsers'));
     }
 
     public function show($theFriendId)
@@ -40,15 +80,29 @@ class TalkController extends Controller
 
         $myId = Auth::id();
 
-        $followingAccounts = Follow::following($myId)->get();
+        $talkLists = Talk::where('user_id', $myId)->orWhere('user_to_id', $myId)->orderBy('created_at', 'desc')->get();
+
+        foreach ($talkLists as $talkList) {
+            if ($talkList->user_id != $myId) {
+                $talkingUsersId[] = $talkList->user_id;
+            }
+            if ($talkList->user_to_id != $myId) {
+                $talkingUsersId[] = $talkList->user_to_id;
+            }
+        }
+
+        $talkingUsersId = array_unique($talkingUsersId);
+
+        foreach ($talkingUsersId as $talkingUserId) {
+            $talkingUsers[] = User::find($talkingUserId);
+        }
 
         $yetColumns = Talk::talking($theFriendId)->talked($myId)->get();
-
         Talk::readCheck($yetColumns);
 
         $talks = Talk::talk($myId, $theFriendId)->get();
 
-        return view('MyService.talk-show', compact('myId', 'theFriendId', 'followingAccounts', 'theFriendAccount', 'talks'));
+        return view('MyService.talk-show', compact('myId', 'theFriendId', 'talkingUsers', 'theFriendAccount', 'talks'));
     }
 
     public function store($theFriendId, TalkRequest $request)

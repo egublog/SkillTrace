@@ -237,6 +237,9 @@ hr {
                 margin: 0 auto;
 
                 &-top {
+                    display: flex;
+                    align-items: baseline;
+                    margin-bottom: 5px;
                     p {
                         font-size: 3rem;
                     }
@@ -245,11 +248,17 @@ hr {
                 &-middle {
                     display: flex;
                     align-items: center;
+                    p {
+                        margin-right: 10px;
+                    }
                 }
 
                 &-bottom {
                     display: flex;
                     align-items: center;
+                    p {
+                        margin-right: 10px;
+                    }
                 }
             }
         }
