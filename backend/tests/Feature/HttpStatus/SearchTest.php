@@ -18,12 +18,18 @@ class SearchTest extends TestCase
     public function testSearchIndex()
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user)->get(route('searches.index'))->assertOk();
+
+        $this->actingAs($user)
+            ->get(route('searches.index'))
+            ->assertOk();
     }
 
     public function testSearchSearch()
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user)->get(route('searches.search'))->assertOk();
+
+        $this->actingAs($user)
+            ->get(route('searches.search'))
+            ->assertOk();
     }
 }

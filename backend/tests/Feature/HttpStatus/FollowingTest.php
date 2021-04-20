@@ -12,7 +12,7 @@ use App\Models\User;
 class FollowingTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * Following@index
      *
      * @return void
      */
@@ -20,20 +20,29 @@ class FollowingTest extends TestCase
     function testFollowingIndex()
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user)->get(route('following.index', ['userId' => $user->id]))->assertOk();
+
+        $this->actingAs($user)
+            ->get(route('following.index', ['userId' => $user->id]))
+            ->assertOk();
     }
-    
+
     function testFollowingFollow()
     {
         $user1 = factory(User::class)->create();
         $user2 = factory(User::class)->create();
-        $this->actingAs($user1)->post('users/' . $user2->id . '/follow')->assertOk();
+
+        $this->actingAs($user1)
+            ->post('users/' . $user2->id . '/follow')
+            ->assertOk();
     }
 
     function testFollowingUnfollow()
     {
         $user1 = factory(User::class)->create();
         $user2 = factory(User::class)->create();
-        $this->actingAs($user1)->post('users/' . $user2->id . '/unfollow')->assertOk();
+
+        $this->actingAs($user1)
+            ->post('users/' . $user2->id . '/unfollow')
+            ->assertOk();
     }
 }

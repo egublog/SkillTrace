@@ -26,18 +26,20 @@ class SkillTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $this->actingAs($user)->get(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]))->assertOk();
+        $this->actingAs($user)
+            ->get(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]))
+            ->assertOk();
     }
 
     function testSkillCreate()
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user)->get(route('skills.create'))->assertOk();
+        $this->actingAs($user)
+            ->get(route('skills.create'))
+            ->assertOk();
     }
 
-    //ここがうまくいかない
-    // 選択した言語がlanguage_idに
     function testSkillStore()
     {
         $user = factory(User::class)->create();
@@ -45,7 +47,9 @@ class SkillTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $this->actingAs($user)->post(route('skills.store'), ['language_id' => $userLanguage->language_id])->assertStatus(302);
+        $this->actingAs($user)
+            ->post(route('skills.store'), ['language_id' => $userLanguage->language_id])
+            ->assertRedirect(route('home.home', ['userId' => $user->id]));
     }
 
     function testSkillDestroy()
@@ -55,6 +59,8 @@ class SkillTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $this->actingAs($user)->delete(route('skills.destroy', ['userLanguageId' => $userLanguage->id]))->assertStatus(302);
+        $this->actingAs($user)
+            ->delete(route('skills.destroy', ['userLanguageId' => $userLanguage->id]))
+            ->assertRedirect(route('home.home', ['userId' => $user->id]));
     }
 }

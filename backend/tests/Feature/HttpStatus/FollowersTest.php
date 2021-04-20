@@ -12,7 +12,7 @@ use App\Models\User;
 class FollowersTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * Followers@index
      *
      * @return void
      */
@@ -20,7 +20,9 @@ class FollowersTest extends TestCase
     function testFollowers()
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user)->get(route('followers.index', ['userId' => $user->id]))->assertOk();
-    }
 
+        $this->actingAs($user)
+            ->get(route('followers.index', ['userId' => $user->id]))
+            ->assertOk();
+    }
 }

@@ -17,23 +17,27 @@ class SkillStarTest extends TestCase
      * @return void
      */
 
-    function testSkillStarCreate() 
+    function testSkillStarCreate()
     {
         $user = factory(User::class)->create();
         $userLanguage = factory(UserLanguage::class)->create([
             'user_id' => $user->id
         ]);
 
-        $this->actingAs($user)->get(route('skill_stars.create', ['userLanguageId' => $userLanguage->id]))->assertOk();
+        $this->actingAs($user)
+            ->get(route('skill_stars.create', ['userLanguageId' => $userLanguage->id]))
+            ->assertOk();
     }
 
-    function testSkillStarUpdate() 
+    function testSkillStarUpdate()
     {
         $user = factory(User::class)->create();
         $userLanguage = factory(UserLanguage::class)->create([
             'user_id' => $user->id
         ]);
 
-        $this->actingAs($user)->put(route('skill_stars.update', ['userLanguageId' => $userLanguage->id]), ['star_count' => random_int(1, 5)])->assertStatus(302);
+        $this->actingAs($user)
+            ->put(route('skill_stars.update', ['userLanguageId' => $userLanguage->id]), ['star_count' => random_int(1, 5)])
+            ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
     }
 }

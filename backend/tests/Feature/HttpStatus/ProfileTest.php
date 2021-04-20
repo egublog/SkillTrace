@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProfileTest extends TestCase
@@ -26,13 +28,16 @@ class ProfileTest extends TestCase
     function testProfileStore()
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user)->post(route('profiles.store'))->assertStatus(302);
+        $this->actingAs($user)->post(route('profiles.store'), ['name' => '山田花子', 'age' => 22, 'area_id' => 2, 'history_id' => 2, 'language_id' => 2])->assertRedirect('users/' . $user->id);
     }
 
     function testProfileImgStore()
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user)->post(route('profiles.img_store'))->assertStatus(302);
+        Storage::fake('avatars');
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $this->actingAs($user)->post(route('profiles.img_store'), ['profile_img' =>$file])->assertRedirect('profiles');
     }
 
 }

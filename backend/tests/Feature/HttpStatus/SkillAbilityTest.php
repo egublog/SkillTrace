@@ -18,14 +18,16 @@ class SkillAbilityTest extends TestCase
      * @return void
      */
 
-    function testSkillAbilityCreate() 
+    function testSkillAbilityCreate()
     {
         $user = factory(User::class)->create();
         $userLanguage = factory(UserLanguage::class)->create([
             'user_id' => $user->id
         ]);
 
-        $this->actingAs($user)->get(route('skill_abilities.create', ['userLanguageId' => $userLanguage->id]))->assertOk();
+        $this->actingAs($user)
+            ->get(route('skill_abilities.create', ['userLanguageId' => $userLanguage->id]))
+            ->assertOk();
     }
 
     function testSkillAbilityStore()
@@ -35,7 +37,9 @@ class SkillAbilityTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $this->actingAs($user)->post(route('skill_abilities.create', ['userLanguageId' => $userLanguage->id]))->assertStatus(302);
+        $this->actingAs($user)
+            ->post(route('skill_abilities.create', ['userLanguageId' => $userLanguage->id]), ['ability' => 'aaaaa'])
+            ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
     }
 
     function testSkillAbilityShow()
@@ -48,7 +52,9 @@ class SkillAbilityTest extends TestCase
             'user_language_id' => $userLanguage->id
         ]);
 
-        $this->actingAs($user)->get(route('skill_abilities.show', ['userLanguageId' => $userLanguage->id, 'abilityId' => $ability->id]))->assertOk();
+        $this->actingAs($user)
+            ->get(route('skill_abilities.show', ['userLanguageId' => $userLanguage->id, 'abilityId' => $ability->id]))
+            ->assertOk();
     }
 
     function testSkillAbilityUpdate()
@@ -61,10 +67,12 @@ class SkillAbilityTest extends TestCase
             'user_language_id' => $userLanguage->id
         ]);
 
-        $this->actingAs($user)->put(route('skill_abilities.update', ['userLanguageId' => $userLanguage->id, 'abilityId' => $ability->id]), ['ability' => $ability->content . 'a'])->assertStatus(302);
+        $this->actingAs($user)
+            ->put(route('skill_abilities.update', ['userLanguageId' => $userLanguage->id, 'abilityId' => $ability->id]), ['ability' => $ability->content . 'abc'])
+            ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
     }
 
-    function testSkillAbilityDestroy() 
+    function testSkillAbilityDestroy()
     {
         $user = factory(User::class)->create();
         $userLanguage = factory(UserLanguage::class)->create([
@@ -74,6 +82,8 @@ class SkillAbilityTest extends TestCase
             'user_language_id' => $userLanguage->id
         ]);
 
-        $this->actingAs($user)->delete(route('skill_abilities.destroy', ['userLanguageId' => $userLanguage->id, 'abilityId' => $ability->id]))->assertStatus(302);
+        $this->actingAs($user)
+            ->delete(route('skill_abilities.destroy', ['userLanguageId' => $userLanguage->id, 'abilityId' => $ability->id]))
+            ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
     }
 }

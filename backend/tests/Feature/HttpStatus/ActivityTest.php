@@ -20,6 +20,9 @@ class ActivityTest extends TestCase
     function testActivity()
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user)->get(route('activities'))->assertOk();
+
+        $this->actingAs($user)
+            ->get(route('activities'))
+            ->assertOk();
     }
 }
