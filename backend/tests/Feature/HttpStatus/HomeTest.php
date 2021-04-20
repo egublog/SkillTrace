@@ -11,17 +11,10 @@ use App\Models\User;
 class HomeTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * HomeController
      *
      * @return void
      */
-    public function testExample()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
 
     public function testHome()
     {
@@ -30,7 +23,7 @@ class HomeTest extends TestCase
         $response->assertStatus(302);
     }
 
-    function testMyHome()
+    function testHomeHome()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user)->get(route('home.home', ['userId' => $user->id]))->assertOk();

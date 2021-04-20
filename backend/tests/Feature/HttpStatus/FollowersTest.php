@@ -16,13 +16,6 @@ class FollowersTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
 
     function testFollowers()
     {

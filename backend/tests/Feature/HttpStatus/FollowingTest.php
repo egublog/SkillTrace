@@ -16,17 +16,24 @@ class FollowingTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
-    {
-        $response = $this->get('/');
 
-        $response->assertStatus(200);
-    }
-
-
-    function testFollowing()
+    function testFollowingIndex()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user)->get(route('following.index', ['userId' => $user->id]))->assertOk();
+    }
+    
+    function testFollowingFollow()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        $this->actingAs($user1)->post('users/' . $user2->id . '/follow')->assertOk();
+    }
+
+    function testFollowingUnfollow()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        $this->actingAs($user1)->post('users/' . $user2->id . '/unfollow')->assertOk();
     }
 }

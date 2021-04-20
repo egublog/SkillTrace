@@ -16,17 +16,23 @@ class ProfileTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
-    {
-        $response = $this->get('/');
 
-        $response->assertStatus(200);
-    }
-
-    function testProfile()
+    function testProfileIndex()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user)->get(route('profiles.index'))->assertOk();
+    }
+
+    function testProfileStore()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)->post(route('profiles.store'))->assertStatus(302);
+    }
+
+    function testProfileImgStore()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)->post(route('profiles.img_store'))->assertStatus(302);
     }
 
 }

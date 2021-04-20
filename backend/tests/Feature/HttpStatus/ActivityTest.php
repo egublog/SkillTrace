@@ -12,16 +12,10 @@ use App\Models\User;
 class ActivityTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * Activity@__invoke
      *
      * @return void
      */
-    public function testExample()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
 
     function testActivity()
     {

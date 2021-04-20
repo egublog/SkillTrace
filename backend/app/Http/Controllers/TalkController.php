@@ -20,6 +20,8 @@ class TalkController extends Controller
 
         $talkLists = Talk::where('user_id', $myId)->orWhere('user_to_id', $myId)->orderBy('created_at', 'desc')->get();
 
+        $talkingUserId = [];
+
         foreach ($talkLists as $talkList) {
             if ($talkList->user_id != $myId) {
                 $talkingUsersId[] = $talkList->user_id;
@@ -29,10 +31,18 @@ class TalkController extends Controller
             }
         }
 
-        $talkingUsersId = array_unique($talkingUsersId);
+        if($talkingUserId != null) {
+            $talkingUsersId = array_unique($talkingUsersId);
+        }
 
-        foreach ($talkingUsersId as $talkingUserId) {
-            $talkingUsers[] = User::find($talkingUserId);
+        $talkingUsers = [];
+
+        if($talkingUserId != null) {
+
+            foreach ($talkingUsersId as $talkingUserId) {
+                $talkingUsers[] = User::find($talkingUserId);
+            }
+
         }
 
         return view('MyService.talk', compact('myId', 'talkingUsers'));
