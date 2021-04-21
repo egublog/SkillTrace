@@ -30,7 +30,7 @@
       <!-- 検索 -->
       <form class="mt-3" action="{{ route('talks.search') }}" method="get">
         @csrf
-        <input type="text" name="name">
+        <input type="text" name="talk_search_name" value="{{ old('talk_search_name') }}">
 
         <div class="talk-wrapper-button">
           <input class="btn" type="submit" value="検索">

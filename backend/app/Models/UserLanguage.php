@@ -19,13 +19,13 @@ class UserLanguage extends Model
         return $this->belongsTo('App\Models\Language');
     }
 
+    public function ability()
+    {
+        return $this->hasMany('App\Models\Ability');
+    }
+
     public function trace()
     {
         return $this->hasMany('App\Models\Trace');
-    }
-
-    public function skill()
-    {
-        return $this->hasMany('App\Models\Skill');
     }
 }

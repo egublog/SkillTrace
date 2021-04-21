@@ -20,7 +20,7 @@ class TalkController extends Controller
 
         $talkLists = Talk::where('user_id', $myId)->orWhere('user_to_id', $myId)->orderBy('created_at', 'desc')->get();
 
-        $talkingUserId = [];
+        $talkingUsersId = [];
 
         foreach ($talkLists as $talkList) {
             if ($talkList->user_id != $myId) {
@@ -31,18 +31,17 @@ class TalkController extends Controller
             }
         }
 
-        if($talkingUserId != null) {
+        if ($talkingUsersId != null) {
             $talkingUsersId = array_unique($talkingUsersId);
         }
 
         $talkingUsers = [];
 
-        if($talkingUserId != null) {
+        if ($talkingUsersId != null) {
 
             foreach ($talkingUsersId as $talkingUserId) {
                 $talkingUsers[] = User::find($talkingUserId);
             }
-
         }
 
         return view('MyService.talk', compact('myId', 'talkingUsers'));
@@ -52,13 +51,13 @@ class TalkController extends Controller
     {
 
         $myId = Auth::id();
-        $searchResultName = $request->input('name');
+        $searchResultName = $request->input('talk_search_name');
 
-        $followingAccounts = SearchFollowing::search($myId, $searchResultName)->get();
-
-
+        // $followingAccounts = SearchFollowing::search($myId, $searchResultName)->get();
 
         $talkLists = Talk::where('user_id', $myId)->orWhere('user_to_id', $myId)->orderBy('created_at', 'desc')->get();
+
+        $talkingUsersId = [];
 
         foreach ($talkLists as $talkList) {
             if ($talkList->user_id != $myId) {
@@ -69,7 +68,9 @@ class TalkController extends Controller
             }
         }
 
-        $talkingUsersId = array_unique($talkingUsersId);
+        if ($talkingUsersId != null) {
+            $talkingUsersId = array_unique($talkingUsersId);
+        }
 
         $talkingUsers = [];
 
@@ -80,6 +81,8 @@ class TalkController extends Controller
                 $talkingUsers[] = $talkingUser;
             }
         }
+
+        $request->flash();
 
         return view('MyService.talk', compact('myId', 'talkingUsers'));
     }

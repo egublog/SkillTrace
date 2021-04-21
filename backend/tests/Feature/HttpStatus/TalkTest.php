@@ -33,7 +33,7 @@ class TalkTest extends TestCase
 
         $this->actingAs($user)
         ->get(route('talks.search'))
-        ->assertStatus(302);
+        ->assertOk();
     }
 
     function testTalkShow()
