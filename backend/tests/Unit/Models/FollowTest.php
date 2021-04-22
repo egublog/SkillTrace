@@ -11,14 +11,14 @@ class FollowTest extends TestCase
     /**@test followのリレーション*/
     function testFollowUserFollower()
     {
-        $follow = factory(Follow::class)->create();
+        $follow = factory(Follow::class)->make();
 
         $this->assertInstanceOf(User::class, $follow->user_follower);
     }
 
     function testFollowUserFollowing()
     {
-        $follow = factory(Follow::class)->create();
+        $follow = factory(Follow::class)->make();
 
         $this->assertInstanceOf(User::class, $follow->user_following);
     }

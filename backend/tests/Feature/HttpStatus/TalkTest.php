@@ -9,6 +9,9 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Talk;
 
+/**
+ * @see \App\Http\Controllers\TalkController
+ */
 
 class TalkTest extends TestCase
 {

@@ -11,7 +11,7 @@ class AbilityTest extends TestCase
     /**@test abilityのリレーション*/
     function testAbilityUserLanguage()
     {
-        $ability = factory(Ability::class)->create();
+        $ability = factory(Ability::class)->make();
 
         $this->assertInstanceOf(UserLanguage::class, $ability->userLanguage);
     }

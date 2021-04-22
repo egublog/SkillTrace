@@ -12,6 +12,10 @@ use App\Models\Trace;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * @see \App\Http\Controllers\SkillTraceController
+ */
+
 class SkillTraceTest extends TestCase
 {
     /**

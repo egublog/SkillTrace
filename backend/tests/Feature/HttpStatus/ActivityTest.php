@@ -9,14 +9,12 @@ use Tests\TestCase;
 use App\Models\User;
 
 
+/**p
+ * @see \App\Http\Controllers\ActivityController
+ */
+
 class ActivityTest extends TestCase
 {
-    /**
-     * Activity@__invoke
-     *
-     * @return void
-     */
-
     function testActivity()
     {
         $user = factory(User::class)->create();

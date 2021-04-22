@@ -12,14 +12,14 @@ class TraceTest extends TestCase
     /**@test traceのリレーション*/
     function testTraceCategory()
     {
-        $trace = factory(Trace::class)->create();
+        $trace = factory(Trace::class)->make();
 
         $this->assertInstanceOf(Category::class, $trace->category);
     }
 
     function testTraceUserLanguage()
     {
-        $trace = factory(Trace::class)->create();
+        $trace = factory(Trace::class)->make();
 
         $this->assertInstanceOf(UserLanguage::class, $trace->userLanguage);
     }

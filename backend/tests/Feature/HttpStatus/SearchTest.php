@@ -7,6 +7,10 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 
+/**
+ * @see \App\Http\Controllers\SearchController
+ */
+
 class SearchTest extends TestCase
 {
     /**

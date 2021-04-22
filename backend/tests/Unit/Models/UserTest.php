@@ -15,75 +15,75 @@ class UserTest extends TestCase
     /**@test userのリレーション*/
     function testUserArea()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(Area::class, $user->area);
     }
 
     function testUserHistory()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(History::class, $user->history);
     }
 
     function testUserLanguage()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(Language::class, $user->language);
     }
 
     function testUserLanguages()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(Collection::class, $user->languages);
     }
 
     function testUserUserLanguages()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(Collection::class, $user->userLanguages);
     }
 
     function testUserFollow()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(Collection::class, $user->follow);
     }
 
     function testUserFollowTo()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(Collection::class, $user->follow_to);
     }
 
     function testUserTalk()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(Collection::class, $user->talk);
     }
 
     function testUserTalkTo()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(Collection::class, $user->talk_to);
     }
     function testUserFollows()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(Collection::class, $user->follows);
     }
     function testUserFollowsTo()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->make();
 
         $this->assertInstanceOf(Collection::class, $user->follow_to);
     }

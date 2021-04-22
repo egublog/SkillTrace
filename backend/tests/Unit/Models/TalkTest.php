@@ -11,14 +11,14 @@ class TalkTest extends TestCase
     /**@test talkのリレーション*/
     function testTalkUserFollower()
     {
-        $talk = factory(Talk::class)->create();
+        $talk = factory(Talk::class)->make();
 
         $this->assertInstanceOf(User::class, $talk->user_follower);
     }
 
     function testTalkUserFollowing()
     {
-        $talk = factory(Talk::class)->create();
+        $talk = factory(Talk::class)->make();
 
         $this->assertInstanceOf(User::class, $talk->user_following);
     }

@@ -11,7 +11,7 @@ class HistoryTest extends TestCase
     /**@test historyのリレーション*/
     function testHistoryUsers()
     {
-        $history = factory(History::class)->create();
+        $history = factory(History::class)->make();
 
         $this->assertInstanceOf(Collection::class, $history->users);
     }

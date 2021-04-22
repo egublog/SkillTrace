@@ -11,7 +11,7 @@ class AreaTest extends TestCase
     /**@test areaのリレーション*/
     function testAreaUsers()
     {
-        $area = factory(Area::class)->create();
+        $area = factory(Area::class)->make();
 
         $this->assertInstanceOf(Collection::class, $area->users);
     }

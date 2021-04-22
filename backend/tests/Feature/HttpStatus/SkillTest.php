@@ -10,7 +10,9 @@ use App\Models\User;
 use App\Models\Language;
 use App\Models\UserLanguage;
 
-
+/**
+ * @see \App\Http\Controllers\SkillController
+ */
 class SkillTest extends TestCase
 {
     /**

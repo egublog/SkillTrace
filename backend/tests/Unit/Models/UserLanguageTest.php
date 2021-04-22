@@ -13,28 +13,28 @@ class UserLanguageTest extends TestCase
     /**@test userLanguageのリレーション*/
     function testUserLanguageUser()
     {
-        $userLanguage = factory(UserLanguage::class)->create();
+        $userLanguage = factory(UserLanguage::class)->make();
 
         $this->assertInstanceOf(User::class, $userLanguage->user);
     }
 
     function testUserLanguageLanguage()
     {
-        $userLanguage = factory(UserLanguage::class)->create();
+        $userLanguage = factory(UserLanguage::class)->make();
 
         $this->assertInstanceOf(Language::class, $userLanguage->language);
     }
 
     function testUserLanguageAbility()
     {
-        $userLanguage = factory(UserLanguage::class)->create();
+        $userLanguage = factory(UserLanguage::class)->make();
 
         $this->assertInstanceOf(Collection::class, $userLanguage->ability);
     }
 
     function testUserLanguageTrace()
     {
-        $userLanguage = factory(UserLanguage::class)->create();
+        $userLanguage = factory(UserLanguage::class)->make();
 
         $this->assertInstanceOf(Collection::class, $userLanguage->trace);
     }

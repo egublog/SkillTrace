@@ -8,6 +8,10 @@ use Tests\TestCase;
 
 use App\Models\User;
 
+/**
+ * @see \App\Http\Controllers\HomeController
+ */
+
 class HomeTest extends TestCase
 {
     /**

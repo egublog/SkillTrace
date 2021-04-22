@@ -11,7 +11,7 @@ class CategoryTest extends TestCase
     /**@test categoryのリレーション*/
     function testCategoryTraces()
     {
-        $category = factory(Category::class)->create();
+        $category = factory(Category::class)->make();
 
         $this->assertInstanceOf(Collection::class, $category->traces);
     }

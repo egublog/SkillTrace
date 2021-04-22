@@ -9,6 +9,11 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\UserLanguage;
 
+/**
+ * @see \App\Http\Controllers\SkillStar
+ * Controller
+ */
+
 class SkillStarTest extends TestCase
 {
     /**

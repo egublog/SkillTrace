@@ -8,6 +8,9 @@ use Tests\TestCase;
 
 use App\Models\User;
 
+/**
+ * @see \App\Http\Controllers\FollowingController
+ */
 
 class FollowingTest extends TestCase
 {

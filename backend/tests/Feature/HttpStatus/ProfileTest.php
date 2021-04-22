@@ -10,6 +10,9 @@ use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * @see \App\Http\Controllers\ProfileController
+ */
 
 class ProfileTest extends TestCase
 {
