@@ -21,7 +21,7 @@ class SkillController extends Controller
 
         $myId = Auth::id();
 
-        $theSkill = UserLanguage::where('language_id', $skillId)->where('user_id', $userId)->first();
+        $theSkill = UserLanguage::getLanguage($userId, $skillId)->first();
 
         $userLanguageId = $theSkill->id;
 

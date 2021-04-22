@@ -28,4 +28,20 @@ class UserLanguage extends Model
     {
         return $this->hasMany('App\Models\Trace');
     }
+
+    /**
+     * scope
+     *
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+
+     public function scopeGetLanguageAsc($query, $userId)
+     {
+        return $query->where('user_id', $userId)->with('language')->orderBy('language_id', 'asc');
+     }
+
+     public function scopeGetLanguage($query, $userId, $skillId)
+     {
+        return $query->where('user_id', $userId)->where('language_id', $skillId);
+     }
 }

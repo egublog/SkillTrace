@@ -39,6 +39,11 @@ class Talk extends Model
         ->where('user_to_id', $myId);
     }
 
+    public function scopeTalkingListLatest($query, $myId)
+    {
+        return $query->where('user_id', $myId)->orWhere('user_to_id', $myId)->latest();
+    }
+
     /**
      * 既読処理
      *

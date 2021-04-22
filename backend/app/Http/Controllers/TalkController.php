@@ -18,7 +18,7 @@ class TalkController extends Controller
     {
         $myId = Auth::id();
 
-        $talkLists = Talk::where('user_id', $myId)->orWhere('user_to_id', $myId)->orderBy('created_at', 'desc')->get();
+        $talkLists = Talk::talkingListLatest($myId)->get();
 
         $talkingUsersId = [];
 
@@ -31,14 +31,13 @@ class TalkController extends Controller
             }
         }
 
-        if ($talkingUsersId != null) {
+        if ($talkingUsersId) {
             $talkingUsersId = array_unique($talkingUsersId);
         }
 
         $talkingUsers = [];
 
-        if ($talkingUsersId != null) {
-
+        if ($talkingUsersId) {
             foreach ($talkingUsersId as $talkingUserId) {
                 $talkingUsers[] = User::find($talkingUserId);
             }
@@ -53,9 +52,7 @@ class TalkController extends Controller
         $myId = Auth::id();
         $searchResultName = $request->input('talk_search_name');
 
-        // $followingAccounts = SearchFollowing::search($myId, $searchResultName)->get();
-
-        $talkLists = Talk::where('user_id', $myId)->orWhere('user_to_id', $myId)->orderBy('created_at', 'desc')->get();
+        $talkLists = Talk::talkingListLatest($myId)->get();
 
         $talkingUsersId = [];
 
@@ -68,7 +65,7 @@ class TalkController extends Controller
             }
         }
 
-        if ($talkingUsersId != null) {
+        if ($talkingUsersId) {
             $talkingUsersId = array_unique($talkingUsersId);
         }
 
@@ -93,7 +90,7 @@ class TalkController extends Controller
 
         $myId = Auth::id();
 
-        $talkLists = Talk::where('user_id', $myId)->orWhere('user_to_id', $myId)->orderBy('created_at', 'desc')->get();
+        $talkLists = Talk::talkingListLatest($myId)->get();
 
         foreach ($talkLists as $talkList) {
             if ($talkList->user_id != $myId) {
