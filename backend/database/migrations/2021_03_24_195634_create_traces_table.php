@@ -13,10 +13,6 @@ class CreateTracesTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('traces')) {
-            // テーブルが存在していればリターン
-            return;
-        }
         Schema::create('traces', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_language_id');

@@ -13,10 +13,6 @@ class AddLanguageIdUsersTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('add_language_id_users')) {
-            // テーブルが存在していればリターン
-            return;
-        }
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('language_id')->nullable();
 

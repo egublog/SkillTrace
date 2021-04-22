@@ -13,11 +13,6 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('users')) {
-            // テーブルが存在していればリターン
-            return;
-        }
-        
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -27,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
 
             $table->string('img')->nullable();
-            $table->unsignedBigInteger('age')->nullable();
+            $table->unsignedTinyInteger('age')->nullable();
 
             $table->timestamps();
         });

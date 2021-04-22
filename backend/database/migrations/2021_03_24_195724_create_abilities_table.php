@@ -13,10 +13,6 @@ class CreateAbilitiesTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('abilities')) {
-            // テーブルが存在していればリターン
-            return;
-        }
         Schema::create('abilities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_language_id');

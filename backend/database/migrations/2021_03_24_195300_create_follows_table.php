@@ -13,10 +13,6 @@ class CreateFollowsTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('follows')) {
-            // テーブルが存在していればリターン
-            return;
-        }
         Schema::create('follows', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');

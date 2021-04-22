@@ -13,10 +13,6 @@ class CreateTalksTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('talks')) {
-            // テーブルが存在していればリターン
-            return;
-        }
         Schema::create('talks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
