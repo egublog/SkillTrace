@@ -65,8 +65,15 @@ class Talk extends Model
         }
     }
 
-    public static function getUniqueId($myId, $talkLists)
+    /**
+     * 重複をなくしてリストを取る
+     *
+     * @return array
+     */
+
+    public static function getTalkingList($myId, $talkLists)
     {
+        $talkingUsers = [];
         $talkingUsersId = [];
 
         foreach ($talkLists as $talkList) {
@@ -82,6 +89,31 @@ class Talk extends Model
             $talkingUsersId = array_unique($talkingUsersId);
         }
 
-        return $talkingUsersId;
+        if ($talkingUsersId) {
+            foreach ($talkingUsersId as $talkingUserId) {
+                $talkingUsers[] = User::find($talkingUserId);
+            }
+        }
+
+        return $talkingUsers;
+    }
+
+    /**
+     * search
+     *
+     * @return array
+     */
+
+    public static function search($talkingUsersBeforeSearch, $searchResultName) 
+    {
+        $talkingUsers = [];
+
+        foreach($talkingUsersBeforeSearch as $talkingUser) {
+            if(str_contains($talkingUser->name, $searchResultName)) {
+                $talkingUsers[] = $talkingUser;
+            }
+        }
+
+        return $talkingUsers;
     }
 }

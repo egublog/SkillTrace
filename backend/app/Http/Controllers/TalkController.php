@@ -20,37 +20,21 @@ class TalkController extends Controller
 
         $talkLists = Talk::talkingListLatest($myId)->get();
 
-        $talkingUsersId = Talk::getUniqueId($myId, $talkLists);
-
-        $talkingUsers = [];
-
-        foreach ($talkingUsersId as $talkingUserId) {
-            $talkingUsers[] = User::find($talkingUserId);
-        }
+        $talkingUsers = Talk::getTalkingList($myId, $talkLists);
 
         return view('MyService.talk', compact('myId', 'talkingUsers'));
     }
 
     public function search(SearchTalkUserRequest $request)
     {
-
         $myId = Auth::id();
         $searchResultName = $request->input('talk_search_name');
 
         $talkLists = Talk::talkingListLatest($myId)->get();
 
-        $talkingUsersId = Talk::getUniqueId($myId, $talkLists);
+        $talkingUsersBeforeSearch = Talk::getTalkingList($myId, $talkLists);
 
-        $talkingUsers = [];
-
-
-        foreach ($talkingUsersId as $talkingUserId) {
-            $talkingUser = User::find($talkingUserId);
-
-            if (str_contains($talkingUser->name, $searchResultName)) {
-                $talkingUsers[] = $talkingUser;
-            }
-        }
+        $talkingUsers = Talk::search($talkingUsersBeforeSearch, $searchResultName);
 
         $request->flash();
 
@@ -65,16 +49,11 @@ class TalkController extends Controller
 
         $talkLists = Talk::talkingListLatest($myId)->get();
 
-        $talkingUsersId = Talk::getUniqueId($myId, $talkLists);
-
-        $talkingUsers = [];
-
-        foreach ($talkingUsersId as $talkingUserId) {
-            $talkingUsers[] = User::find($talkingUserId);
-        }
+        $talkingUsers = Talk::getTalkingList($myId, $talkLists);
 
         $yetColumns = Talk::talking($theFriendId)->talked($myId)->get();
         Talk::readCheck($yetColumns);
+
         $talks = Talk::talk($myId, $theFriendId)->get();
 
         return view('MyService.talk-show', compact('myId', 'theFriendId', 'talkingUsers', 'theFriendAccount', 'talks'));
