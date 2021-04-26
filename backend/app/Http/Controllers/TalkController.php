@@ -20,27 +20,12 @@ class TalkController extends Controller
 
         $talkLists = Talk::talkingListLatest($myId)->get();
 
-        $talkingUsersId = [];
-
-        foreach ($talkLists as $talkList) {
-            if ($talkList->user_id != $myId) {
-                $talkingUsersId[] = $talkList->user_id;
-            }
-            if ($talkList->user_to_id != $myId) {
-                $talkingUsersId[] = $talkList->user_to_id;
-            }
-        }
-
-        if ($talkingUsersId) {
-            $talkingUsersId = array_unique($talkingUsersId);
-        }
+        $talkingUsersId = Talk::getUniqueId($myId, $talkLists);
 
         $talkingUsers = [];
 
-        if ($talkingUsersId) {
-            foreach ($talkingUsersId as $talkingUserId) {
-                $talkingUsers[] = User::find($talkingUserId);
-            }
+        foreach ($talkingUsersId as $talkingUserId) {
+            $talkingUsers[] = User::find($talkingUserId);
         }
 
         return view('MyService.talk', compact('myId', 'talkingUsers'));
@@ -54,22 +39,10 @@ class TalkController extends Controller
 
         $talkLists = Talk::talkingListLatest($myId)->get();
 
-        $talkingUsersId = [];
-
-        foreach ($talkLists as $talkList) {
-            if ($talkList->user_id != $myId) {
-                $talkingUsersId[] = $talkList->user_id;
-            }
-            if ($talkList->user_to_id != $myId) {
-                $talkingUsersId[] = $talkList->user_to_id;
-            }
-        }
-
-        if ($talkingUsersId) {
-            $talkingUsersId = array_unique($talkingUsersId);
-        }
+        $talkingUsersId = Talk::getUniqueId($myId, $talkLists);
 
         $talkingUsers = [];
+
 
         foreach ($talkingUsersId as $talkingUserId) {
             $talkingUser = User::find($talkingUserId);
@@ -92,16 +65,9 @@ class TalkController extends Controller
 
         $talkLists = Talk::talkingListLatest($myId)->get();
 
-        foreach ($talkLists as $talkList) {
-            if ($talkList->user_id != $myId) {
-                $talkingUsersId[] = $talkList->user_id;
-            }
-            if ($talkList->user_to_id != $myId) {
-                $talkingUsersId[] = $talkList->user_to_id;
-            }
-        }
+        $talkingUsersId = Talk::getUniqueId($myId, $talkLists);
 
-        $talkingUsersId = array_unique($talkingUsersId);
+        $talkingUsers = [];
 
         foreach ($talkingUsersId as $talkingUserId) {
             $talkingUsers[] = User::find($talkingUserId);
@@ -109,7 +75,6 @@ class TalkController extends Controller
 
         $yetColumns = Talk::talking($theFriendId)->talked($myId)->get();
         Talk::readCheck($yetColumns);
-
         $talks = Talk::talk($myId, $theFriendId)->get();
 
         return view('MyService.talk-show', compact('myId', 'theFriendId', 'talkingUsers', 'theFriendAccount', 'talks'));

@@ -35,7 +35,7 @@ class TalkTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
-        ->get(route('talks.search'))
+        ->get(route('talks.search', ['talk_search_name' => 'aaa']))
         ->assertOk();
     }
 

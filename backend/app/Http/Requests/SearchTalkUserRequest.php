@@ -24,7 +24,7 @@ class SearchTalkUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'talk_search_name' => 'required'
         ];
     }
 
@@ -37,7 +37,7 @@ class SearchTalkUserRequest extends FormRequest
     public function messages()
     {
         return [
-            "name.required" => "メッセージが入力されていません。"
+            "talk_search_name.required" => "メッセージが入力されていません。"
         ];
     }
 }

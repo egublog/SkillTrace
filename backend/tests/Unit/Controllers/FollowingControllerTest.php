@@ -64,16 +64,17 @@ class FollowingControllerTest extends TestCase
             ->assertSee('</follow-button>');
     }
 
-    // function test()
-    // {
-    //     $user1 = factory(User::class)->create();
-    //     $user2 = factory(User::class)->create();
+    function test()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
 
-    //     $this->actingAs($user1)
-    //         ->post('users/' . $user2->id . '/follow')
-    //         ->assertDatabaseHas('follow', [
-    //             'user_id' => $user1->id,
-    //             'user_to_id' => $user2->id
-    //         ]);
-    // }
+        $this->actingAs($user1)
+            ->post('users/' . $user2->id . '/follow');
+
+        $this->assertDatabaseHas('follows', [
+                'user_id' => $user1->id,
+                'user_to_id' => $user2->id
+            ]);
+    }
 }

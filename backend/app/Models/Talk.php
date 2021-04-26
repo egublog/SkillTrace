@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Talk extends Model
 {
@@ -35,13 +36,17 @@ class Talk extends Model
     {
         return $query->where('user_id', $myId)
         ->where('user_to_id', $theFriendId)
-        ->orWhere('user_id', $theFriendId)
-        ->where('user_to_id', $myId);
+        ->orWhere(function($q) use ($theFriendId, $myId) {
+            $q->where('user_id', $theFriendId)
+                ->where('user_to_id', $myId);
+        });
     }
 
     public function scopeTalkingListLatest($query, $myId)
     {
-        return $query->where('user_id', $myId)->orWhere('user_to_id', $myId)->latest();
+        return $query->where('user_id', $myId)->orWhere(function($q) use ($myId) {
+            $q->where('user_to_id', $myId);
+        })->latest();
     }
 
     /**
@@ -58,5 +63,25 @@ class Talk extends Model
                 $yetColumn->save();
             }
         }
+    }
+
+    public static function getUniqueId($myId, $talkLists)
+    {
+        $talkingUsersId = [];
+
+        foreach ($talkLists as $talkList) {
+            if ($talkList->user_id != $myId) {
+                $talkingUsersId[] = $talkList->user_id;
+            }
+            if ($talkList->user_to_id != $myId) {
+                $talkingUsersId[] = $talkList->user_to_id;
+            }
+        }
+
+        if ($talkingUsersId) {
+            $talkingUsersId = array_unique($talkingUsersId);
+        }
+
+        return $talkingUsersId;
     }
 }
