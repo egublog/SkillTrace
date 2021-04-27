@@ -9,7 +9,12 @@ use App\Models\UserLanguage;
 
 class TraceTest extends TestCase
 {
-    /**@test traceのリレーション*/
+    /**
+     * traceのリレーション
+     *
+     * @test
+     */
+    
     function testTraceCategory()
     {
         $trace = factory(Trace::class)->make();

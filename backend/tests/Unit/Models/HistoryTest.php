@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class HistoryTest extends TestCase
 {
-    /**@test historyのリレーション*/
+    /**
+     * historyのリレーション
+     *
+     * @test
+     */
     function testHistoryUsers()
     {
         $history = factory(History::class)->make();

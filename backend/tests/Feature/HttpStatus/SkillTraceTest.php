@@ -21,10 +21,10 @@ class SkillTraceTest extends TestCase
     /**
      * A basic feature test example.
      *
-     * @return void
+     * @test
      */
 
-    function testSkillTraceCreate() 
+    function testSkillTraceCreate()
     {
         $user = factory(User::class)->create();
         $userLanguage = factory(UserLanguage::class)->create([
@@ -32,11 +32,11 @@ class SkillTraceTest extends TestCase
         ]);
 
         $this->actingAs($user)
-        ->get(route('skill_traces.create', ['userLanguageId' => $userLanguage->id]))
-        ->assertOk();
+            ->get(route('skill_traces.create', ['userLanguageId' => $userLanguage->id]))
+            ->assertOk();
     }
 
-    function testSkillTraceStore() 
+    function testSkillTraceStore()
     {
         $user = factory(User::class)->create();
         $userLanguage = factory(UserLanguage::class)->create([
@@ -50,11 +50,11 @@ class SkillTraceTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.jpg');
 
         $this->actingAs($user)
-        ->post(route('skill_traces.store', ['userLanguageId' => $userLanguage->id]), ['trace_img' => $file, 'trace' => $trace->content, 'category' => $trace->category_id])
-        ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
+            ->post(route('skill_traces.store', ['userLanguageId' => $userLanguage->id]), ['trace_img' => $file, 'trace' => $trace->content, 'category' => $trace->category_id])
+            ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
     }
 
-    function testSkillTraceShow() 
+    function testSkillTraceShow()
     {
         $user = factory(User::class)->create();
         $userLanguage = factory(UserLanguage::class)->create([
@@ -65,11 +65,11 @@ class SkillTraceTest extends TestCase
         ]);
 
         $this->actingAs($user)
-        ->get(route('skill_traces.show', ['userLanguageId' => $userLanguage->id, 'traceId' => $trace->id]))
-        ->assertOk();
+            ->get(route('skill_traces.show', ['userLanguageId' => $userLanguage->id, 'traceId' => $trace->id]))
+            ->assertOk();
     }
 
-    function testSkillTraceUpdate() 
+    function testSkillTraceUpdate()
     {
         $user = factory(User::class)->create();
         $userLanguage = factory(UserLanguage::class)->create([
@@ -85,11 +85,11 @@ class SkillTraceTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.jpg');
 
         $this->actingAs($user)
-        ->put(route('skill_traces.update', ['userLanguageId' => $userLanguage->id, 'traceId' => $trace->id]), ['trace_img' => $file, 'trace' => $trace->content, 'category_id' => $trace->category_id])
-        ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
+            ->put(route('skill_traces.update', ['userLanguageId' => $userLanguage->id, 'traceId' => $trace->id]), ['trace_img' => $file, 'trace' => $trace->content, 'category_id' => $trace->category_id])
+            ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
     }
 
-    function testSkillTraceDestroy() 
+    function testSkillTraceDestroy()
     {
         $user = factory(User::class)->create();
         $userLanguage = factory(UserLanguage::class)->create([
@@ -100,7 +100,7 @@ class SkillTraceTest extends TestCase
         ]);
 
         $this->actingAs($user)
-        ->delete(route('skill_traces.destroy', ['userLanguageId' => $userLanguage->id, 'traceId' => $trace->id]))
-        ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
+            ->delete(route('skill_traces.destroy', ['userLanguageId' => $userLanguage->id, 'traceId' => $trace->id]))
+            ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
     }
 }

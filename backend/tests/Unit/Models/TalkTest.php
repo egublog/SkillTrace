@@ -8,7 +8,11 @@ use App\Models\User;
 
 class TalkTest extends TestCase
 {
-    /**@test talkのリレーション*/
+    /**
+     * talkのリレーション
+     *
+     * @test
+     */
     function testTalkUserFollower()
     {
         $talk = factory(Talk::class)->make();

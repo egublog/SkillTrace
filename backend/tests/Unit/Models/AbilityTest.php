@@ -8,7 +8,11 @@ use App\Models\UserLanguage;
 
 class AbilityTest extends TestCase
 {
-    /**@test abilityのリレーション*/
+    /**
+     * abilityのリレーション
+     *
+     * @test
+     */
     function testAbilityUserLanguage()
     {
         $ability = factory(Ability::class)->make();

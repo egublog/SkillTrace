@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class AreaTest extends TestCase
 {
-    /**@test areaのリレーション*/
+    /**
+     * areaのリレーション
+     *
+     * @test
+     */
     function testAreaUsers()
     {
         $area = factory(Area::class)->make();

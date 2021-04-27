@@ -9,7 +9,7 @@ use Tests\TestCase;
 use App\Models\User;
 
 
-/**p
+/**
  * @see \App\Http\Controllers\ActivityController
  */
 

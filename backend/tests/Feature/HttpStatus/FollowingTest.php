@@ -17,7 +17,7 @@ class FollowingTest extends TestCase
     /**
      * Following@index
      *
-     * @return void
+     * @test
      */
 
     function testFollowingIndex()

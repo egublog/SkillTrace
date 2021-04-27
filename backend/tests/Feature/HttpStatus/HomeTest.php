@@ -17,10 +17,10 @@ class HomeTest extends TestCase
     /**
      * HomeController
      *
-     * @return void
+     * @test
      */
 
-    public function testHome()
+    function testHome()
     {
         $response = $this->get('/home');
 

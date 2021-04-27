@@ -12,7 +12,7 @@ class HomeControllerTest extends TestCase
      * homeで自分の情報が表示される
      * 
      * @test 
-    */
+     */
 
     function testHome()
     {

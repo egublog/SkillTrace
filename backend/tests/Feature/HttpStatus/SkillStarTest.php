@@ -19,7 +19,7 @@ class SkillStarTest extends TestCase
     /**
      * A basic feature test example.
      *
-     * @return void
+     * @test
      */
 
     function testSkillStarCreate()

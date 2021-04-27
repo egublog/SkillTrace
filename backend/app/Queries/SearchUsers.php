@@ -16,16 +16,16 @@ final class SearchUsers
         return $query->where('name', 'like', "%$name%");
       })
       ->when($age, function ($query) use ($age) {
-        return $query->where('age', 'like', "%$age%");
+        return $query->where('age', $age);
       })
       ->when($areId, function ($query) use ($areId) {
-        return $query->where('area_id', 'like', "%$areId%");
+        return $query->where('area_id', $areId);
       })
       ->when($historyId, function ($query) use ($historyId) {
-        return $query->where('history_id', 'like', "%$historyId%");
+        return $query->where('history_id', $historyId);
       })
       ->when($languageId, function ($query) use ($languageId) {
-        return $query->where('language_id', 'like', "%$languageId%");
+        return $query->where('language_id', $languageId);
       });
   }
 }

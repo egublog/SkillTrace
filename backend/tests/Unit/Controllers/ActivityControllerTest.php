@@ -41,5 +41,5 @@ class ActivityControllerTest extends TestCase
             ->assertSee($user3->area->area)
             ->assertSee($user3->history->history)
             ->assertSee($user3->language->language);
-        }
+    }
 }

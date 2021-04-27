@@ -16,10 +16,10 @@ class SearchTest extends TestCase
     /**
      * A basic feature test example.
      *
-     * @return void
+     * @test
      */
 
-    public function testSearchIndex()
+    function testSearchIndex()
     {
         $user = factory(User::class)->create();
 
@@ -28,7 +28,7 @@ class SearchTest extends TestCase
             ->assertOk();
     }
 
-    public function testSearchSearch()
+    function testSearchSearch()
     {
         $user = factory(User::class)->create();
 

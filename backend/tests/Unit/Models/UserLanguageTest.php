@@ -10,7 +10,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserLanguageTest extends TestCase
 {
-    /**@test userLanguageのリレーション*/
+    /**
+     * userLanguageのリレーション
+     *
+     * @test
+     */
+    
     function testUserLanguageUser()
     {
         $userLanguage = factory(UserLanguage::class)->make();

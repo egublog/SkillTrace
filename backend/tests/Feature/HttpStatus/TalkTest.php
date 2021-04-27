@@ -18,7 +18,7 @@ class TalkTest extends TestCase
     /**
      * A basic feature test example.
      *
-     * @return void
+     * @test
      */
 
     function testTalkIndex()
@@ -26,8 +26,8 @@ class TalkTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
-        ->get(route('talks.index'))
-        ->assertOk();
+            ->get(route('talks.index'))
+            ->assertOk();
     }
 
     function testTalkSearch()
@@ -35,8 +35,8 @@ class TalkTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
-        ->get(route('talks.search', ['talk_search_name' => 'aaa']))
-        ->assertOk();
+            ->get(route('talks.search', ['talk_search_name' => 'aaa']))
+            ->assertOk();
     }
 
     function testTalkShow()
@@ -50,8 +50,8 @@ class TalkTest extends TestCase
         ]);
 
         $this->actingAs($user1)
-        ->get(route('talks.show', ['theFriendId' => $user2->id]))
-        ->assertOk();
+            ->get(route('talks.show', ['theFriendId' => $user2->id]))
+            ->assertOk();
     }
 
     function testTalkStore()
@@ -65,7 +65,7 @@ class TalkTest extends TestCase
         ]);
 
         $this->actingAs($user1)
-        ->post(route('talks.store', ['theFriendId' => $user2->id]), ['message' => $talk->talk_body])
-        ->assertRedirect(route('talks.show', ['theFriendId' => $user2->id]));
+            ->post(route('talks.store', ['theFriendId' => $user2->id]), ['message' => $talk->talk_body])
+            ->assertRedirect(route('talks.show', ['theFriendId' => $user2->id]));
     }
 }

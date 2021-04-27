@@ -8,7 +8,11 @@ use App\Models\User;
 
 class FollowTest extends TestCase
 {
-    /**@test followのリレーション*/
+    /**
+     * followのリレーション
+     *
+     * @test
+     */
     function testFollowUserFollower()
     {
         $follow = factory(Follow::class)->make();

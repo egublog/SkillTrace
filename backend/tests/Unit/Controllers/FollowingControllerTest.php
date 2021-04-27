@@ -48,7 +48,6 @@ class FollowingControllerTest extends TestCase
      * 
      * @test
      */
-
     function testFollow()
     {
         $user1 = factory(User::class)->create();
@@ -63,7 +62,6 @@ class FollowingControllerTest extends TestCase
             ->get(route('home.home', ['userId' => $user2->id]))
             ->assertSee('</follow-button>');
     }
-
 
     /**
      * follow,unfollowしたら、DataBaseに保存、削除される

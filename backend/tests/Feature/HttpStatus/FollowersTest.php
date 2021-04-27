@@ -17,7 +17,7 @@ class FollowersTest extends TestCase
     /**
      * Followers@index
      *
-     * @return void
+     * @test
      */
 
     function testFollowers()

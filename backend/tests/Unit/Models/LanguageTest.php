@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class LanguageTest extends TestCase
 {
-    /**@test languageのリレーション*/
+    /**
+     * languageのリレーション
+     *
+     * @test
+     */
     function testLanguageLanguages()
     {
         $language = factory(Language::class)->make();

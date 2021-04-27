@@ -9,16 +9,16 @@ use Tests\TestCase;
 class TalkControllerTest extends TestCase
 {
     /**
-     * 
+     * talkしているUserが表示される
      *
      * @test
      */
-    public function testExample()
+    function testTalk()
     {
         $user1 = factory(User::class)->create();
         $user2 = factory(User::class)->create();
         $user3 = factory(User::class)->create();
-        
+
         factory(Talk::class)->create([
             'user_id' => $user1->id,
             'user_to_id' => $user2->id
@@ -29,18 +29,24 @@ class TalkControllerTest extends TestCase
         ]);
 
         $this->actingAs($user1)
-        ->get(route('talks.index'))
-        ->assertSee($user2->name)
-        ->assertSee($user2->age)
-        ->assertSee($user2->area->area)
-        ->assertSee($user2->history->history)
-        ->assertSee($user2->language->language)
-        ->assertSee($user3->name)
-        ->assertSee($user3->age)
-        ->assertSee($user3->area->area)
-        ->assertSee($user3->history->history)
-        ->assertSee($user3->language->language);
+            ->get(route('talks.index'))
+            ->assertSee($user2->name)
+            ->assertSee($user2->age)
+            ->assertSee($user2->area->area)
+            ->assertSee($user2->history->history)
+            ->assertSee($user2->language->language)
+            ->assertSee($user3->name)
+            ->assertSee($user3->age)
+            ->assertSee($user3->area->area)
+            ->assertSee($user3->history->history)
+            ->assertSee($user3->language->language);
     }
+
+    /**
+     * search処理で指定したUserが表示される
+     *
+     * @test
+     */
 
     function testTalkSearch()
     {
@@ -54,7 +60,7 @@ class TalkControllerTest extends TestCase
         $user4 = factory(User::class)->create([
             'name' => '渡辺海星'
         ]);
-        
+
         factory(Talk::class)->create([
             'user_id' => $user1->id,
             'user_to_id' => $user2->id
@@ -70,30 +76,36 @@ class TalkControllerTest extends TestCase
 
 
         $this->actingAs($user1)
-        ->get(route('talks.search', ['talk_search_name' => '田']))
-        ->assertSee($user2->name)
-        ->assertSee($user3->name)
-        ->assertDontSee($user4->name);
+            ->get(route('talks.search', ['talk_search_name' => '田']))
+            ->assertSee($user2->name)
+            ->assertSee($user3->name)
+            ->assertDontSee($user4->name);
 
         $this->actingAs($user1)
-        ->get(route('talks.search', ['talk_search_name' => '田中']))
-        ->assertSee($user2->name)
-        ->assertDontSee($user3->name)
-        ->assertDontSee($user4->name);
+            ->get(route('talks.search', ['talk_search_name' => '田中']))
+            ->assertSee($user2->name)
+            ->assertDontSee($user3->name)
+            ->assertDontSee($user4->name);
 
         $this->actingAs($user1)
-        ->get(route('talks.search', ['talk_search_name' => 'あ']))
-        ->assertDontSee($user2->name)
-        ->assertDontSee($user3->name)
-        ->assertDontSee($user4->name);
+            ->get(route('talks.search', ['talk_search_name' => 'あ']))
+            ->assertDontSee($user2->name)
+            ->assertDontSee($user3->name)
+            ->assertDontSee($user4->name);
     }
+
+    /**
+     * talk_showの左側の一覧が表示されるか
+     *
+     * @test
+     */
 
     function testShow()
     {
         $user1 = factory(User::class)->create();
         $user2 = factory(User::class)->create();
         $user3 = factory(User::class)->create();
-        
+
         $talk1 = factory(Talk::class)->create([
             'user_id' => $user1->id,
             'user_to_id' => $user2->id
@@ -104,17 +116,23 @@ class TalkControllerTest extends TestCase
         ]);
 
         $this->actingAs($user1)
-        ->get(route('talks.show', ['theFriendId' => $user2->id]))
-        ->assertSee($user2->name)
-        ->assertSee($user3->name)
-        ->assertSee($talk1->talk_body);
+            ->get(route('talks.show', ['theFriendId' => $user2->id]))
+            ->assertSee($user2->name)
+            ->assertSee($user3->name)
+            ->assertSee($talk1->talk_body);
 
         $this->actingAs($user1)
-        ->get(route('talks.show', ['theFriendId' => $user3->id]))
-        ->assertSee($user2->name)
-        ->assertSee($user3->name)
-        ->assertSee($talk2->talk_body);
+            ->get(route('talks.show', ['theFriendId' => $user3->id]))
+            ->assertSee($user2->name)
+            ->assertSee($user3->name)
+            ->assertSee($talk2->talk_body);
     }
+
+    /**
+     * talk内容がDBに反映される
+     *
+     * @test
+     */
 
     function testTalkDatabase()
     {
@@ -122,7 +140,7 @@ class TalkControllerTest extends TestCase
         $user2 = factory(User::class)->create();
 
         $this->actingAs($user1)
-        ->post(route('talks.store', ['theFriendId' => $user2->id]), ['message' => 'おはよう']);
+            ->post(route('talks.store', ['theFriendId' => $user2->id]), ['message' => 'おはよう']);
 
         $this->assertDatabaseHas('talks', [
             'user_id' => $user1->id,

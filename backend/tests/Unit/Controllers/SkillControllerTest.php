@@ -15,7 +15,7 @@ class SkillControllerTest extends TestCase
      *
      * @test
      */
-    public function testExample()
+    function testSkillNothing()
     {
         $user = factory(User::class)->create();
         $userLanguage = factory(UserLanguage::class)->create([
@@ -75,11 +75,11 @@ class SkillControllerTest extends TestCase
             ->assertSee($trace->content);
     }
 
-     /**
+    /**
      * 自分の画面でだけ編集や削除ができるか
      * 
      * @test
-    */
+     */
 
     function testEditOrDeleteInMyPage()
     {

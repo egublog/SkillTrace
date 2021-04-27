@@ -12,7 +12,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserTest extends TestCase
 {
-    /**@test userのリレーション*/
+    /**
+     * userのリレーション
+     *
+     * @test
+     */
+    
     function testUserArea()
     {
         $user = factory(User::class)->make();

@@ -14,8 +14,8 @@ class FollowerControllerTest extends TestCase
      * @test
      */
 
-     function testFollower()
-     {
+    function testFollower()
+    {
         $user1 = factory(User::class)->create();
         $user2 = factory(User::class)->create();
         $user3 = factory(User::class)->create();
@@ -28,7 +28,7 @@ class FollowerControllerTest extends TestCase
             'user_id' => $user3->id,
             'user_to_id' => $user1->id
         ]);
-        
+
         $this->actingAs($user1)
             ->get(route('followers.index', ['userId' => $user1->id]))
             ->assertSee($user2->name)
@@ -41,5 +41,5 @@ class FollowerControllerTest extends TestCase
             ->assertSee($user3->area->area)
             ->assertSee($user3->history->history)
             ->assertSee($user3->language->language);
-     }
+    }
 }
