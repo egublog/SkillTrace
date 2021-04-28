@@ -59,11 +59,14 @@ csrf_field()
             <dt class="search-box-ttl">住んでいる地域：</dt>
             <dd class="search-box-data">
               <select class="col-8" id="area" name="area_id">
+
+                <option value="">指定しない</option>
                 <?php $i = 1; ?>
                 @foreach($areas as $area)
                 <option value="<?php echo $i ?>" @if(old('area_id')==$i) selected @endif>{{ $area->area }}</option>
                 <?php $i++ ?>
                 @endforeach
+
               </select>
             </dd>
           </label>
@@ -74,11 +77,14 @@ csrf_field()
             <dt class="search-box-ttl">エンジニア歴：</dt>
             <dd class="search-box-data">
               <select class="col-8" id="history" name="history_id">
+
+                <option value="">指定しない</option>
                 <?php $i = 1; ?>
                 @foreach($histories as $history)
                 <option value="<?php echo $i ?>" @if(old('history_id')==$i) selected @endif>{{ $history->history }}</option>
                 <?php $i++ ?>
                 @endforeach
+
               </select>
             </dd>
           </label>
@@ -89,11 +95,14 @@ csrf_field()
             <dt class="search-box-ttl">得意な言語：</dt>
             <dd class="search-box-data">
               <select class="col-8" id="favorite" name="language_id">
+
+                <option value="">指定しない</option>
                 <?php $i = 1; ?>
                 @foreach($languages as $language)
                 <option value="<?php echo $i ?>" @if(old('language_id')==$i) selected @endif>{{ $language->name }}</option>
                 <?php $i++ ?>
                 @endforeach
+
               </select>
             </dd>
           </label>

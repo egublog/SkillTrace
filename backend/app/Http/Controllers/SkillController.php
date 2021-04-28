@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\SkillRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Language;
 use App\Models\User;
@@ -45,14 +45,14 @@ class SkillController extends Controller
         return view('MyService.skill-add', compact('myId', 'languages'));
     }
 
-    public function store(Request $request)
+    public function store(SkillRequest $request)
     {
         $myId = Auth::id();
-        $theSkill = $request->language_id;
+        $theLanguageId = $request->language_id;
 
         $userLanguage = new UserLanguage;
         $userLanguage->user_id = $myId;
-        $userLanguage->language_id = $theSkill;
+        $userLanguage->language_id = $theLanguageId;
         $userLanguage->star_count = 1;
         $userLanguage->save();
 

@@ -23,12 +23,24 @@
         <form action="{{ route('skill_stars.update', ['userLanguageId' => $userLanguageId]) }}" method="POST">
 
           @method("put")
+
           <div class="skill-top">
             <h3 class="skill-edit-ttl">スキルレベル</h3>
+
+            @if ($errors->has('star_count'))
+            <div class="alert alert-danger mt-3">
+              <ul>
+
+                <li>{{ $errors->first('star_count') }}</li>
+
+              </ul>
+            </div>
+            @endif
 
             <div class="skill-top-box">
               <p>自己評価：</p>
               <select name="star_count" id="">
+                <option value="">選択してください</option>
                 <option value="1">⭐️</option>
                 <option value="2">⭐️⭐️</option>
                 <option value="3">⭐️⭐️⭐️</option>
@@ -36,6 +48,7 @@
                 <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
               </select>
             </div><!-- /.skill-top-box -->
+
           </div><!-- /.skill-top -->
           @endif
 
@@ -119,10 +132,23 @@
 
                       <input type="file" name="trace_img" id="">
 
+                      @if ($errors->has('category'))
+                      <div class="alert alert-danger mt-3">
+                        <ul>
+
+                          <li>{{ $errors->first('category') }}</li>
+
+                        </ul>
+                      </div>
+                      @endif
+
                       <select name="category" id="">
+
+                        <option value="">選択してください</option>
                         @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
+
                       </select>
 
                       <!-- エラー処理 -->
@@ -167,10 +193,23 @@
 
                         <input type="file" name="trace_img">
 
-                        <select name="category_id" id="">
+                        @if ($errors->has('category'))
+                        <div class="alert alert-danger mt-3">
+                          <ul>
+
+                            <li>{{ $errors->first('category') }}</li>
+
+                          </ul>
+                        </div>
+                        @endif
+
+                        <select name="category" id="">
+
+                          <option value="">選択してください</option>
                           @foreach($categories as $category)
                           <option value="{{ $category->id }}">{{ $category->name }}</option>
                           @endforeach
+
                         </select>
 
                         <!-- エラー処理 -->

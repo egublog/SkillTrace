@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SearchTalkUserRequest extends FormRequest
+class SkillRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +16,7 @@ class SearchTalkUserRequest extends FormRequest
         return true;
     }
 
-     /**
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,7 +24,7 @@ class SearchTalkUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'talk_search_name' => 'required'
+            'language_id' => 'required'
         ];
     }
 
@@ -33,11 +33,10 @@ class SearchTalkUserRequest extends FormRequest
      *
      * @return array
      */
-
     public function messages()
     {
         return [
-            "talk_search_name.required" => "キーワードを入力してください。"
+            'language_id.required' => 'スキルを選択してください。'
         ];
     }
 }

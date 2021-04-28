@@ -15,13 +15,12 @@
         <h2>トーク</h2>
       </div><!-- /.section-ttl -->
 
-      @if ($errors->has('name'))
+
+      @if ($errors->has('talk_search_name'))
       <div class="alert alert-danger mt-3">
         <ul>
 
-          @foreach($errors->get('name') as $error)
-          <li>{{ $error }}</li>
-          @endforeach
+          <li>{{ $errors->first('talk_search_name') }}</li>
 
         </ul>
       </div>

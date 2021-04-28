@@ -6,9 +6,6 @@
 
 @section('content')
 
-<!-- プロフィール編集 -->
-
-
 <div class="inner">
   <section class="profile">
 
@@ -28,8 +25,6 @@
         <div class="profile-body-img">
           <p class="profile-body-img-tit">プロフィール写真</p>
 
-          <!-- もしも何も写真の設定をしていなかったらデフォルトの画像 -->
-          <!-- もしもすでに写真の設定をしていたらその画像が出るように -->
           @if ($errors->has('profile_img'))
           <div class="alert alert-danger mt-3">
             <ul>
@@ -107,28 +102,51 @@
                 </label>
               </div>
 
+              @if ($errors->has('area_id'))
+              <div class="alert alert-danger mt-3">
+                <ul>
+
+                  <li>{{ $errors->first('area_id') }}</li>
+
+                </ul>
+              </div>
+              @endif
+
               <div class="profile-box">
                 <label>
                   <dt class="profile-box-ttl">住んでいる地域：</dt>
                   <dd class="profile-box-data">
                     <select class="col-8" id="area" name="area_id">
-                      <!-- DBとの接続で北海道から沖縄まで選択できるようにする -->
+
+                      <option value="">選択してください</option>
                       <?php $i = 1; ?>
                       @foreach($areas as $area)
                       <option value="<?php echo $i ?>" @if( $myAccount->area_id == $i ) selected @endif>{{ $area->area }}</option>
                       <?php $i++ ?>
                       @endforeach
+
                     </select>
                   </dd>
                 </label>
               </div>
+
+              @if ($errors->has('history_id'))
+              <div class="alert alert-danger mt-3">
+                <ul>
+
+                  <li>{{ $errors->first('history_id') }}</li>
+
+                </ul>
+              </div>
+              @endif
 
               <div class="profile-box">
                 <label>
                   <dt class="profile-box-ttl">エンジニア歴：</dt>
                   <dd class="profile-box-data">
                     <select class="col-8" id="history" name="history_id">
-                      <!-- DBとの接続でエンジニア歴がどれくらいか選択できるようにする -->
+
+                      <option value="">選択してください</option>
                       <?php $i = 1; ?>
                       @foreach($histories as $history)
                       <option value="<?php echo $i ?>" @if($myAccount->history_id==$i ) selected @endif>{{ $history->history }}</option>
@@ -140,13 +158,24 @@
                 </label>
               </div>
 
+              @if ($errors->has('language_id'))
+              <div class="alert alert-danger mt-3">
+                <ul>
+
+                  <li>{{ $errors->first('language_id') }}</li>
+
+                </ul>
+              </div>
+              @endif
+
               <div class="profile-box">
                 <label>
                   <dt class="profile-box-ttl">得意な言語：
                   </dt>
                   <dd class="profile-box-data">
                     <select class="col-8" id="favorite" name="language_id">
-                      <!-- DBとの接続で得意な言語を選択できるようにする -->
+
+                      <option value="">選択してください</option>
                       <?php $i = 1; ?>
                       @foreach($languages as $language)
                       <option value="<?php echo $i ?>" @if($myAccount->language_id==$i ) selected @endif>{{ $language->name }}</option>

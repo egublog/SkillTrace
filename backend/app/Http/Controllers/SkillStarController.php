@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\SkillStarRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\UserLanguage;
@@ -21,7 +21,7 @@ class SkillStarController extends Controller
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'stars'));
     }
 
-    public function update($userLanguageId, Request $request)
+    public function update($userLanguageId, SkillStarRequest $request)
     {
         $stars = $request->input('star_count');
 

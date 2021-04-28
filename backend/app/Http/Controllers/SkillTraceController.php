@@ -67,7 +67,7 @@ class SkillTraceController extends Controller
     {
         $traceImg = $request->file('trace_img');
         $traceContent = $request->input('trace');
-        $traceCategoryId = $request->input('category_id');
+        $traceCategoryId = $request->input('category');
 
         $traceEdit = Trace::find($traceId);
 

@@ -25,6 +25,7 @@ class SkillTraceRequest extends FormRequest
     {
         return [
             'trace_img' => 'image|mimes:jpeg,png,jpg,gif|max:1024|dimensions:max_width=300',
+            'category' => 'required',
             'trace' => 'required'
         ];
     }
@@ -41,6 +42,7 @@ class SkillTraceRequest extends FormRequest
             "trace_img.mimes" => "指定された拡張子（PNG/JPG/GIF）ではありません。",
             "trace_img.max" => "１Ｍを超えています。",
             "trace_img.dimensions" => "横幅は最大300pxです。",
+            "category.required" => "カテゴリーを選択してください。",
             "trace.required" => "軌跡は必ず入力してください。"
         ];
     }
