@@ -85,7 +85,7 @@ class SkillTraceTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.jpg');
 
         $this->actingAs($user)
-            ->put(route('skill_traces.update', ['userLanguageId' => $userLanguage->id, 'traceId' => $trace->id]), ['trace_img' => $file, 'trace' => $trace->content, 'category_id' => $trace->category_id])
+            ->put(route('skill_traces.update', ['userLanguageId' => $userLanguage->id, 'traceId' => $trace->id]), ['trace_img' => $file, 'trace' => $trace->content, 'category' => $trace->category_id])
             ->assertRedirect(route('skills.show', ['userId' => $user->id, 'skillId' => $userLanguage->language_id]));
     }
 

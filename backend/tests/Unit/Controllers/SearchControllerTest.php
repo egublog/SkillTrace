@@ -112,4 +112,19 @@ class SearchControllerTest extends TestCase
             ->get(route('searches.search', ['language_id' => 1]))
             ->assertSeeText($user2->language->language);
     }
+
+    /**
+     * ageのvalidationが機能している
+     *
+     * @test
+     */
+
+     function testAgeValidation()
+     {
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user)
+            ->get(route('searches.search', ['age' => 151]))
+            ->assertSessionHasErrors(['age' => '年齢は0~150の間で入力してください。']);
+     }
 }

@@ -76,4 +76,22 @@ class SkillAbilityControllerTest extends TestCase
             'content' => $ability->content
         ]);
     }
+
+    /**
+     * abilityのvalidationが機能する
+     *
+     * @test
+     */
+
+     function testAbilityValidation()
+     {
+        $user = factory(User::class)->create();
+        $userLanguage = factory(UserLanguage::class)->create([
+            'user_id' => $user->id
+        ]);
+
+        $this->actingAs($user)
+            ->post(route('skill_abilities.create', ['userLanguageId' => $userLanguage->id]), ['ability' => ''])
+            ->assertSessionHasErrors(['ability' => 'できることは必ず入力してください。']);
+     }
 }

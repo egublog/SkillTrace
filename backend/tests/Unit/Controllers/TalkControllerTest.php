@@ -148,4 +148,35 @@ class TalkControllerTest extends TestCase
             'talk_body' => 'おはよう'
         ]);
     }
+
+    /**
+     * talk_search_nameのvalidationが機能する
+     *
+     * @test
+     */
+
+     function testSearchValidation()
+     {
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user)
+            ->get(route('talks.search', ['talk_search_name' => '']))
+            ->assertSessionHasErrors(['talk_search_name' => 'キーワードを入力してください。']);
+     }
+
+     /**
+     * messageのvalidationが機能する
+     *
+     * @test
+     */
+
+     function testMessageValidation()
+     {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+
+        $this->actingAs($user1)
+            ->post(route('talks.store', ['theFriendId' => $user2->id]), ['message' => ''])
+            ->assertSessionHasErrors(['message' => 'メッセージが入力されていません。']);
+     }
 }

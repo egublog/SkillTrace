@@ -32,7 +32,7 @@ class SkillControllerTest extends TestCase
 
     /**
      * できることが追加されたら表示されるか
-     * 
+     *
      * @test
      */
 
@@ -54,7 +54,7 @@ class SkillControllerTest extends TestCase
 
     /**
      * 軌跡が追加されたら表示されるか
-     * 
+     *
      * @test
      */
 
@@ -77,7 +77,7 @@ class SkillControllerTest extends TestCase
 
     /**
      * 自分の画面でだけ編集や削除ができるか
-     * 
+     *
      * @test
      */
 
@@ -125,4 +125,19 @@ class SkillControllerTest extends TestCase
             ->assertSee($ability2->content)
             ->assertSee($trace2->content);
     }
+
+    /**
+     * language_idのvalidationが機能する
+     *
+     * @test
+     */
+
+     function testLanguageIdValidation()
+     {
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user)
+            ->post(route('skills.store'), ['language_id' => ''])
+            ->assertSessionHasErrors(['language_id' => 'スキルを選択してください。']);
+     }
 }

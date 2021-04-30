@@ -27,4 +27,22 @@ class SkillStarControllerTest extends TestCase
             'star_count' => 3
         ]);
     }
+
+    /**
+     * star_countのvalidationが機能する
+     *
+     * @test
+     */
+
+     function testStarCountValidation()
+     {
+        $user = factory(User::class)->create();
+        $userLanguage = factory(UserLanguage::class)->create([
+            'user_id' => $user->id
+        ]);
+
+        $this->actingAs($user)
+            ->put(route('skill_stars.update', ['userLanguageId' => $userLanguage->id]), ['star_count' => ''])
+            ->assertSessionHasErrors(['star_count' => '自己評価を選択してください。']);
+     }
 }

@@ -91,4 +91,52 @@ class SkillTraceControllerTest extends TestCase
             'id' => $trace->id
         ]);
     }
+
+    /**
+     * categoryのvalidationが機能する
+     *
+     * @test
+     */
+
+     function testCategoryValidation()
+     {
+        $user = factory(User::class)->create();
+        $userLanguage = factory(UserLanguage::class)->create([
+            'user_id' => $user->id
+        ]);
+        $trace = factory(Trace::class)->create([
+            'user_language_id' => $userLanguage->id
+        ]);
+
+        Storage::fake('avatars');
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $this->actingAs($user)
+            ->post(route('skill_traces.store', ['userLanguageId' => $userLanguage->id]), ['trace_img' => $file, 'trace' => $trace->content, 'category' => ''])
+            ->assertSessionHasErrors(['category' => 'カテゴリーを選択してください。']);
+     }
+
+    /**
+     * categoryのvalidationが機能する
+     *
+     * @test
+     */
+
+     function testTraceValidation()
+     {
+        $user = factory(User::class)->create();
+        $userLanguage = factory(UserLanguage::class)->create([
+            'user_id' => $user->id
+        ]);
+        $trace = factory(Trace::class)->create([
+            'user_language_id' => $userLanguage->id
+        ]);
+
+        Storage::fake('avatars');
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $this->actingAs($user)
+            ->post(route('skill_traces.store', ['userLanguageId' => $userLanguage->id]), ['trace_img' => $file, 'trace' => '', 'category' => $trace->category_id])
+            ->assertSessionHasErrors(['trace' => '軌跡は必ず入力してください。']);
+     }
 }
