@@ -16,7 +16,7 @@ use App\Models\Ability;
 class SkillController extends Controller
 {
     //
-    public function show($userId, $skillId)
+    public function show(int $userId, int $skillId)
     {
 
         $myId = Auth::id();
@@ -59,7 +59,7 @@ class SkillController extends Controller
         return redirect()->route('home.home', ['userId' => $myId]);
     }
 
-    public function destroy($userLanguageId)
+    public function destroy(int $userLanguageId)
     {
         UserLanguage::find($userLanguageId)->delete();
 

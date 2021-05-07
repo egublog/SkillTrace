@@ -11,7 +11,7 @@ use App\Http\Requests\SkillAbilityRequest;
 class SkillAbilityController extends Controller
 {
     //
-    public function create($userLanguageId)
+    public function create(int $userLanguageId)
     {
         $myId = Auth::id();
         $theSkill = UserLanguage::find($userLanguageId);
@@ -21,7 +21,7 @@ class SkillAbilityController extends Controller
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'abilities'));
     }
 
-    public function store($userLanguageId, SkillAbilityRequest $request)
+    public function store(int $userLanguageId, SkillAbilityRequest $request)
     {
         $ableText = $request->input('ability');
 
@@ -38,7 +38,7 @@ class SkillAbilityController extends Controller
         return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
     }
 
-    public function show($userLanguageId, $abilityId)
+    public function show(int $userLanguageId, int $abilityId)
     {
         $myId = Auth::id();
         $theSkill = UserLanguage::find($userLanguageId);
@@ -47,7 +47,7 @@ class SkillAbilityController extends Controller
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'abilityEdit', 'abilityId', 'userLanguageId'));
     }
 
-    public function update($userLanguageId, $abilityId, SkillAbilityRequest $request)
+    public function update(int $userLanguageId, int $abilityId, SkillAbilityRequest $request)
     {
         $abilityText = $request->input('ability');
 
@@ -65,7 +65,7 @@ class SkillAbilityController extends Controller
         return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
     }
 
-    public function destroy($userLanguageId, $abilityId)
+    public function destroy(int $userLanguageId, int $abilityId)
     {
 
         $theSkill = UserLanguage::find($userLanguageId);

@@ -7,7 +7,7 @@ use App\Models\Follow;
 
 class FollowerController extends Controller
 {
-     public function index($userId)
+     public function index(int $userId)
     {
         $myId = Auth::id();
         $followers = Follow::follower($userId)->get();

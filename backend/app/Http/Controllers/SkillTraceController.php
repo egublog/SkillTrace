@@ -11,7 +11,7 @@ use App\Http\Requests\SkillTraceRequest;
 
 class SkillTraceController extends Controller
 {
-    public function create($userLanguageId)
+    public function create(int $userLanguageId)
     {
         $myId = Auth::id();
 
@@ -23,7 +23,7 @@ class SkillTraceController extends Controller
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'categories', 'traces'));
     }
 
-    public function store($userLanguageId, SkillTraceRequest $request)
+    public function store(int $userLanguageId, SkillTraceRequest $request)
     {
         $traceImg = $request->file('trace_img');
         $traceText = $request->input('trace');
@@ -50,7 +50,7 @@ class SkillTraceController extends Controller
         return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
     }
 
-    public function show($userLanguageId, $traceId)
+    public function show(int $userLanguageId, int $traceId)
     {
         $myId = Auth::id();
 
@@ -63,7 +63,7 @@ class SkillTraceController extends Controller
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'categories', 'traceEdit', 'traceId', 'userLanguageId'));
     }
 
-    public function update($userLanguageId, $traceId, SkillTraceRequest $request)
+    public function update(int $userLanguageId, int $traceId, SkillTraceRequest $request)
     {
         $traceImg = $request->file('trace_img');
         $traceContent = $request->input('trace');
@@ -90,7 +90,7 @@ class SkillTraceController extends Controller
         return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
     }
 
-    public function destroy($userLanguageId, $traceId)
+    public function destroy(int $userLanguageId, int $traceId)
     {
 
         $theSkill = UserLanguage::find($userLanguageId);

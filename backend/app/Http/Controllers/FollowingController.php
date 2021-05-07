@@ -8,7 +8,7 @@ use App\Models\Follow;
 
 class FollowingController extends Controller
 {
-    public function index($userId)
+    public function index(int $userId)
     {
         $myId = Auth::id();
         $followings = Follow::following($userId)->get();
@@ -16,7 +16,7 @@ class FollowingController extends Controller
         return view('MyService.friends-list', compact('myId', 'followings', 'userId'));
     }
 
-    public function follow($userId)
+    public function follow(int $userId)
     {
         $myId = Auth::id();
         $myAccount = User::find($myId);
@@ -24,7 +24,7 @@ class FollowingController extends Controller
         $myAccount->follow()->attach($userId);
     }
 
-    public function unfollow($userId)
+    public function unfollow(int $userId)
     {
         $myId = Auth::id();
         $myAccount = User::find($myId);

@@ -33,13 +33,13 @@ class HomeController extends Controller
     }
 
 
-    public function home($userId)
+    public function home(int $userId)
     {
         $myId = Auth::id();
         $myAccount = User::find($myId);
 
         $languages = UserLanguage::getLanguageAsc($userId)->get();
-        
+
         $account = User::findOrFail($userId);
 
         $followCheck = Follow::mutualFollow($myId, $userId)->first();

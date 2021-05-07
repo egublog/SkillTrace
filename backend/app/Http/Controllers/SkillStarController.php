@@ -10,7 +10,7 @@ use App\Models\UserLanguage;
 class SkillStarController extends Controller
 {
 
-    public function create($userLanguageId)
+    public function create(int $userLanguageId)
     {
         $myId = Auth::id();
         $theSkill = UserLanguage::find($userLanguageId);
@@ -21,7 +21,7 @@ class SkillStarController extends Controller
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'stars'));
     }
 
-    public function update($userLanguageId, SkillStarRequest $request)
+    public function update(int $userLanguageId, SkillStarRequest $request)
     {
         $stars = $request->input('star_count');
 

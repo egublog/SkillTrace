@@ -41,7 +41,7 @@ class TalkController extends Controller
         return view('MyService.talk', compact('myId', 'talkingUsers'));
     }
 
-    public function show($theFriendId)
+    public function show(int $theFriendId)
     {
         $theFriendAccount = User::find($theFriendId);
 
@@ -59,7 +59,7 @@ class TalkController extends Controller
         return view('MyService.talk-show', compact('myId', 'theFriendId', 'talkingUsers', 'theFriendAccount', 'talks'));
     }
 
-    public function store($theFriendId, TalkRequest $request)
+    public function store(int $theFriendId, TalkRequest $request)
     {
         $myId = Auth::id();
         $message = $request->input('message');
