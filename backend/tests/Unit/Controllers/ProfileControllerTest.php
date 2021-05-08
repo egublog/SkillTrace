@@ -18,6 +18,7 @@ class ProfileControllerTest extends TestCase
     function testProfileDatabase()
     {
         $user = factory(User::class)->create();
+        
         $this->actingAs($user)
             ->post(route('profiles.store'), ['name' => '山田花子', 'age' => 22, 'area_id' => 2, 'history_id' => 2, 'language_id' => 2]);
 

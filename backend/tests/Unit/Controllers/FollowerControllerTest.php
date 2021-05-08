@@ -10,36 +10,34 @@ class FollowerControllerTest extends TestCase
 {
     /**
      * Followerが表示されているか
-     * 
+     *
      * @test
      */
 
     function testFollower()
     {
-        $user1 = factory(User::class)->create();
-        $user2 = factory(User::class)->create();
-        $user3 = factory(User::class)->create();
+        $users = factory(User::class, 3)->create();
 
         factory(Follow::class)->create([
-            'user_id' => $user2->id,
-            'user_to_id' => $user1->id
+            'user_id' => $users[1]->id,
+            'user_to_id' => $users[0]->id
         ]);
         factory(Follow::class)->create([
-            'user_id' => $user3->id,
-            'user_to_id' => $user1->id
+            'user_id' => $users[2]->id,
+            'user_to_id' => $users[0]->id
         ]);
 
-        $this->actingAs($user1)
-            ->get(route('followers.index', ['userId' => $user1->id]))
-            ->assertSee($user2->name)
-            ->assertSee($user2->age)
-            ->assertSee($user2->area->area)
-            ->assertSee($user2->history->history)
-            ->assertSee($user2->language->language)
-            ->assertSee($user3->name)
-            ->assertSee($user3->age)
-            ->assertSee($user3->area->area)
-            ->assertSee($user3->history->history)
-            ->assertSee($user3->language->language);
+        $this->actingAs($users[0])
+            ->get(route('followers.index', ['userId' => $users[0]->id]))
+            ->assertSee($users[1]->name)
+            ->assertSee($users[1]->age)
+            ->assertSee($users[1]->area->area)
+            ->assertSee($users[1]->history->history)
+            ->assertSee($users[1]->language->language)
+            ->assertSee($users[2]->name)
+            ->assertSee($users[2]->age)
+            ->assertSee($users[2]->area->area)
+            ->assertSee($users[2]->history->history)
+            ->assertSee($users[2]->language->language);
     }
 }

@@ -31,21 +31,19 @@ class FollowingTest extends TestCase
 
     function testFollowingFollow()
     {
-        $user1 = factory(User::class)->create();
-        $user2 = factory(User::class)->create();
+        $users = factory(User::class, 2)->create();
 
-        $this->actingAs($user1)
-            ->post('users/' . $user2->id . '/follow')
+        $this->actingAs($users[0])
+            ->post('users/' . $users[1]->id . '/follow')
             ->assertOk();
     }
 
     function testFollowingUnfollow()
     {
-        $user1 = factory(User::class)->create();
-        $user2 = factory(User::class)->create();
+        $users = factory(User::class, 2)->create();
 
-        $this->actingAs($user1)
-            ->post('users/' . $user2->id . '/unfollow')
+        $this->actingAs($users[0])
+            ->post('users/' . $users[1]->id . '/unfollow')
             ->assertOk();
     }
 }

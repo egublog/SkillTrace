@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 class ProfileTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * ProfileController@index,store,profile_img_store
      *
      * @test
      */
@@ -25,6 +25,7 @@ class ProfileTest extends TestCase
     function testProfileIndex()
     {
         $user = factory(User::class)->create();
+
         $this->actingAs($user)
             ->get(route('profiles.index'))
             ->assertOk();
@@ -33,19 +34,20 @@ class ProfileTest extends TestCase
     function testProfileStore()
     {
         $user = factory(User::class)->create();
+        
         $this->actingAs($user)
             ->post(route('profiles.store'), ['name' => '山田花子', 'age' => 22, 'area_id' => 2, 'history_id' => 2, 'language_id' => 2])
             ->assertRedirect('users/' . $user->id);
     }
 
-    function testProfileImgStore()
-    {
-        $user = factory(User::class)->create();
-        Storage::fake('avatars');
-        $file = UploadedFile::fake()->image('avatar.jpg');
+    // function testProfileImgStore()
+    // {
+    //     $user = factory(User::class)->create();
+    //     Storage::fake('avatars');
+    //     $file = UploadedFile::fake()->image('avatar.jpg');
 
-        $this->actingAs($user)
-            ->post(route('profiles.img_store'), ['profile_img' => $file])
-            ->assertRedirect('profiles');
-    }
+    //     $this->actingAs($user)
+    //         ->post(route('profiles.img_store'), ['profile_img' => $file])
+    //         ->assertRedirect('profiles');
+    // }
 }

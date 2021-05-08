@@ -30,6 +30,7 @@ class HomeTest extends TestCase
     function testHomeHome()
     {
         $user = factory(User::class)->create();
+        
         $this->actingAs($user)
             ->get(route('home.home', ['userId' => $user->id]))
             ->assertOk();

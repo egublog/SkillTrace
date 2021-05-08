@@ -8,12 +8,8 @@ use App\Models\User;
 
 $factory->define(Talk::class, function (Faker $faker) {
     return [
-        'user_id' => function() {
-            return factory(User::class)->create();
-        },
-        'user_to_id' => function() {
-            return factory(User::class)->create();
-        },
+        'user_id' => factory(User::class),
+        'user_to_id' => factory(User::class),
         'talk_body' => $faker->sentence(),
         'yet' => false
     ];

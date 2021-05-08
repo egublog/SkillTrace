@@ -10,7 +10,7 @@ class FollowingControllerTest extends TestCase
 {
     /**
      * 自分がfollowしている人が表示されるか
-     * 
+     *
      * @test
      */
 
@@ -45,7 +45,7 @@ class FollowingControllerTest extends TestCase
 
     /**
      * 自分以外の人にだけfollowボタン表示されて、押すとfollowできる
-     * 
+     *
      * @test
      */
     function testFollow()
@@ -70,23 +70,22 @@ class FollowingControllerTest extends TestCase
      */
     function testFollowingDatabase()
     {
-        $user1 = factory(User::class)->create();
-        $user2 = factory(User::class)->create();
+        $users = factory(User::class, 2)->create();
 
-        $this->actingAs($user1)
-            ->post('users/' . $user2->id . '/follow');
+        $this->actingAs($users[0])
+            ->post('users/' . $users[1]->id . '/follow');
 
         $this->assertDatabaseHas('follows', [
-            'user_id' => $user1->id,
-            'user_to_id' => $user2->id
+            'user_id' => $users[0]->id,
+            'user_to_id' => $users[1]->id
         ]);
 
-        $this->actingAs($user1)
-            ->post('users/' . $user2->id . '/unfollow');
+        $this->actingAs($users[0])
+            ->post('users/' . $users[1]->id . '/unfollow');
 
         $this->assertDatabaseMissing('follows', [
-            'user_id' => $user1->id,
-            'user_to_id' => $user2->id
+            'user_id' => $users[0]->id,
+            'user_to_id' => $users[1]->id
         ]);
     }
 }

@@ -14,7 +14,7 @@ use App\Models\User;
 class SearchTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * SearchController@index,search
      *
      * @test
      */
