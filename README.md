@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Build a simple laravel development environment with docker-compose.
+エンジニアのスキルの軌跡を保存し、マッチングするアプリ
 
 ## Usage
 
