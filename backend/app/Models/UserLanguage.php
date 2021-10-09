@@ -6,6 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserLanguage extends Model
 {
+    protected $fillable = [
+        'id',
+        'user_id',
+        'language_id',
+        'star_count',
+        'updated_at',
+        'created_at',
+    ];
+
     // 単数と複数の関係を機械が認識してくれなさそうならかく
     protected $table = 'user_languages';
 
