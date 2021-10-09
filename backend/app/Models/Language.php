@@ -8,7 +8,14 @@ use App\User;
 
 class Language extends Model
 {
-    //
+    protected $fillable = [
+        'id',
+        'name',
+        'favicon',
+        'updated_at',
+        'created_at'
+    ];
+    
     public function languages() {
         return $this->hasMany('App\Models\User');
     }
