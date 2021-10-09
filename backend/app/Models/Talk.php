@@ -7,7 +7,16 @@ use App\Models\User;
 
 class Talk extends Model
 {
-    
+    protected $fillable = [
+        'id',
+        'user_id',
+        'user_to_id',
+        'talk_body',
+        'yet',
+        'updated_at',
+        'created_at',
+    ];
+
     public function user_follower() {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
