@@ -16,6 +16,6 @@ class Ability extends Model
     
     public function userLanguage()
     {
-        return $this->belongsTo('App\Models\UserLanguage');
+        return $this->belongsTo(App\Models\UserLanguage::class);
     }
 }

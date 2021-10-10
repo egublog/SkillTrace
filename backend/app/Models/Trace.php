@@ -18,10 +18,10 @@ class Trace extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(App\Models\Category::class);
     }
     public function userLanguage()
     {
-        return $this->belongsTo('App\Models\UserLanguage');
+        return $this->belongsTo(App\Models\UserLanguage::class);
     }
 }

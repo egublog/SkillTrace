@@ -15,6 +15,6 @@ class Category extends Model
 
     public function traces()
     {
-        return $this->hasMany('App\Models\Trace');
+        return $this->hasMany(App\Models\Trace::class, 'trace_id', 'id');
     }
 }

@@ -20,22 +20,22 @@ class UserLanguage extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(App\Models\User::class);
     }
 
     public function language()
     {
-        return $this->belongsTo('App\Models\Language');
+        return $this->belongsTo(App\Models\Language::class);
     }
 
     public function ability()
     {
-        return $this->hasMany('App\Models\Ability');
+        return $this->hasMany(App\Models\Ability::class);
     }
 
     public function trace()
     {
-        return $this->hasMany('App\Models\Trace');
+        return $this->hasMany(App\Models\Trace::class);
     }
 
     /**

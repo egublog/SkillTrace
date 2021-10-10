@@ -17,11 +17,11 @@ class Language extends Model
     ];
     
     public function languages() {
-        return $this->hasMany('App\Models\User');
+        return $this->hasMany(App\Models\User::class, 'language_id', 'id');
     }
 
     public function users() {
-        return $this->belongsToMany('App\Models\User', 'user_languages', 'language_id', 'user_id');
+        return $this->belongsToMany(App\Models\User::class, 'user_languages', 'language_id', 'user_id');
     }
 
 }

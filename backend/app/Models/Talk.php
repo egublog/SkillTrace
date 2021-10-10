@@ -18,11 +18,11 @@ class Talk extends Model
     ];
 
     public function user_follower() {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo(App\Models\User::class, 'user_id');
     }
 
     public function user_following() {
-        return $this->belongsTo('App\Models\User', 'user_to_id');
+        return $this->belongsTo(App\Models\User::class, 'user_to_id');
     }
 
     /**
