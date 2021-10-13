@@ -2,21 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-
 use App\Models\Area;
 use App\Models\History;
 use App\Models\Language;
 use App\Queries\SearchUsers;
 use App\Http\Requests\SearchRequest;
-
+use App\Services\UserAuthServiceInterface;
 
 class SearchController extends Controller
 {
-    //
+    protected $userAuthService;
+
+    public function __construct(
+        UserAuthServiceInterface $userAuthService
+    )
+    {
+        $this->userAuthService = $userAuthService;
+    }
+
     public function index()
     {
-        $myId = Auth::id();
+        $myId  = $this->userAuthService->getLoginUserId();
         $areas = Area::all();
         $histories = History::all();
         $languages = Language::all();
@@ -27,7 +33,7 @@ class SearchController extends Controller
 
     public function search(SearchRequest $request)
     {
-        $myId = Auth::id();
+        $myId  = $this->userAuthService->getLoginUserId();
 
         $areas = Area::all();
         $histories = History::all();

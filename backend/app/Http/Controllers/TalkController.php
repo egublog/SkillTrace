@@ -10,13 +10,22 @@ use App\Models\Talk;
 use App\Queries\SearchFollowing;
 use App\Http\Requests\TalkRequest;
 use App\Http\Requests\SearchTalkUserRequest;
+use App\Services\UserAuthServiceInterface;
 
 class TalkController extends Controller
 {
-    //
+    protected $userAuthService;
+
+    public function __construct(
+        UserAuthServiceInterface $userAuthService
+    )
+    {
+        $this->userAuthService = $userAuthService;
+    }
+
     public function index()
     {
-        $myId = Auth::id();
+        $myId      = $this->userAuthService->getLoginUserId();
 
         $talkLists = Talk::talkingListLatest($myId)->get();
 
@@ -27,7 +36,7 @@ class TalkController extends Controller
 
     public function search(SearchTalkUserRequest $request)
     {
-        $myId = Auth::id();
+        $myId             = $this->userAuthService->getLoginUserId();
         $searchResultName = $request->input('talk_search_name');
 
         $talkLists = Talk::talkingListLatest($myId)->get();
@@ -45,7 +54,7 @@ class TalkController extends Controller
     {
         $theFriendAccount = User::find($theFriendId);
 
-        $myId = Auth::id();
+        $myId      = $this->userAuthService->getLoginUserId();
 
         $talkLists = Talk::talkingListLatest($myId)->get();
 
@@ -61,7 +70,7 @@ class TalkController extends Controller
 
     public function store(int $theFriendId, TalkRequest $request)
     {
-        $myId = Auth::id();
+        $myId    = $this->userAuthService->getLoginUserId();
         $message = $request->input('message');
 
         $talks = new Talk;

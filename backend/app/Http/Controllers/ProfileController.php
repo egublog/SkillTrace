@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\ProfileImageRequest;
@@ -10,14 +9,24 @@ use App\Models\User;
 use App\Models\Area;
 use App\Models\History;
 use App\Models\Language;
+use App\Services\UserAuthServiceInterface;
 
 class ProfileController extends Controller
 {
+    protected $userAuthService;
+
+    public function __construct(
+        UserAuthServiceInterface $userAuthService
+    )
+    {
+        $this->userAuthService = $userAuthService;
+    }
+
     public function index()
     {
-        $myId = Auth::id();
+        $myId      = $this->userAuthService->getLoginUserId();
         $myAccount = User::find($myId);
-        $areas = Area::all();
+        $area      = Area::all();
         $histories = History::all();
         $languages = Language::all();
 
@@ -26,7 +35,7 @@ class ProfileController extends Controller
 
     public function store(ProfileRequest $request)
     {
-        $myId = Auth::id();
+        $myId    = $this->userAuthService->getLoginUserId();
         $account = User::find($myId);
 
         $account->update($request->userAttributes());
@@ -36,12 +45,12 @@ class ProfileController extends Controller
 
     public function img_store(ProfileImageRequest $request) {
 
-        $userImg = $request->file('profile_img');
+        $userImg   = $request->file('profile_img');
 
-        $myId = Auth::id();
+        $myId      = $this->userAuthService->getLoginUserId();
         $myAccount = User::find($myId);
 
-        $path = Storage::disk('s3')->putFile('profile_img', $userImg, 'public');
+        $path           = Storage::disk('s3')->putFile('profile_img', $userImg, 'public');
         $myAccount->img = Storage::disk('s3')->url($path);
 
         $myAccount->save();

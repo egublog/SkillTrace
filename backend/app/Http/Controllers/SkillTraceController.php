@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\UserLanguage;
 use App\Models\Category;
 use App\Models\Trace;
 use App\Http\Requests\SkillTraceRequest;
+use App\Services\UserAuthServiceInterface;
 
 class SkillTraceController extends Controller
 {
+    protected $userAuthService;
+
+    public function __construct(
+        UserAuthServiceInterface $userAuthService
+    )
+    {
+        $this->userAuthService = $userAuthService;
+    }
+
     public function create(int $userLanguageId)
     {
-        $myId = Auth::id();
+        $myId     = $this->userAuthService->getLoginUserId();
 
         $theSkill = UserLanguage::find($userLanguageId);
 
@@ -52,7 +61,7 @@ class SkillTraceController extends Controller
 
     public function show(int $userLanguageId, int $traceId)
     {
-        $myId = Auth::id();
+        $myId     = $this->userAuthService->getLoginUserId();
 
         $theSkill = UserLanguage::find($userLanguageId);
 

@@ -2,31 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Follow;
+use App\Services\UserAuthServiceInterface;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $userAuthService;
+
+    public function __construct(
+        UserAuthServiceInterface $userAuthService
+    )
     {
-        $this->middleware('auth');
+        $this->userAuthService = $userAuthService;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        $myId = Auth::id();
+        $myId    = $this->userAuthService->getLoginUserId();
         $account = User::find($myId);
 
         return view('home', compact('myId', 'account'));
@@ -35,7 +29,7 @@ class HomeController extends Controller
 
     public function home(int $userId)
     {
-        $myId = Auth::id();
+        $myId      = $this->userAuthService->getLoginUserId();
         $myAccount = User::find($myId);
 
         $languages = UserLanguage::getLanguageAsc($userId)->get();

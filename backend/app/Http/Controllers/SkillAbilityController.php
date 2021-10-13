@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Ability;
 use App\Http\Requests\SkillAbilityRequest;
+use App\Services\UserAuthServiceInterface;
 
 class SkillAbilityController extends Controller
 {
-    //
+    protected $userAuthService;
+
+    public function __construct(
+        UserAuthServiceInterface $userAuthService
+    )
+    {
+        $this->userAuthService = $userAuthService;
+    }
+
     public function create(int $userLanguageId)
     {
-        $myId = Auth::id();
+        $myId     = $this->userAuthService->getLoginUserId();
         $theSkill = UserLanguage::find($userLanguageId);
 
         $abilities = Ability::where('user_language_id', $userLanguageId)->get();
@@ -40,7 +48,7 @@ class SkillAbilityController extends Controller
 
     public function show(int $userLanguageId, int $abilityId)
     {
-        $myId = Auth::id();
+        $myId     = $this->userAuthService->getLoginUserId();
         $theSkill = UserLanguage::find($userLanguageId);
         $abilityEdit = Ability::find($abilityId);
 

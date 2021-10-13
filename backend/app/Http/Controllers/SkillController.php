@@ -3,23 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SkillRequest;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Language;
 use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Trace;
 use App\Models\Ability;
-
-
-
+use App\Services\UserAuthServiceInterface;
 
 class SkillController extends Controller
 {
-    //
+    protected $userAuthService;
+
+    public function __construct(
+        UserAuthServiceInterface $userAuthService
+    )
+    {
+        $this->userAuthService = $userAuthService;
+    }
+
     public function show(int $userId, int $skillId)
     {
 
-        $myId = Auth::id();
+        $myId     = $this->userAuthService->getLoginUserId();
 
         $theSkill = UserLanguage::getLanguage($userId, $skillId)->first();
 
@@ -35,7 +40,7 @@ class SkillController extends Controller
 
     public function create()
     {
-        $myId = Auth::id();
+        $myId     = $this->userAuthService->getLoginUserId();
 
         $userLanguages = UserLanguage::where('user_id', $myId)->get(['language_id']);
 
@@ -47,7 +52,7 @@ class SkillController extends Controller
 
     public function store(SkillRequest $request)
     {
-        $myId = Auth::id();
+        $myId          = $this->userAuthService->getLoginUserId();
         $theLanguageId = $request->language_id;
 
         $userLanguage = new UserLanguage;
@@ -63,7 +68,7 @@ class SkillController extends Controller
     {
         UserLanguage::find($userLanguageId)->delete();
 
-        $myId = Auth::id();
+        $myId = $this->userAuthService->getLoginUserId();
 
         return redirect()->route('home.home', ['userId' => $myId]);
     }

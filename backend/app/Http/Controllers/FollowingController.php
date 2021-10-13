@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Follow;
+use App\Services\UserAuthServiceInterface;
 
 class FollowingController extends Controller
 {
+    protected $userAuthService;
+
+    public function __construct(
+        UserAuthServiceInterface $userAuthService
+    )
+    {
+        $this->userAuthService = $userAuthService;
+    }
+
     public function index(int $userId)
     {
-        $myId = Auth::id();
+        $myId       = $this->userAuthService->getLoginUserId();
         $followings = Follow::following($userId)->get();
 
         return view('MyService.friends-list', compact('myId', 'followings', 'userId'));
@@ -18,7 +27,7 @@ class FollowingController extends Controller
 
     public function follow(int $userId)
     {
-        $myId = Auth::id();
+        $myId      = $this->userAuthService->getLoginUserId();
         $myAccount = User::find($myId);
 
         $myAccount->follow()->attach($userId);
@@ -26,7 +35,7 @@ class FollowingController extends Controller
 
     public function unfollow(int $userId)
     {
-        $myId = Auth::id();
+        $myId      = $this->userAuthService->getLoginUserId();
         $myAccount = User::find($myId);
 
         $myAccount->follow()->detach($userId);

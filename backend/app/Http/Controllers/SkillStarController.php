@@ -3,16 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SkillStarRequest;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\UserLanguage;
+use App\Services\UserAuthServiceInterface;
 
 class SkillStarController extends Controller
 {
+    protected $userAuthService;
+
+    public function __construct(
+        UserAuthServiceInterface $userAuthService
+    )
+    {
+        $this->userAuthService = $userAuthService;
+    }
 
     public function create(int $userLanguageId)
     {
-        $myId = Auth::id();
+        $myId     = $this->userAuthService->getLoginUserId();
         $theSkill = UserLanguage::find($userLanguageId);
 
         //区別するためにstarsを用意
