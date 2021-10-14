@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Follow;
 use App\Repositories\FollowRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 final class FollowRepository implements FollowRepositoryInterface
 {
@@ -80,5 +81,29 @@ final class FollowRepository implements FollowRepositoryInterface
             ->delete(
                 $deleteAssoc
             );
+    }
+
+     /**
+     * user_idをもとに絞り込むためのメソッド
+     *
+     * @param int $userId
+     *
+     * @return Collection
+     */
+    public function getByUserId(int $userId): Collection
+    {
+        return $this->model->where('user_id', $userId)->get();
+    }
+
+    /**
+     * user_to_idをもとに絞り込むためのメソッド
+     *
+     * @param int $userToId
+     *
+     * @return Collection
+     */
+    public function getByUserToId(int $userToId): Collection
+    {
+        return $this->model->where('user_to_id', $userToId)->get();
     }
 }

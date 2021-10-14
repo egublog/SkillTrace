@@ -8,29 +8,32 @@ use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Trace;
 use App\Models\Ability;
+use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
 class SkillController extends Controller
 {
     protected $userAuthService;
+    protected $userRepository;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService
+        UserAuthServiceInterface $userAuthService,
+        UserRepositoryInterface $userRepository
     )
     {
         $this->userAuthService = $userAuthService;
+        $this->userRepository  = $userRepository;
     }
 
     public function show(int $userId, int $skillId)
     {
-
         $myId     = $this->userAuthService->getLoginUserId();
 
         $theSkill = UserLanguage::getLanguage($userId, $skillId)->first();
 
         $userLanguageId = $theSkill->id;
 
-        $account = User::find($userId);
+        $account = $this->userRepository->findById($userId);
 
         $traces = Trace::where('user_language_id', $userLanguageId)->get();
         $abilities = Ability::where('user_language_id', $userLanguageId)->get();

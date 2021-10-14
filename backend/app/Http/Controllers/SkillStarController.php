@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SkillStarRequest;
 use App\Models\User;
 use App\Models\UserLanguage;
+use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
 class SkillStarController extends Controller
 {
     protected $userAuthService;
+    protected $userRepository;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService
+        UserAuthServiceInterface $userAuthService,
+        UserRepositoryInterface $userRepository
     )
     {
         $this->userAuthService = $userAuthService;
+        $this->userRepository  = $userRepository;
     }
 
     public function create(int $userLanguageId)
@@ -37,7 +41,7 @@ class SkillStarController extends Controller
         $theSkill->star_count = $stars;
         $theSkill->save();
 
-        $account = User::find($theSkill->user_id);
+        $account = $this->userRepository->findById($theSkill->user_id);
 
         $userId = $account->id;
         $skillId = $theSkill->language_id;

@@ -6,17 +6,21 @@ use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Ability;
 use App\Http\Requests\SkillAbilityRequest;
+use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
 class SkillAbilityController extends Controller
 {
     protected $userAuthService;
+    protected $userRepository;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService
+        UserAuthServiceInterface $userAuthService,
+        UserRepositoryInterface $userRepository
     )
     {
         $this->userAuthService = $userAuthService;
+        $this->userRepository  = $userRepository;
     }
 
     public function create(int $userLanguageId)
@@ -65,7 +69,7 @@ class SkillAbilityController extends Controller
         $abilityEdit->save();
 
         $theSkill = UserLanguage::find($userLanguageId);
-        $account = User::find($theSkill->user_id);
+        $account = $this->userRepository->findById($theSkill->user_id);
 
         $userId = $account->id;
         $skillId = $theSkill->language_id;
@@ -77,7 +81,7 @@ class SkillAbilityController extends Controller
     {
 
         $theSkill = UserLanguage::find($userLanguageId);
-        $account = User::find($theSkill->user_id);
+        $account = $this->userRepository->findById($theSkill->user_id);
 
         $userId = $account->id;
         $skillId = $theSkill->language_id;

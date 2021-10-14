@@ -4,23 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Follow;
+use App\Repositories\FollowRepositoryInterface;
+use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
 class FollowingController extends Controller
 {
     protected $userAuthService;
+    protected $userRepository;
+    protected $followRepository;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService
-    )
-    {
-        $this->userAuthService = $userAuthService;
+        UserAuthServiceInterface $userAuthService,
+        UserRepositoryInterface $userRepository,
+        FollowRepositoryInterface $followRepository
+    ) {
+        $this->userAuthService  = $userAuthService;
+        $this->userRepository   = $userRepository;
+        $this->followRepository = $followRepository;
     }
 
     public function index(int $userId)
     {
         $myId       = $this->userAuthService->getLoginUserId();
-        $followings = Follow::following($userId)->get();
+
+        // NOTE: 自分がfollowしている人を取得
+        $followings = $this->followRepository->getByUserId($myId);
+        $followings->load('user_following');
 
         return view('MyService.friends-list', compact('myId', 'followings', 'userId'));
     }
@@ -28,7 +38,7 @@ class FollowingController extends Controller
     public function follow(int $userId)
     {
         $myId      = $this->userAuthService->getLoginUserId();
-        $myAccount = User::find($myId);
+        $myAccount = $this->userRepository->findById($myId);
 
         $myAccount->follow()->attach($userId);
     }
@@ -36,7 +46,7 @@ class FollowingController extends Controller
     public function unfollow(int $userId)
     {
         $myId      = $this->userAuthService->getLoginUserId();
-        $myAccount = User::find($myId);
+        $myAccount = $this->userRepository->findById($myId);
 
         $myAccount->follow()->detach($userId);
     }

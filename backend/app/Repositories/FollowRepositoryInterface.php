@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Follow;
+use Illuminate\Database\Eloquent\Collection;
 
 interface FollowRepositoryInterface
 {
@@ -13,4 +14,8 @@ interface FollowRepositoryInterface
     public function update(array $savingAssoc): ?bool;
 
     public function delete(array $deleteAssoc): ?bool;
+
+    public function getByUserId(int $userId): Collection;
+
+    public function getByUserToId(int $userToId): Collection;
 }

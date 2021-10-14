@@ -10,17 +10,21 @@ use App\Models\Talk;
 use App\Queries\SearchFollowing;
 use App\Http\Requests\TalkRequest;
 use App\Http\Requests\SearchTalkUserRequest;
+use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
 class TalkController extends Controller
 {
     protected $userAuthService;
+    protected $userRepository;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService
+        UserAuthServiceInterface $userAuthService,
+        UserRepositoryInterface $userRepository
     )
     {
         $this->userAuthService = $userAuthService;
+        $this->userRepository  = $userRepository;
     }
 
     public function index()
@@ -52,7 +56,7 @@ class TalkController extends Controller
 
     public function show(int $theFriendId)
     {
-        $theFriendAccount = User::find($theFriendId);
+        $theFriendAccount = $this->userRepository->findById($theFriendId);
 
         $myId      = $this->userAuthService->getLoginUserId();
 
