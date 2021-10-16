@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SkillRequest;
 use App\Models\Language;
-use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Trace;
 use App\Models\Ability;

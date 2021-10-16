@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Ability;
 use App\Http\Requests\SkillAbilityRequest;

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Follow;
 use App\Repositories\FollowRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 

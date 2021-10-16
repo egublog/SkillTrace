@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SkillStarRequest;
-use App\Models\User;
 use App\Models\UserLanguage;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;

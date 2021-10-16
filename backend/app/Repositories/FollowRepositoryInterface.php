@@ -18,4 +18,8 @@ interface FollowRepositoryInterface
     public function getByUserId(int $userId): Collection;
 
     public function getByUserToId(int $userToId): Collection;
+
+    public function getByUserIdAndUserToId(int $userId, int $userToId): ?Follow;
+
+    public function followCheck(?Follow $followCheck): void;
 }

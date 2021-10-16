@@ -106,4 +106,33 @@ final class FollowRepository implements FollowRepositoryInterface
     {
         return $this->model->where('user_to_id', $userToId)->get();
     }
+
+    /**
+     * user_idとuser_to_idをもとに絞り込むためのメソッド
+     *
+     * @param int $userId, $userToId
+     *
+     * @return Follow|null
+     */
+    public function getByUserIdAndUserToId(int $userId, int $userToId): ?Follow
+    {
+        return $this->model->where('user_id', $userId)->where('user_to_id', $userToId)->first();
+    }
+
+    /**
+     * 自分がその人をフォローしているかどうかの判定
+     * FIXME: 本来であればこのメソッドはRepository層ではないので、後々Service層orUseCase層に移動する
+     *
+     * @param Follow|null $followCheck
+     *
+     * @return void
+     */
+    public function followCheck(?Follow $followCheck): void
+    {
+        if ($followCheck == null) {
+            $followCheck = false;
+        } else {
+            $followCheck = true;
+        }
+    }
 }

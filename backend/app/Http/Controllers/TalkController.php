@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-
-use App\Models\User;
-use App\Models\Follow;
 use App\Models\Talk;
-use App\Queries\SearchFollowing;
 use App\Http\Requests\TalkRequest;
 use App\Http\Requests\SearchTalkUserRequest;
 use App\Repositories\UserRepositoryInterface;
