@@ -7,24 +7,28 @@ use App\Models\UserLanguage;
 use App\Models\Category;
 use App\Models\Trace;
 use App\Http\Requests\SkillTraceRequest;
+use App\Repositories\UserLanguageRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
 class SkillTraceController extends Controller
 {
     protected $userAuthService;
+    protected $userLanguageRepository;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService
+        UserAuthServiceInterface $userAuthService,
+        UserLanguageRepositoryInterface $userLanguageRepository
     )
     {
-        $this->userAuthService = $userAuthService;
+        $this->userAuthService        = $userAuthService;
+        $this->userLanguageRepository = $userLanguageRepository;
     }
 
     public function create(int $userLanguageId)
     {
         $myId     = $this->userAuthService->getLoginUserId();
 
-        $theSkill = UserLanguage::find($userLanguageId);
+        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
 
         $traces = Trace::all();
         $categories = Category::all();
@@ -51,7 +55,7 @@ class SkillTraceController extends Controller
         $trace->content = $traceText;
         $trace->save();
 
-        $theSkill = UserLanguage::find($userLanguageId);
+        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
 
         $userId = $theSkill->user_id;
         $skillId = $theSkill->language_id;
@@ -63,7 +67,7 @@ class SkillTraceController extends Controller
     {
         $myId     = $this->userAuthService->getLoginUserId();
 
-        $theSkill = UserLanguage::find($userLanguageId);
+        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
 
         $traceEdit = Trace::find($traceId);
 
@@ -91,7 +95,7 @@ class SkillTraceController extends Controller
         $traceEdit->content = $traceContent;
         $traceEdit->save();
 
-        $theSkill = UserLanguage::find($userLanguageId);
+        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
 
         $userId = $theSkill->user_id;
         $skillId = $theSkill->language_id;
@@ -102,7 +106,7 @@ class SkillTraceController extends Controller
     public function destroy(int $userLanguageId, int $traceId)
     {
 
-        $theSkill = UserLanguage::find($userLanguageId);
+        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
 
         $userId = $theSkill->user_id;
         $skillId = $theSkill->language_id;

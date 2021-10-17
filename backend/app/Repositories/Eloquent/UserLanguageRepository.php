@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\UserLanguage;
 use App\Repositories\UserLanguageRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 final class UserLanguageRepository implements UserLanguageRepositoryInterface
 {
@@ -80,5 +81,38 @@ final class UserLanguageRepository implements UserLanguageRepositoryInterface
             ->delete(
                 $deleteAssoc
             );
+    }
+
+    /**
+     *
+     * @param int $userId, $languageId
+     *
+     * @return UserLanguage|null
+     */
+    public function findByUserIdAndLanguageId(int $userId, int $languageId): ?UserLanguage
+    {
+        return $this->model->where('user_id', $userId)->where('language_id', $languageId)->first();
+    }
+
+    /**
+     *
+     * @param int $userId
+     *
+     * @return Collection
+     */
+    public function findByUserIdAndAscByLanguageId(int $userId): Collection
+    {
+        return $this->model->where('user_id', $userId)->orderBy('language_id', 'asc')->get();
+    }
+
+    /**
+     *
+     * @param int $userId
+     *
+     * @return Collection
+     */
+    public function findByUserIdAndGetLanguageId(int $userId): Collection
+    {
+        return $this->model->where('user_id', $userId)->get(['language_id']);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SkillStarRequest;
 use App\Models\UserLanguage;
+use App\Repositories\UserLanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
@@ -11,23 +12,26 @@ class SkillStarController extends Controller
 {
     protected $userAuthService;
     protected $userRepository;
+    protected $userLanguageRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        UserLanguageRepositoryInterface $userLanguageRepository
     )
     {
-        $this->userAuthService = $userAuthService;
-        $this->userRepository  = $userRepository;
+        $this->userAuthService        = $userAuthService;
+        $this->userRepository         = $userRepository;
+        $this->userLanguageRepository = $userLanguageRepository;
     }
 
     public function create(int $userLanguageId)
     {
         $myId     = $this->userAuthService->getLoginUserId();
-        $theSkill = UserLanguage::find($userLanguageId);
+        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
 
         //区別するためにstarsを用意
-        $stars = UserLanguage::find($userLanguageId);
+        $stars = $this->userLanguageRepository->findById($userLanguageId);
 
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'stars'));
     }
@@ -36,7 +40,7 @@ class SkillStarController extends Controller
     {
         $stars = $request->input('star_count');
 
-        $theSkill = UserLanguage::find($userLanguageId);
+        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
         $theSkill->star_count = $stars;
         $theSkill->save();
 

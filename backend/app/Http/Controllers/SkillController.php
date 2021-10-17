@@ -7,6 +7,7 @@ use App\Models\Language;
 use App\Models\UserLanguage;
 use App\Models\Trace;
 use App\Models\Ability;
+use App\Repositories\UserLanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
@@ -14,21 +15,25 @@ class SkillController extends Controller
 {
     protected $userAuthService;
     protected $userRepository;
+    protected $userLanguageRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        UserLanguageRepositoryInterface $userLanguageRepository
     )
     {
-        $this->userAuthService = $userAuthService;
-        $this->userRepository  = $userRepository;
+        $this->userAuthService        = $userAuthService;
+        $this->userRepository         = $userRepository;
+        $this->userLanguageRepository = $userLanguageRepository;
     }
 
     public function show(int $userId, int $skillId)
     {
         $myId     = $this->userAuthService->getLoginUserId();
 
-        $theSkill = UserLanguage::getLanguage($userId, $skillId)->first();
+        // FIXME: findByUserIdAndLanguageId()の第二引数は命名規則に則るなら、$languageIdだが、後方互換性のために$skillIdにしている。後々$languageIdにリファクタする
+        $theSkill = $this->userLanguageRepository->findByUserIdAndLanguageId($userId, $skillId);
 
         $userLanguageId = $theSkill->id;
 
@@ -44,7 +49,7 @@ class SkillController extends Controller
     {
         $myId     = $this->userAuthService->getLoginUserId();
 
-        $userLanguages = UserLanguage::where('user_id', $myId)->get(['language_id']);
+        $userLanguages = $this->userLanguageRepository->findByUserIdAndGetLanguageId($myId);
 
         $languages = Language::whereNotIn('id', $userLanguages)->get();
 
@@ -68,7 +73,8 @@ class SkillController extends Controller
 
     public function destroy(int $userLanguageId)
     {
-        UserLanguage::find($userLanguageId)->delete();
+        $userLanguage = $this->userLanguageRepository->findById($userLanguageId);
+        $this->userLanguageRepository->delete($userLanguage->toArray());
 
         $myId = $this->userAuthService->getLoginUserId();
 

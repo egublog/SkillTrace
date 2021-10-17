@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserLanguage;
 use App\Models\Follow;
 use App\Repositories\FollowRepositoryInterface;
+use App\Repositories\UserLanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
@@ -14,16 +15,19 @@ class HomeController extends Controller
     protected $userAuthService;
     protected $userRepository;
     protected $followRepository;
+    protected $userLanguageRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
         UserRepositoryInterface $userRepository,
-        FollowRepositoryInterface $followRepository
+        FollowRepositoryInterface $followRepository,
+        UserLanguageRepositoryInterface $userLanguageRepository
     )
     {
-        $this->userAuthService  = $userAuthService;
-        $this->userRepository   = $userRepository;
-        $this->followRepository = $followRepository;
+        $this->userAuthService        = $userAuthService;
+        $this->userRepository         = $userRepository;
+        $this->followRepository       = $followRepository;
+        $this->userLanguageRepository = $userLanguageRepository;
     }
 
     public function index()
@@ -40,7 +44,8 @@ class HomeController extends Controller
         $myId      = $this->userAuthService->getLoginUserId();
         $myAccount = $this->userRepository->findById($myId);
 
-        $languages = UserLanguage::getLanguageAsc($userId)->get();
+        $languages = $this->userLanguageRepository->findByUserIdAndAscByLanguageId($userId);
+        $languages->load('language');
 
         // TODO: 独自のHomeHomeRequestを作成し、userIdがない場合を考慮する。
         $account = $this->userRepository->findById($userId);
