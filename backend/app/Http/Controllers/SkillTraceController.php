@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use App\Models\UserLanguage;
 use App\Models\Category;
 use App\Models\Trace;
 use App\Http\Requests\SkillTraceRequest;

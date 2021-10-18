@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\ProfileImageRequest;
-use App\Models\User;
 use App\Models\Area;
 use App\Models\History;
 use App\Models\Language;

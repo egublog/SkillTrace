@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\UserLanguage;
-use App\Models\Follow;
 use App\Repositories\FollowRepositoryInterface;
 use App\Repositories\UserLanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
