@@ -24,7 +24,7 @@ class FollowingController extends Controller
 
     public function index(int $userId)
     {
-        $myId       = $this->userAuthService->getLoginUserId();
+        $myId = $this->userAuthService->getLoginUserId();
 
         // NOTE: 自分がfollowしている人を取得
         $followings = $this->followRepository->getByUserId($myId);

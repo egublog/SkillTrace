@@ -21,7 +21,7 @@ class ActivityController extends Controller
 
     public function __invoke()
     {
-        $myId             = $this->userAuthService->getLoginUserId();
+        $myId = $this->userAuthService->getLoginUserId();
 
         // NOTE: 自分をfollowしている人を取得
         $followerAccounts = $this->followRepository->getByUserToId($myId);
