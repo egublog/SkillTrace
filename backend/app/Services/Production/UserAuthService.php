@@ -5,7 +5,7 @@ namespace App\Services\Production;
 use App\Services\UserAuthServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
-class UserAuthService extends UserAuthServiceInterface
+class UserAuthService implements UserAuthServiceInterface
 {
     public function getLoginUserId(): int
     {
