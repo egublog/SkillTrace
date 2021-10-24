@@ -65,7 +65,7 @@ class AreaTableSeeder extends Seeder
 
         for ($i = 0; $i < count($areas); $i++) {
             DB::table('areas')->insert([
-                'area' => $areas[$i]
+                'name' => $areas[$i]
             ]);
         }
     }

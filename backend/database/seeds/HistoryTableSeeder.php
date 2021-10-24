@@ -25,7 +25,7 @@ class HistoryTableSeeder extends Seeder
 
         for ($i = 0; $i < count($histories); $i++) {
             DB::table('histories')->insert([
-                'history' => $histories[$i]
+                'name' => $histories[$i]
             ]);
         }
     }
