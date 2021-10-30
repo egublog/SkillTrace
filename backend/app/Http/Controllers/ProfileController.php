@@ -9,6 +9,7 @@ use App\Models\Area;
 use App\Models\History;
 use App\Models\Language;
 use App\Repositories\AreaRepositoryInterface;
+use App\Repositories\LanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
@@ -18,18 +19,21 @@ class ProfileController extends Controller
     protected $userRepository;
     protected $areaRepository;
     protected $historyRepository;
+    protected $languageRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
         UserRepositoryInterface $userRepository,
         AreaRepositoryInterface $areaRepository,
-        HistoryRepositoryInterface $historyRepository
+        HistoryRepositoryInterface $historyRepository,
+        LanguageRepositoryInterface $languageRepository
     )
     {
-        $this->userAuthService   = $userAuthService;
-        $this->userRepository    = $userRepository;
-        $this->areaRepository    = $areaRepository;
-        $this->historyRepository = $historyRepository;
+        $this->userAuthService    = $userAuthService;
+        $this->userRepository     = $userRepository;
+        $this->areaRepository     = $areaRepository;
+        $this->historyRepository  = $historyRepository;
+        $this->languageRepository = $languageRepository;
     }
 
     public function index()
@@ -38,7 +42,7 @@ class ProfileController extends Controller
         $myAccount = $this->userRepository->findById($myId);
         $area      = $this->areaRepository->getAll();
         $histories = $this->historyRepository->getAll();
-        $languages = Language::all();
+        $languages = $this->languageRepository->getAll();
 
         return view('MyService.profile', compact('myId', 'areas', 'histories', 'languages', 'myAccount'));
     }
