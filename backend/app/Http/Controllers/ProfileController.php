@@ -8,6 +8,7 @@ use App\Http\Requests\ProfileImageRequest;
 use App\Models\Area;
 use App\Models\History;
 use App\Models\Language;
+use App\Repositories\AreaRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
@@ -15,21 +16,24 @@ class ProfileController extends Controller
 {
     protected $userAuthService;
     protected $userRepository;
+    protected $areaRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        AreaRepositoryInterface $areaRepository
     )
     {
         $this->userAuthService = $userAuthService;
         $this->userRepository  = $userRepository;
+        $this->areaRepository  = $areaRepository;
     }
 
     public function index()
     {
         $myId      = $this->userAuthService->getLoginUserId();
         $myAccount = $this->userRepository->findById($myId);
-        $area      = Area::all();
+        $area      = $this->areaRepository->getAll();
         $histories = History::all();
         $languages = Language::all();
 
