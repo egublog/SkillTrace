@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Area;
 use App\Repositories\AreaRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 final class AreaRepository implements AreaRepositoryInterface
 {
@@ -29,6 +30,16 @@ final class AreaRepository implements AreaRepositoryInterface
         return $this->model
             ->where('id', $id)
             ->first();
+    }
+
+    /**
+     * 全てのエリアを取得するためのメソッド。
+     *
+     * @return Collection
+     */
+    public function getAll(): Collection
+    {
+        return $this->model->all();
     }
 
     /**
