@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Language;
 use App\Repositories\LanguageRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 final class LanguageRepository implements LanguageRepositoryInterface
 {
@@ -29,6 +30,16 @@ final class LanguageRepository implements LanguageRepositoryInterface
         return $this->model
             ->where('id', $id)
             ->first();
+    }
+
+    /**
+     * 全てのLanguageを取得するためのメソッド。
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAll(): Collection
+    {
+        return $this->model->all();
     }
 
     /**
