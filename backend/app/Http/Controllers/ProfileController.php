@@ -17,16 +17,19 @@ class ProfileController extends Controller
     protected $userAuthService;
     protected $userRepository;
     protected $areaRepository;
+    protected $historyRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
         UserRepositoryInterface $userRepository,
-        AreaRepositoryInterface $areaRepository
+        AreaRepositoryInterface $areaRepository,
+        HistoryRepositoryInterface $historyRepository
     )
     {
-        $this->userAuthService = $userAuthService;
-        $this->userRepository  = $userRepository;
-        $this->areaRepository  = $areaRepository;
+        $this->userAuthService   = $userAuthService;
+        $this->userRepository    = $userRepository;
+        $this->areaRepository    = $areaRepository;
+        $this->historyRepository = $historyRepository;
     }
 
     public function index()
@@ -34,7 +37,7 @@ class ProfileController extends Controller
         $myId      = $this->userAuthService->getLoginUserId();
         $myAccount = $this->userRepository->findById($myId);
         $area      = $this->areaRepository->getAll();
-        $histories = History::all();
+        $histories = $this->historyRepository->getAll();
         $languages = Language::all();
 
         return view('MyService.profile', compact('myId', 'areas', 'histories', 'languages', 'myAccount'));
