@@ -14,16 +14,19 @@ class SkillAbilityController extends Controller
     protected $userAuthService;
     protected $userRepository;
     protected $userLanguageRepository;
+    protected $abilityRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
         UserRepositoryInterface $userRepository,
-        UserLanguageRepositoryInterface $userLanguageRepository
+        UserLanguageRepositoryInterface $userLanguageRepository,
+        AbilityRepositoryInterface $abilityRepository
     )
     {
         $this->userAuthService        = $userAuthService;
         $this->userRepository         = $userRepository;
         $this->userLanguageRepository = $userLanguageRepository;
+        $this->abilityRepository      = $abilityRepository;
     }
 
     public function create(int $userLanguageId)
@@ -31,7 +34,7 @@ class SkillAbilityController extends Controller
         $myId     = $this->userAuthService->getLoginUserId();
         $theSkill = $this->userLanguageRepository->findById($userLanguageId);
 
-        $abilities = Ability::where('user_language_id', $userLanguageId)->get();
+        $abilities = $this->abilityRepository->getByUserLanguageId($userLanguageId);
 
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'abilities'));
     }
@@ -57,7 +60,7 @@ class SkillAbilityController extends Controller
     {
         $myId     = $this->userAuthService->getLoginUserId();
         $theSkill = $this->userLanguageRepository->findById($userLanguageId);
-        $abilityEdit = Ability::find($abilityId);
+        $abilityEdit = $this->abilityRepository->findById($abilityId);
 
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'abilityEdit', 'abilityId', 'userLanguageId'));
     }
@@ -66,7 +69,7 @@ class SkillAbilityController extends Controller
     {
         $abilityText = $request->input('ability');
 
-        $abilityEdit = Ability::find($abilityId);
+        $abilityEdit = $this->abilityRepository->findById($abilityId);
 
         $abilityEdit->content = $abilityText;
         $abilityEdit->save();
@@ -89,7 +92,9 @@ class SkillAbilityController extends Controller
         $userId = $account->id;
         $skillId = $theSkill->language_id;
 
-        Ability::find($abilityId)->delete();
+        $ability = $this->abilityRepository->findById($abilityId);
+
+        $this->abilityRepository->delete($ability);
 
         return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
     }
