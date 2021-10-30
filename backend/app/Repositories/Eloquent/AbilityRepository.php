@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Ability;
 use App\Repositories\AbilityRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 final class AbilityRepository implements AbilityRepositoryInterface
 {
@@ -29,6 +30,18 @@ final class AbilityRepository implements AbilityRepositoryInterface
         return $this->model
             ->where('id', $id)
             ->first();
+    }
+
+    /**
+     * user_language_idを元に全件取得するためのメソッド。
+     *
+     * @return Collection
+     */
+    public function getByUserLanguageId(int $userLanguageId): Collection
+    {
+        return $this->model
+            ->where('user_language_id', $userLanguageId)
+            ->get();
     }
 
     /**
