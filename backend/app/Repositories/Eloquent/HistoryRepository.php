@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\History;
 use App\Repositories\HistoryRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 final class HistoryRepository implements HistoryRepositoryInterface
 {
@@ -29,6 +30,18 @@ final class HistoryRepository implements HistoryRepositoryInterface
         return $this->model
             ->where('id', $id)
             ->first();
+    }
+
+    /**
+     * 全てのHistoryを取得するためのメソッド。
+     *
+     * @return Collection
+     */
+
+    public function getAll(): Collection
+    {
+        return $this->model
+            ->all();
     }
 
     /**
