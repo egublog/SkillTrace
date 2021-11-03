@@ -3,10 +3,13 @@
 namespace App\Repositories;
 
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Collection;
 
 interface CategoryRepositoryInterface
 {
     public function findById(int $id): ?Category;
+
+    public function getAll(): Collection;
 
     public function create(array $savingAssoc);
 

@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Category;
 use App\Repositories\CategoryRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 final class CategoryRepository implements CategoryRepositoryInterface
 {
@@ -29,6 +30,16 @@ final class CategoryRepository implements CategoryRepositoryInterface
         return $this->model
             ->where('id', $id)
             ->first();
+    }
+
+    /**
+     * 全件取得するためのメソッド。
+     *
+     * @return Collection
+     */
+    public function getAll(): Collection
+    {
+        return $this->model->all();
     }
 
     /**
