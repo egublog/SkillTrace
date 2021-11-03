@@ -43,6 +43,19 @@ final class LanguageRepository implements LanguageRepositoryInterface
     }
 
     /**
+     * 指定したid以外のLanguageを取得するためのメソッド。
+     *
+     * @param int $id
+     * @return Collection
+     */
+    public function getWhereNotInId(int $id): Collection
+    {
+        return $this->model
+            ->whereNotIn('id', $id)
+            ->get();
+    }
+
+    /**
      * 保存するためのメソッド。
      *
      * @param array $savingAssoc 保存する対象の連想配列

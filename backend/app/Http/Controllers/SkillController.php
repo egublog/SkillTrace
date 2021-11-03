@@ -18,13 +18,15 @@ class SkillController extends Controller
     protected $userLanguageRepository;
     protected $traceRepository;
     protected $abilityRepository;
+    protected $languageRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
         UserRepositoryInterface $userRepository,
         UserLanguageRepositoryInterface $userLanguageRepository,
         TraceRepositoryInterface $traceRepository,
-        AbilityRepositoryInterface $abilityRepository
+        AbilityRepositoryInterface $abilityRepository,
+        LanguageRepositoryInterface $languageRepository
     )
     {
         $this->userAuthService        = $userAuthService;
@@ -32,6 +34,7 @@ class SkillController extends Controller
         $this->userLanguageRepository = $userLanguageRepository;
         $this->traceRepository        = $traceRepository;
         $this->abilityRepository      = $abilityRepository;
+        $this->languageRepository     = $languageRepository;
     }
 
     public function show(int $userId, int $skillId)
@@ -57,8 +60,7 @@ class SkillController extends Controller
 
         $userLanguages = $this->userLanguageRepository->findByUserIdAndGetLanguageId($myId);
 
-        $languages = Language::whereNotIn('id', $userLanguages)->get();
-
+        $languages =$this->languageRepository->getWhereNotIn($userLanguages);
 
         return view('MyService.skill-add', compact('myId', 'languages'));
     }

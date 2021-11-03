@@ -11,6 +11,8 @@ interface LanguageRepositoryInterface
 
     public function getAll(): Collection;
 
+    public function getWhereNotInId(int $id): Collection;
+
     public function create(array $savingAssoc);
 
     public function update(array $savingAssoc): ?bool;
