@@ -33,6 +33,16 @@ final class TraceRepository implements TraceRepositoryInterface
     }
 
     /**
+     * 全件取得するためのメソッド。
+     *
+     * @return Collection
+     */
+    public function getAll(): Collection
+    {
+        return $this->model->all();
+    }
+
+    /**
      * user_language_idを指定して検索するためのメソッド。
      *
      * @param integer $userLanguageId
@@ -94,5 +104,17 @@ final class TraceRepository implements TraceRepositoryInterface
             ->delete(
                 $deleteAssoc
             );
+    }
+
+    /**
+     * idを指定して削除するためのメソッド。
+     *
+     * @return null|bool 削除が成功したらtrue, 失敗したらfalseを返す
+     */
+    public function deleteById(int $id): ?bool
+    {
+        return $this->model
+            ->where('id', $id)
+            ->delete();
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 use App\Models\Trace;
 use App\Http\Requests\SkillTraceRequest;
+use App\Repositories\TraceRepositoryInterface;
 use App\Repositories\UserLanguageRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
@@ -13,14 +14,20 @@ class SkillTraceController extends Controller
 {
     protected $userAuthService;
     protected $userLanguageRepository;
+    protected $traceRepository;
+    protected $categoryRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
-        UserLanguageRepositoryInterface $userLanguageRepository
+        UserLanguageRepositoryInterface $userLanguageRepository,
+        TraceRepositoryInterface $traceRepository,
+        CategoryRepositoryInterface $categoryRepository
     )
     {
         $this->userAuthService        = $userAuthService;
         $this->userLanguageRepository = $userLanguageRepository;
+        $this->traceRepository        = $traceRepository;
+        $this->categoryRepository     = $categoryRepository;
     }
 
     public function create(int $userLanguageId)
@@ -29,8 +36,8 @@ class SkillTraceController extends Controller
 
         $theSkill = $this->userLanguageRepository->findById($userLanguageId);
 
-        $traces = Trace::all();
-        $categories = Category::all();
+        $traces = $this->traceRepository->getAll();
+        $categories = $this->categoryRepository->getAll();
 
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'categories', 'traces'));
     }
@@ -68,9 +75,9 @@ class SkillTraceController extends Controller
 
         $theSkill = $this->userLanguageRepository->findById($userLanguageId);
 
-        $traceEdit = Trace::find($traceId);
+        $traceEdit = $this->traceRepository->findById($traceId);
 
-        $categories = Category::all();
+        $categories = $this->categoryRepository->getAll();
 
         return view('MyService.skill-edit', compact('myId', 'theSkill', 'categories', 'traceEdit', 'traceId', 'userLanguageId'));
     }
@@ -81,7 +88,7 @@ class SkillTraceController extends Controller
         $traceContent = $request->input('trace');
         $traceCategoryId = $request->input('category');
 
-        $traceEdit = Trace::find($traceId);
+        $traceEdit = $this->categoryRepository->findById($traceId);
 
         if ($traceImg === null) {
             $traceEdit->img = null;
@@ -110,7 +117,7 @@ class SkillTraceController extends Controller
         $userId = $theSkill->user_id;
         $skillId = $theSkill->language_id;
 
-        Trace::find($traceId)->delete();
+        $this->traceRepository->deleteById($traceId);
 
         return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
     }
