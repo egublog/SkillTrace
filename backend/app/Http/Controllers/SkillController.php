@@ -16,16 +16,19 @@ class SkillController extends Controller
     protected $userAuthService;
     protected $userRepository;
     protected $userLanguageRepository;
+    protected $traceRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
         UserRepositoryInterface $userRepository,
-        UserLanguageRepositoryInterface $userLanguageRepository
+        UserLanguageRepositoryInterface $userLanguageRepository,
+        TraceRepositoryInterface $traceRepository
     )
     {
         $this->userAuthService        = $userAuthService;
         $this->userRepository         = $userRepository;
         $this->userLanguageRepository = $userLanguageRepository;
+        $this->traceRepository        = $traceRepository;
     }
 
     public function show(int $userId, int $skillId)
@@ -39,7 +42,7 @@ class SkillController extends Controller
 
         $account = $this->userRepository->findById($userId);
 
-        $traces = Trace::where('user_language_id', $userLanguageId)->get();
+        $traces = $this->traceRepository->getByUserLanguageId($userLanguageId);
         $abilities = Ability::where('user_language_id', $userLanguageId)->get();
 
         return view('MyService.skill-item', compact('theSkill', 'traces', 'abilities', 'myId', 'account', 'skillId', 'userLanguageId', 'userId'));

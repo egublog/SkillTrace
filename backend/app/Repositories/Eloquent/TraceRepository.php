@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Trace;
 use App\Repositories\TraceRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 final class TraceRepository implements TraceRepositoryInterface
 {
@@ -29,6 +30,19 @@ final class TraceRepository implements TraceRepositoryInterface
         return $this->model
             ->where('id', $id)
             ->first();
+    }
+
+    /**
+     * user_language_idを指定して検索するためのメソッド。
+     *
+     * @param integer $userLanguageId
+     * @return Collection
+     */
+    public function getByUserLanguageId(int $userLanguageId): Collection
+    {
+        return $this->model
+            ->where('user_language_id', $userLanguageId)
+            ->get();
     }
 
     /**
