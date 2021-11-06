@@ -27,6 +27,7 @@ class Talk extends Model
 
     /**
      * scope
+     * // NOTE: ここはRepository層に置き換える
      *
      * @return \Illuminate\Database\Query\Builder
      */
@@ -35,12 +36,12 @@ class Talk extends Model
     {
         return $query->where('user_id', $id);
     }
-    
+
     public function scopeTalked($query, $id)
     {
         return $query->where('user_to_id', $id);
     }
-    
+
     public function scopeTalk($query, $myId, $theFriendId)
     {
         return $query->where('user_id', $myId)
@@ -60,12 +61,13 @@ class Talk extends Model
 
     /**
      * 既読処理
+     * // NOTE: ここはRepository層に置き換える
      *
      * @return void
      */
     public static function readCheck($yetColumns)
     {
-        if (isset($yetColumns->first()->user_id)) 
+        if (isset($yetColumns->first()->user_id))
         {
             foreach ($yetColumns as $yetColumn) {
                 $yetColumn->yet = true;
@@ -113,7 +115,7 @@ class Talk extends Model
      * @return array
      */
 
-    public static function search($talkingUsersBeforeSearch, $searchResultName) 
+    public static function search($talkingUsersBeforeSearch, $searchResultName)
     {
         $talkingUsers = [];
 
