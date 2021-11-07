@@ -89,7 +89,7 @@ final class TalkRepository implements TalkRepositoryInterface
     }
 
     /**
-     * そのFriendと話しているTalk全てを取得するためのメソッド。
+     * theFriendIdのuserと話しているTalk全てを取得するためのメソッド。
      *
      * @param int $userId
      * @param int $theFriendId
