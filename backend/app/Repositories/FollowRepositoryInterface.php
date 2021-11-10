@@ -9,7 +9,7 @@ interface FollowRepositoryInterface
 {
     public function findById(int $id): ?Follow;
 
-    public function create(array $savingAssoc);
+    public function create(array $savingAssoc): Follow;
 
     public function update(array $savingAssoc): ?bool;
 

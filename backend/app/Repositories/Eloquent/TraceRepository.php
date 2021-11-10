@@ -64,7 +64,7 @@ final class TraceRepository implements TraceRepositoryInterface
      *
      * @return Trace 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): Trace
     {
         return $this->model
             ->create(

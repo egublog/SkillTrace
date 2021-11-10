@@ -11,7 +11,7 @@ interface HistoryRepositoryInterface
 
     public function getAll(): Collection;
 
-    public function create(array $savingAssoc);
+    public function create(array $savingAssoc): History;
 
     public function update(array $savingAssoc): ?bool;
 

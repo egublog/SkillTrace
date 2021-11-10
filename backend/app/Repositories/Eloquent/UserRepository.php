@@ -40,7 +40,7 @@ final class UserRepository implements UserRepositoryInterface
      *
      * @return User 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): User
     {
         return $this->model
             ->create(

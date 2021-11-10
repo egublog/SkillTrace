@@ -8,7 +8,7 @@ interface UserRepositoryInterface
 {
     public function findById(int $id): ?User;
 
-    public function create(array $savingAssoc);
+    public function create(array $savingAssoc): User;
 
     public function update(array $savingAssoc): ?bool;
 

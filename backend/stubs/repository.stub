@@ -40,7 +40,7 @@ final class {{class}}Repository implements {{class}}RepositoryInterface
      *
      * @return {{ class }} 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): {{ class }}
     {
         return $this->model
             ->create(

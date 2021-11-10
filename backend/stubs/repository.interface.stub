@@ -8,7 +8,7 @@ interface {{class}}RepositoryInterface
 {
     public function findById(int $id): ?{{class}};
 
-    public function create(array $savingAssoc);
+    public function create(array $savingAssoc): {{ class }};
 
     public function update(array $savingAssoc): ?bool;
 

@@ -9,7 +9,7 @@ interface UserLanguageRepositoryInterface
 {
     public function findById(int $id): ?UserLanguage;
 
-    public function create(array $savingAssoc);
+    public function create(array $savingAssoc): UserLanguage;
 
     public function update(array $savingAssoc): ?bool;
 

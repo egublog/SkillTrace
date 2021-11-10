@@ -53,7 +53,7 @@ final class AbilityRepository implements AbilityRepositoryInterface
      *
      * @return Ability 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): Ability
     {
         return $this->model
             ->create(

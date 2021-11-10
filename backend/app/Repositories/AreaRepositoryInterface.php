@@ -11,7 +11,7 @@ interface AreaRepositoryInterface
 
     public function getAll(): Collection;
 
-    public function create(array $savingAssoc);
+    public function create(array $savingAssoc): Area;
 
     public function update(array $savingAssoc): ?bool;
 

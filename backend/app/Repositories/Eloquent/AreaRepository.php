@@ -51,7 +51,7 @@ final class AreaRepository implements AreaRepositoryInterface
      *
      * @return Area 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): Area
     {
         return $this->model
             ->create(

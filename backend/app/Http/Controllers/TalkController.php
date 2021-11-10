@@ -12,21 +12,24 @@ class TalkController extends Controller
 {
     protected $userAuthService;
     protected $userRepository;
+    protected $talkRepository;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        TalkRepositoryInterface $talkRepository
     )
     {
         $this->userAuthService = $userAuthService;
         $this->userRepository  = $userRepository;
+        $this->talkRepository  = $talkRepository;
     }
 
     public function index()
     {
         $myId      = $this->userAuthService->getLoginUserId();
 
-        $talkLists = Talk::talkingListLatest($myId)->get();
+        $talkLists = $this->talkRepository->getLatestByUserIdOrUserToId($myId);
 
         $talkingUsers = Talk::getTalkingList($myId, $talkLists);
 
@@ -38,7 +41,7 @@ class TalkController extends Controller
         $myId             = $this->userAuthService->getLoginUserId();
         $searchResultName = $request->input('talk_search_name');
 
-        $talkLists = Talk::talkingListLatest($myId)->get();
+        $talkLists = $this->talkRepository->getLatestByUserIdOrUserToId($myId);
 
         $talkingUsersBeforeSearch = Talk::getTalkingList($myId, $talkLists);
 
@@ -55,14 +58,14 @@ class TalkController extends Controller
 
         $myId      = $this->userAuthService->getLoginUserId();
 
-        $talkLists = Talk::talkingListLatest($myId)->get();
+        $talkLists = $this->talkRepository->getLatestByUserIdOrUserToId($myId);
 
         $talkingUsers = Talk::getTalkingList($myId, $talkLists);
 
-        $yetColumns = Talk::talking($theFriendId)->talked($myId)->get();
+        $yetColumns = $this->talkRepository->getByUserIdOrUserToId($theFriendId, $myId);
         Talk::readCheck($yetColumns);
 
-        $talks = Talk::talk($myId, $theFriendId)->get();
+        $talks = $this->talkRepository->getTalkByTheFriendId($myId, $theFriendId);
 
         return view('MyService.talk-show', compact('myId', 'theFriendId', 'talkingUsers', 'theFriendAccount', 'talks'));
     }
