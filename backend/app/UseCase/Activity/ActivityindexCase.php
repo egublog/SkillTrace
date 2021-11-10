@@ -5,26 +5,33 @@ declare(strict_types=1);
 namespace App\UseCase\Activity;
 
 use App\UseCase\ActivityIndexCaseInterface;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use stdClass;
+use Illuminate\Contracts\View\View;
 
 final class ActivityIndexCase implements ActivityIndexCaseInterface
 {
-
-    private $activityRepository;
+    private $followRepository;
+    private $userAuthService;
 
     public function __construct(
-        ActivityRepositoryInterface $activityRepository
+        FollowRepositoryInterface $followRepository,
+        UserAuthServiceInterface $userAuthService
     ) {
-        $this->activityRepository = $activityRepository;
+        $this->followRepository = $followRepository;
+        $this->userAuthService  = $userAuthService;
     }
 
     /**
      *
-     * @return 
+     * @return
      */
-    public function handle()
+    public function handle(): View
     {
+        $myId = $this->userAuthService->getLoginUserId();
 
+        // NOTE: 自分をfollowしている人を取得
+        $followerAccounts = $this->followRepository->getByUserToId($myId);
+        $followerAccounts->load('user_follower');
+
+        return view('MyService.activity', compact('myId', 'followerAccounts'));
     }
 }

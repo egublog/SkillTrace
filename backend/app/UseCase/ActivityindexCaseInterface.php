@@ -1,9 +1,9 @@
 <?php
 namespace App\UseCase;
 
-use stdClass;
+use Illuminate\Contracts\View\View;
 
 interface ActivityIndexCaseInterface
 {
-    public function handle();
+    public function handle(): View;
 }
