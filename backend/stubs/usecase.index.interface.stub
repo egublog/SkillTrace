@@ -1,0 +1,9 @@
+<?php
+namespace App\UseCase;
+
+use stdClass;
+
+interface {{class}}IndexCaseInterface
+{
+    public function handle(int $, int $pageSize, int $pageNumber): stdClass;
+}
