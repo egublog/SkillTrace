@@ -1,0 +1,9 @@
+<?php
+namespace App\UseCase;
+
+use stdClass;
+
+interface {{class}}UpdateCaseInterface
+{
+    public function handle(int $updateTargetId, array $updatingValue): stdClass;
+}

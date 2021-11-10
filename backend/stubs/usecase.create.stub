@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\UseCase\{{class}};
+
+use App\UseCase\{{class}}CreateCaseInterface;
+use stdClass;
+
+final class {{class}}CreateCase implements {{class}}CreateCaseInterface
+{
+
+    private ${{class}}Repository;
+
+    public function __construct(
+        {{class}}RepositoryInterface ${{class}}Repository
+    ) {
+        $this->{{class}}Repository = ${{class}}Repository;
+    }
+
+    /**
+     *
+     * @return stdClass 作成した値を返す
+     */
+    public function handle(array $savingValue): stdClass
+    {
+
+        // TODO: 送信内容が空でないかチェックする実装を行う。
+        $savedValue = $this->{{class}}Repository->updateOrCreate((int) $savingValue);
+        return (object)$savedValue;
+    }
+}

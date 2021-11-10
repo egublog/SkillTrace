@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\UseCase\{{class}};
+
+use App\UseCase\{{class}}IndexCaseInterface;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use stdClass;
+
+final class {{class}}IndexCase implements {{class}}IndexCaseInterface
+{
+
+    private ${{small_class}}Repository;
+
+    public function __construct(
+        {{class}}RepositoryInterface ${{small_class}}Repository
+    ) {
+        $this->{{small_class}}Repository = ${{small_class}}Repository;
+    }
+
+    /**
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function handle(
+        int $pageSize,
+        int $pageNumber
+        // 引数が必要であれば、随時追加すること
+    ): stdClass {
+
+        $paginated = $this->{{small_class}}Repository->paginate($pageSize, $pageNumber);
+        $data = $paginated->data;
+
+        // EagerLoadするべきものがあればここで行う。
+        $data->load();
+
+        $paginated->data = {{class}}Resource::collection($data);
+
+        return $paginated;
+    }
+}

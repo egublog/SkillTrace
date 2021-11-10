@@ -4,29 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Repositories\FollowRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
+use App\UseCase\ActivityIndexCaseInterface;
 
 class ActivityController extends Controller
 {
-    protected $userAuthService;
-    protected $followRepository;
+    protected $activityIndexCase;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService,
-        FollowRepositoryInterface $followRepository
+        ActivityIndexCaseInterface $activityIndexCase
     )
     {
-        $this->userAuthService  = $userAuthService;
-        $this->followRepository = $followRepository;
+        $this->activityIndexCase = $activityIndexCase;
     }
 
     public function __invoke()
     {
-        $myId = $this->userAuthService->getLoginUserId();
+        $activities = $this->activityIndexCase->handle();
 
-        // NOTE: 自分をfollowしている人を取得
-        $followerAccounts = $this->followRepository->getByUserToId($myId);
-        $followerAccounts->load('user_follower');
-
-        return view('MyService.activity', compact('myId', 'followerAccounts'));
+        return $activities;
     }
 }

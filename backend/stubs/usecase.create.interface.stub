@@ -1,0 +1,9 @@
+<?php
+namespace App\UseCase\;
+
+use stdClass;
+
+interface {{class}}CreateCaseInterface
+{
+    public function handle(array $savingValue): stdClass;
+}

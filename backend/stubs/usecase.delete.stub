@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\UseCase\{{class}};
+
+use App\UseCase\{{class}}DeleteCaseInterface;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use stdClass;
+
+final class {{class}}DeleteCase implements {{class}}DeleteCaseInterface
+{
+
+    private ${{class}}Repository;
+
+    public function __construct(
+        {{class}}RepositoryInterface ${{class}}Repository
+    ) {
+        $this->{{class}}Repository = ${{class}}Repository;
+    }
+
+    /**
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function handle(int $id, array $deletingValue)
+    {
+
+        // TODO: 送信内容が空でないかチェックする実装を行う。
+        $alreadyRegister = $this->{{class}}Repository->findById((int) $id);
+        // 更新する項目を抽出し、入れる
+        // メソッドなどを実装するように変更を行うこと。
+        // ex) $alreadyRegister->title = $deletingValue['title'];
+        $this->{{class}}Repository->delete([$alreadyRegister]);
+        // ↓件数によっては全件を取得する。
+        $remainingValues = $this->{{class}}Repository->paginate();
+
+        return $remainingValues->isEmpty() ? [] : {{class}}Resource::collection($remainingValues);
+    }
+}
