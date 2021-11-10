@@ -13,7 +13,7 @@ interface LanguageRepositoryInterface
 
     public function getWhereNotInId(int $id): Collection;
 
-    public function create(array $savingAssoc);
+    public function create(array $savingAssoc): Language;
 
     public function update(array $savingAssoc): ?bool;
 

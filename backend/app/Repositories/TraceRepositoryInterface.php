@@ -13,7 +13,7 @@ interface TraceRepositoryInterface
 
     public function getByUserLanguageId(int $userLanguageId): Collection;
 
-    public function create(array $savingAssoc);
+    public function create(array $savingAssoc): Trace;
 
     public function update(array $savingAssoc): ?bool;
 

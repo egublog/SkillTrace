@@ -64,7 +64,7 @@ final class LanguageRepository implements LanguageRepositoryInterface
      *
      * @return Language 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): Language
     {
         return $this->model
             ->create(

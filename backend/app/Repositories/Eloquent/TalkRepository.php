@@ -115,7 +115,7 @@ final class TalkRepository implements TalkRepositoryInterface
      *
      * @return Talk 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): Talk
     {
         return $this->model
             ->create(

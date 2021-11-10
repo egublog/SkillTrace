@@ -41,7 +41,7 @@ final class FollowRepository implements FollowRepositoryInterface
      *
      * @return Follow 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): Follow
     {
         return $this->model
             ->create(

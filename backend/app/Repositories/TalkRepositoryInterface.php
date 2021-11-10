@@ -17,7 +17,7 @@ interface TalkRepositoryInterface
 
     public function getTalkByTheFriendId(int $userId, int $theFriendId): Collection;
 
-    public function create(array $savingAssoc);
+    public function create(array $savingAssoc): Talk;
 
     public function update(array $savingAssoc): ?bool;
 

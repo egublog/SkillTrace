@@ -51,7 +51,7 @@ final class CategoryRepository implements CategoryRepositoryInterface
      *
      * @return Category 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): Category
     {
         return $this->model
             ->create(

@@ -11,7 +11,7 @@ interface CategoryRepositoryInterface
 
     public function getAll(): Collection;
 
-    public function create(array $savingAssoc);
+    public function create(array $savingAssoc): Category;
 
     public function update(array $savingAssoc): ?bool;
 

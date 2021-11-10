@@ -41,7 +41,7 @@ final class UserLanguageRepository implements UserLanguageRepositoryInterface
      *
      * @return UserLanguage 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): UserLanguage
     {
         return $this->model
             ->create(

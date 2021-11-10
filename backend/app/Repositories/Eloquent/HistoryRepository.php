@@ -53,7 +53,7 @@ final class HistoryRepository implements HistoryRepositoryInterface
      *
      * @return History 保存した内容を返す
      */
-    public function create(array $savingAssoc)
+    public function create(array $savingAssoc): History
     {
         return $this->model
             ->create(
