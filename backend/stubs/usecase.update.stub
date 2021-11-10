@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\UseCase\{{class}};
+
+use App\UseCase\{{class}}UpdateCaseInterface;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use stdClass;
+
+final class {{class}}UpdateCase implements {{class}}UpdateCaseInterface
+{
+
+    private ${{small_class}}Repository;
+
+    public function __construct(
+        {{class}}RepositoryInterface ${{small_class}}Repository
+    ) {
+        $this->{{small_class}}Repository = ${{small_class}}Repository;
+    }
+
+    /**
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function handle(int $updateTargetId, array $updatingValue)
+    {
+        // TODO: 送信内容が空でないかチェックする実装を行う。
+        $alreadyRegister = $this->{{small_class}}Repository->findById((int) $id);
+        // 更新する項目を抽出し、入れる
+        // 項目が多いなどの考慮が出てきた場合にはex以外の方法を考えたり、RepositoryにbulkInsertOrUpdate
+        // メソッドなどを実装するように変更を行うこと。
+        // ex) $alreadyRegister->title = $updatingValue['title'];
+        $this->{{small_class}}Repository->updateOrCreate([$alreadyRegister]);
+        // ↓件数によっては全件を取得する。
+        $updated = $this->{{class}}Repository->paginate();
+
+        return $updated->isEmpty() ? [] : {{class}}Resource::collection($updated);
+    }
+}
