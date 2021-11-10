@@ -1,0 +1,9 @@
+<?php
+namespace App\UseCase;
+
+use stdClass;
+
+interface {{class}}DeleteCaseInterface
+{
+    public function handle(int $id);
+}
