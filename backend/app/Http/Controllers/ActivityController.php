@@ -6,6 +6,9 @@ use App\Repositories\FollowRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 use App\UseCase\ActivityIndexCaseInterface;
 
+/**
+ * フォローされた可動化の通知に関するコントローラー
+ */
 class ActivityController extends Controller
 {
     protected $activityIndexCase;
