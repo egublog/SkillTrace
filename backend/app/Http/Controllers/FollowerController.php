@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Repositories\FollowRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
+/**
+ * フォロワーに関するコントローラー
+ */
 class FollowerController extends Controller
 {
     protected $userAuthService;
