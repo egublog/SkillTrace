@@ -7,6 +7,9 @@ namespace App\UseCase\Activity;
 use App\UseCase\ActivityIndexCaseInterface;
 use Illuminate\Contracts\View\View;
 
+/**
+ * /activities.indexのユースケース
+ */
 final class ActivityIndexCase implements ActivityIndexCaseInterface
 {
     private $followRepository;
@@ -21,8 +24,9 @@ final class ActivityIndexCase implements ActivityIndexCaseInterface
     }
 
     /**
-     *
-     * @return
+     *  activities.indexのユースケース
+     * 
+     * @return View
      */
     public function handle(): View
     {
