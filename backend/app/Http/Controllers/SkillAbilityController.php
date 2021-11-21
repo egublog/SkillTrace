@@ -9,6 +9,9 @@ use App\Repositories\UserLanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
+/**
+ * ユーザーのできることを登録するコントローラー
+ */
 class SkillAbilityController extends Controller
 {
     protected $userAuthService;
