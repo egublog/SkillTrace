@@ -8,6 +8,9 @@ use App\Http\Requests\SearchTalkUserRequest;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
+/**
+ * トーク内容を登録するコントローラー
+ */
 class TalkController extends Controller
 {
     protected $userAuthService;
