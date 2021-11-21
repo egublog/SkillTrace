@@ -10,6 +10,9 @@ use App\Repositories\TraceRepositoryInterface;
 use App\Repositories\UserLanguageRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
+/**
+ * スキルの軌跡を管理するコントローラー
+ */
 class SkillTraceController extends Controller
 {
     protected $userAuthService;
