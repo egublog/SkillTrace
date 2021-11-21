@@ -10,6 +10,9 @@ use App\Http\Requests\SearchRequest;
 use App\Repositories\AreaRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
+/**
+ * 検索画面コントローラー
+ */
 class SearchController extends Controller
 {
     protected $userAuthService;
