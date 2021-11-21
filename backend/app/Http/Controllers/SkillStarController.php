@@ -7,6 +7,9 @@ use App\Repositories\UserLanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
+/**
+ * スキルの星を登録するコントローラー
+ */
 class SkillStarController extends Controller
 {
     protected $userAuthService;
