@@ -6,6 +6,9 @@ use App\Repositories\FollowRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
+/**
+ * 自分がフォローしている人に関するコントローラー
+ */
 class FollowingController extends Controller
 {
     protected $userAuthService;
