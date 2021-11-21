@@ -7,6 +7,9 @@ use App\Repositories\UserLanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
+/**
+ * ホームページを表示するコントローラー
+ */
 class HomeController extends Controller
 {
     protected $userAuthService;
