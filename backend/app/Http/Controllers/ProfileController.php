@@ -13,6 +13,9 @@ use App\Repositories\LanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
+/**
+ * プロフィール画面に関するコントローラー
+ */
 class ProfileController extends Controller
 {
     protected $userAuthService;
