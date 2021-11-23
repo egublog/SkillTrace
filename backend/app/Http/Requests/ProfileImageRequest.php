@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * /profiles.image_storeのリクエストクラス
+ */
 class ProfileImageRequest extends FormRequest
 {
     /**
