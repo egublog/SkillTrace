@@ -12,11 +12,17 @@ use App\UseCase\FollowingIndexCaseInterface;
  */
 class FollowingController extends Controller
 {
+    protected $userAuthService;
+    protected $userRepository;
     protected $followingIndexCase;
 
     public function __construct(
+        UserAuthServiceInterface $userAuthService,
+        UserRepositoryInterface $userRepository,
         FollowingIndexCaseInterface $followingIndexCase
     ) {
+        $this->userAuthService = $userAuthService;
+        $this->userRepository = $userRepository;
         $this->followingIndexCase = $followingIndexCase;
     }
 
