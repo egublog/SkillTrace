@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\FollowRepositoryInterface;
-use App\Repositories\UserLanguageRepositoryInterface;
-use App\Repositories\UserRepositoryInterface;
-use App\Services\UserAuthServiceInterface;
+use App\UseCase\HomeHomeCaseInterface;
 use App\UseCase\HomeIndexCaseInterface;
 
 /**
@@ -13,25 +10,16 @@ use App\UseCase\HomeIndexCaseInterface;
  */
 class HomeController extends Controller
 {
-    protected $userAuthService;
-    protected $userRepository;
-    protected $followRepository;
-    protected $userLanguageRepository;
     protected $homeIndexCase;
+    protected $homeHomeCase;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService,
-        UserRepositoryInterface $userRepository,
-        FollowRepositoryInterface $followRepository,
-        UserLanguageRepositoryInterface $userLanguageRepository,
-        HomeIndexCaseInterface $homeIndexCase
+        HomeIndexCaseInterface $homeIndexCase,
+        HomeHomeCaseInterface $homeHomeCase
     )
     {
-        $this->userAuthService        = $userAuthService;
-        $this->userRepository         = $userRepository;
-        $this->followRepository       = $followRepository;
-        $this->userLanguageRepository = $userLanguageRepository;
         $this->homeIndexCase          = $homeIndexCase;
+        $this->homeHomeCase           = $homeHomeCase;
     }
 
     public function index()
@@ -44,19 +32,8 @@ class HomeController extends Controller
 
     public function home(int $userId)
     {
-        $myId      = $this->userAuthService->getLoginUserId();
-        $myAccount = $this->userRepository->findById($myId);
+        $home = $this->homeHomeCase->handle($userId);
 
-        $languages = $this->userLanguageRepository->findByUserIdAndAscByLanguageId($userId);
-        $languages->load('language');
-
-        // TODO: 独自のHomeHomeRequestを作成し、userIdがない場合を考慮する。
-        $account = $this->userRepository->findById($userId);
-
-        $followCheck = $this->followRepository->getByUserIdAndUserToId($myId, $userId);
-
-        $this->followRepository->followCheck($followCheck);
-
-        return view('MyService.home', compact('myId', 'myAccount', 'userId', 'account', 'languages', 'followCheck'));
+        return $home;
     }
 }
