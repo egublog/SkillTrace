@@ -5,35 +5,26 @@ namespace App\Http\Controllers;
 use App\Repositories\FollowRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
+use App\UseCase\FollowingIndexCaseInterface;
 
 /**
  * 自分がフォローしている人に関するコントローラー
  */
 class FollowingController extends Controller
 {
-    protected $userAuthService;
-    protected $userRepository;
-    protected $followRepository;
+    protected $followingIndexCase;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService,
-        UserRepositoryInterface $userRepository,
-        FollowRepositoryInterface $followRepository
+        FollowingIndexCaseInterface $followingIndexCase
     ) {
-        $this->userAuthService  = $userAuthService;
-        $this->userRepository   = $userRepository;
-        $this->followRepository = $followRepository;
+        $this->followingIndexCase = $followingIndexCase;
     }
 
     public function index(int $userId)
     {
-        $myId = $this->userAuthService->getLoginUserId();
+        $followings = $this->followingIndexCase->handle($userId);
 
-        // NOTE: 自分がfollowしている人を取得
-        $followings = $this->followRepository->getByUserId($myId);
-        $followings->load('user_following');
-
-        return view('MyService.friends-list', compact('myId', 'followings', 'userId'));
+        return $followings;
     }
 
     public function follow(int $userId)
