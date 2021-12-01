@@ -6,6 +6,7 @@ use App\Repositories\FollowRepositoryInterface;
 use App\Repositories\UserLanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
+use App\UseCase\HomeIndexCaseInterface;
 
 /**
  * ホームページを表示するコントローラー
@@ -16,26 +17,28 @@ class HomeController extends Controller
     protected $userRepository;
     protected $followRepository;
     protected $userLanguageRepository;
+    protected $homeIndexCase;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
         UserRepositoryInterface $userRepository,
         FollowRepositoryInterface $followRepository,
-        UserLanguageRepositoryInterface $userLanguageRepository
+        UserLanguageRepositoryInterface $userLanguageRepository,
+        HomeIndexCaseInterface $homeIndexCase
     )
     {
         $this->userAuthService        = $userAuthService;
         $this->userRepository         = $userRepository;
         $this->followRepository       = $followRepository;
         $this->userLanguageRepository = $userLanguageRepository;
+        $this->homeIndexCase          = $homeIndexCase;
     }
 
     public function index()
     {
-        $myId    = $this->userAuthService->getLoginUserId();
-        $account = $this->userRepository->findById($myId);
+        $index = $this->homeIndexCase->handle();
 
-        return view('home', compact('myId', 'account'));
+        return $index;
     }
 
 
