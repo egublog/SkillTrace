@@ -15,17 +15,22 @@ class UseCaseServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             \App\UseCase\FollowerIndexCaseInterface::class,
-            \App\UseCase\FollowerIndexCase::class
+            \App\UseCase\Follower\FollowerIndexCase::class
         );
 
         $this->app->bind(
             \App\UseCase\FollowingIndexCaseInterface::class,
-            \App\UseCase\FollowingIndexCase::class
+            \App\UseCase\Following\FollowingIndexCase::class
         );
 
         $this->app->bind(
             \App\UseCase\HomeIndexCaseInterface::class,
-            \App\UseCase\HomeIndexCase::class
+            \App\UseCase\Home\HomeIndexCase::class
+        );
+
+        $this->app->bind(
+            \App\UseCase\HomeHomeCaseInterface::class,
+            \App\UseCase\Home\HomeHomeCase::class
         );
     }
 
