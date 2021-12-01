@@ -30,7 +30,7 @@ final class FollowerIndexCase implements FollowerIndexCaseInterface
      *
      * @return View
      */
-    public function handle(): View
+    public function handle(int $userId): View
     {
         $myId = $this->userAuthService->getLoginUserId();
 

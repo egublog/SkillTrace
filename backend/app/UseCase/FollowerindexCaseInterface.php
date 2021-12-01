@@ -5,5 +5,5 @@ use Illuminate\Contracts\View\View;
 
 interface FollowerIndexCaseInterface
 {
-    public function handle(): View;
+    public function handle(int $userId): View;
 }
