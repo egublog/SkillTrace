@@ -22,6 +22,11 @@ class UseCaseServiceProvider extends ServiceProvider
             \App\UseCase\FollowingIndexCaseInterface::class,
             \App\UseCase\FollowingIndexCase::class
         );
+
+        $this->app->bind(
+            \App\UseCase\HomeIndexCaseInterface::class,
+            \App\UseCase\HomeIndexCase::class
+        );
     }
 
     /**
