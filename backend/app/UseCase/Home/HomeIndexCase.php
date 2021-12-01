@@ -9,6 +9,9 @@ use App\Services\UserAuthServiceInterface;
 use App\UseCase\HomeIndexCaseInterface;
 use Illuminate\Contracts\View\View;
 
+/**
+ * home.indexのユースケース
+ */
 final class HomeIndexCase implements HomeIndexCaseInterface
 {
     private $userAuthService;

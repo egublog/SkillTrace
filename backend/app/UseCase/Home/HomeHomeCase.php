@@ -11,6 +11,9 @@ use App\Services\UserAuthServiceInterface;
 use App\UseCase\HomeHomeCaseInterface;
 use Illuminate\Contracts\View\View;
 
+/**
+ * home.homeのユースケース
+ */
 final class HomeHomeCase implements HomeHomeCaseInterface
 {
     private $userAuthService;
