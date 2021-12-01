@@ -13,7 +13,10 @@ class UseCaseServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            \App\UseCase\FollowerIndexCaseInterface::class,
+            \App\UseCase\FollowerIndexCase::class
+        );
     }
 
     /**
