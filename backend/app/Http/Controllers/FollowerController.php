@@ -19,7 +19,6 @@ class FollowerController extends Controller
         $this->followerIndexCase = $followerIndexCase;
     }
 
-    // NOTE: UseCase層を作ったが、引数の$userIdをどう処理するか迷うため、一旦放置
     public function index(int $userId)
     {
         $followers = $this->followerIndexCase->handle($userId);
