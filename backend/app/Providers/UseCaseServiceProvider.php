@@ -32,6 +32,11 @@ class UseCaseServiceProvider extends ServiceProvider
             \App\UseCase\HomeHomeCaseInterface::class,
             \App\UseCase\Home\HomeHomeCase::class
         );
+
+        $this->app->bind(
+            \App\UseCase\ProfileIndexCaseInterface::class,
+            \App\UseCase\Profile\ProfileIndexCase::class
+        );
     }
 
     /**
