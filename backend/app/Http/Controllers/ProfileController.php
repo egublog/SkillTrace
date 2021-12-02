@@ -12,6 +12,7 @@ use App\Repositories\AreaRepositoryInterface;
 use App\Repositories\LanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
+use App\UseCase\ProfileIndexCaseInterface;
 
 /**
  * プロフィール画面に関するコントローラー
@@ -23,13 +24,15 @@ class ProfileController extends Controller
     protected $areaRepository;
     protected $historyRepository;
     protected $languageRepository;
+    protected $profileIndexCase;
 
     public function __construct(
         UserAuthServiceInterface $userAuthService,
         UserRepositoryInterface $userRepository,
         AreaRepositoryInterface $areaRepository,
         HistoryRepositoryInterface $historyRepository,
-        LanguageRepositoryInterface $languageRepository
+        LanguageRepositoryInterface $languageRepository,
+        ProfileIndexCaseInterface $profileIndexCase
     )
     {
         $this->userAuthService    = $userAuthService;
@@ -37,17 +40,14 @@ class ProfileController extends Controller
         $this->areaRepository     = $areaRepository;
         $this->historyRepository  = $historyRepository;
         $this->languageRepository = $languageRepository;
+        $this->profileIndexCase   = $profileIndexCase;
     }
 
     public function index()
     {
-        $myId      = $this->userAuthService->getLoginUserId();
-        $myAccount = $this->userRepository->findById($myId);
-        $area      = $this->areaRepository->getAll();
-        $histories = $this->historyRepository->getAll();
-        $languages = $this->languageRepository->getAll();
+        $index = $this->profileIndexCase->handle();
 
-        return view('MyService.profile', compact('myId', 'areas', 'histories', 'languages', 'myAccount'));
+        return $index;
     }
 
     public function store(ProfileRequest $request)
