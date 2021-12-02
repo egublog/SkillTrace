@@ -37,6 +37,16 @@ class UseCaseServiceProvider extends ServiceProvider
             \App\UseCase\ProfileIndexCaseInterface::class,
             \App\UseCase\Profile\ProfileIndexCase::class
         );
+
+        $this->app->bind(
+            \App\UseCase\ProfileStoreCaseInterface::class,
+            \App\UseCase\Profile\ProfileStoreCase::class
+        );
+
+        $this->app->bind(
+            \App\UseCase\ProfileImgStoreCaseInterface::class,
+            \App\UseCase\Profile\ProfileImgStoreCase::class
+        );
     }
 
     /**
