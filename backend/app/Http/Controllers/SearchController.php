@@ -2,65 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Area;
-use App\Models\History;
-use App\Models\Language;
-use App\Queries\SearchUsers;
 use App\Http\Requests\SearchRequest;
-use App\Repositories\AreaRepositoryInterface;
-use App\Services\UserAuthServiceInterface;
+use App\UseCase\SearchIndexCaseInterface;
+use App\UseCase\SearchSearchCaseInterface;
 
 /**
  * 検索画面コントローラー
  */
 class SearchController extends Controller
 {
-    protected $userAuthService;
-    protected $areRepository;
-    protected $historyRepository;
-    protected $languageRepository;
+    protected $searchIndexCase;
+    protected $searchSearchCase;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService,
-        AreaRepositoryInterface $areRepository,
-        HistoryRepositoryInterface $historyRepository,
-        LanguageRepositoryInterface $languageRepository
+        SearchIndexCaseInterface $searchIndexCase,
+        SearchSearchCaseInterface $searchSearchCase
     )
     {
-        $this->userAuthService = $userAuthService;
-        $this->areRepository   = $areRepository;
-        $this->historyRepository = $historyRepository;
-        $this->languageRepository = $languageRepository;
+        $this->searchIndexCase  = $searchIndexCase;
+        $this->searchSearchCase = $searchSearchCase;
     }
 
     public function index()
     {
-        $myId      = $this->userAuthService->getLoginUserId();
-        $areas     = $this->areRepository->getAll();
-        $histories = $this->historyRepository->getAll();
-        $languages = $this->languageRepository->getAll();
+        $index = $this->searchIndexCase->handle();
 
-
-        return view('MyService.search', compact('myId', 'areas', 'histories', 'languages'));
+        return $index;
     }
 
     public function search(SearchRequest $request)
     {
-        $myId      = $this->userAuthService->getLoginUserId();
-        $areas     = $this->areRepository->getAll();
-        $histories = $this->historyRepository->getAll();
-        $languages = $this->languageRepository->getAll();
+        $validated = $request->validated();
+        $search = $this->searchSearchCase->handle($validated);
 
-        $name = $request->input('name');
-        $age = $request->input('age');
-        $areaId = $request->input('area_id');
-        $historyId = $request->input('history_id');
-        $languageId = $request->input('language_id');
-
-        $request->flash();
-
-        $searchResultUsers = SearchUsers::search($myId, $name, $age, $areaId, $historyId, $languageId)->get();
-
-        return view('MyService.search', compact('myId', 'areas', 'histories', 'languages', 'searchResultUsers'));
+        return $search;
     }
 }
