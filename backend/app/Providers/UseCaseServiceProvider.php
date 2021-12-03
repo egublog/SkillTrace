@@ -54,7 +54,7 @@ class UseCaseServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \App\UseCase\SearchSearchInterface::class,
+            \App\UseCase\SearchSearchCaseInterface::class,
             \App\UseCase\Profile\SearchSearchCase::class
         );
     }
