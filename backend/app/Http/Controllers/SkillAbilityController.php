@@ -2,103 +2,70 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserLanguage;
-use App\Models\Ability;
 use App\Http\Requests\SkillAbilityRequest;
-use App\Repositories\UserLanguageRepositoryInterface;
-use App\Repositories\UserRepositoryInterface;
-use App\Services\UserAuthServiceInterface;
+use App\UseCase\SkillAbilityCreateCaseInterface;
+use App\UseCase\SkillAbilityStoreCaseInterface;
 
 /**
  * ユーザーのできることを登録するコントローラー
  */
 class SkillAbilityController extends Controller
 {
-    protected $userAuthService;
-    protected $userRepository;
-    protected $userLanguageRepository;
-    protected $abilityRepository;
+    protected $skillAbilityCreateCase;
+    protected $skillAbilityStoreCase;
+    protected $skillAbilityShowCase;
+    protected $skillAbilityUpdateCase;
+    protected $skillAbilityDeleteCase;
 
     public function __construct(
-        UserAuthServiceInterface $userAuthService,
-        UserRepositoryInterface $userRepository,
-        UserLanguageRepositoryInterface $userLanguageRepository,
-        AbilityRepositoryInterface $abilityRepository
+        SkillAbilityCreateCaseInterface $skillAbilityCreateCase,
+        SkillAbilityStoreCaseInterface $skillAbilityStoreCase,
+        SkillAbilityShowCaseInterface $skillAbilityShowCase,
+        SkillAbilityUpdateCaseInterface $skillAbilityUpdateCase,
+        SkillAbilityDeleteCaseInterface $skillAbilityDeleteCase
     )
     {
-        $this->userAuthService        = $userAuthService;
-        $this->userRepository         = $userRepository;
-        $this->userLanguageRepository = $userLanguageRepository;
-        $this->abilityRepository      = $abilityRepository;
+        $this->skillAbilityCreateCase = $skillAbilityCreateCase;
+        $this->skillAbilityStoreCase  = $skillAbilityStoreCase;
+        $this->skillAbilityShowCase   = $skillAbilityShowCase;
+        $this->skillAbilityUpdateCase = $skillAbilityUpdateCase;
+        $this->skillAbilityDeleteCase = $skillAbilityDeleteCase;
     }
 
     public function create(int $userLanguageId)
     {
-        $myId     = $this->userAuthService->getLoginUserId();
-        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
+        $skillAbility = $this->skillAbilityCreateCase->handle($userLanguageId);
 
-        $abilities = $this->abilityRepository->getByUserLanguageId($userLanguageId);
-
-        return view('MyService.skill-edit', compact('myId', 'theSkill', 'userLanguageId', 'abilities'));
+        return $skillAbility;
     }
 
     public function store(int $userLanguageId, SkillAbilityRequest $request)
     {
-        $ableText = $request->input('ability');
+        $validated = $request->validated();
+        $skillAbility = $this->skillAbilityStoreCase->handle($userLanguageId, $validated);
 
-        $skill = new Ability;
-        $skill->user_language_id = $userLanguageId;
-        $skill->content = $ableText;
-        $skill->save();
-
-        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
-
-        $userId = $theSkill->user_id;
-        $skillId = $theSkill->language_id;
-
-        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
+        return $skillAbility;
     }
 
     public function show(int $userLanguageId, int $abilityId)
     {
-        $myId     = $this->userAuthService->getLoginUserId();
-        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
-        $abilityEdit = $this->abilityRepository->findById($abilityId);
+        $skillAbility = $this->skillAbilityShowCase->handle($userLanguageId, $abilityId);
 
-        return view('MyService.skill-edit', compact('myId', 'theSkill', 'abilityEdit', 'abilityId', 'userLanguageId'));
+        return $skillAbility;
     }
 
     public function update(int $userLanguageId, int $abilityId, SkillAbilityRequest $request)
     {
-        $abilityText = $request->input('ability');
+        $validated = $request->validated();
+        $skillAbility = $this->skillAbilityUpdateCase->handle($userLanguageId, $abilityId, $validated);
 
-        $abilityEdit = $this->abilityRepository->findById($abilityId);
-
-        $abilityEdit->content = $abilityText;
-        $abilityEdit->save();
-
-        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
-        $account = $this->userRepository->findById($theSkill->user_id);
-
-        $userId = $account->id;
-        $skillId = $theSkill->language_id;
-
-        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
+        return $skillAbility;
     }
 
     public function destroy(int $userLanguageId, int $abilityId)
     {
+        $skillAbility = $this->skillAbilityDeleteCase->handle($userLanguageId, $abilityId);
 
-        $theSkill = $this->userLanguageRepository->findById($userLanguageId);
-        $account = $this->userRepository->findById($theSkill->user_id);
-
-        $userId = $account->id;
-        $skillId = $theSkill->language_id;
-
-        $ability = $this->abilityRepository->findById($abilityId);
-
-        $this->abilityRepository->delete($ability);
-
-        return redirect()->route('skills.show', ['userId' => $userId, 'skillId' => $skillId]);
+        return $skillAbility;
     }
 }
