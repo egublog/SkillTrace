@@ -57,6 +57,31 @@ class UseCaseServiceProvider extends ServiceProvider
             \App\UseCase\SearchSearchCaseInterface::class,
             \App\UseCase\Profile\SearchSearchCase::class
         );
+
+        $this->app->bind(
+            \App\UseCase\SkillAbilityCreateCaseInterface::class,
+            \App\UseCase\Profile\SkillAbilityCreateCase::class
+        );
+
+        $this->app->bind(
+            \App\UseCase\SkillAbilityStoreCaseInterface::class,
+            \App\UseCase\Profile\SkillAbilityStoreCase::class
+        );
+
+        $this->app->bind(
+            \App\UseCase\SkillAbilityShowCaseInterface::class,
+            \App\UseCase\Profile\SkillAbilityShowCase::class
+        );
+
+        $this->app->bind(
+            \App\UseCase\SkillAbilityUpdateCaseInterface::class,
+            \App\UseCase\Profile\SkillAbilityUpdateCase::class
+        );
+
+        $this->app->bind(
+            \App\UseCase\SkillAbilityDestroyCaseInterface::class,
+            \App\UseCase\Profile\SkillAbilityDestroyCase::class
+        );
     }
 
     /**
