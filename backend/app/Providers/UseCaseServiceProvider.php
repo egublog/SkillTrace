@@ -82,6 +82,26 @@ class UseCaseServiceProvider extends ServiceProvider
             \App\UseCase\SkillAbilityDestroyCaseInterface::class,
             \App\UseCase\Profile\SkillAbilityDestroyCase::class
         );
+
+        $this->app->bind(
+            \App\UseCase\SkillShowCaseInterface::class,
+            \App\UseCase\Skill\SkillShowCase::class
+        );
+
+        $this->app->bind(
+            \App\UseCase\SkillCreateCaseInterface::class,
+            \App\UseCase\Skill\SkillCreateCase::class
+        );
+
+        $this->app->bind(
+            \App\UseCase\SkillStoreCaseInterface::class,
+            \App\UseCase\Skill\SkillStoreCase::class
+        );
+
+        $this->app->bind(
+            \App\UseCase\SkillDeleteCaseInterface::class,
+            \App\UseCase\Skill\SkillDeleteCase::class
+        );
     }
 
     /**
