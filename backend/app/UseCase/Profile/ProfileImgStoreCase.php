@@ -10,6 +10,9 @@ use App\UseCase\ProfileImgStoreCaseInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * profiles.img_storeのユースケース
+ */
 final class ProfileImgStoreCase implements ProfileImgStoreCaseInterface
 {
     private $userAuthService;
