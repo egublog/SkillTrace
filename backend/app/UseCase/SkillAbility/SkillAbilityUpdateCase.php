@@ -10,6 +10,9 @@ use App\Repositories\UserRepositoryInterface;
 use App\UseCase\SkillAbilityUpdateCaseInterface;
 use Illuminate\Http\RedirectResponse;
 
+/**
+ * skill_abilities.updateのユースケース
+ */
 final class SkillAbilityUpdateCase implements SkillAbilityUpdateCaseInterface
 {
 

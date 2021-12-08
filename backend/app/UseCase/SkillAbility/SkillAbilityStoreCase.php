@@ -11,6 +11,9 @@ use App\UseCase\SkillAbilityStoreCaseInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
+/**
+ * skill_abilities.storeのユースケース
+ */
 final class SkillAbilityStoreCase implements SkillAbilityStoreCaseInterface
 {
     private $userLanguageRepository;

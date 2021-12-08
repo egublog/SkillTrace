@@ -9,6 +9,9 @@ use App\Repositories\UserLanguageRepositoryInterface;
 use App\UseCase\SkillAbilityDeleteCaseInterface;
 use Illuminate\Http\RedirectResponse;
 
+/**
+ * skill_abilities.deleteのユースケース
+ */
 final class SkillAbilityDeleteCase implements SkillAbilityDeleteCaseInterface
 {
 

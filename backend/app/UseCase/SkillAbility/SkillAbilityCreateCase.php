@@ -10,6 +10,9 @@ use App\Services\UserAuthServiceInterface;
 use App\UseCase\SkillAbilityCreateCaseInterface;
 use Illuminate\Contracts\View\View;
 
+/**
+ * skill_abilities.createのユースケース
+ */
 final class SkillAbilityCreateCase implements SkillAbilityCreateCaseInterface
 {
 
