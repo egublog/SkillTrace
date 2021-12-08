@@ -9,6 +9,9 @@ use App\Services\UserAuthServiceInterface;
 use App\UseCase\ProfileStoreCaseInterface;
 use Illuminate\Http\RedirectResponse;
 
+/**
+ * profiles.storeのユースケース
+ */
 final class ProfileStoreCase implements ProfileStoreCaseInterface
 {
     private $userAuthService;
