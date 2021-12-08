@@ -8,7 +8,6 @@ use App\Queries\SearchUsers;
 use App\Repositories\AreaRepositoryInterface;
 use App\Repositories\HistoryRepositoryInterface;
 use App\Repositories\LanguageRepositoryInterface;
-use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 use App\UseCase\SearchSearchCaseInterface;
 use Illuminate\Contracts\View\View;
