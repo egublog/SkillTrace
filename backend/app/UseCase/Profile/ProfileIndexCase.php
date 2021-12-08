@@ -12,6 +12,9 @@ use App\Services\UserAuthServiceInterface;
 use App\UseCase\ProfileIndexCaseInterface;
 use Illuminate\Contracts\View\View;
 
+/**
+ * profiles.indexのユースケース
+ */
 final class ProfileIndexCase implements ProfileIndexCaseInterface
 {
     private $userAuthService;
