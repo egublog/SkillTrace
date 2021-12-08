@@ -41,7 +41,7 @@ final class SearchSearchCase implements SearchSearchCaseInterface
     public function handle(array $validated): View
     {
         $myId      = $this->userAuthService->getLoginUserId();
-        $areas     = $this->areRepository->getAll();
+        $areas     = $this->areaRepository->getAll();
         $histories = $this->historyRepository->getAll();
         $languages = $this->languageRepository->getAll();
 
