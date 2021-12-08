@@ -51,8 +51,6 @@ final class SearchSearchCase implements SearchSearchCaseInterface
         $historyId = $validated['history_id'];
         $languageId = $validated['language_id'];
 
-        session()->flash();
-
         $searchResultUsers = SearchUsers::search($myId, $name, $age, $areaId, $historyId, $languageId)->get();
 
         return view('MyService.search', compact('myId', 'areas', 'histories', 'languages', 'searchResultUsers'));
