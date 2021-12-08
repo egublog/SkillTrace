@@ -39,7 +39,7 @@ final class SearchIndexCase implements SearchIndexCaseInterface
     public function handle(): View
     {
         $myId      = $this->userAuthService->getLoginUserId();
-        $areas     = $this->areRepository->getAll();
+        $areas     = $this->areaRepository->getAll();
         $histories = $this->historyRepository->getAll();
         $languages = $this->languageRepository->getAll();
 
