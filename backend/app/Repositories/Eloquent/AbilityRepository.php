@@ -6,6 +6,9 @@ use App\Models\Ability;
 use App\Repositories\AbilityRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Abilityモデルを操作するリポジトリクラス
+ */
 final class AbilityRepository implements AbilityRepositoryInterface
 {
 

@@ -6,6 +6,9 @@ use App\Models\Category;
 use App\Repositories\CategoryRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Categoryモデルを操作するリポジトリクラス
+ */
 final class CategoryRepository implements CategoryRepositoryInterface
 {
 

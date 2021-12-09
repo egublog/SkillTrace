@@ -6,6 +6,9 @@ use App\Models\Trace;
 use App\Repositories\TraceRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Traceモデルを操作するリポジトリクラス
+ */
 final class TraceRepository implements TraceRepositoryInterface
 {
 

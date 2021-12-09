@@ -6,6 +6,9 @@ use App\Models\Talk;
 use App\Repositories\TalkRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Talkモデルを操作するリポジトリクラス
+ */
 final class TalkRepository implements TalkRepositoryInterface
 {
 

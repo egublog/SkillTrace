@@ -6,6 +6,9 @@ use App\Models\Area;
 use App\Repositories\AreaRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Areaモデルを操作するリポジトリクラス
+ */
 final class AreaRepository implements AreaRepositoryInterface
 {
 

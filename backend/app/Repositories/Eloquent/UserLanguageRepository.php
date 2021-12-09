@@ -6,6 +6,9 @@ use App\Models\UserLanguage;
 use App\Repositories\UserLanguageRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * userLanguageモデルを操作するリポジトリクラス
+ */
 final class UserLanguageRepository implements UserLanguageRepositoryInterface
 {
 

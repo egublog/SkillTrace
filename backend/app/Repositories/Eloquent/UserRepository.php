@@ -5,6 +5,9 @@ namespace App\Repositories\Eloquent;
 use App\Models\User;
 use App\Repositories\UserRepositoryInterface;
 
+/**
+ * Userモデルを操作するリポジトリクラス
+ */
 final class UserRepository implements UserRepositoryInterface
 {
 

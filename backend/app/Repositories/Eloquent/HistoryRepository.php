@@ -6,6 +6,9 @@ use App\Models\History;
 use App\Repositories\HistoryRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Historyモデルを操作するリポジトリクラス
+ */
 final class HistoryRepository implements HistoryRepositoryInterface
 {
 

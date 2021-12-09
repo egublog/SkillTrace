@@ -6,6 +6,9 @@ use App\Models\Follow;
 use App\Repositories\FollowRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Followモデルを操作するリポジトリクラス
+ */
 final class FollowRepository implements FollowRepositoryInterface
 {
 
