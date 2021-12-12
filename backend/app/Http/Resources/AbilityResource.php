@@ -14,6 +14,12 @@ class AbilityResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'               => $this->id,
+            'user_language_id' => $this->user_language_id,
+            'content'          => $this->content,
+            'updated_at'       => $this->updated_at,
+            'created_at'       => $this->created_at,
+        ];
     }
 }
