@@ -4,6 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Categoryモデルのリソースクラス
+ */
 class CategoryResource extends JsonResource
 {
     /**
