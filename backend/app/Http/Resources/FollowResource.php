@@ -4,6 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Followモデルのリソースクラス
+ */
 class FollowResource extends JsonResource
 {
     /**
