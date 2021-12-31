@@ -4,6 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Userモデルのリソースクラス
+ */
 class UserResource extends JsonResource
 {
     /**
