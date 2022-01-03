@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Abilityテーブルを操作するモデルクラス
+ */
 class Ability extends Model
 {
     protected $fillable = [
@@ -13,7 +16,7 @@ class Ability extends Model
         'updated_at',
         'created_at'
     ];
-    
+
     public function userLanguage()
     {
         return $this->belongsTo(App\Models\UserLanguage::class);
