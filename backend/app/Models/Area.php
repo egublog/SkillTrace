@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Areaテーブルを操作するモデルクラス
+ */
 class Area extends Model
 {
     protected $fillable = [
