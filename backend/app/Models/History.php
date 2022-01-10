@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Historyテーブルを操作するモデルクラス
+ */
 class History extends Model
 {
     protected $fillable = [
