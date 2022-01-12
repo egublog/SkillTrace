@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 
 
+/**
+ * Languageテーブルを操作するモデルクラス
+ */
 class Language extends Model
 {
     protected $fillable = [
@@ -15,7 +18,7 @@ class Language extends Model
         'updated_at',
         'created_at'
     ];
-    
+
     public function languages() {
         return $this->hasMany(App\Models\User::class, 'language_id', 'id');
     }
