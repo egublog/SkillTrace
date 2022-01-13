@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
+/**
+ * Talkテーブルを操作するモデルクラス
+ */
 class Talk extends Model
 {
     protected $fillable = [
