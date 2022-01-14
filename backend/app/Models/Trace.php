@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Traceテーブルを操作するモデルクラス
+ */
 class Trace extends Model
 {
     protected $fillable = [
