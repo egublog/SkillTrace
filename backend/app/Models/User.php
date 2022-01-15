@@ -6,6 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Userテーブルを操作するモデルクラス
+ */
 class User extends Authenticatable
 {
     use Notifiable;
