@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * UserLanguageテーブルを操作するモデルクラス
+ */
 class UserLanguage extends Model
 {
     protected $fillable = [
