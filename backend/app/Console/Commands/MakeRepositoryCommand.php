@@ -7,6 +7,9 @@ use Str;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * stubでリポジトリ層のテンプレを生成するコマンド
+ */
 class MakeRepositoryCommand extends GeneratorCommand
 {
     /**
