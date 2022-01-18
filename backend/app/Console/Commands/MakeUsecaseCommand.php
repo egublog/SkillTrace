@@ -7,6 +7,9 @@ use Str;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * stubでUserCase層のテンプレを生成するコマンド
+ */
 class MakeUsecaseCommand extends GeneratorCommand
 {
     /**
