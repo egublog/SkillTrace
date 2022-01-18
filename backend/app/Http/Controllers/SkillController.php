@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SkillRequest;
-use App\Models\Language;
 use App\Models\UserLanguage;
-use App\Models\Trace;
-use App\Models\Ability;
 use App\Repositories\UserLanguageRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
