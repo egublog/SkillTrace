@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\FollowRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 use App\UseCase\FollowingIndexCaseInterface;
