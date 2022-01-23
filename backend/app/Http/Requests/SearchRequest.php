@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * /search.searchのリクエストクラス
+ */
 class SearchRequest extends FormRequest
 {
     /**
