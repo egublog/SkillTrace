@@ -27,11 +27,11 @@ class ProfileStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|string',
             'age' => 'required|numeric|between:0,150',
-            'area_id' => 'required',
-            'history_id' => 'required',
-            'language_id' => 'required'
+            'area_id' => 'required|integer',
+            'history_id' => 'required|integer',
+            'language_id' => 'required|integer',
         ];
     }
 
