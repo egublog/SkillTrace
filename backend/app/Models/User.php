@@ -19,7 +19,8 @@ class User extends Authenticatable
      */
     protected $guarded = [
         'id',
-        'name',
+        'password',
+        'remember_token',
     ];
 
     /**
