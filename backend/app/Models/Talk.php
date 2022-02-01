@@ -20,6 +20,11 @@ class Talk extends Model
         'created_at',
     ];
 
+    protected $casts = [
+        'created_at'             => 'datetime',
+        'updated_at'             => 'datetime',
+    ];
+
     public function user_follower() {
         return $this->belongsTo(App\Models\User::class, 'user_id');
     }
