@@ -19,6 +19,11 @@ class Trace extends Model
         'created_at',
     ];
 
+    protected $casts = [
+        'created_at'             => 'datetime',
+        'updated_at'             => 'datetime',
+    ];
+
     public function category()
     {
         return $this->belongsTo(App\Models\Category::class);
