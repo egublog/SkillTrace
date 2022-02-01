@@ -19,6 +19,11 @@ class Language extends Model
         'created_at'
     ];
 
+    protected $casts = [
+        'created_at'             => 'datetime',
+        'updated_at'             => 'datetime',
+    ];
+
     public function languages() {
         return $this->hasMany(App\Models\User::class, 'language_id', 'id');
     }
