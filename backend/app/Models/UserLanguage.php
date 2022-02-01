@@ -18,6 +18,11 @@ class UserLanguage extends Model
         'created_at',
     ];
 
+    protected $casts = [
+        'created_at'             => 'datetime',
+        'updated_at'             => 'datetime',
+    ];
+
     // 単数と複数の関係を機械が認識してくれなさそうならかく
     protected $table = 'user_languages';
 
