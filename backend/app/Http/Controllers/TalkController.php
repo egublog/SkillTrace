@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Talk;
 use App\Http\Requests\TalkRequest;
-use App\Http\Requests\SearchTalkUserRequest;
+use App\Http\Requests\TalkSearchRequest;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 
@@ -39,7 +39,7 @@ class TalkController extends Controller
         return view('MyService.talk', compact('myId', 'talkingUsers'));
     }
 
-    public function search(SearchTalkUserRequest $request)
+    public function search(TalkSearchRequest $request)
     {
         $myId             = $this->userAuthService->getLoginUserId();
         $searchResultName = $request->input('talk_search_name');
