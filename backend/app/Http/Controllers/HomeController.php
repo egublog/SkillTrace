@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\UseCase\HomeHomeCaseInterface;
 use App\UseCase\HomeIndexCaseInterface;
+use Illuminate\Contracts\View\View;
 
 /**
  * ホームページを表示するコントローラー
@@ -23,7 +24,7 @@ class HomeController extends Controller
         $this->homeHomeCase           = $homeHomeCase;
     }
 
-    public function index()
+    public function index(): View
     {
         $index = $this->homeIndexCase->handle();
 
@@ -31,7 +32,7 @@ class HomeController extends Controller
     }
 
 
-    public function home(int $userId)
+    public function home(int $userId): View
     {
         $home = $this->homeHomeCase->handle($userId);
 
