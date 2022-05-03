@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\UserAuthServiceInterface;
 use App\UseCase\FollowingIndexCaseInterface;
-
+use Illuminate\Contracts\View\View;
 /**
  * 自分がフォローしている人に関するコントローラー
  */
@@ -26,14 +26,14 @@ class FollowingController extends Controller
         $this->followingIndexCase = $followingIndexCase;
     }
 
-    public function index(int $userId)
+    public function index(int $userId): View
     {
         $followings = $this->followingIndexCase->handle($userId);
 
         return $followings;
     }
 
-    public function follow(int $userId)
+    public function follow(int $userId): void
     {
         $myId      = $this->userAuthService->getLoginUserId();
         $myAccount = $this->userRepository->findById($myId);
@@ -41,7 +41,7 @@ class FollowingController extends Controller
         $myAccount->follow()->attach($userId);
     }
 
-    public function unfollow(int $userId)
+    public function unfollow(int $userId): void
     {
         $myId      = $this->userAuthService->getLoginUserId();
         $myAccount = $this->userRepository->findById($myId);
