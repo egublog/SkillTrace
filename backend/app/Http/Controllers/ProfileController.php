@@ -8,6 +8,7 @@ use App\Http\Requests\ProfileStoreRequest;
 use App\UseCase\ProfileImgStoreCaseInterface;
 use App\UseCase\ProfileIndexCaseInterface;
 use App\UseCase\ProfileStoreCaseInterface;
+use Illuminate\View\View;
 
 /**
  * プロフィール画面に関するコントローラー
@@ -29,7 +30,7 @@ class ProfileController extends Controller
         $this->profileImgStoreCase = $profileImgStoreCase;
     }
 
-    public function index()
+    public function index(): View
     {
         $index = $this->profileIndexCase->handle();
 
