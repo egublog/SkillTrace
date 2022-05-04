@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SearchRequest;
 use App\UseCase\SearchIndexCaseInterface;
 use App\UseCase\SearchSearchCaseInterface;
+use Illuminate\Contracts\View\View;
 
 /**
  * 検索画面コントローラー
@@ -24,14 +25,14 @@ class SearchController extends Controller
         $this->searchSearchCase = $searchSearchCase;
     }
 
-    public function index()
+    public function index(): View
     {
         $index = $this->searchIndexCase->handle();
 
         return $index;
     }
 
-    public function search(SearchRequest $request)
+    public function search(SearchRequest $request): View
     {
         $validated = $request->validated();
         $search = $this->searchSearchCase->handle($validated);
