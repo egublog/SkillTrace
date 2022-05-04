@@ -8,6 +8,7 @@ use App\Http\Requests\ProfileStoreRequest;
 use App\UseCase\ProfileImgStoreCaseInterface;
 use App\UseCase\ProfileIndexCaseInterface;
 use App\UseCase\ProfileStoreCaseInterface;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 /**
@@ -37,7 +38,7 @@ class ProfileController extends Controller
         return $index;
     }
 
-    public function store(ProfileStoreRequest $request)
+    public function store(ProfileStoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
         $store = $this->profileStoreCase->handle($validated);
@@ -45,7 +46,7 @@ class ProfileController extends Controller
         return $store;
     }
 
-    public function img_store(ProfileImageStoreRequest $request)
+    public function img_store(ProfileImageStoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
         $imgStore  = $this->profileImgStoreCase->handle($validated);
