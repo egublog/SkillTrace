@@ -46,6 +46,13 @@ class SkillAbilityController extends Controller
         return $skillAbility;
     }
 
+    /**
+     * 登録
+     *
+     * @param integer $userLanguageId
+     * @param SkillAbilityRequest $request
+     * @return void
+     */
     public function store(int $userLanguageId, SkillAbilityRequest $request)
     {
         $validated = $request->validated();
