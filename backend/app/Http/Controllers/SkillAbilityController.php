@@ -33,6 +33,12 @@ class SkillAbilityController extends Controller
         $this->skillAbilityDeleteCase = $skillAbilityDeleteCase;
     }
 
+    /**
+     * 新規作成
+     *
+     * @param integer $userLanguageId
+     * @return void
+     */
     public function create(int $userLanguageId)
     {
         $skillAbility = $this->skillAbilityCreateCase->handle($userLanguageId);
